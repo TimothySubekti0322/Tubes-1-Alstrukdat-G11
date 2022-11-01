@@ -4,7 +4,7 @@
 #ifndef __MESINKATA_H__
 #define __MESINKATA_H__
 
-#include "boolean.h"
+#include "D:/Semester 3/ALSTRUKDAT/TUBES 1/Tubes-1-Alstrukdat-G11/src/boolean.h"
 #include "mesinkarakter.h"
 
 #define NMax 50
