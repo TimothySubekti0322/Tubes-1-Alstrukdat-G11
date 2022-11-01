@@ -16,13 +16,13 @@ void IgnoreBlanks()
     }
 }
 
-void STARTWORD()
+void STARTWORD(char *FileName)
 {
 /* I.S. : currentChar sembarang
    F.S. : EndWord = true, dan currentChar = MARK;
           atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
           currentChar karakter pertama sesudah karakter terakhir kata */
-    START();
+    START(FileName);
     IgnoreBlanks();
     
     if (IsEOP())

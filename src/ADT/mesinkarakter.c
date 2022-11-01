@@ -7,7 +7,7 @@ boolean EOP;
 static FILE *pita;
 static int retval;
 
-void START(char *namaFile)
+void START(char *FileName)
 {
 
 /* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.
@@ -17,7 +17,7 @@ void START(char *namaFile)
    F.S. : currentChar adalah karakter pertama pada pita
           Jika currentChar != MARK maka EOP akan padam (false)
           Jika currentChar = MARK maka EOP akan menyala (true) */
-    pita = fopen(*namaFile,"r");
+    pita = fopen(FileName,"r");
     ADV();
 }
 
