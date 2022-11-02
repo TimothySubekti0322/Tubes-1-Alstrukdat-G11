@@ -78,6 +78,9 @@ void tambahturn(masaksaji *masak, masaksaji *saji,customers *orders){
     for(i = 0;i<masak->count;i++){
         masak->durasi[i] -=1;
         if(masak->durasi[i] == 0){
+            saji->count++;
+            saji->indeks[saji->count-1] = masak->indeks[i];
+            saji->durasi[saji->count-1] = orders->ketahanan[saji->indeks[saji->count-1]];    
             DeleteMasakSaji(masak,i);
         }
     }
@@ -94,7 +97,7 @@ int main(){
     
     // Deklarasi variabel dan array
     boolean game_over = false,found;
-    int saldo = 0,custnumber,indeks;
+    int saldo = 0,custnumber,indeks,count = 0;
     customers orders;
     CreateQueue(&orders.indeks);
     
@@ -137,7 +140,7 @@ int main(){
         printf("Makanan | Durasi Memasak | Ketahanan | Harga\n");
         printf("----------------------------------------------\n");
         for(i = 0;i<length(orders.indeks);i++){
-            printf("M%d      | %d              | %d         | %d\n",orders.indeks.buffer[i],orders.durasi[i+HEAD(orders.indeks)],orders.ketahanan[i+HEAD(orders.indeks)],orders.harga[i+HEAD(orders.indeks)]);
+            printf("M%d      | %d              | %d         | %d\n",count+i,orders.durasi[i+HEAD(orders.indeks)],orders.ketahanan[i+HEAD(orders.indeks)],orders.harga[i+HEAD(orders.indeks)]);
         }
         printf("\n");
 
@@ -184,6 +187,7 @@ int main(){
                     saldo += orders.harga[custnumber];
                     dequeue(&orders.indeks);
                     saji.count -= 1;
+                    count++;
                     for(i = indeks;i<saji.count;i++){
                         saji.indeks[i] = saji.indeks[i+1];
                         saji.durasi[i] = saji.durasi[i+1];
