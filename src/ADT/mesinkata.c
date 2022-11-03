@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "mesinWord.h"
+#include "mesinkata.h"
 
 boolean EndWord;
 Word CWord;
@@ -81,17 +81,6 @@ void CopyWord()
     CWord.Length = i;
 }
 
-void PrintWord(Word CWord)
-{
-/* Mencetak current word
-   I.S : CWord tidak kosong dan terdefinisi
-   F.S : isi dari CWord dicetak ke layar */
-   for (int i = 0 ; i < CWord.Length ; i++)
-   {
-    printf("%c",CWord.TabWord[i]);
-   }
-   printf("\n");
-}
 
 boolean IsBlank()
 {
@@ -168,7 +157,7 @@ void CopyCommand()
 
 /* *** Additional Function *** */
 
-boolean IsWordSama(Word InputCommand, Word Command)
+boolean IsKataSama(Word InputCommand, Word Command)
 {
     /* Mengirimkan true jika K1 = K2 : Length dan elemen tiap arraynya sama */
 
@@ -185,5 +174,51 @@ boolean IsWordSama(Word InputCommand, Word Command)
         }
         return sama;
     }
+}
 
+void PrintWord(Word CWord)
+{
+/* Mencetak current word
+   I.S : CWord tidak kosong dan terdefinisi
+   F.S : isi dari CWord dicetak ke layar */
+   for (int i = 0 ; i < CWord.Length ; i++)
+   {
+    printf("%c",CWord.TabWord[i]);
+   }
+   //printf("\n");
+}
+
+int stringLength (char* string) 
+/* Mengirimkan panjang sebuah string */
+{
+    int len = 0;
+    while (string[len] != '\0') {
+        len++;
+    }
+    return len;
+}
+
+Word toKata(char* command) 
+/* Mengirimkan kata yang elemen of arraynya berasal dari command */
+{
+    int i;
+    Word output;
+    for (i = 0; i < stringLength(command); i++) {
+        output.TabWord[i] = command[i];
+    }
+    output.Length = stringLength(command);
+    return output;
+}
+
+int toInt(char* string)
+{
+    /* Mengubah sebuah string menjadi integer*/
+    int i = 0;
+    int hasil = 0;
+    while(*(string + i) != '\0')
+    {
+        hasil = hasil*10 + (*(string+i) - '0');
+        i++;
+    }
+    return hasil;
 }

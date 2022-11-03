@@ -1,8 +1,8 @@
 /* File: mesinWord.h */
 /* Definisi Mesin Word: Model Akuisisi Versi I */
 
-#ifndef __MESINWord_H__
-#define __MESINWord_H__
+#ifndef __MESINKATA_H__
+#define __MESINKATA_H__
 
 #include "../boolean.h"
 #include "mesinkarakter.h"
@@ -10,11 +10,12 @@
 #define NMax 100
 #define BLANK ' '
 
-typedef struct
+typedef struct 
 {
-   char TabWord[NMax]; /* container penyimpan Word, indeks yang dipakai [0..NMax-1] */
+	char TabWord[NMax]; /* container penyimpan Word, indeks yang dipakai [0..NMax-1] */
    int Length;
 } Word;
+
 
 /* State Mesin Word */
 extern boolean EndWord;
@@ -47,10 +48,6 @@ void CopyWord();
           CC adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang Word melebihi NMax, maka sisa Word "dipotong" */
 
-void PrintWord(Word CWord);
-/* Mencetak current word
-   I.S : CWord tidak kosong dan terdefinisi
-   F.S : isi dari CWord dicetak ke layar */
 
 boolean IsBlank();
 /* Mengirimkan true jika CWord = BLANK */
@@ -87,18 +84,21 @@ void CopyCommand();
 
 /* *** FUNGSI TAMBAHAN *** */
 
-boolean IsWordSama(Word InputCommand, Word Command);
+boolean IsKataSama(Word InputCommand, Word Command);
 /* Mengirimkan true jika K1 = K2 : Length dan elemen tiap arraynya sama */
 
-void PrintWord(Word K);
-/* Mencetak Word ke layar
-   I.S. : Word K terdefinisi
-   F.S. : Word K tercetak pada layar */
+void PrintWord(Word CWord);
+/* Mencetak current word
+   I.S : CWord tidak kosong dan terdefinisi
+   F.S : isi dari CWord dicetak ke layar */
 
 int stringLength (char* string);
 /* Mengirimkan panjang sebuah string */
 
 Word toWord(char* command);
 /* Mengirimkan Word yang elemen of arraynya berasal dari command */
+
+int toInt(char* string);
+/* Mengubah sebuah string menjadi integer*/
 
 #endif
