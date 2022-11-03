@@ -57,7 +57,7 @@ CC mungkin = ENTER
 Jika CC = ENTER maka EOP akan menyala (true) */
 {
     retval = fscanf(pita,"%c",&CC);
-    if (IsEOPC()) {
+    if (IsNewline()) {
         // fclose(pita); --> Membiarkan agar pita dapat terus terbaca oleh mesin
     }
 }
@@ -74,7 +74,7 @@ boolean IsEOP()
     return (CC == MARK);
 }
 
-boolean IsEOPC()
+boolean IsNewline()
 {
 /* Mengirimkan true jika CC = ENTER */
     return (CC == ENTER);
