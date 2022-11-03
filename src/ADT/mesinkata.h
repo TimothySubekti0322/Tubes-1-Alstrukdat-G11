@@ -22,28 +22,28 @@ extern Word currentWord;
 
 void IgnoreBlanks();
 /* Mengabaikan satu atau beberapa BLANK
-   I.S. : currentChar sembarang
-   F.S. : currentChar ≠ BLANK atau currentChar = MARK */
+   I.S. : CC sembarang
+   F.S. : CC ≠ BLANK atau CC = MARK */
 
 void STARTWORD(char *FileName);
-/* I.S. : currentChar sembarang
-   F.S. : EndWord = true, dan currentChar = MARK;
+/* I.S. : CC sembarang
+   F.S. : EndWord = true, dan CC = MARK;
           atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
-          currentChar karakter pertama sesudah karakter terakhir kata */
+          CC karakter pertama sesudah karakter terakhir kata */
 
 void ADVWORD();
-/* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi
+/* I.S. : CC adalah karakter pertama kata yang akan diakuisisi
    F.S. : currentWord adalah kata terakhir yang sudah diakuisisi,
-          currentChar adalah karakter pertama dari kata berikutnya, mungkin MARK
-          Jika currentChar = MARK, EndWord = true.
+          CC adalah karakter pertama dari kata berikutnya, mungkin MARK
+          Jika CC = MARK, EndWord = true.
    Proses : Akuisisi kata menggunakan procedure SalinWord */
 
 void CopyWord();
 /* Mengakuisisi kata, menyimpan dalam currentWord
-   I.S. : currentChar adalah karakter pertama dari kata
+   I.S. : CC adalah karakter pertama dari kata
    F.S. : currentWord berisi kata yang sudah diakuisisi;
-          currentChar = BLANK atau currentChar = MARK;
-          currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
+          CC = BLANK atau CC = MARK;
+          CC adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
 
 void PrintWord(Word Currentword);

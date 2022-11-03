@@ -7,8 +7,10 @@
 #include "D:/Semester 3/ALSTRUKDAT/TUBES 1/Tubes-1-Alstrukdat-G11/src/boolean.h"
 
 #define MARK '.'
+#define ENTER '\n'
+
 /* State Mesin */
-extern char currentChar;
+extern char CC;
 extern boolean EOP;
 
 void START(char *FileName);
@@ -16,21 +18,40 @@ void START(char *FileName);
    Karakter pertama yang ada pada pita posisinya adalah pada jendela.
    Pita baca diambil dari stdin.
    I.S. : sembarang
-   F.S. : currentChar adalah karakter pertama pada pita
-          Jika currentChar != MARK maka EOP akan padam (false)
-          Jika currentChar = MARK maka EOP akan menyala (true) */
+   F.S. : CC adalah karakter pertama pada pita
+          Jika CC != MARK maka EOP akan padam (false)
+          Jika CC = MARK maka EOP akan menyala (true) */
 
 void ADV();
 /* Pita dimajukan satu karakter.
-   I.S. : Karakter pada jendela = currentChar, currentChar != MARK
-   F.S. : currentChar adalah karakter berikutnya dari currentChar yang lama,
-          currentChar mungkin = MARK
-          Jika  currentChar = MARK maka EOP akan menyala (true) */
+   I.S. : Karakter pada jendela = CC, CC != MARK
+   F.S. : CC adalah karakter berikutnya dari CC yang lama,
+          CC mungkin = MARK
+          Jika  CC = MARK maka EOP akan menyala (true) */
+
+void COMMAND();
+/*  Mesin siap dioperasikan. Pita disiapkan untuk dibaca.
+    Karakter pertama yang ada pada pita posisinya adalah pada jendela.
+    filename merupakan nama file yang berisi pita karakter
+    I.S. : sembarang
+    F.S. : CC adalah karakter pertama pada pita
+    Jika CC != ENTER maka EOP akan padam (false)
+    Jika CC = ENTER maka EOP akan menyala (true) */
+
+void ADVC();
+/* Pita dimajukan satu karakter.
+I.S. : Karakter pada jendela = CC, CC != ENTER
+F.S. : CC adalah karakter berikutnya dari CC yang lama,
+CC mungkin = ENTER
+Jika CC = ENTER maka EOP akan menyala (true) */
 
 char GetCC();
-/* Mengirimkan currentChar */
+/* Mengirimkan CC */
 
 boolean IsEOP();
-/* Mengirimkan true jika currentChar = MARK */
+/* Mengirimkan true jika CC = MARK */
+
+boolean IsEOP();
+/* Mengirimkan true jika CC = ENTER */
 
 #endif
