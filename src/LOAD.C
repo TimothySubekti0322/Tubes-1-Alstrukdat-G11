@@ -1,3 +1,7 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "ADT/mesinkata.h"
+
 void concat(char *string1, char *string2, char *string3)
 {
     /* I.S : string1 , string2 , dan string3 terdefinisi, string3 kosong
