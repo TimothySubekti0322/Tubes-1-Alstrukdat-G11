@@ -5,19 +5,39 @@ boolean EndWord;
 Word CWord;
 Word CCommand;
 
+void IgnoreNewLine()
+{
+    while (IsNewline())
+    {
+        ADV();
+    }
+}
+
 void IgnoreBlanks()
 {
 /* Mengabaikan satu atau beberapa BLANK
    I.S. : CC sembarang
    F.S. : CC ≠ BLANK atau CC = MARK */
 
-    while (CC == BLANK)
+    while (IsBlank())
     {
         ADV();
     }
 }
 
-void STARTGAME(char *FileName)
+void IgnoreDot()
+{
+/* Mengabaikan satu atau beberapa Titik
+   I.S. : CC sembarang 
+   F.S. : CC ≠ BLANK atau CC = ENTER */
+    while (IsEOP()) 
+    {
+        ADV();
+    }
+}
+
+/* *** START dan Akuisisi *** */
+void STARTFILE(char *FileName)
 {
 /* I.S. : CC sembarang
    F.S. : EndWord = true, dan CC = MARK;
@@ -26,17 +46,36 @@ void STARTGAME(char *FileName)
     START(FileName);
     IgnoreBlanks();
     
-    if (IsEOP() || IsEOPC())
+    if (IsFeof())
     {
         EndWord = true;
     }
-    
     else
     {
         EndWord = false;
-        CopyWord();
+        CopyLineFile();
     }
 
+}
+
+void INPUT()
+{
+/* I.S. : CC sembarang
+   F.S. : EndWord = true, dan CC = MARK;
+          atau EndWord = false, CWord adalah Word yang sudah diakuisisi,
+          CC karakter pertama sesudah karakter terakhir Word */
+    STARTINPUT();
+    IgnoreBlanks();
+    
+    if (IsNewline())
+    {
+        EndWord = true;
+    }
+    else
+    {
+        EndWord = false;
+        CopyLine();
+    }
 }
 
 void ADVWORD()
@@ -47,7 +86,7 @@ void ADVWORD()
           Jika CC = MARK, EndWord = true.
    Proses : Akuisisi Word menggunakan procedure CopyWord */
     IgnoreBlanks();
-    if(IsEOP() || IsEOPC())
+    if(IsEOP())
     {
         EndWord = true;
     }
@@ -58,7 +97,43 @@ void ADVWORD()
     }
 }
 
+void ADVLINEFILE()
+{
+/* I.S. : CC adalah karakter pertama Word yang akan diakuisisi
+   F.S. : CWord adalah Word terakhir yang sudah diakuisisi,
+          CC adalah karakter pertama dari Word berikutnya, mungkin MARK
+          Jika CC = MARK, EndWord = true.
+   Proses : Akuisisi Word menggunakan procedure CopyWord */
+    IgnoreNewLine();
+    if(IsNewline())
+    {
+        EndWord = true;
+    }
+    else
+    {
+        CopyLineFile();
+    }
+}
 
+void ADVLINE()
+{
+/* I.S. : CC adalah karakter pertama Word yang akan diakuisisi
+   F.S. : CWord adalah Word terakhir yang sudah diakuisisi,
+          CC adalah karakter pertama dari Word berikutnya, mungkin MARK
+          Jika CC = MARK, EndWord = true.
+   Proses : Akuisisi Word menggunakan procedure CopyWord */
+    IgnoreNewLine();
+    if(IsNewline())
+    {
+        EndWord = true;
+    }
+    else
+    {
+        CopyLine();
+    }
+}
+
+/* *** AKUISISI KATA *** */
 void CopyWord()
 {
 /* Mengakuisisi Word, menyimpan dalam CWord
@@ -68,7 +143,7 @@ void CopyWord()
           CC adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang Word melebihi NMax, maka sisa Word "dipotong" */
     int i = 0;
-    while ((!IsEOP()) && (!IsEOPC()))
+    while (!IsEOP() && !IsBlank())
     {
         if (i < NMax)
         {
@@ -78,11 +153,54 @@ void CopyWord()
         ADV();
         
     }
-    CWord.TabWord[i] = '\n';
     CWord.Length = i;
 }
 
+void CopyLineFile()
+{
+/* Mengakuisisi Word, menyimpan dalam CWord
+   I.S. : CC adalah karakter pertama dari Word
+   F.S. : CWord berisi Word yang sudah diakuisisi;
+          CC = BLANK atau CC = MARK;
+          CC adalah karakter sesudah karakter terakhir yang diakuisisi.
+          Jika panjang Word melebihi NMax, maka sisa Word "dipotong" */
+    int i = 0;
+    while (!IsEOP() && !IsNewline() && !IsFeof())
+    {
+        if (i < NMax)
+        {
+        CWord.TabWord[i] = CC;
+        i++;
+        }
+        ADV();
+        
+    }
+    CWord.Length = i;
+}
 
+void CopyLine()
+{
+/* Mengakuisisi Word, menyimpan dalam CWord
+   I.S. : CC adalah karakter pertama dari Word
+   F.S. : CWord berisi Word yang sudah diakuisisi;
+          CC = BLANK atau CC = MARK;
+          CC adalah karakter sesudah karakter terakhir yang diakuisisi.
+          Jika panjang Word melebihi NMax, maka sisa Word "dipotong" */
+    int i = 0;
+    while (!IsEOP() && !IsNewline())
+    {
+        if (i < NMax)
+        {
+        CWord.TabWord[i] = CC;
+        i++;
+        }
+        ADV();
+        
+    }
+    CWord.Length = i;
+}
+
+/* boolean*/
 boolean IsBlank()
 {
 /* Mengirimkan true jika CWord = BLANK */
@@ -91,70 +209,7 @@ boolean IsBlank()
 
 /* *** ADT untuk baca commands *** */
 
-void IgnoreDot()
-{
-/* Mengabaikan satu atau beberapa BLANK dan MARK
-   I.S. : CC sembarang 
-   F.S. : CC ≠ BLANK atau CC = ENTER */
-    while (IsBlank() && IsEOP()) 
-    {
-        ADVC();
-    }
-}
 
-void STARTCOMMAND()
-{
-/* I.S. : CC sembarang 
-   F.S. : EndWord = true, dan CC = ENTER; 
-          atau EndWord = false, CCommand adalah Word yang sudah diakuisisi,
-          CC karakter pertama sesudah karakter terakhir Word */
-    COMMAND();
-    IgnoreDot();
-    if (IsEOPC())
-    {
-        EndWord = true;
-    } else {
-        EndWord = false;
-        ADVCOMMAND();
-    }
-}
-
-void ADVCOMMAND()
-{
-/* I.S. : CC adalah karakter pertama Word yang akan diakuisisi 
-   F.S. : CCommand adalah Word terakhir yang sudah diakuisisi, 
-          CC adalah karakter pertama dari Word berikutnya, mungkin ENTER
-          Jika CC = ENTER, EndWord = true.		  
-   Proses : Akuisisi Word menggunakan procedure CopyCommand */
-    IgnoreDot();
-    if (IsEOPC() && !EndWord){
-        EndWord = true;
-    } else{
-        CopyCommand();
-        IgnoreDot();
-    }
-}
-
-void CopyCommand()
-{
-/* Mengakuisisi Word, menyimpan dalam CCommand
-   I.S. : CC adalah karakter pertama dari Word
-   F.S. : CCommand berisi Word yang sudah diakuisisi; 
-          CC = BLANK atau CC = ENTER; 
-          CC adalah karakter sesudah karakter terakhir yang diakuisisi.
-          Jika panjang Word melebihi NMax, maka sisa Word "dipotong" */
-    int i = 0;
-    while (!IsBlank() && !IsEOPC()) 
-    {
-        if (i < NMax)
-        {
-        CCommand.TabWord[i] = CC;
-        i++;
-        }
-        ADVC();
-    }
-    CCommand.Length = i;
-}
 
 /* *** Additional Function *** */
 
@@ -164,7 +219,7 @@ boolean IsKataSama(Word InputCommand, Word Command)
 
     boolean sama = true;
     if (InputCommand.Length != Command.Length) {
-        return !sama;
+        return (!sama);
     } else {
         int i = 0;
         while (sama && (i < Command.Length)) {
@@ -186,7 +241,50 @@ void PrintWord(Word CWord)
    {
     printf("%c",CWord.TabWord[i]);
    }
-   //printf("\n");
+   printf("\n");
+}
+
+void wordToString(Word currentWord, char *string)
+{
+    int i = 0;
+    while (i < currentWord.Length)
+    {
+        *(string + i) = currentWord.TabWord[i];
+        i++;
+    }
+    *(string + i) = '\0';
+}
+
+boolean CompareString(char *string1 , char *string2)
+{
+    boolean equal = true;
+    int i = 0;
+    while ((*(string1 + i) != '\0') && (*(string2 + i) != '\0') && equal)
+    {
+        if (*(string1 + i) != *(string2 + i))
+        {
+            equal = false;
+        }
+        else
+        {
+        i++;
+        }
+    }
+}
+
+
+void PrintString(char *string)
+{
+    /* Mencetak string
+       I.S : String terdefinisi
+       F.S : string tercetak ke layar */
+    int i = 0;
+    while(*(string + i) != '\0')
+    {
+        printf("%c", *(string + i));
+        i++;
+    }
+    printf("\n");
 }
 
 int stringLength (char* string) 
@@ -199,7 +297,7 @@ int stringLength (char* string)
     return len;
 }
 
-Word toKata(char* command) 
+Word StringtoWord(char* command) 
 /* Mengirimkan kata yang elemen of arraynya berasal dari command */
 {
     int i;
@@ -211,7 +309,7 @@ Word toKata(char* command)
     return output;
 }
 
-int toInt(char* string)
+int StringtoInt(char* string)
 {
     /* Mengubah sebuah string menjadi integer*/
     int i = 0;
