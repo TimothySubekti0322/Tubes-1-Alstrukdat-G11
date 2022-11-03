@@ -26,7 +26,7 @@ void STARTGAME(char *FileName)
     START(FileName);
     IgnoreBlanks();
     
-    if (IsEOP())
+    if (IsEOP() || IsEOPC())
     {
         EndWord = true;
     }
@@ -47,7 +47,7 @@ void ADVWORD()
           Jika CC = MARK, EndWord = true.
    Proses : Akuisisi Word menggunakan procedure CopyWord */
     IgnoreBlanks();
-    if(IsEOP())
+    if(IsEOP() || IsEOPC())
     {
         EndWord = true;
     }
@@ -68,7 +68,7 @@ void CopyWord()
           CC adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang Word melebihi NMax, maka sisa Word "dipotong" */
     int i = 0;
-    while ((!IsEOP()) && (!IsBlank()) && (!IsEOPC()))
+    while ((!IsEOP()) && (!IsEOPC()))
     {
         if (i < NMax)
         {
@@ -78,6 +78,7 @@ void CopyWord()
         ADV();
         
     }
+    CWord.TabWord[i] = '\n';
     CWord.Length = i;
 }
 
