@@ -103,3 +103,9 @@ boolean IsFeof()
 /* Mengirimkan true jika*/
     return(feof(pita));
 }
+
+boolean IsPitaNull()
+{
+    /* Mengembalikan true jika pita NULL*/
+    return (pita == NULL);
+}

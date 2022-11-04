@@ -69,5 +69,7 @@ boolean IsNewline();
 boolean IsFeof();
 /* Mengirimkan true jika*/
 
+boolean IsPitaNull();
+/* Mengembalikan true jika pita NULL*/
 
 #endif

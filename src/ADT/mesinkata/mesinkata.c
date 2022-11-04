@@ -44,18 +44,24 @@ void STARTFILE(char *FileName)
           atau EndWord = false, CWord adalah Word yang sudah diakuisisi,
           CC karakter pertama sesudah karakter terakhir Word */
     START(FileName);
-    IgnoreBlanks();
-    
-    if (IsFeof())
+    if(FileNotExist())
     {
         EndWord = true;
     }
     else
     {
-        EndWord = false;
-        CopyLineFile();
+        IgnoreBlanks();
+        
+        if (IsFeof())
+        {
+            EndWord = true;
+        }
+        else
+        {
+            EndWord = false;
+            CopyLineFile();
+        }
     }
-
 }
 
 void INPUT()
