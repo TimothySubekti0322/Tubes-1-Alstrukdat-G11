@@ -3,8 +3,8 @@
  * Array bersifat rata kiri ; elemennya adalah string (char*)
 */
 
-#ifndef __DYNAMIC_ARRAY__
-#define __DYNAMIC_ARRAY__
+#ifndef __ARRAY_STR_DYNAMIC__
+#define __ARRAY_STR_DYNAMIC__
 
 /* Definisi Boolean */
 #define boolean unsigned char
