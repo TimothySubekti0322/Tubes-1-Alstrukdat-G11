@@ -46,10 +46,10 @@ void concat(char *string1, char *string2, char *string3);
    I.S : string 1, string2 , dan string3 terdefinisi ; string 3 kosong
    F.S : string3 berisi gabungan dari string1 dan string2*/
 
-void CopyWordtostring(Word Input, char *string, int length);
+void CopyWordtostring(Word Input, char *string, int Awal , int Akhir);
 /* Menyalin kata ke string
-   I.S : Input terdefinisi , String dan length terdefinisi
-   F.S : string berisis elemen elemen kata sepanjang length */
+   I.S : Input terdefinisi , String , Awal , dan Akhir terdefinisi
+   F.S : string berisis elemen elemen kata dari Indeks Awal hingga Indeks Akhir */
 
 /* COMMAND FUNCTION*/
 

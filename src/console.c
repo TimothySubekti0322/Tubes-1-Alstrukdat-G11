@@ -165,12 +165,14 @@ void concat(char *string1, char *string2, char *string3)
     string3[j] = '\0';
 }
 
-void CopyWordtostring(Word Input, char *string, int length)
+void CopyWordtostring(Word Input, char *string, int Awal , int Akhir)
 {
     int i;
-    for(i = 0 ; i < length ; i++)
+    int j = 0;
+    for(i = Awal ; i <= Akhir  ; i++)
     {
-        *(string + i) = Input.TabWord[i];
+        *(string + j) = Input.TabWord[i];
+        j++;
     }
     *(string + i) = '\0';
 }
