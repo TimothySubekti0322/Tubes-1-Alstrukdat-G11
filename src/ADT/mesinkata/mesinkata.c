@@ -213,10 +213,6 @@ boolean IsBlank()
     return (CC == BLANK);
 }
 
-/* *** ADT untuk baca commands *** */
-
-
-
 /* *** Additional Function *** */
 
 boolean IsKataSama(Word InputCommand, Word Command)
