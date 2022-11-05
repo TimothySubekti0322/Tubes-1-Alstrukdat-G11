@@ -211,3 +211,14 @@ void LOADFILE(ArrayDin *Games, char *inputfile)
         }   
     }
 }
+
+void LISTGAME(ArrayDyn arraygames)
+{
+    printf("Berikut adalah daftar game yang tersedia");
+    
+    for (int i = 0; i < arrayGames.Neff; i++)
+    {
+        printf("%d. %s\n", i + 1, arrayGames.A[i]);
+    }
+
+}

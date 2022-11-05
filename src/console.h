@@ -58,4 +58,8 @@ void LOADFILE(ArrayDin *Games, char *inputfile);
    I.S : File yang diinput terdefinisi , Array Games terdefinisi dan kosong
    F.S : Array games berisis list Game yang ada dalam file*/
 
+void LISTGAME(ArrayDyn arraygames);
+/* Menampilkan ListGame yang tersedia 
+   I.S : arraygames terdefinisi
+   F.S : menampilakn seluruh elemen arraygames*/
 #endif
