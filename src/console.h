@@ -40,4 +40,13 @@ Word StringtoWord(char* command);
 int StringtoInt(char* string);
 /* Mengubah sebuah string menjadi integer*/
 
+void concat(char *string1, char *string2, char *string3);
+/* Menggabungkan string 1 dan string 2
+   I.S : string 1, string2 , dan string3 terdefinisi ; string 3 kosong
+   F.S : string3 berisi gabungan dari string1 dan string2*/
+
+void CopyWordtostring(Word Input, char *string, int length);
+/* Menyalin kata ke string
+   I.S : Input terdefinisi , String dan length terdefinisi
+   F.S : string berisis elemen elemen kata sepanjang length */
 #endif

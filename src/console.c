@@ -141,3 +141,36 @@ int StringtoInt(char* string)
     }
     return hasil;
 }
+
+void concat(char *string1, char *string2, char *string3)
+{
+    /* Menggabungkan string 1 dan string 2
+   I.S : string 1, string2 , dan string3 terdefinisi ; string 3 kosong
+   F.S : string3 berisi gabungan dari string1 dan string2*/
+    int i = 0;
+    int j = 0;
+
+    while (string1[i] != '\0') {
+        string3[j] = string1[i];
+        i++;
+        j++;
+    }
+
+    i = 0;
+    while (string2[i] != '\0') {
+        string3[j] = string2[i];
+        i++;
+        j++;
+    }
+    string3[j] = '\0';
+}
+
+void CopyWordtostring(Word Input, char *string, int length)
+{
+    int i;
+    for(i = 0 ; i < length ; i++)
+    {
+        *(string + i) = Input.TabWord[i];
+    }
+    *(string + i) = '\0';
+}
