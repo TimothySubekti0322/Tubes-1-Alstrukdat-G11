@@ -3,7 +3,7 @@
 #include "console.h"
 
 
-void STARTBNMO(DynArray *gamesBNMO){
+void STARTBNMO(ArrayDyn *gamesBNMO){
      STARTFILE("config.txt");
     int jumlahGame;
     jumlahGame = atoi(CWord.TabWord);
