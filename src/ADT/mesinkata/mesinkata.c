@@ -44,7 +44,7 @@ void STARTFILE(char *FileName)
           atau EndWord = false, CWord adalah Word yang sudah diakuisisi,
           CC karakter pertama sesudah karakter terakhir Word */
     START(FileName);
-    if(FileNotExist())
+    if(IsPitaNull())
     {
         EndWord = true;
     }
