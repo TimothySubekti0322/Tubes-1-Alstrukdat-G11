@@ -3,7 +3,7 @@
  * versi string, arraydinamikstr.h
 */
 
-#include "arraydinamik.h"
+#include "arraydinamikstr.h"
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -11,8 +11,8 @@
  * I.S.	sembarang;
  * F.S.	Terbentuk DynArray kosong yang berukuran StartSize;
 */
-DynArray CreateDynArray() {
-	DynArray array;
+ArrayDyn CreateDynArray() {
+	ArrayDyn array;
 	// Alokasi elemen array secara dinamik menggunakan malloc
 	array.Ar = (ElType*) malloc (StartSize * sizeof(ElType));
 	array.Kapasitas = StartSize; // Kapasitas array diset sebesar StartSize
@@ -24,7 +24,7 @@ DynArray CreateDynArray() {
  * I.S.	DynArray terdefinisi;
  * F.S.	DynArray->arrdin terdealokasikan;
 */
-void DealokasiDynArray(DynArray *array) {
+void DealokasiArrayDyn(ArrayDyn *array) {
 	free(array->Ar);
 }
 
@@ -33,7 +33,7 @@ void DealokasiDynArray(DynArray *array) {
  * Fungsi untuk mengetahui apakah array input kosong atau tidak.
  * Prekondisi : array sudah terdefinisi
 */
-boolean IsEmpty(DynArray array) {
+boolean IsEmpty(ArrayDyn array) {
 	return (array.Neff == 0);
 }
 
@@ -41,7 +41,7 @@ boolean IsEmpty(DynArray array) {
  * Fungsi untuk mengetahui banyaknya elemen efektif dalam sebuah array, bernilai 0 jika kosong.
  * Prekondisi : array sudah terdefinisi
 */
-int Length(DynArray array) {
+int Length(ArrayDyn array) {
 	return (array.Neff);
 }
 
@@ -49,7 +49,7 @@ int Length(DynArray array) {
  * Fungsi untuk mengembalikan nilai elemen array yang ke-i (logical index).
  * Prekondisi : array tidak kosong, dan i berada di [0...Length(array))
 */
-ElType Get(DynArray array, IdxType i) {
+ElType Get(ArrayDyn array, IdxType i) {
 	return (array.Ar[i]);
 }
 
@@ -57,7 +57,7 @@ ElType Get(DynArray array, IdxType i) {
  * Fungsi untuk mengembalikan kapasitas dari array yang tersedia.
  * Prekondisi : array sudah terdefinisi
 */
-int GetCapacity(DynArray array) {
+int GetCapacity(ArrayDyn array) {
 	return (array.Kapasitas);
 }
 
@@ -65,7 +65,7 @@ int GetCapacity(DynArray array) {
  * Fungsi untuk memasukkan elemen baru pada indeks ke-i
  * Prekondisi : array tidak penuh, dan i berada di [0...Length(array))
 */
-void InsertIn(DynArray *array, ElType elmt, IdxType i) {
+void InsertIn(ArrayDyn *array, ElType *elmt, IdxType i) {
 	int index;
 	index = Length(*array);
 	
@@ -85,7 +85,7 @@ void InsertIn(DynArray *array, ElType elmt, IdxType i) {
 		array->Ar[index] = array->Ar[index - 1];
 		index--;
 	}
-	array->Ar[i] = elmt;
+	array->Ar[i] = (*elmt);
 	array->Neff++;
 }
 
@@ -93,7 +93,7 @@ void InsertIn(DynArray *array, ElType elmt, IdxType i) {
  * Fungsi untuk memasukkan elemen baru di awal array
  * Prekondisi : array sudah terdefinisi
 */
-void InsertFirst(DynArray *array, ElType elmt) {
+void InsertFirst(ArrayDyn *array, ElType *elmt) {
 	InsertIn(array, elmt, 0);
 }
 
@@ -101,7 +101,7 @@ void InsertFirst(DynArray *array, ElType elmt) {
  * Fungsi untuk memasukkan elemen baru di akhir array
  * Prekondisi : array sudah terdefinisi
 */
-void InsertLast(DynArray *array, ElType elmt) {
+void InsertLast(ArrayDyn *array, ElType *elmt) {
 	InsertIn(array, elmt, Length(*array));
 }
 
@@ -109,7 +109,7 @@ void InsertLast(DynArray *array, ElType elmt) {
  * Fungsi untuk menghapus elemen pada indeks ke-i
  * Prekondisi : array tidak kosong, dan i berada di [0...Length(array))
 */
-void DeleteIn(DynArray *array, IdxType i) {
+void DeleteIn(ArrayDyn *array, IdxType i) {
 	while (i < Length(*array)) {
 		array->Ar[i] = array->Ar[i + 1];
 		i++;
@@ -122,7 +122,7 @@ void DeleteIn(DynArray *array, IdxType i) {
  * Fungsi untuk menghapus elemen di awal array
  * Prekondisi : array sudah terdefinisi dan tidak kosong
 */
-void DeleteFirst(DynArray *array) {
+void DeleteFirst(ArrayDyn *array) {
 	DeleteIn(array, 0);
 }
 
@@ -130,7 +130,7 @@ void DeleteFirst(DynArray *array) {
  * Fungsi untuk menghapus elemen di akhir array
  * Prekondisi : array sudah terdefinisi dan tidak kosong
 */
-void DeleteLast(DynArray *array) {
+void DeleteLast(ArrayDyn *array) {
 	DeleteIn(array, Length(*array) - 1);
 }
 
@@ -141,7 +141,7 @@ void DeleteLast(DynArray *array) {
  * Tampilan array diakhiri dengan baris baru (newline)
  * Prekondisi : array sudah terdefinisi
 */
-void ShowDynArray(DynArray array) {
+void ShowArrayDyn(ArrayDyn array) {
 	if (IsEmpty(array)) {
 		printf("[]\n");
 	} else { // array tidak kosong
@@ -161,7 +161,7 @@ void ShowDynArray(DynArray array) {
  * Fungsi untuk mengubah urutan array menjadi terbalik (reverse)
  * Prekondisi : array sudah terdefinisi
 */
-void ReverseDynArray(DynArray *array) {
+void ReverseArrayDyn(ArrayDyn *array) {
 	int i;
 	for (i = 0; i < Length(*array)/2; ++i) {
 		ElType temp = array->Ar[i];
@@ -174,11 +174,11 @@ void ReverseDynArray(DynArray *array) {
  * Fungsi untuk menyalin suatu DynArray
  * Prekondisi : array sudah terdefinisi
 */
-DynArray CopyDynArray(DynArray array) {
-	DynArray newarr = CreateDynArray();
+ArrayDyn CopyArrayDyn(ArrayDyn array) {
+	ArrayDyn newarr = CreateDynArray();
 	int k;
 	for (k = 0; k < array.Neff; k++) {
-		InsertLast(&newarr, array.Ar[k]);
+		InsertLast(&newarr, &array.Ar[k]);
 	}
 	return newarr;
 }
@@ -189,12 +189,12 @@ DynArray CopyDynArray(DynArray array) {
  * apabila tidak ditemukan maka akan mengembalikan -1.
  * Prekondisi : array sudah terdefinisi
 */
-IdxType FindDynArray(DynArray array, ElType elmt) {
+IdxType FindArrayDyn(ArrayDyn array, ElType *elmt) {
 	boolean found = false;
 	int LocationIdx = -1;
 	int i = 0;
 	while (i < array.Neff && !found) {
-		if (array.Ar[i] == elmt) {
+		if (array.Ar[i] == (*elmt)) {
 			found = true;
 			LocationIdx = i;
 		}
