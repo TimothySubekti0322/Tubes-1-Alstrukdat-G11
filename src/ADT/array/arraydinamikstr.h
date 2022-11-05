@@ -14,7 +14,7 @@
 #define StartSize 100
 
 typedef int IdxType;
-typedef char ElType;
+typedef char *ElType;
 typedef struct {
 	ElType *Ar;
 	int Kapasitas;
@@ -25,7 +25,7 @@ typedef struct {
  * I.S.	sembarang;
  * F.S.	Terbentuk DynArray kosong yang berukuran StartSize;
 */
-ArrayDyn CreateDynArray();
+ArrayDyn CreateArrayDyn();
 
 /* DESTRUKTOR
  * I.S.	DynArray terdefinisi;
@@ -64,19 +64,19 @@ int GetCapacity(ArrayDyn array);
  * Prekondisi : array sudah terdefinisi,
  * 				dan i berada di [0...Length(array))
 */
-void InsertIn(ArrayDyn *array, ElType *elmt, IdxType i);
+void InsertIn(ArrayDyn *array, ElType elmt, IdxType i);
 
 /* Fungsi InsertFirst
  * Fungsi untuk memasukkan elemen baru di awal array
  * Prekondisi : array sudah terdefinisi
 */
-void InsertFirst(ArrayDyn *array, ElType *elmt);
+void InsertFirst(ArrayDyn *array, ElType elmt);
 
 /* Fungsi InsertLast
  * Fungsi untuk memasukkan elemen baru di akhir array
  * Prekondisi : array sudah terdefinisi
 */
-void InsertLast(ArrayDyn *array, ElType *elmt);
+void InsertLast(ArrayDyn *array, ElType elmt);
 
 /* Fungsi DeleteIn
  * Fungsi untuk menghapus elemen pada indeks ke-i
@@ -123,6 +123,6 @@ ArrayDyn CopyArrayDyn(ArrayDyn array);
  * apabila tidak ditemukan maka akan mengembalikan -1.
  * Prekondisi : array sudah terdefinisi
 */
-IdxType FindArrayDyn(ArrayDyn array, ElType *elmt);
+IdxType FindArrayDyn(ArrayDyn array, ElType elmt);
 
 #endif

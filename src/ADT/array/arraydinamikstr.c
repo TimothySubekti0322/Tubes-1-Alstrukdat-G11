@@ -11,7 +11,7 @@
  * I.S.	sembarang;
  * F.S.	Terbentuk DynArray kosong yang berukuran StartSize;
 */
-ArrayDyn CreateDynArray() {
+ArrayDyn CreateArrayDyn() {
 	ArrayDyn array;
 	// Alokasi elemen array secara dinamik menggunakan malloc
 	array.Ar = (ElType*) malloc (StartSize * sizeof(ElType));
@@ -65,7 +65,7 @@ int GetCapacity(ArrayDyn array) {
  * Fungsi untuk memasukkan elemen baru pada indeks ke-i
  * Prekondisi : array tidak penuh, dan i berada di [0...Length(array))
 */
-void InsertIn(ArrayDyn *array, ElType *elmt, IdxType i) {
+void InsertIn(ArrayDyn *array, ElType elmt, IdxType i) {
 	int index;
 	index = Length(*array);
 	
@@ -85,7 +85,7 @@ void InsertIn(ArrayDyn *array, ElType *elmt, IdxType i) {
 		array->Ar[index] = array->Ar[index - 1];
 		index--;
 	}
-	array->Ar[i] = (*elmt);
+	array->Ar[i] = elmt;
 	array->Neff++;
 }
 
@@ -93,7 +93,7 @@ void InsertIn(ArrayDyn *array, ElType *elmt, IdxType i) {
  * Fungsi untuk memasukkan elemen baru di awal array
  * Prekondisi : array sudah terdefinisi
 */
-void InsertFirst(ArrayDyn *array, ElType *elmt) {
+void InsertFirst(ArrayDyn *array, ElType elmt) {
 	InsertIn(array, elmt, 0);
 }
 
@@ -101,7 +101,7 @@ void InsertFirst(ArrayDyn *array, ElType *elmt) {
  * Fungsi untuk memasukkan elemen baru di akhir array
  * Prekondisi : array sudah terdefinisi
 */
-void InsertLast(ArrayDyn *array, ElType *elmt) {
+void InsertLast(ArrayDyn *array, ElType elmt) {
 	InsertIn(array, elmt, Length(*array));
 }
 
@@ -148,7 +148,7 @@ void ShowArrayDyn(ArrayDyn array) {
 		printf("[");
 		int l;
 		for (l = 0; l < array.Neff; l++) {
-			printf("%d", array.Ar[l]);
+			printf("%s", array.Ar[l]);
 			if (l < array.Neff - 1) {
 				printf(", ");
 			}
@@ -175,10 +175,10 @@ void ReverseArrayDyn(ArrayDyn *array) {
  * Prekondisi : array sudah terdefinisi
 */
 ArrayDyn CopyArrayDyn(ArrayDyn array) {
-	ArrayDyn newarr = CreateDynArray();
+	ArrayDyn newarr = CreateArrayDyn();
 	int k;
 	for (k = 0; k < array.Neff; k++) {
-		InsertLast(&newarr, &array.Ar[k]);
+		InsertLast(&newarr, array.Ar[k]);
 	}
 	return newarr;
 }
@@ -189,12 +189,12 @@ ArrayDyn CopyArrayDyn(ArrayDyn array) {
  * apabila tidak ditemukan maka akan mengembalikan -1.
  * Prekondisi : array sudah terdefinisi
 */
-IdxType FindArrayDyn(ArrayDyn array, ElType *elmt) {
+IdxType FindArrayDyn(ArrayDyn array, ElType elmt) {
 	boolean found = false;
 	int LocationIdx = -1;
 	int i = 0;
 	while (i < array.Neff && !found) {
-		if (array.Ar[i] == (*elmt)) {
+		if (array.Ar[i] == elmt) {
 			found = true;
 			LocationIdx = i;
 		}
