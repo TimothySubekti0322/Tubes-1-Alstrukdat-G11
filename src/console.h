@@ -7,7 +7,7 @@
 #include "ADT/mesinkata/mesinkata.h"
 #include "ADT/queue/queue.h"
 
-void STARTBNMO(DynArray *gamesBNM0);
+void STARTBNMO(ArrayDyn *gamesBNM0);
 
 boolean IsKataSama(Word InputCommand, Word Command);
     /* Mengirimkan true jika K1 = K2 : Length dan elemen tiap arraynya sama */
@@ -53,7 +53,7 @@ void CopyWordtostring(Word Input, char *string, int Awal , int Akhir);
 
 /* COMMAND FUNCTION*/
 
-void LOADFILE(ArrayDin *Games, char *inputfile);
+void LOADFILE(ArrayDyn *Games, char *inputfile);
 /* Melakukan pembacaan file , kemudian menuliskan isinya edalam Array Games
    I.S : File yang diinput terdefinisi , Array Games terdefinisi dan kosong
    F.S : Array games berisis list Game yang ada dalam file*/
