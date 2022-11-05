@@ -174,3 +174,40 @@ void CopyWordtostring(Word Input, char *string, int length)
     }
     *(string + i) = '\0';
 }
+
+/* COMMAND FUNCTION*/
+
+void LOADFILE(ArrayDin *Games, char *inputfile)
+{
+    char placeholder[] = "../data/";
+    char path[50];
+
+    concat(placeholder, inputfile, path);
+
+    STARTFILE(path);
+
+    if (EndWord)
+    {
+        printf("File tidak valid / kosong. Silahkan masukkan nama file lain.\n");
+    }
+    else
+    {
+        char string[NMax];
+        int amount = 0;
+        WordToInt(CWord,&amount);
+        ADVLINEFILE();/* word pertama yang dibaca adalah jumlah game*/
+        for (int j = 0; j < amount; j++)
+        {
+            wordToString(CWord, string);
+            InsertIn(Games, string, j);
+        }
+        if (path == "config.txt")
+        {
+            printf("File konfigurasi sistem berhasil dibaca. BNMO berhasil dijalankan.\n");
+        }
+        else
+        {
+            printf("File %s berhasil dibaca. BNMO berhasil dijalankan.\n", inputfile);
+        }   
+    }
+}

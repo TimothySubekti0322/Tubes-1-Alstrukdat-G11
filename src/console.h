@@ -2,6 +2,7 @@
 #define __CONSOLE__
 
 #include "ADT/array/arraydinamik.h"
+#include "ADT/array/arraydinamikstr.h"
 #include "ADT/mesinkarakter/mesinkarakter.h"
 #include "ADT/mesinkata/mesinkata.h"
 #include "ADT/queue/queue.h"
@@ -49,4 +50,12 @@ void CopyWordtostring(Word Input, char *string, int length);
 /* Menyalin kata ke string
    I.S : Input terdefinisi , String dan length terdefinisi
    F.S : string berisis elemen elemen kata sepanjang length */
+
+/* COMMAND FUNCTION*/
+
+void LOADFILE(ArrayDin *Games, char *inputfile);
+/* Melakukan pembacaan file , kemudian menuliskan isinya edalam Array Games
+   I.S : File yang diinput terdefinisi , Array Games terdefinisi dan kosong
+   F.S : Array games berisis list Game yang ada dalam file*/
+
 #endif
