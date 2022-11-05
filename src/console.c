@@ -179,7 +179,7 @@ void CopyWordtostring(Word Input, char *string, int Awal , int Akhir)
 
 /* COMMAND FUNCTION*/
 
-void LOADFILE(ArrayDin *Games, char *inputfile)
+void LOADFILE(ArrayDyn *Games, char *inputfile)
 {
     char placeholder[] = "../data/";
     char path[50];
@@ -218,9 +218,9 @@ void LISTGAME(ArrayDyn arraygames)
 {
     printf("Berikut adalah daftar game yang tersedia");
     
-    for (int i = 0; i < arrayGames.Neff; i++)
+    for (int i = 0; i < arraygames.Neff; i++)
     {
-        printf("%d. %s\n", i + 1, arrayGames.A[i]);
+        printf("%d. %s\n", i + 1, arraygames.Ar[i]);
     }
 
 }
