@@ -185,7 +185,8 @@ void DinerDash(){
             if(found){
                 if(custnumber == HEAD(orders.indeks)){
                     saldo += orders.harga[custnumber];
-                    dequeue(&orders.indeks);
+                    int val;
+                    dequeue(&orders.indeks,&val);
                     saji.count -= 1;
                     count++;
                     for(i = indeks;i<saji.count;i++){
