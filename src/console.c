@@ -224,3 +224,15 @@ void LISTGAME(ArrayDyn arraygames)
     }
 
 }
+
+void DELETEGAME(ArrayDyn *Games,IdxType indeksgame)
+{
+    if(indeksgame > 5 && indeksgame < Length(*Games)){
+        DeleteIn(Games,indeksgame);
+    } else if(indeksgame >= 1 && indeksgame <= 5){
+        printf("Game gagal dihapus karena merupakan game default.\n");
+    } else{
+        printf("Game gagal dihapus karena indeks yang dimasukkan tidak valid.\n");
+    }
+
+}

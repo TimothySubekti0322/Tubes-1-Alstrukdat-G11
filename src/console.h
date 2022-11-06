@@ -62,4 +62,10 @@ void LISTGAME(ArrayDyn arraygames);
 /* Menampilkan ListGame yang tersedia 
    I.S : arraygames terdefinisi
    F.S : menampilakn seluruh elemen arraygames*/
+
+void DELETEGAME(ArrayDyn Games,int indeksgame);
+/* Melakukan penghapusan suatu game
+   I.S : Arraygames terdefinisi
+   F.S : Melakukan penghapusan game jika ada pada array, mengeluarkan pesan error
+         jika tidak terdefinisi atau termasuk dalam game default*/
 #endif
