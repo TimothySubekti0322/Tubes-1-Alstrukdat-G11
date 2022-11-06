@@ -1,8 +1,9 @@
 #include "boolean.h"
-#include "queue.c"
 #include <stdlib.h>
 #include "time.h"
 #include "math.h"
+#include "../src/ADT/queue/queue.h"
+
 typedef struct{
         int indeks[10];
         int durasi[10];
