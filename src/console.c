@@ -236,3 +236,83 @@ void DELETEGAME(ArrayDyn *Games,IdxType indeksgame)
     }
 
 }
+
+void HELP() 
+{
+	printf("Selamat datang di fungsi HELP!\n");
+	printf("Kalau kamu berada di sini, ");
+	printf("itu berarti kamu kebingungan akan bagaimana program ini berjalan!\n");
+	printf("Tenang saja, kamu akan dibantu sebisa mungkin!\n\n");
+	
+	printf("Berikut adalah list-list command ");
+	printf("yang dapat kamu pakai disini:\n\n");
+	
+	printf("1. Start\n");
+	printf("Jalankan command ini apabila kamu ingin BNMO dijalankan.\n");
+	printf("Untuk menjalankan command ini, cukup ketik : 'START'.\n\n");
+	
+	printf("2. Load\n");
+	printf("Jalankan command ini agar file save-mu dapat dijalankan oleh BNMO.\n");
+	printf("Apabila sudah mengetahui nama file, ketikkan : 'LOAD'.");
+	printf("lalu diikuti dengan nama save file-mu, lengkap dengan tipenya (.txt).\n");
+	printf("Contoh : Apabila ingin load file save.txt, ketikkan : 'LOAD save.txt'.\n\n");
+	
+	printf("3. Save\n");
+	printf("Jalankan command ini apabila kamu merasa ingin ");
+	printf("menyimpan progres terbarumu di BNMO.\n");
+	printf("Apabila sudah mengetahui nama file yang akan dipakai untuk save, ");
+	printf("ketikkan 'LOAD' lalu diikuti dengan nama save file-mu, lengkap dengan tipenya (.txt).\n");
+	printf("Contoh : Apabila ingin menyimpan progres ke file backup.txt, ketikkan 'LOAD backup.txt'.\n\n");
+	
+	printf("4. Create Game\n");
+	printf("Jalankan command ini apabila kamu merasa menemukan sebuah ");
+	printf("game yang sangat keren, dan kamu ingin menambahkannya ke BNMO!\n");
+	printf("Untuk menjalankan command ini, ketik 'CREATE GAME', lalu masukkan nama game-nya!\n");
+	printf("Game akan tersimpan di BNMO.\n");
+	printf("Contoh : Apabila ingin memasukkan game Snake, ketikkan 'CREATE GAME', lalu di input kedua, ketikkan 'Snake'.\n\n");
+	
+	printf("5. List Game\n");
+	printf("Jalankan command ini apabila kamu ingin melihat game-game yang tersedia di BNMO.\n");
+	printf("Untuk menjalankan command ini, ketikkan 'LIST GAME'.\n\n");
+	
+	printf("6. Delete Game\n");
+	printf("Jalankan command ini apabila kamu ingin menghapus game dari BNMO.\n");
+	printf("Untuk menjalankan command ini, ketikkan 'DELETE GAME'.\n");
+	printf("Game yang tersedia pun akan ditampilkan. Lalu, ketikkan nomor game yang ingin dihapus. \n");
+	printf("Kamu tidak bisa menghapus 5 game default pada sistem. Pastikan nomornya valid!\n");
+	printf("Contohnya tersedia 10 game dalam BNMO. Apabila kamu ketik 'DELETE GAME', maka list game akan muncul.\n");
+	printf("Apabila kamu mengetikkan 2, maka game gagal dihapus, karena game ke-2 adalah game default BNMO.\n");
+	printf("Sedangkan jika kamu mengetikkan 7, maka game ke-7 berhasil dihapus.\n\n");
+	
+	printf("7. Queue Game\n");
+	printf("Jalankan command ini apabila kamu ingin menambahkan game BNMO ke antrian permainanmu.\n");
+	printf("Harap diingat, saat kamu keluar dari BNMO, game antrianmu ini juga akan hilang.\n");
+	printf("Untuk menjalankan command ini, ketikkan 'QUEUE GAME'.\n");
+	printf("Game antrianmu dan game BNMO akan ditampilkan. Lalu, ketikkan game yang ingin dimasukkan ke antrianmu.\n");
+	printf("Kamu tidak bisa menambahkan game yang nomornya berada di luar game BNMO!\n\n");
+	
+	printf("8. Play Game\n");
+	printf("Jalankan command ini apabila kamu ingin memainkan game teratas dalam antrianmu.\n");
+	printf("Apabila game tersedia, game dapat langsung dimainkan, tetapi jika tidak, akan tampil pesan kesalahan.\n");
+	printf("Untuk menjalankan command ini, ketikkan 'PLAY GAME.\n\n");
+	
+	printf("9. Skip Game\n");
+	printf("Jalankan command ini apabila kamu ingin melangkahi game antrianmu sebanyak yang kamu mau.\n");
+	printf("Untuk menjalankan command ini, ketikkan 'SKIP GAME'.\n");
+	printf("Lalu, diikuti dengan bilangan n, banyaknya game yang akan dilangkahi.\n");
+	printf("Apabila setelah dilangkahi, masih ada game di antrian, game teratas pada antrian akan dimainkan.\n");
+	printf("Apabila game pada antrian kosong setelah dilangkahi, akan muncul pesan yang menandakan tidak ada game lagi di antrianmu.\n\n");
+	
+	printf("10. Quit\n");
+	printf("Jalankan oommand ini apabila kamu ingin keluar dari BNMO.\n");
+	printf("Untuk menjalankan command ini, ketikkan 'QUIT'.\n\n");
+	
+	printf("11. Help\n");
+	printf("Kamu sudah berada di help!\n\n");
+	
+	printf("Harap diingat, command yang dimasukkan selain di atas ini termasuk command yang tidak dikenali BNMO.\n");
+	printf("Alhasil akan muncul pesan kesalahan yang menandakan command-mu tidak dikenali.\n\n");
+	
+	printf("Sekian bantuannya, semoga membantu :)\n");
+	printf("Selamat menjalani BNMO ~\n");
+}
