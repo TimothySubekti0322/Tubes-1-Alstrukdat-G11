@@ -1,9 +1,11 @@
-#include "boolean.h"
+#include "../src/boolean.h"
 #include <stdlib.h>
 #include "time.h"
 #include "math.h"
-#include "../src/ADT/queue/queue.h"
-
+#include "../src/ADT/queue/queue.c"
+#include "../src/ADT/mesinkata/mesinkata.c"
+#include "../src/ADT/mesinkarakter/mesinkarakter.c"
+#include <stdio.h>
 typedef struct{
         int indeks[10];
         int durasi[10];
@@ -16,6 +18,17 @@ typedef struct{
     int ketahanan[25];
     int harga[25];
 } customers;
+
+void wordToString(Word currentWord, char *string)
+{
+    int i = 0;
+    while (i < currentWord.Length)
+    {
+        *(string + i) = currentWord.TabWord[i];
+        i++;
+    }
+    *(string + i) = '\0';
+}
 
 void IsMemberMasakSaji(masaksaji m,int custnumber,boolean *found,int *indeks){
     int i;
@@ -52,11 +65,22 @@ boolean cooks(char *command){
     return false;
 }
 
-int custnumbers(char *number){
+boolean skip(char *command){
+    if(command[0] == 'S' && command[1] == 'K' && command[2] == 'I' && command[3] == 'P'){
+        return true;
+    }
+    return false;
+}
+
+int custnumbers(char *command){
     int i,custnumber=0;
-        if(strlen(number)<=3){
-            for(i = 1;i<strlen(number)+1;i++){
-                custnumber += pow(10,strlen(number)-1-i)*(number[i]-43);
+        if(cooks(command)){
+            for(i = 6;i<strlen(command)+1;i++){
+                custnumber += pow(10,strlen(command)-1-i)*(command[i]-43);
+            }
+        } else if(serves(command)){
+            for(i = 7;i<strlen(command)+1;i++){
+                custnumber += pow(10,strlen(command)-1-i)*(command[i]-43);
             }
         } else{
             return -1;
@@ -81,8 +105,9 @@ void tambahturn(masaksaji *masak, masaksaji *saji,customers *orders){
         if(masak->durasi[i] == 0){
             saji->count++;
             saji->indeks[saji->count-1] = masak->indeks[i];
-            saji->durasi[saji->count-1] = orders->ketahanan[saji->indeks[saji->count-1]];    
+            saji->durasi[saji->count-1] = orders->ketahanan[saji->indeks[saji->count-1]]+1;
             DeleteMasakSaji(masak,i);
+            i--;    
         }
     }
     for(i = 0;i<saji->count;i++){
@@ -93,7 +118,7 @@ void tambahturn(masaksaji *masak, masaksaji *saji,customers *orders){
     }
 }
 
-void DinerDash(){
+void main(){
     printf("Selamat datang di Diner Dash!\n");
     
     // Deklarasi variabel dan array
@@ -123,9 +148,8 @@ void DinerDash(){
     masaksajiempty(&saji);    
 
     //Isi command
-    char *command,*number;
+    char *command;
     command = (char *) malloc (6*sizeof(char));
-    number = (char *) malloc (4*sizeof(char));
     //Isi Customer awal
     for(i = 0;i<3;i++){
         enqueue(&orders.indeks,i);
@@ -169,7 +193,8 @@ void DinerDash(){
         //Pemasukkan command
         while(!valid){
             printf("MASUKKAN COMMAND: ");
-            scanf("%s %s",command,number);
+            INPUT();
+            wordToString(CWord,command);
             serve = false;
             cook = false;
             if(serves(command)){
@@ -180,49 +205,51 @@ void DinerDash(){
 
             if(serve == true){
                 found = false;
-                custnumber = custnumbers(number);
+                custnumber = custnumbers(command);
                 IsMemberMasakSaji(saji,custnumber,&found,&indeks);
 
-            if(found){
-                if(custnumber == HEAD(orders.indeks)){
-                    saldo += orders.harga[custnumber];
-                    int val;
-                    dequeue(&orders.indeks,&val);
-                    saji.count -= 1;
-                    count++;
-                    for(i = indeks;i<saji.count;i++){
-                        saji.indeks[i] = saji.indeks[i+1];
-                        saji.durasi[i] = saji.durasi[i+1];
-                    }
-                    valid = true;
-                } else {
-                    printf("M%d belum dapat disajikan karena M%d belum selesai\n",custnumber,HEAD(orders.indeks));                    
-                }
-            } else{
-                printf("Indeks makanan belum siap disaji atau tidak valid.\n");
-            }
-        } else if(cook == true){
-            custnumber = custnumbers(number);
-            found = false;
-            for(i = 0;i<length(orders.indeks);i++){
-                if(custnumber == orders.indeks.buffer[i]){
-                    found = true;
-                }
-            }
-            if (masak.count <= 5){
                 if(found){
-                    masak.count+=1;
-                    masak.durasi[masak.count-1] = orders.durasi[custnumber]+1;
-                    masak.indeks[masak.count-1] = custnumber;
-                    valid = true;
+                    if(custnumber == HEAD(orders.indeks)){
+                        saldo += orders.harga[custnumber];
+                        int val;
+                        dequeue(&orders.indeks,&val);
+                        saji.count -= 1;
+                        count++;
+                        for(i = indeks;i<saji.count;i++){
+                            saji.indeks[i] = saji.indeks[i+1];
+                            saji.durasi[i] = saji.durasi[i+1];
+                        }
+                        valid = true;
+                    } else {
+                        printf("M%d belum dapat disajikan karena M%d belum selesai\n",custnumber,HEAD(orders.indeks));                    
+                    }
                 } else{
-                    printf("Indeks masakan tidak dalam queue customer.\n");
+                    printf("Indeks makanan belum siap disaji atau tidak valid.\n");
                 }
-            } else{
-                printf("Batas jumlah masakan sudah tercapai. Input ulang command.\n");
+            } else if(cook == true){
+                custnumber = custnumbers(command);
+                found = false;
+                for(i = 0;i<length(orders.indeks);i++){
+                    if(custnumber == orders.indeks.buffer[i]){
+                        found = true;
+                    }
+                }
+                if (masak.count <= 5){
+                    if(found){
+                        masak.count+=1;
+                        masak.durasi[masak.count-1] = orders.durasi[custnumber]+1;
+                        masak.indeks[masak.count-1] = custnumber;
+                        valid = true;
+                    } else{
+                        printf("Indeks masakan tidak dalam queue customer.\n");
+                    }
+                } else{
+                    printf("Batas jumlah masakan sudah tercapai. Input ulang command.\n");
+                }
+            } else if(skip(command)){
+                valid = true;
             }
         }
-    }
 
         tambahturn(&masak,&saji,&orders);
         if(HEAD(orders.indeks) == 15){
