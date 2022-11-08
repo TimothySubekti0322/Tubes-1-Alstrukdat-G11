@@ -19,7 +19,7 @@ void PrintWord(Word CWord);
    I.S : CWord tidak kosong dan terdefinisi
    F.S : isi dari CWord dicetak ke layar */
 
-void wordToString(Word currentWord, char string[]);
+char *wordToString(Word kata);
 /* Mengubah Word menjadi string*/
 
 boolean CompareString(char *string1 , char *string2);

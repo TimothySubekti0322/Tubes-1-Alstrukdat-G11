@@ -183,10 +183,11 @@ void dinnerdash(){
         boolean valid = false;
         
         //Pemasukkan command
+        char *command;
         while(!valid){
             printf("MASUKKAN COMMAND: ");
             INPUT();
-            wordToString(CWord,command);
+            command = wordToString(CWord);
             serve = false;
             cook = false;
             if(serves(command)){

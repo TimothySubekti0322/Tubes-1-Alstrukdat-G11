@@ -64,19 +64,19 @@ void PrintWord(Word CWord)
    printf("\n");
 }
 
-void wordToString(Word currentWord, char *string)
+char *wordToString(Word CWord)
 {
+    char *string;
+
+    string = malloc(CWord.Length * sizeof(char));
     int i = 0;
-    // printf("%d\n", currentWord.Length);
-    while (i < currentWord.Length)
+    while (i < CWord.Length)
     {
-        // printf("Sampe sini 1\n");
-        // printf("%c", currentWord.TabWord[i]);
-        *(string + i) = currentWord.TabWord[i];
-        // printf("Sampe sini 2\n");
+        *(string+i) = CWord.TabWord[i];
         i++;
     }
-    *(string + i) = '\0';
+    string[i] = '\0';
+    return string;
 }
 
 boolean CompareString(char *string1 , char *string2)
@@ -208,25 +208,20 @@ void LOADFILE(ArrayDyn *Games, char *inputfile)
     }
     else
     {
-        char string[NMax];
+        
         int amount = 0;
         WordToInt(CWord,&amount);
         ADVLINEFILE();/* word pertama yang dibaca adalah jumlah game*/
         for (int j = 0; j < amount; j++)
         {
-            wordToString(CWord, string);
+            char *gamename;
+            gamename = wordToString(CWord);
+            // printf("%s\n",gamename);
             // printf("Sampe sini 2\n");
             //InsertStrLast(Games,string);
-            char  * gamename = (char*) malloc(CWord.Length*sizeof(char));
-            int i = 0;
-            while (i < CWord.Length)
-            {
-                gamename[i] = string[i];
-                i++;
-            }
             InsertStrIn(Games, gamename, j);
-            printf("%s\n",string);
-            ShowStrArrayDyn(*Games);
+            // printf("%s\n",gamename);
+            // ShowStrArrayDyn(*Games);
             // printf("%s\n",Games->Ar[j]);
             ADVLINEFILE();
         }
@@ -285,72 +280,72 @@ void DELETEGAME(ArrayDyn *Games)
 void CreateGame(ArrayDyn* ArrayGame){
     //ArrayGame merupakan array yang menyimpan list game
 
-    char input[100];
+    char *input;
     INPUT();
-    wordToString(CWord,input);
+    input = wordToString(CWord);
     //Melakukan validasi input, apakah sudah ada game yang bernama sama dengan input atau belum
     while (FindStrArrayDyn(*ArrayGame, input) != -1){
         printf("Game sudah ada, silahkan input ulang");
         INPUT();
-        wordToString(CWord,input);            
+        input = wordToString(CWord);           
     }
     //Melakukan penambahan game yang diinput
     InsertStrLast(ArrayGame, input);
 }
 
-void PlayGame(QueueStr* AntrianGame){
-    if (isStrEmpty(*AntrianGame)){
-        printf("Tidak ada antrian game untuk dimainkan, silahkan daftar game ke antrian dengan menggunakan command QUEUE GAME");
-    } else { 
-        printf("Berikut adalah daftar Game-mu\n");
-        DisplayStrQueue(* AntrianGame);
-        char game[100];
-        dequeueStr(AntrianGame,&game);
-        if (game == 'RNG' || game == 'Diner Dash'){ 
-            printf("Loading %s ...", game);
-            if (game == 'RNG'){
-                RNG();
-            } else if (game == 'Diner Dash'){
-                DinerDash();
-            }
-        } else {
-            printf("Game %s masih dalam meaintenance, belum dapat dimainkan.\n", game);
-            printf("Silahkan pilih game lain.");
-        }
-    }
-}
+// void PlayGame(QueueStr* AntrianGame){
+//     if (isStrEmpty(*AntrianGame)){
+//         printf("Tidak ada antrian game untuk dimainkan, silahkan daftar game ke antrian dengan menggunakan command QUEUE GAME");
+//     } else { 
+//         printf("Berikut adalah daftar Game-mu\n");
+//         DisplayStrQueue(* AntrianGame);
+//         char game[100];
+//         dequeueStr(AntrianGame,&game);
+//         if (CompareString(game,"RNG") || CompareString(game,"Diner Dash")){ 
+//             printf("Loading %s ...", game);
+//             if (CompareString(game,"RNG")){
+//                 RNG();
+//             } else if (CompareString(game,"RNG")){
+//                 DinerDash();
+//             }
+//         } else {
+//             printf("Game %s masih dalam meaintenance, belum dapat dimainkan.\n", game);
+//             printf("Silahkan pilih game lain.");
+//         }
+//     }
+// }
 
-void SkipGame(QueueStr* AntrianGame, int number){
-    if (isStrEmpty(*AntrianGame)){
-        pritnf("Tidak ada antrian game untuk diskip, silahkan daftar game ke antrian dengan menggunakan command QUEUE GAME");
-    } else { 
-        printf("Berikut adalah daftar Game-mu\n");
-        DisplayStrQueue(* AntrianGame);
-        char game[100];
-        int i = 0;
-        while (!isStrEmpty(*AntrianGame) && i<number){
-            dequeue(AntrianGame,game);
-            i++;
-        }
+// void SkipGame(QueueStr* AntrianGame, int number){
+//     if (isStrEmpty(*AntrianGame)){
+//         pritnf("Tidak ada antrian game untuk diskip, silahkan daftar game ke antrian dengan menggunakan command QUEUE GAME");
+//     } else { 
+//         printf("Berikut adalah daftar Game-mu\n");
+//         DisplayStrQueue(* AntrianGame);
+//         char game[100];
+//         int i = 0;
+//         while (!isStrEmpty(*AntrianGame) && i<number){
+//             dequeue(AntrianGame,game);
+//             i++;
+//         }
 
-        if (isStrEmpty(*AntrianGame)){
-            printf("Tidak ada permainan lagi dalam daftar game-mu");
-        } else { 
-            dequeueStr(AntrianGame,&game);
-            if (game == 'RNG' || game == 'Diner Dash'){ 
-                printf("Loading %s ...", game);
-                if (game == 'RNG'){
-                    RNG();
-                } else if (game == 'Diner Dash'){
-                    DinerDash();
-                }
-            } else {
-                printf("Game %s masih dalam meaintenance, belum dapat dimainkan.\n", game);
-                printf("Silahkan pilih game lain.");
-            }
-        }
-    }
-}
+//         if (isStrEmpty(*AntrianGame)){
+//             printf("Tidak ada permainan lagi dalam daftar game-mu");
+//         } else { 
+//             dequeueStr(AntrianGame,&game);
+//             if (game == 'RNG' || game == 'Diner Dash'){ 
+//                 printf("Loading %s ...", game);
+//                 if (game == 'RNG'){
+//                     RNG();
+//                 } else if (game == 'Diner Dash'){
+//                     DinerDash();
+//                 }
+//             } else {
+//                 printf("Game %s masih dalam meaintenance, belum dapat dimainkan.\n", game);
+//                 printf("Silahkan pilih game lain.");
+//             }
+//         }
+//     }
+// }
 
 void HELP() 
 {
@@ -439,10 +434,10 @@ void QUEUEGAME(QueueStr *BNMOGames, ArrayDyn ListGame) {
 	LISTGAME(ListGame);
 	
 	printf("Nomor Game yang mau ditambahkan ke antrian :");
-	int idxgame;
+	int idxgame = 0;
     INPUT();
     WordToInt(CWord,&idxgame);
-    
+    printf("%d\n",idxgame);
     if (idxgame >= 1 && idxgame <= StrLength(ListGame)) {
 		enqueueStr(BNMOGames, ListGame.Ar[idxgame - 1]);
 		printf("Game berhasil ditambahkan ke dalam antrian.\n");

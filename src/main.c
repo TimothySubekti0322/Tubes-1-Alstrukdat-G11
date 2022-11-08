@@ -40,7 +40,7 @@ int main()
     {
         printf("\nENTER COMMAND: ");
         INPUT();
-        printf("%s\n", CWord);
+        // printf("%s\n", CWord);
         //ADVCommand();
         //printf("%s\n", CWord);
         
@@ -53,6 +53,7 @@ int main()
                 //STARTBNMO(&ArrayGame);
                 LOADFILE(&ArrayGame,"config.txt");
                 ShowStrArrayDyn(ArrayGame);
+                printf("%d",ArrayGame.Neff);
             }
 
             /* Command LOAD */
