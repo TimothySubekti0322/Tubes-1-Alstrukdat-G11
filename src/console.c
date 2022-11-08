@@ -4,7 +4,7 @@
 
 
 void STARTBNMO(ArrayDyn *gamesBNMO){
-     STARTFILE("config.txt");
+    STARTFILE("../data/config.txt");
     int jumlahGame;
     jumlahGame = atoi(CWord.TabWord);
     ADVLINEFILE();
