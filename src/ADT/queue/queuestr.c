@@ -6,7 +6,7 @@
 #include <stdio.h>
 
 /* *** KREATOR QUEUE *** */
-void CreateStrQueue(Queue *q) {
+void CreateStrQueue(QueueStr *q) {
 	IDX_HEAD(*q) = Idx_Undef;
 	IDX_TAIL(*q) = Idx_Undef;
 }
@@ -18,19 +18,19 @@ void CreateStrQueue(Queue *q) {
 */
 
 /* ********** QUEUE PROPERTIES ********** */
-boolean isStrEmpty(Queue q) {
+boolean isStrEmpty(QueueStr q) {
 	return (IDX_HEAD(q) == Idx_Undef && IDX_TAIL(q) == Idx_Undef);
 }
 /* Mengirimkan nilai true apabila queue kosong, yaitu ketika
  * IdxHead dan IdxTail sama-sama bernilai Idx_Undef
 */
-boolean isStrFull(Queue q) {
+boolean isStrFull(QueueStr q) {
 	return (((IDX_TAIL(q) + 1) % InitSize) == IDX_HEAD(q));
 }
 /* Mengirimkan nilai true apabila queue penuh, yaitu ketika
  * IdxTail akan berada di belakang IdxHead pada buffer melingkar
 */
-int lengthStr(Queue q) {
+int lengthStr(QueueStr q) {
 	if (isStrEmpty(q)) {
 		return 0;
 	} else { // Queue tidak kosong
@@ -48,7 +48,7 @@ int lengthStr(Queue q) {
 */
 
 /* ********** QUEUE PRIMITIVES ********** */
-void enqueueStr(Queue *q, ElemType var) {
+void enqueueStr(QueueStr *q, ElemType var) {
 	if (isStrEmpty(*q)) {
 		IDX_HEAD(*q)++;
 		IDX_TAIL(*q)++;
@@ -64,7 +64,7 @@ void enqueueStr(Queue *q, ElemType var) {
  * 		tetapi tidak penuh
  * F.S.	var menjadi TAIL yang baru, IdxTail "mundur"
 */
-void dequeueStr(Queue *q, ElemType *var) {
+void dequeueStr(QueueStr *q, ElemType *var) {
 	*var = HEAD(*q);
 	if (IDX_HEAD(*q) == IDX_TAIL(*q)) {
 		IDX_HEAD(*q) = Idx_Undef;
@@ -82,7 +82,7 @@ void dequeueStr(Queue *q, ElemType *var) {
 */
 
 /* ********** QUEUE DISPLAYS ********** */
-void DisplayStrQueue(Queue q) {
+void DisplayStrQueue(QueueStr q) {
 	if (!isStrEmpty(q)) { // Queue tidak kosong
 		if (IDX_HEAD(q) > IDX_TAIL(q)) {
 			int i;

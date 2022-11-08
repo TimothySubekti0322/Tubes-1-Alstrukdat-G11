@@ -21,7 +21,7 @@ typedef struct {
 	ElemType buffer[InitSize];
 	int IdxHead;
 	int IdxTail;
-} Queue;
+} QueueStr;
 
 /* ************* AKSES (SELEKTOR; MACRO) ************* */
 /* Jika q adalah queue, alternatif cara pengaksesan: */
@@ -31,7 +31,7 @@ typedef struct {
 #define 	TAIL(q) (q).buffer[(q).IdxTail]
 
 /* *** KREATOR QUEUE *** */
-void CreateStrQueue(Queue *q);
+void CreateStrQueue(QueueStr *q);
 /*	I.S. sembarang
  * 	F.S. Sebuah queue q kosong terbentuk dengan spesifikasi:
  * 	* Indeks Head (IdxHead) bernilai Idx_Undef;
@@ -40,27 +40,27 @@ void CreateStrQueue(Queue *q);
 */
 
 /* ********** QUEUE PROPERTIES ********** */
-boolean isStrEmpty(Queue q);
+boolean isStrEmpty(QueueStr q);
 /* Mengirimkan nilai true apabila queue kosong, yaitu ketika
  * IdxHead dan IdxTail sama-sama bernilai Idx_Undef
 */
-boolean isStrFull(Queue q);
+boolean isStrFull(QueueStr q);
 /* Mengirimkan nilai true apabila queue penuh, yaitu ketika
  * IdxTail akan berada di belakang IdxHead pada buffer melingkar
 */
-int lengthStr(Queue q);
+int lengthStr(QueueStr q);
 /* Mengirimkan banyaknya elemen dalam queue;
  * Mengirimkan 0 apabila queue kosong
 */
 
 /* ********** QUEUE PRIMITIVES ********** */
-void enqueueStr(Queue *q, ElemType var);
+void enqueueStr(QueueStr *q, ElemType var);
 /* Menambahkan var pada queue q dengan sifat First In First Out
  * I.S. q sudah terdefinisi dan mungkin kosong,
  * 		tetapi tidak penuh
  * F.S.	var menjadi TAIL yang baru, IdxTail "mundur"
 */
-void dequeueStr(Queue *q, ElemType *var);
+void dequeueStr(QueueStr *q, ElemType *var);
 /* Menghapus var pada queue q dengan sifat First In First Out
  * I.S.	q sudah terdefinisi dan tidak mungkin kosong
  * F.S. var = nilai elemen IdxHead pada queue; IdxHead "mundur";
@@ -68,7 +68,7 @@ void dequeueStr(Queue *q, ElemType *var);
 */
 
 /* ********** QUEUE DISPLAYS ********** */
-void DisplayStrQueue(Queue q);
+void DisplayStrQueue(QueueStr q);
 /* Menuliskan isi Queue dengan skema pemrosesan traversal, dengan
  * format penulisan elemen diikuti newline sebelum elemen selanjutnya
  * I.S.	q sudah terdefinisi dan mungkin kosong
