@@ -4,8 +4,8 @@
 #ifndef RNG_H
 #define RNG_H
 
-#include "mesinkarakter.h"
-#include "mesinkata.h"
+#include "../src/ADT/mesinkarakter/mesinkarakter.h"
+#include "../src/ADT/mesinkata/mesinkata.h"
 
 void gameRNG();
 /* Game RNG
