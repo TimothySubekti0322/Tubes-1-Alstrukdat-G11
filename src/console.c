@@ -298,6 +298,60 @@ void CreateGame(ArrayDyn* ArrayGame){
     InsertStrLast(ArrayGame, input);
 }
 
+void PlayGame(QueueStr* AntrianGame){
+    if (isStrEmpty(*AntrianGame)){
+        printf("Tidak ada antrian game untuk dimainkan, silahkan daftar game ke antrian dengan menggunakan command QUEUE GAME");
+    } else { 
+        printf("Berikut adalah daftar Game-mu\n");
+        DisplayStrQueue(* AntrianGame);
+        char game[100];
+        dequeueStr(AntrianGame,&game);
+        if (game == 'RNG' || game == 'Diner Dash'){ 
+            printf("Loading %s ...", game);
+            if (game == 'RNG'){
+                RNG();
+            } else if (game == 'Diner Dash'){
+                DinerDash();
+            }
+        } else {
+            printf("Game %s masih dalam meaintenance, belum dapat dimainkan.\n", game);
+            printf("Silahkan pilih game lain.");
+        }
+    }
+}
+
+void SkipGame(QueueStr* AntrianGame, int number){
+    if (isStrEmpty(*AntrianGame)){
+        pritnf("Tidak ada antrian game untuk diskip, silahkan daftar game ke antrian dengan menggunakan command QUEUE GAME");
+    } else { 
+        printf("Berikut adalah daftar Game-mu\n");
+        DisplayStrQueue(* AntrianGame);
+        char game[100];
+        int i = 0;
+        while (!isStrEmpty(*AntrianGame) && i<number){
+            dequeue(AntrianGame,game);
+            i++;
+        }
+
+        if (isStrEmpty(*AntrianGame)){
+            printf("Tidak ada permainan lagi dalam daftar game-mu");
+        } else { 
+            dequeueStr(AntrianGame,&game);
+            if (game == 'RNG' || game == 'Diner Dash'){ 
+                printf("Loading %s ...", game);
+                if (game == 'RNG'){
+                    RNG();
+                } else if (game == 'Diner Dash'){
+                    DinerDash();
+                }
+            } else {
+                printf("Game %s masih dalam meaintenance, belum dapat dimainkan.\n", game);
+                printf("Silahkan pilih game lain.");
+            }
+        }
+    }
+}
+
 void HELP() 
 {
 	printf("Selamat datang di fungsi HELP!\n");

@@ -82,6 +82,10 @@ void DELETEGAME(ArrayDyn *Games);
          jika tidak terdefinisi atau termasuk dalam game default*/
 
 void CreateGame(ArrayDyn* ArrayGame);
+
+void PlayGame(QueueStr* AntrianGame);
+
+void SkipGame(QueueStr* AntrianGame, int number);
          
 void HELP();
 /* Menampilkan daftar command-command yang tersedia,
