@@ -82,10 +82,22 @@ void DELETEGAME(ArrayDyn *Games);
          jika tidak terdefinisi atau termasuk dalam game default*/
 
 void CreateGame(ArrayDyn* ArrayGame);
+/* Melakukan penambahan suatu game
+   I.S : ArrayGame terdefinisi
+   F.S : Melakukan penambahan game pada array, meminta validasi dengan input 
+         ulang jika game sudah ada di dalam array*/
 
 void PlayGame(QueueStr* AntrianGame);
+/* Menjalankan suatu game
+   I.S : ArrayGame terdefinisi
+   F.S : Menjalankan game yang terdapat di paling atas pada ADT Queue yang
+         menyimpan antrian game*/
 
 void SkipGame(QueueStr* AntrianGame, int number);
+/* Menjalankan suatu game dengan skip game sebanyak number
+   I.S : Arraygames terdefinisi
+   F.S : Melewatkan game sebanyak number dari atas, dan menjalankan game apabila
+         masih terdapat game dalam ADT Queue*/
          
 void HELP();
 /* Menampilkan daftar command-command yang tersedia,
