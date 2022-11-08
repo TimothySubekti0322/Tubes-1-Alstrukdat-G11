@@ -2,9 +2,10 @@
 #include <stdlib.h>
 #include "time.h"
 #include "math.h"
-#include "../src/ADT/queue/queue.c"
-#include "../src/ADT/mesinkata/mesinkata.c"
-#include "../src/ADT/mesinkarakter/mesinkarakter.c"
+#include "../src/ADT/queue/queue.h"
+#include "../src/ADT/mesinkata/mesinkata.h"
+#include "../src/ADT/mesinkarakter/mesinkarakter.h"
+#include "../src/console.h"
 #include <stdio.h>
 typedef struct{
         int indeks[10];
@@ -19,16 +20,6 @@ typedef struct{
     int harga[25];
 } customers;
 
-void wordToString(Word currentWord, char *string)
-{
-    int i = 0;
-    while (i < currentWord.Length)
-    {
-        *(string + i) = currentWord.TabWord[i];
-        i++;
-    }
-    *(string + i) = '\0';
-}
 
 void IsMemberMasakSaji(masaksaji m,int custnumber,boolean *found,int *indeks){
     int i;
@@ -43,7 +34,7 @@ void masaksajiempty(masaksaji *m){
     m->count = 0;
 }
 
-int strlen(char *sentence){
+int strlength(char *sentence){
     int i = 0;
     while(sentence[i] != '\0'){
         i++;
@@ -75,12 +66,12 @@ boolean skip(char *command){
 int custnumbers(char *command){
     int i,custnumber=0;
         if(cooks(command)){
-            for(i = 6;i<strlen(command)+1;i++){
-                custnumber += pow(10,strlen(command)-1-i)*(command[i]-43);
+            for(i = 6;i<strlength(command)+1;i++){
+                custnumber += pow(10,strlength(command)-1-i)*(command[i]-43);
             }
         } else if(serves(command)){
-            for(i = 7;i<strlen(command)+1;i++){
-                custnumber += pow(10,strlen(command)-1-i)*(command[i]-43);
+            for(i = 7;i<strlength(command)+1;i++){
+                custnumber += pow(10,strlength(command)-1-i)*(command[i]-43);
             }
         } else{
             return -1;
@@ -118,7 +109,7 @@ void tambahturn(masaksaji *masak, masaksaji *saji,customers *orders){
     }
 }
 
-void main(){
+void dinnerdash(){
     printf("Selamat datang di Diner Dash!\n");
     
     // Deklarasi variabel dan array

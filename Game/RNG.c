@@ -3,6 +3,7 @@
 #include <time.h>
 #include <math.h>
 #include "RNG.h"
+#include "../src/console.h"
 
 void gameRNG()  
 {  

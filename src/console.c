@@ -211,7 +211,7 @@ void LOADFILE(ArrayDyn *Games, char *inputfile)
         for (int j = 0; j < amount; j++)
         {
             wordToString(CWord, string);
-            InsertIn(Games, string, j);
+            InsertStrIn(Games, string, j);
         }
         if (path == "config.txt")
         {
@@ -254,8 +254,8 @@ void DELETEGAME(ArrayDyn *Games)
     int indeksgame;
     INPUT();
     WordToInt(CWord,&indeksgame);
-    if(indeksgame > 5 && indeksgame < Length(*Games)){
-        DeleteIn(Games,indeksgame);
+    if(indeksgame > 5 && indeksgame < StrLength(*Games)){
+        DeleteStrIn(Games,indeksgame);
     } else if(indeksgame >= 1 && indeksgame <= 5){
         printf("Game gagal dihapus karena merupakan game default.\n");
     } else{
@@ -270,13 +270,13 @@ void CreateGame(ArrayDyn* ArrayGame){
     INPUT();
     wordToString(CWord,input);
     //Melakukan validasi input, apakah sudah ada game yang bernama sama dengan input atau belum
-    while (FindArrayDyn(*ArrayGame, input) != -1){
+    while (FindStrArrayDyn(*ArrayGame, input) != -1){
         printf("Game sudah ada, silahkan input ulang");
         INPUT();
         wordToString(CWord,input);            
     }
     //Melakukan penambahan game yang diinput
-    InsertLast(ArrayGame, input);
+    InsertStrLast(ArrayGame, input);
 }
 
 void HELP() 
