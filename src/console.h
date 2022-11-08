@@ -52,6 +52,11 @@ void CopyWordtostring(Word Input, char *string, int Awal , int Akhir);
    I.S : Input terdefinisi , String , Awal , dan Akhir terdefinisi
    F.S : string berisis elemen elemen kata dari Indeks Awal hingga Indeks Akhir */
 
+void WordToInt(Word kata, int *hasil);
+/* Mengubah Kata to Int
+   I.S : Kata dan hasil terdefinisi
+   F.S : hasil merupakan integer dari element Kata*/
+
 /* COMMAND FUNCTION*/
 
 void LOADFILE(ArrayDyn *Games, char *inputfile);

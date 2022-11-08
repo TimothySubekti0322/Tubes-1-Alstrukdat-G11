@@ -30,7 +30,7 @@ int main()
 {
     ArrayDyn ArrayGame;
     Queue QueueGame;
-    ArrayGame = CreateArrayDyn();
+    ArrayGame = CreateStrArrayDyn();
     CreateQueue(&QueueGame);
     boolean endProgram = false;
 
@@ -45,7 +45,7 @@ int main()
         //printf("%s\n", CWord);
         
         /* Belum Start / Load */
-        if (IsEmpty(ArrayGame))
+        if (IsStrEmpty(ArrayGame))
         {
             /* Command START*/
             if (IsKataSama(CWord, StringtoWord("START")))

@@ -17,14 +17,14 @@ void STARTBNMO(ArrayDyn *gamesBNMO){
         
         while (i < jumlahGame){
             char *namaGame;
-            namaGame = (char*) malloc(CWord.Length * sizeof (char));
+            namaGame = (char*) malloc(CWord.Length * sizeof(char));
 
             int k = 0;
             while (k < CWord.Length){
                 namaGame[k] = CWord.TabWord[k];
                 k = k+1;
             }
-            InsertLast(gamesBNMO, namaGame);
+            InsertStrLast(gamesBNMO, namaGame);
             i = i +1;
             ADVLINEFILE();
         }
@@ -140,6 +140,16 @@ int StringtoInt(char* string)
         i++;
     }
     return hasil;
+}
+
+void WordToInt(Word kata, int *hasil)
+{
+    int i = 0;
+    while (i < kata.Length)
+    {
+        *hasil = *hasil * 10 + (kata.TabWord[i] - '0');
+        i++;
+    }
 }
 
 void concat(char *string1, char *string2, char *string3)
