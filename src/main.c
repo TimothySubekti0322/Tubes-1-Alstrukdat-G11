@@ -88,7 +88,7 @@ int main()
             }
             else if (IsKataSama(CWord, StringtoWord("LIST GAME")))
             {
-                    /* Memanggil function List Game*/
+                LISTGAME(ArrayGame);
             }
             else if (IsKataSama(CWord, StringtoWord("DELETE GAME")))
             {
