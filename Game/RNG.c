@@ -3,6 +3,7 @@
 #include <time.h>
 #include <math.h>
 #include "RNG.h"
+
 void gameRNG()  
 {  
     srand(time(NULL));
