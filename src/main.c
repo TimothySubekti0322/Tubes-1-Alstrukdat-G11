@@ -3,6 +3,7 @@
 
 #include "ADT/mesinkarakter/mesinkarakter.h"
 #include "ADT/mesinkata/mesinkata.h"
+#include "ADT/array/arraydinamikstr.h"
 #include "console.h"
 
 
@@ -30,7 +31,7 @@ void welcome(){
 
 int main()
 {
-    ArrayDin ArrayGame;
+    ArrayDyn ArrayGame;
     Queue QueueGame;
     ArrayGame = MakeArrayDin();
     CreateQueue(&QueueGame);
@@ -126,6 +127,9 @@ int main()
 
             else if (IsKataSama(CWord, StringtoWord("QUIT")))
                 {
+                    QUIT(endProgram);
+                    printf("Anda keluar dari game BNMO.\n");
+                    printf("Bye bye ...\n");
                     /* Memanggil Fungsi Quit*/
                 }
 

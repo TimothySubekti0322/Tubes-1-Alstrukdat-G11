@@ -6,6 +6,7 @@
 #include "ADT/mesinkarakter/mesinkarakter.h"
 #include "ADT/mesinkata/mesinkata.h"
 #include "ADT/queue/queue.h"
+#include "boolean.h"
 
 void STARTBNMO(ArrayDyn *gamesBNM0);
 
@@ -73,5 +74,11 @@ void HELP();
 /* Menampilkan daftar command-command yang tersedia,
  * apa saja yang dapat dilakukan dengan masing-masing command,
  * dan cara memanggilnya.
+*/
+
+boolean QUIT(boolean EndGame);
+/*
+   I.S : EndGame bernilai false
+   F.S : Endgame bernilai true
 */
 #endif

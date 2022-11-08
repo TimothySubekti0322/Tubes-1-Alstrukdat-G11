@@ -316,3 +316,7 @@ void HELP()
 	printf("Sekian bantuannya, semoga membantu :)\n");
 	printf("Selamat menjalani BNMO ~\n");
 }
+
+boolean QUIT(boolean EndGame){
+    return EndGame = true;
+}
