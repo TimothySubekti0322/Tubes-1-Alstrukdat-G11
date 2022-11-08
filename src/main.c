@@ -1,9 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "ADT/mesinkarakter/mesinkarakter.h"
-#include "ADT/mesinkata/mesinkata.h"
-#include "ADT/array/arraydinamikstr.h"
 #include "console.h"
 
 
@@ -33,7 +30,7 @@ int main()
 {
     ArrayDyn ArrayGame;
     Queue QueueGame;
-    ArrayGame = MakeArrayDin();
+    ArrayGame = CreateArrayDyn();
     CreateQueue(&QueueGame);
     boolean endProgram = false;
 
@@ -57,7 +54,7 @@ int main()
             }
 
             /* Command LOAD */
-            else if ((CWord[0] == 'L') && (CWord[1] == 'O') && (CWord[2] == 'A') && (Cword[3] == 'D'))
+            else if ((CWord.TabWord[0] == 'L') && (CWord.TabWord[1] == 'O') && (CWord.TabWord[2] == 'A') && (CWord.TabWord[3] == 'D'))
             {
                 char inputfile[50];
                 CopyWordtostring(CWord, inputfile, 5 , CWord.Length-1);
@@ -93,7 +90,7 @@ int main()
             }
             else if (IsKataSama(CWord, StringtoWord("DELETE GAME")))
             {
-                /* Memanggil function Delete Game */
+                DELETEGAME(&ArrayGame);
             }
             else if (IsKataSama(CWord, StringtoWord("QUEUE GAME")))
             {
@@ -103,17 +100,17 @@ int main()
             {
                 /* Memanggil function Play Game */
             }
-            else if ((CWord[0] == 'S') && (CWord[1] == 'K') && (CWord[2] == 'I') && (Cword[3] == 'P') && (Cword[4] == 'G') && (Cword[5] == 'A')&& (Cword[6] == 'M') && (Cword[7] == 'E'))
+            else if ((CWord.TabWord[0] == 'S') && (CWord.TabWord[1] == 'K') && (CWord.TabWord[2] == 'I') && (CWord.TabWord[3] == 'P') && (CWord.TabWord[4] == 'G') && (CWord.TabWord[5] == 'A')&& (CWord.TabWord[6] == 'M') && (CWord.TabWord[7] == 'E'))
             {
                 /* Memanggil function Skip Game */
             }
 
             else if (IsKataSama(CWord, StringtoWord("HELP")))
             {
-                /* Memanggil fungsi Help*/
+                HELP();
             }
 
-            else if ((CWord[0] == 'S') && (CWord[1] == 'A') && (CWord[2] == 'V') && (Cword[3] == 'E'))
+            else if ((CWord.TabWord[0] == 'S') && (CWord.TabWord[1] == 'A') && (CWord.TabWord[2] == 'V') && (CWord.TabWord[3] == 'E'))
             {
 
                 /* Memanggil Fungsi Save*/

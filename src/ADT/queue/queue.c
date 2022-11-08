@@ -49,7 +49,7 @@ int length(Queue q) {
 */
 
 /* ********** QUEUE PRIMITIVES ********** */
-void enqueue(Queue *q, ElType var) {
+void enqueue(Queue *q, ElmtType var) {
 	if (isEmpty(*q)) {
 		IDX_HEAD(*q)++;
 		IDX_TAIL(*q)++;
@@ -65,7 +65,7 @@ void enqueue(Queue *q, ElType var) {
  * 		tetapi tidak penuh
  * F.S.	var menjadi TAIL yang baru, IdxTail "mundur"
 */
-void dequeue(Queue *q, ElType *var) {
+void dequeue(Queue *q, ElmtType *var) {
 	*var = HEAD(*q);
 	if (IDX_HEAD(*q) == IDX_TAIL(*q)) {
 		IDX_HEAD(*q) = Idx_Undef;
@@ -84,34 +84,35 @@ void dequeue(Queue *q, ElType *var) {
 
 /* ********** QUEUE DISPLAYS ********** */
 void DisplayQueue(Queue q) {
-	if (isEmpty(q)) {
-		printf("[]\n");
-	} else { // Queue tidak kosong
-		printf("[");
+	if (!isEmpty(q)) { // Queue tidak kosong
 		if (IDX_HEAD(q) > IDX_TAIL(q)) {
 			int i;
 			for (i = IDX_HEAD(q); i < InitSize; i++) {
-				printf("%d,", q.buffer[i]);
+				printf("%d\n", q.buffer[i]);
 			}
 			int j;
 			for (j = 0; j < IDX_TAIL(q); j++) {
-				printf("%d,", q.buffer[j]);
+				printf("%d\n", q.buffer[j]);
 			}
-			printf("%d", TAIL(q));
+			printf("%d\n", TAIL(q));
 		} else { // Indeks Tail lebih besar dibanding Indeks Head
 			int k;
 			for (k = IDX_HEAD(q); k <= IDX_TAIL(q); k++) {
-				printf("%d,", q.buffer[k]);
+				printf("%d\n", q.buffer[k]);
 			}
-			printf("%d", TAIL(q));
+			printf("%d\n", TAIL(q));
 		}
-		printf("]\n");
 	}
+	printf("\n");
 }
 /* Menuliskan isi Queue dengan skema pemrosesan traversal, dengan
- * format penulisan elemen diapit dua kurung siku tanpa koma / spasi
+ * format penulisan elemen diikuti newline sebelum elemen selanjutnya
  * I.S.	q sudah terdefinisi dan mungkin kosong
- * F.S.	apabila q kosong, menampilkan [] saja
- * 		apabila q tidak kosong, menampilkan [elemen-1,elemen-2,...,elemen-n]
- * 		Setiap display, terlepas q kosong atau tidak, akan diakhiri newline
+ * F.S.	apabila q kosong, tidak ada yang ditampilkan.
+ * 		apabila q tidak kosong, menampilkan: 
+ * 		elemen-1
+ * 		elemen-2
+ * 		...
+ * 		elemen-n
+ * 		Setiap display, terlepas q kosong atau tidak, akan diakhiri newline.
 */

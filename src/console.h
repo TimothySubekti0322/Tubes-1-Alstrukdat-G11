@@ -69,6 +69,8 @@ void DELETEGAME(ArrayDyn *Games);
    I.S : Arraygames terdefinisi
    F.S : Melakukan penghapusan game jika ada pada array, mengeluarkan pesan error
          jika tidak terdefinisi atau termasuk dalam game default*/
+
+void CreateGame(ArrayDyn* ArrayGame);
          
 void HELP();
 /* Menampilkan daftar command-command yang tersedia,
