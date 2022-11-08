@@ -214,6 +214,20 @@ void LOADFILE(ArrayDyn *Games, char *inputfile)
     }
 }
 
+
+void Save(ArrayDyn ArrayGame, char namafile[]){
+    //ArrayGame merupakan array yang menyimpan list game yang tersedia
+    //namafile merupakan namafile yang diinginkan dilakukan save
+
+    FILE* filebaru;
+    filebaru = fopen(namafile,"w");
+    fprintf(filebaru, "%d\n", ArrayGame.Neff);
+    for (int i=0; i<ArrayGame.Neff; i++){
+        fprintf(filebaru, "%s\n", ArrayGame.Ar[i]);
+    }
+    fclose(filebaru);
+}
+
 void LISTGAME(ArrayDyn arraygames)
 {
     printf("Berikut adalah daftar game yang tersedia");
@@ -237,6 +251,22 @@ void DELETEGAME(ArrayDyn *Games)
     } else{
         printf("Game gagal dihapus karena indeks yang dimasukkan tidak valid.\n");
     }
+}
+
+void CreateGame(ArrayDyn* ArrayGame){
+    //ArrayGame merupakan array yang menyimpan list game
+
+    char input[100];
+    INPUT();
+    wordToString(CWord,input);
+    //Melakukan validasi input, apakah sudah ada game yang bernama sama dengan input atau belum
+    while (FindArrayDyn(*ArrayGame, input) != -1){
+        printf("Game sudah ada, silahkan input ulang");
+        INPUT();
+        wordToString(CWord,input);            
+    }
+    //Melakukan penambahan game yang diinput
+    InsertLast(ArrayGame, input);
 }
 
 void HELP() 
