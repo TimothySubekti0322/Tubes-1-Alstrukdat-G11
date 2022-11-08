@@ -83,6 +83,14 @@ void HELP();
  * dan cara memanggilnya.
 */
 
+void QUEUEGAME(QueueStr *BNMOGames, ArrayDyn ListGame);
+/* Menampilkan antrian terkini dari game user, lalu memperbolehkan
+ * user untuk menambahkan game sesuai list game yang tersedia di BNMO.
+ * Apabila indeks game yang dipilih berada pada rentang indeks game BNMO,
+ * game berhasil ditambahkan ke antrian.
+ * Jika tidak, akan muncul pesan kesalahan dan game gagal ditambahkan.
+*/
+
 boolean QUIT(boolean EndGame);
 /*
    I.S : EndGame bernilai false

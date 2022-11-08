@@ -359,6 +359,25 @@ void HELP()
 	printf("Selamat menjalani BNMO ~\n");
 }
 
+void QUEUEGAME(QueueStr *BNMOGames, ArrayDyn ListGame) {
+	printf("Berikut adalah daftar antrian game-mu\n");
+	DisplayStrQueue(*BNMOGames);
+	printf("\n");
+	LISTGAME(ListGame);
+	
+	printf("Nomor Game yang mau ditambahkan ke antrian :");
+	int idxgame;
+    INPUT();
+    WordToInt(CWord,&idxgame);
+    
+    if (idxgame >= 1 && idxgame <= StrLength(ListGame)) {
+		enqueueStr(BNMOGames, ListGame.Ar[idxgame - 1]);
+		printf("Game berhasil ditambahkan ke dalam antrian.\n");
+	} else { // Di luar rentang indeks game yang tersedia
+		printf("Nomor permainan tidak valid, silahkan masukkan nomor game pada list.\n");
+	}
+}
+
 boolean QUIT(boolean EndGame){
     return EndGame = true;
 }
