@@ -89,6 +89,7 @@ void InsertStrIn(ArrayDyn *array, TypeEl elmt, TypeIdx i) {
 	array->Neff++;
 }
 
+
 /* Fungsi InsertFirst
  * Fungsi untuk memasukkan elemen baru di awal array
  * Prekondisi : array sudah terdefinisi

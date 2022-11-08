@@ -29,9 +29,9 @@ void welcome(){
 int main()
 {
     ArrayDyn ArrayGame;
-    Queue QueueGame;
+    QueueStr QueueGame;
     ArrayGame = CreateStrArrayDyn();
-    CreateQueue(&QueueGame);
+    CreateStrQueue(&QueueGame);
     boolean endProgram = false;
 
     /* Display Main menu */
@@ -40,7 +40,7 @@ int main()
     {
         printf("\nENTER COMMAND: ");
         INPUT();
-        //printf("%s\n", CWord);
+        printf("%s\n", CWord);
         //ADVCommand();
         //printf("%s\n", CWord);
         
@@ -50,7 +50,9 @@ int main()
             /* Command START*/
             if (IsKataSama(CWord, StringtoWord("START")))
             {
-                STARTBNMO(&ArrayGame);
+                //STARTBNMO(&ArrayGame);
+                LOADFILE(&ArrayGame,"config.txt");
+                ShowStrArrayDyn(ArrayGame);
             }
 
             /* Command LOAD */
@@ -82,7 +84,7 @@ int main()
         {
             if (IsKataSama(CWord,StringtoWord("CREATE GAME")))
             {
-                    /* Memanggil function Create Game*/
+                CreateGame(&ArrayGame);
             }
             else if (IsKataSama(CWord, StringtoWord("LIST GAME")))
             {
@@ -94,7 +96,7 @@ int main()
             }
             else if (IsKataSama(CWord, StringtoWord("QUEUE GAME")))
             {
-                /* Memanggil function Queue Game */
+                QUEUEGAME(&QueueGame, ArrayGame);
             }
             else if (IsKataSama(CWord, StringtoWord("PLAY GAME")))
             {
@@ -112,9 +114,9 @@ int main()
 
             else if ((CWord.TabWord[0] == 'S') && (CWord.TabWord[1] == 'A') && (CWord.TabWord[2] == 'V') && (CWord.TabWord[3] == 'E'))
             {
-
-                /* Memanggil Fungsi Save*/
-
+                char inputfiles[50];
+                CopyWordtostring(CWord, inputfiles, 5 , CWord.Length-1);
+                Save(ArrayGame, inputfiles);
 
                 //ADVCommand();
                 //char filename[50];
@@ -124,7 +126,7 @@ int main()
 
             else if (IsKataSama(CWord, StringtoWord("QUIT")))
                 {
-                    QUIT(endProgram);
+                    endProgram = true;
                     printf("Anda keluar dari game BNMO.\n");
                     printf("Bye bye ...\n");
                     /* Memanggil Fungsi Quit*/

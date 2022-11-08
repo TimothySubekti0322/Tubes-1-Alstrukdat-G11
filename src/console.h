@@ -6,6 +6,7 @@
 #include "ADT/mesinkarakter/mesinkarakter.h"
 #include "ADT/mesinkata/mesinkata.h"
 #include "ADT/queue/queue.h"
+#include "ADT/queue/queuestr.h"
 #include "boolean.h"
 
 void STARTBNMO(ArrayDyn *gamesBNM0);
@@ -18,7 +19,7 @@ void PrintWord(Word CWord);
    I.S : CWord tidak kosong dan terdefinisi
    F.S : isi dari CWord dicetak ke layar */
 
-void wordToString(Word currentWord, char *string);
+void wordToString(Word currentWord, char string[]);
 /* Mengubah Word menjadi string*/
 
 boolean CompareString(char *string1 , char *string2);
@@ -64,6 +65,11 @@ void LOADFILE(ArrayDyn *Games, char *inputfile);
    I.S : File yang diinput terdefinisi , Array Games terdefinisi dan kosong
    F.S : Array games berisis list Game yang ada dalam file*/
 
+void Save(ArrayDyn ArrayGame, char namafile[]);
+/* Melkaukan Save file
+   I.S : ArrayGame terdefinisi dan nama file terdefinisi
+   F.S : Jika file sudah ada maka file di overwrite , Jika tidak ada akan membuat file baru*/
+
 void LISTGAME(ArrayDyn arraygames);
 /* Menampilkan ListGame yang tersedia 
    I.S : arraygames terdefinisi
@@ -91,7 +97,7 @@ void QUEUEGAME(QueueStr *BNMOGames, ArrayDyn ListGame);
  * Jika tidak, akan muncul pesan kesalahan dan game gagal ditambahkan.
 */
 
-boolean QUIT(boolean EndGame);
+void QUIT(boolean EndGame);
 /*
    I.S : EndGame bernilai false
    F.S : Endgame bernilai true

@@ -67,9 +67,13 @@ void PrintWord(Word CWord)
 void wordToString(Word currentWord, char *string)
 {
     int i = 0;
+    // printf("%d\n", currentWord.Length);
     while (i < currentWord.Length)
     {
+        // printf("Sampe sini 1\n");
+        // printf("%c", currentWord.TabWord[i]);
         *(string + i) = currentWord.TabWord[i];
+        // printf("Sampe sini 2\n");
         i++;
     }
     *(string + i) = '\0';
@@ -211,9 +215,23 @@ void LOADFILE(ArrayDyn *Games, char *inputfile)
         for (int j = 0; j < amount; j++)
         {
             wordToString(CWord, string);
-            InsertStrIn(Games, string, j);
+            // printf("Sampe sini 2\n");
+            //InsertStrLast(Games,string);
+            char  * gamename = (char*) malloc(CWord.Length*sizeof(char));
+            int i = 0;
+            while (i < CWord.Length)
+            {
+                gamename[i] = string[i];
+                i++;
+            }
+            InsertStrIn(Games, gamename, j);
+            printf("%s\n",string);
+            ShowStrArrayDyn(*Games);
+            // printf("%s\n",Games->Ar[j]);
+            ADVLINEFILE();
         }
-        if (path == "config.txt")
+        //ShowStrArrayDyn(*Games);
+        if (CompareString(path,"../data/config.txt"))
         {
             printf("File konfigurasi sistem berhasil dibaca. BNMO berhasil dijalankan.\n");
         }
@@ -225,7 +243,8 @@ void LOADFILE(ArrayDyn *Games, char *inputfile)
 }
 
 
-void Save(ArrayDyn ArrayGame, char namafile[]){
+void Save(ArrayDyn ArrayGame, char namafile[])
+{
     //ArrayGame merupakan array yang menyimpan list game yang tersedia
     //namafile merupakan namafile yang diinginkan dilakukan save
 
@@ -241,7 +260,7 @@ void Save(ArrayDyn ArrayGame, char namafile[]){
 void LISTGAME(ArrayDyn arraygames)
 {
     printf("Berikut adalah daftar game yang tersedia");
-    
+    printf("\n");
     for (int i = 0; i < arraygames.Neff; i++)
     {
         printf("%d. %s\n", i + 1, arraygames.Ar[i]);
@@ -378,6 +397,6 @@ void QUEUEGAME(QueueStr *BNMOGames, ArrayDyn ListGame) {
 	}
 }
 
-boolean QUIT(boolean EndGame){
-    return EndGame = true;
+void QUIT(boolean EndGame){
+    EndGame = true;
 }

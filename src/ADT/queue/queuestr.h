@@ -4,8 +4,8 @@
  * Tipe Queue : Circular Buffer
 */
 
-#ifndef QUEUE_H
-#define QUEUE_H
+#ifndef QUEUE_STR_H
+#define QUEUE_STR_H
 
 /* Definisi Boolean */
 #define boolean unsigned char
