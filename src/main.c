@@ -1,9 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "ADT/mesinkarakter/mesinkarakter.h"
-#include "ADT/mesinkata/mesinkata.h"
-#include "ADT/array/arraydinamikstr.h"
 #include "console.h"
 
 
@@ -93,7 +90,7 @@ int main()
             }
             else if (IsKataSama(CWord, StringtoWord("DELETE GAME")))
             {
-                /* Memanggil function Delete Game */
+                DELETEGAME(&ArrayGame);
             }
             else if (IsKataSama(CWord, StringtoWord("QUEUE GAME")))
             {
@@ -110,7 +107,7 @@ int main()
 
             else if (IsKataSama(CWord, StringtoWord("HELP")))
             {
-                /* Memanggil fungsi Help*/
+                HELP();
             }
 
             else if ((CWord[0] == 'S') && (CWord[1] == 'A') && (CWord[2] == 'V') && (Cword[3] == 'E'))

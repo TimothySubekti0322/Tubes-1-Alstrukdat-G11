@@ -16,9 +16,9 @@
 #define InitSize 100
 
 /* ** STRUCT DEFINITIONS ** */
-typedef int ElType;
+typedef int ElmtType;
 typedef struct {
-	ElType buffer[InitSize];
+	ElmtType buffer[InitSize];
 	int IdxHead;
 	int IdxTail;
 } Queue;
@@ -54,13 +54,13 @@ int length(Queue q);
 */
 
 /* ********** QUEUE PRIMITIVES ********** */
-void enqueue(Queue *q, ElType var);
+void enqueue(Queue *q, ElmtType var);
 /* Menambahkan var pada queue q dengan sifat First In First Out
  * I.S. q sudah terdefinisi dan mungkin kosong,
  * 		tetapi tidak penuh
  * F.S.	var menjadi TAIL yang baru, IdxTail "mundur"
 */
-void dequeue(Queue *q, ElType *var);
+void dequeue(Queue *q, ElmtType *var);
 /* Menghapus var pada queue q dengan sifat First In First Out
  * I.S.	q sudah terdefinisi dan tidak mungkin kosong
  * F.S. var = nilai elemen IdxHead pada queue; IdxHead "mundur";
@@ -70,11 +70,15 @@ void dequeue(Queue *q, ElType *var);
 /* ********** QUEUE DISPLAYS ********** */
 void DisplayQueue(Queue q);
 /* Menuliskan isi Queue dengan skema pemrosesan traversal, dengan
- * format penulisan elemen diapit dua kurung siku tanpa koma / spasi
+ * format penulisan elemen diikuti newline sebelum elemen selanjutnya
  * I.S.	q sudah terdefinisi dan mungkin kosong
- * F.S.	apabila q kosong, menampilkan [] saja
- * 		apabila q tidak kosong, menampilkan [elemen-1,elemen-2,...,elemen-n]
- * 		Setiap display, terlepas q kosong atau tidak, akan diakhiri newline
+ * F.S.	apabila q kosong, tidak ada yang ditampilkan.
+ * 		apabila q tidak kosong, menampilkan: 
+ * 		elemen-1
+ * 		elemen-2
+ * 		...
+ * 		elemen-n
+ * 		Setiap display, terlepas q kosong atau tidak, akan diakhiri newline.
 */
 
 
