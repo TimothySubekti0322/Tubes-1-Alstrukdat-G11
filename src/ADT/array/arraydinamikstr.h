@@ -13,10 +13,10 @@
 
 #define StartSize 100
 
-typedef int IdxType;
-typedef char *ElType;
+typedef int TypeIdx;
+typedef char *TypeEl;
 typedef struct {
-	ElType *Ar;
+	TypeEl *Ar;
 	int Kapasitas;
 	int Neff;
 } ArrayDyn;
@@ -51,7 +51,7 @@ int Length(ArrayDyn array);
  * Fungsi untuk mengembalikan nilai elemen array yang ke-i (logical index).
  * Prekondisi : array tidak kosong, dan i berada di [0...Length(array))
 */
-ElType Get(ArrayDyn array, IdxType i);
+TypeEl Get(ArrayDyn array, TypeIdx i);
 
 /* Fungsi GetCapacity
  * Fungsi untuk mengembalikan kapasitas dari array yang tersedia.
@@ -64,26 +64,26 @@ int GetCapacity(ArrayDyn array);
  * Prekondisi : array sudah terdefinisi,
  * 				dan i berada di [0...Length(array))
 */
-void InsertIn(ArrayDyn *array, ElType elmt, IdxType i);
+void InsertIn(ArrayDyn *array, TypeEl elmt, TypeIdx i);
 
 /* Fungsi InsertFirst
  * Fungsi untuk memasukkan elemen baru di awal array
  * Prekondisi : array sudah terdefinisi
 */
-void InsertFirst(ArrayDyn *array, ElType elmt);
+void InsertFirst(ArrayDyn *array, TypeEl elmt);
 
 /* Fungsi InsertLast
  * Fungsi untuk memasukkan elemen baru di akhir array
  * Prekondisi : array sudah terdefinisi
 */
-void InsertLast(ArrayDyn *array, ElType elmt);
+void InsertLast(ArrayDyn *array, TypeEl elmt);
 
 /* Fungsi DeleteIn
  * Fungsi untuk menghapus elemen pada indeks ke-i
  * Prekondisi : array sudah terdefinisi dan tidak kosong,
  * 				dan i berada di [0...Length(array))
 */
-void DeleteIn(ArrayDyn *array, IdxType i);
+void DeleteIn(ArrayDyn *array, TypeIdx i);
 
 /* Fungsi DeleteFirst
  * Fungsi untuk menghapus elemen di awal array
@@ -123,6 +123,6 @@ ArrayDyn CopyArrayDyn(ArrayDyn array);
  * apabila tidak ditemukan maka akan mengembalikan -1.
  * Prekondisi : array sudah terdefinisi
 */
-IdxType FindArrayDyn(ArrayDyn array, ElType elmt);
+TypeIdx FindArrayDyn(ArrayDyn array, TypeEl elmt);
 
 #endif
