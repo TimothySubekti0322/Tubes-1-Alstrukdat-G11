@@ -190,6 +190,7 @@ void main(){
             printf("M%d      | %d\n",saji.indeks[i],saji.durasi[i]);
         }
         boolean valid = false;
+        
         //Pemasukkan command
         while(!valid){
             printf("MASUKKAN COMMAND: ");
@@ -260,7 +261,5 @@ void main(){
             printf("Maaf. Anda kalah karena customer sudah melebihi 7. Skor anda %d.\n",saldo);
             game_over = true;
         }
-
-    }
-    
+    }    
 }
