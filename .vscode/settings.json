@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "LOAD.C": "cpp"
+        "LOAD.C": "cpp",
+        "mesinkarakter.h": "c"
     }
 }

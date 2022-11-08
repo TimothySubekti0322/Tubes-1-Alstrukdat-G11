@@ -225,8 +225,11 @@ void LISTGAME(ArrayDyn arraygames)
 
 }
 
-void DELETEGAME(ArrayDyn *Games,IdxType indeksgame)
+void DELETEGAME(ArrayDyn *Games)
 {
+    int indeksgame;
+    INPUT();
+    WordToInt(CWord,&indeksgame);
     if(indeksgame > 5 && indeksgame < Length(*Games)){
         DeleteIn(Games,indeksgame);
     } else if(indeksgame >= 1 && indeksgame <= 5){
@@ -234,7 +237,6 @@ void DELETEGAME(ArrayDyn *Games,IdxType indeksgame)
     } else{
         printf("Game gagal dihapus karena indeks yang dimasukkan tidak valid.\n");
     }
-
 }
 
 void HELP() 

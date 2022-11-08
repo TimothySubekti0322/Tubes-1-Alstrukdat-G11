@@ -14,7 +14,7 @@
 ArrayDyn CreateArrayDyn() {
 	ArrayDyn array;
 	// Alokasi elemen array secara dinamik menggunakan malloc
-	array.Ar = (ElType*) malloc (StartSize * sizeof(ElType));
+	array.Ar = (TypeEl*) malloc (StartSize * sizeof(TypeEl));
 	array.Kapasitas = StartSize; // Kapasitas array diset sebesar StartSize
 	array.Neff = 0; // Karena masih kosong, elemen efektif array bernilai 0
 	return array;
@@ -49,7 +49,7 @@ int Length(ArrayDyn array) {
  * Fungsi untuk mengembalikan nilai elemen array yang ke-i (logical index).
  * Prekondisi : array tidak kosong, dan i berada di [0...Length(array))
 */
-ElType Get(ArrayDyn array, IdxType i) {
+TypeEl Get(ArrayDyn array, TypeIdx i) {
 	return (array.Ar[i]);
 }
 
@@ -65,13 +65,13 @@ int GetCapacity(ArrayDyn array) {
  * Fungsi untuk memasukkan elemen baru pada indeks ke-i
  * Prekondisi : array tidak penuh, dan i berada di [0...Length(array))
 */
-void InsertIn(ArrayDyn *array, ElType elmt, IdxType i) {
+void InsertIn(ArrayDyn *array, TypeEl elmt, TypeIdx i) {
 	int index;
 	index = Length(*array);
 	
 	if (Length(*array) == GetCapacity(*array)) { // Array sudah penuh
 	// Array perlu dialokasikan kembali agar lebih besar
-		ElType *temparr = (ElType*) malloc (2 * StartSize * sizeof(ElType));
+		TypeEl *temparr = (TypeEl*) malloc (2 * StartSize * sizeof(TypeEl));
 		int j;
 		for (j = 0; j < Length(*array); j++) {
 			temparr[j] = Get(*array, j);
@@ -93,7 +93,7 @@ void InsertIn(ArrayDyn *array, ElType elmt, IdxType i) {
  * Fungsi untuk memasukkan elemen baru di awal array
  * Prekondisi : array sudah terdefinisi
 */
-void InsertFirst(ArrayDyn *array, ElType elmt) {
+void InsertFirst(ArrayDyn *array, TypeEl elmt) {
 	InsertIn(array, elmt, 0);
 }
 
@@ -101,7 +101,7 @@ void InsertFirst(ArrayDyn *array, ElType elmt) {
  * Fungsi untuk memasukkan elemen baru di akhir array
  * Prekondisi : array sudah terdefinisi
 */
-void InsertLast(ArrayDyn *array, ElType elmt) {
+void InsertLast(ArrayDyn *array, TypeEl elmt) {
 	InsertIn(array, elmt, Length(*array));
 }
 
@@ -109,7 +109,7 @@ void InsertLast(ArrayDyn *array, ElType elmt) {
  * Fungsi untuk menghapus elemen pada indeks ke-i
  * Prekondisi : array tidak kosong, dan i berada di [0...Length(array))
 */
-void DeleteIn(ArrayDyn *array, IdxType i) {
+void DeleteIn(ArrayDyn *array, TypeIdx i) {
 	while (i < Length(*array)) {
 		array->Ar[i] = array->Ar[i + 1];
 		i++;
@@ -164,7 +164,7 @@ void ShowArrayDyn(ArrayDyn array) {
 void ReverseArrayDyn(ArrayDyn *array) {
 	int i;
 	for (i = 0; i < Length(*array)/2; ++i) {
-		ElType temp = array->Ar[i];
+		TypeEl temp = array->Ar[i];
 		array->Ar[i] = array->Ar[Length(*array) - i - 1];
 		array->Ar[Length(*array) - i - 1] = temp;
 	}
@@ -189,7 +189,7 @@ ArrayDyn CopyArrayDyn(ArrayDyn array) {
  * apabila tidak ditemukan maka akan mengembalikan -1.
  * Prekondisi : array sudah terdefinisi
 */
-IdxType FindArrayDyn(ArrayDyn array, ElType elmt) {
+TypeIdx FindArrayDyn(ArrayDyn array, TypeEl elmt) {
 	boolean found = false;
 	int LocationIdx = -1;
 	int i = 0;
