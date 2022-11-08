@@ -25,77 +25,77 @@ typedef struct {
  * I.S.	sembarang;
  * F.S.	Terbentuk DynArray kosong yang berukuran StartSize;
 */
-ArrayDyn CreateArrayDyn();
+ArrayDyn CreateStrArrayDyn();
 
 /* DESTRUKTOR
  * I.S.	DynArray terdefinisi;
  * F.S.	DynArray->arrdin terdealokasikan;
 */
-void DealokasiArrayDyn(ArrayDyn *array);
+void DealokasiStrArrayDyn(ArrayDyn *array);
 
 /* PRIMITIF LAINNYA */
 /* Fungsi IsEmpty
  * Fungsi untuk mengetahui apakah array input kosong atau tidak.
  * Prekondisi : array sudah terdefinisi
 */
-boolean IsEmpty(ArrayDyn array);
+boolean IsStrEmpty(ArrayDyn array);
 
 /* Fungsi Length
  * Fungsi untuk mengetahui banyaknya elemen efektif dalam sebuah array,
  * bernilai 0 jika kosong.
  * Prekondisi : array sudah terdefinisi
 */
-int Length(ArrayDyn array);
+int StrLength(ArrayDyn array);
 
 /* Fungsi Get
  * Fungsi untuk mengembalikan nilai elemen array yang ke-i (logical index).
  * Prekondisi : array tidak kosong, dan i berada di [0...Length(array))
 */
-TypeEl Get(ArrayDyn array, TypeIdx i);
+TypeEl GetStr(ArrayDyn array, TypeIdx i);
 
 /* Fungsi GetCapacity
  * Fungsi untuk mengembalikan kapasitas dari array yang tersedia.
  * Prekondisi : array sudah terdefinisi
 */
-int GetCapacity(ArrayDyn array);
+int GetStrCapacity(ArrayDyn array);
 
 /* Fungsi InsertIn
  * Fungsi untuk memasukkan elemen baru pada indeks ke-i
  * Prekondisi : array sudah terdefinisi,
  * 				dan i berada di [0...Length(array))
 */
-void InsertIn(ArrayDyn *array, TypeEl elmt, TypeIdx i);
+void InsertStrIn(ArrayDyn *array, TypeEl elmt, TypeIdx i);
 
 /* Fungsi InsertFirst
  * Fungsi untuk memasukkan elemen baru di awal array
  * Prekondisi : array sudah terdefinisi
 */
-void InsertFirst(ArrayDyn *array, TypeEl elmt);
+void InsertStrFirst(ArrayDyn *array, TypeEl elmt);
 
 /* Fungsi InsertLast
  * Fungsi untuk memasukkan elemen baru di akhir array
  * Prekondisi : array sudah terdefinisi
 */
-void InsertLast(ArrayDyn *array, TypeEl elmt);
+void InsertStrLast(ArrayDyn *array, TypeEl elmt);
 
 /* Fungsi DeleteIn
  * Fungsi untuk menghapus elemen pada indeks ke-i
  * Prekondisi : array sudah terdefinisi dan tidak kosong,
  * 				dan i berada di [0...Length(array))
 */
-void DeleteIn(ArrayDyn *array, TypeIdx i);
+void DeleteStrIn(ArrayDyn *array, TypeIdx i);
 
 /* Fungsi DeleteFirst
  * Fungsi untuk menghapus elemen di awal array
  * Prekondisi : array sudah terdefinisi dan tidak kosong
 */
-void DeleteFirst(ArrayDyn *array);
+void DeleteStrFirst(ArrayDyn *array);
 
 /* Fungsi DeleteLast
  * Fungsi untuk menghapus elemen di akhir array
  * Prekondisi : array sudah terdefinisi dan tidak kosong
 */
-void DeleteLast(ArrayDyn *array);
+void DeleteStrLast(ArrayDyn *array);
 
 /* Fungsi ShowDynArray
  * Fungsi untuk menampilkan DynArray ke layar
@@ -103,19 +103,19 @@ void DeleteLast(ArrayDyn *array);
  * yang diakhiri dengan baris baru (newline)
  * Prekondisi : array sudah terdefinisi
 */
-void ShowArrayDyn(ArrayDyn array);
+void ShowStrArrayDyn(ArrayDyn array);
 
 /* Fungsi ReverseDynArray
  * Fungsi untuk mengubah urutan array menjadi terbalik (reverse)
  * Prekondisi : array sudah terdefinisi
 */
-void ReverseArrayDyn(ArrayDyn *array);
+void ReverseStrArrayDyn(ArrayDyn *array);
 
 /* Fungsi CopyDynArray
  * Fungsi untuk menyalin suatu DynArray
  * Prekondisi : array sudah terdefinisi
 */
-ArrayDyn CopyArrayDyn(ArrayDyn array);
+ArrayDyn CopyStrArrayDyn(ArrayDyn array);
 
 /* Fungsi FindDynArray
  * Fungsi untuk melakukan search pada suatu DynArray
@@ -123,6 +123,6 @@ ArrayDyn CopyArrayDyn(ArrayDyn array);
  * apabila tidak ditemukan maka akan mengembalikan -1.
  * Prekondisi : array sudah terdefinisi
 */
-TypeIdx FindArrayDyn(ArrayDyn array, TypeEl elmt);
+TypeIdx FindStrArrayDyn(ArrayDyn array, TypeEl elmt);
 
 #endif
