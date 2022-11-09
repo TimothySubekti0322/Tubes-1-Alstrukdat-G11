@@ -13,12 +13,52 @@
 #include "../src/ADT/mesinkarakter/mesinkarakter.h"
 #include "../src/ADT/mesinkata/mesinkata.h"
 
-void gameRNG();
-/* Game RNG
-   Game menebak suatu Angka Acak X yang berada para rentang 1 - 10. . Di setiap giliran, user diberi 
-   kesempatan menebak angka X dan program akan memberi  tahu apakah tebakan pemain dibandingkan 
-   terhadap X lebih besar atau lebih kecil User memiliki kesempatan untuk menebak sebanyak 10 kali
-   Permainan berakhir jika pemain menebak angka X dengan benar. Skor game akan muncul di akhir Game 
-   berdasarkan seberapa cepat pemain menebak X.*/
+typedef struct{
+        int indeks[10];
+        int durasi[10];
+        int count;
+} masaksaji;
 
+typedef struct{
+    Queue indeks;
+    int durasi[25];
+    int ketahanan[25];
+    int harga[25];
+} customers;
+
+
+void IsMemberMasakSaji(masaksaji m,int custnumber,boolean *found,int *indeks);
+/*Mengecek jika sutu custnumber merupakan member dari masak atau saji dan 
+meletakkan status dari hasil pencarian di found dan indeks ditemukannya di indeks*/
+
+void masaksajiempty(masaksaji *m);
+   /*Inisialisasi struct masak atau saji yang kosong*/
+
+
+int strlength(char *sentence);
+/*Mencari panjang dari sebuah string, merupakan pengganti dari strlen*/
+
+boolean serves(char *command);
+/*Mengecek apabila command berisi petunjuk untuk serve*/
+
+boolean cooks(char *command);
+/*Mengecek apabila command berisi petunjuk untuk cook*/
+
+boolean skip(char *command);
+/*Mengecek apabila command berisi petunjuk untuk skip*/
+
+int custnumbers(char *command);
+/*Mencari indeks customer yang akan di cook atau serve dari command*/
+
+void DeleteMasakSaji(masaksaji *m,int indeks);
+/*Melakukan penghapusan suatu indeks pada struct masak atau saji*/
+
+void tambahturn(masaksaji *masak, masaksaji *saji,customers *orders);
+/*Melakukan penambahan turn dengan menambah satu customer, mengurangi durasi memasak
+dan mengurangi ketahanan saji, lalu memindahkan makanan pada struct masak dengan durasi 0 
+dan menghilangkan makanan pada struct saji dengan ketahanan 0*/
+
+void dinnerdash();
+/*Memulai game dinerdash yang awalnya menampilkan isi antrian,makanan yang dimasak, makanan yang dapat disaji
+lalu meminta command dan memproses COOK dan SERVE berdasarkan primitif primitif pada dinner dash*/
 #endif
