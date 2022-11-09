@@ -51,8 +51,8 @@ int main()
             /* Command START*/
             if (IsKataSama(CWord, StringtoWord("START")))
             {
-                //STARTBNMO(&ArrayGame);
-                LOADFILE(&ArrayGame,"config.txt");
+                STARTBNMO(&ArrayGame);
+                //LOADFILE(&ArrayGame,"config.txt");
                 // ShowStrArrayDyn(ArrayGame);
                 // printf("%d",ArrayGame.Neff);
             }
