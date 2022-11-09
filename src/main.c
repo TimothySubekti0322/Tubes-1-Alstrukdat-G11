@@ -104,7 +104,7 @@ int main()
             }
             else if (IsKataSama(CWord, StringtoWord("DELETE GAME")))
             {
-                DELETEGAME(&ArrayGame);
+                DELETEGAME(&ArrayGame,&QueueGame);
             }
             else if (IsKataSama(CWord, StringtoWord("QUEUE GAME")))
             {
@@ -129,7 +129,7 @@ int main()
             {
                 char inputfiles[50];
                 CopyWordtostring(CWord, inputfiles, 5 , CWord.Length-1);
-                printf("%s",inputfiles);
+                //printf("%s",inputfiles);
                 Save(ArrayGame, inputfiles);
 
                 //ADVCommand();

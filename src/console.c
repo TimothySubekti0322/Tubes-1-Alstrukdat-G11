@@ -97,6 +97,25 @@ boolean CompareString(char *string1 , char *string2)
     return equal;
 }
 
+boolean IsInQueue(QueueStr *Queue,char *string)
+{
+    /* Mengirimkan true jika string yang diinput ada didalam Queue*/
+    int i = lengthStr(*Queue);
+    boolean availabe = false;
+    int j = 0;
+    while ((j < i) && (!availabe))
+    {
+        if(CompareString(Queue->buffer[j],string))
+        {
+            availabe = true;
+        }
+        else
+        {
+            j++;
+        }
+    }
+    return availabe;
+}
 
 void PrintString(char *string)
 {
@@ -260,6 +279,7 @@ void Save(ArrayDyn ArrayGame, char *namafile)
     }
     fprintf(filebaru, "%s", ArrayGame.Ar[i]);
     fclose(filebaru);
+    printf("Save file berhasil disimpan. \n");
 }
 
 void LISTGAME(ArrayDyn arraygames)
@@ -273,34 +293,55 @@ void LISTGAME(ArrayDyn arraygames)
 
 }
 
-void DELETEGAME(ArrayDyn *Games)
+void DELETEGAME(ArrayDyn *Games, QueueStr *Queue)
 {
-    int indeksgame;
+    int indeksgame = 0;
+    LISTGAME(*Games);
+    printf("Masukkan nomor game yang akan dihapus: ");
     INPUT();
+    printf("\n");
     WordToInt(CWord,&indeksgame);
-    if(indeksgame > 5 && indeksgame < StrLength(*Games)){
-        DeleteStrIn(Games,indeksgame);
-    } else if(indeksgame >= 1 && indeksgame <= 5){
+    //printf("%d\n",indeksgame);
+    //int length = StrLength(*Games);
+    //printf("%d\n",indeksgame);
+    if(indeksgame >= 1 && indeksgame <= 5)
+    {
         printf("Game gagal dihapus karena merupakan game default.\n");
-    } else{
+    } 
+    else if(indeksgame > StrLength(*Games))
+    {
         printf("Game gagal dihapus karena indeks yang dimasukkan tidak valid.\n");
     }
+    else if(IsInQueue(Queue,GetStr(*Games,indeksgame-1)))
+    {
+        printf("Game gagal dihapus karena game berada dalam Queue\n");
+    }
+    else if(indeksgame > 5 && indeksgame <= StrLength(*Games) && !IsInQueue(Queue,GetStr(*Games,indeksgame-1)))
+    {
+        DeleteStrIn(Games,indeksgame-1);
+
+        printf("Game berhasil dihapus\n");
+    } 
 }
 
-void CreateGame(ArrayDyn* ArrayGame){
+void CreateGame(ArrayDyn* ArrayGame)
+{
     //ArrayGame merupakan array yang menyimpan list game
 
     char *input;
+    printf("Masukkan nama game yang akan ditambahkan: ");
     INPUT();
     input = wordToString(CWord);
     //Melakukan validasi input, apakah sudah ada game yang bernama sama dengan input atau belum
     while (FindStrArrayDyn(*ArrayGame, input) != -1){
-        printf("Game sudah ada, silahkan input ulang");
+        printf("Game sudah ada, silahkan input ulang\n");
+        printf("Masukkan nama game yang akan ditambahkan: ");
         INPUT();
         input = wordToString(CWord);           
     }
     //Melakukan penambahan game yang diinput
     InsertStrLast(ArrayGame, input);
+    printf("Game berhasil ditambahkan\n");
 }
 
 void PlayGame(QueueStr* AntrianGame){
@@ -332,7 +373,7 @@ void PlayGame(QueueStr* AntrianGame){
 }
 
 void SkipGame(QueueStr* AntrianGame, int number){
-    printf("%d\n",number);
+    //printf("%d\n",number);
     if (isStrEmpty(*AntrianGame)){
         printf("Tidak ada antrian game untuk diskip, silahkan daftar game ke antrian dengan menggunakan command QUEUE GAME");
     } else { 
@@ -452,16 +493,20 @@ void QUEUEGAME(QueueStr *BNMOGames, ArrayDyn ListGame) {
 	DisplayStrQueue(*BNMOGames);
 	printf("\n");
 	LISTGAME(ListGame);
-	
+	printf("\n");
 	printf("Nomor Game yang mau ditambahkan ke antrian : ");
 	int idxgame = 0;
     INPUT();
     WordToInt(CWord,&idxgame);
-    printf("%d\n",idxgame);
-    if (idxgame >= 1 && idxgame <= StrLength(ListGame)) {
+    printf("\n");
+    //printf("%d\n",idxgame);
+    if (idxgame >= 1 && idxgame <= StrLength(ListGame)) 
+    {
 		enqueueStr(BNMOGames, ListGame.Ar[idxgame - 1]);
 		printf("Game berhasil ditambahkan ke dalam antrian.\n");
-	} else { // Di luar rentang indeks game yang tersedia
+	} 
+    else 
+    { // Di luar rentang indeks game yang tersedia
 		printf("Nomor permainan tidak valid, silahkan masukkan nomor game pada list.\n");
 	}
 }

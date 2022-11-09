@@ -4,6 +4,7 @@
 */
 
 #include "arraydinamikstr.h"
+#include "../../console.h"
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -195,7 +196,8 @@ TypeIdx FindStrArrayDyn(ArrayDyn array, TypeEl elmt) {
 	int LocationIdx = -1;
 	int i = 0;
 	while (i < array.Neff && !found) {
-		if (array.Ar[i] == elmt) {
+		if (CompareString(array.Ar[i],elmt)) 
+		{
 			found = true;
 			LocationIdx = i;
 		}

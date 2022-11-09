@@ -104,9 +104,9 @@ void DisplayStrQueue(QueueStr q) {
 		} else { // Indeks Tail lebih besar dibanding Indeks Head
 			int k;
 			for (k = IDX_HEAD(q); k < IDX_TAIL(q); k++) {
-				printf("%s\n", q.buffer[k]);
+				printf("%d. %s\n", k+1, q.buffer[k]);
 			}
-			printf("%s\n", TAIL(q));
+			printf("%d. %s\n",k+1, TAIL(q));
 		}
 	}
 	printf("\n");

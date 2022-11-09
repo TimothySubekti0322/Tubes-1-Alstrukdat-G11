@@ -27,6 +27,8 @@ char *wordToString(Word kata);
 boolean CompareString(char *string1 , char *string2);
 /* Mengirimkan true jika string1 = string2 */
 
+boolean IsInQueue(QueueStr *Queue,char *string);
+/* Mengirimkan true jika string yang diinput ada didalam Queue*/
 
 void PrintString(char *string);
 /* Mencetak string
@@ -77,7 +79,7 @@ void LISTGAME(ArrayDyn arraygames);
    I.S : arraygames terdefinisi
    F.S : menampilakn seluruh elemen arraygames*/
 
-void DELETEGAME(ArrayDyn *Games);
+void DELETEGAME(ArrayDyn *Games, QueueStr *Queue);
 /* Melakukan penghapusan suatu game
    I.S : Arraygames terdefinisi
    F.S : Melakukan penghapusan game jika ada pada array, mengeluarkan pesan error
