@@ -9,26 +9,11 @@ void STARTBNMO(ArrayDyn *gamesBNMO){
     jumlahGame = atoi(CWord.TabWord);
     ADVLINEFILE();
 
-    int i;
-    i = 0;
-    while (CC != MARK ){
-
-        int i = 0;
-        
-        while (i < jumlahGame){
-            char *namaGame;
-            namaGame = (char*) malloc(CWord.Length * sizeof(char));
-
-            int k = 0;
-            while (k < CWord.Length){
-                namaGame[k] = CWord.TabWord[k];
-                k = k+1;
-            }
-            InsertStrLast(gamesBNMO, namaGame);
-            i = i +1;
-            ADVLINEFILE();
-        }
-
+    for(int i = 0; i<jumlahGame; i++){
+        char *namaGame;
+        namaGame = wordToString(CWord);
+        InsertStrIn(gamesBNMO,namaGame,i);
+        ADVLINEFILE();
     }
     printf("File konfigurasi sistem berhasil dibaca. BNMO berhasil dijalankan.\n");
 }
