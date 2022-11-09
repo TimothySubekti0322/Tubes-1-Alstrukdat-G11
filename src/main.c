@@ -63,8 +63,8 @@ int main()
             {
                 //STARTBNMO(&ArrayGame);
                 LOADFILE(&ArrayGame,"config.txt");
-                ShowStrArrayDyn(ArrayGame);
-                printf("%d",ArrayGame.Neff);
+                // ShowStrArrayDyn(ArrayGame);
+                // printf("%d",ArrayGame.Neff);
             }
 
             /* Command LOAD */
@@ -112,11 +112,12 @@ int main()
             }
             else if (IsKataSama(CWord, StringtoWord("PLAY GAME")))
             {
-                /* Memanggil function Play Game */
+                PlayGame(&QueueGame);
             }
-            else if ((CWord.TabWord[0] == 'S') && (CWord.TabWord[1] == 'K') && (CWord.TabWord[2] == 'I') && (CWord.TabWord[3] == 'P') && (CWord.TabWord[4] == 'G') && (CWord.TabWord[5] == 'A')&& (CWord.TabWord[6] == 'M') && (CWord.TabWord[7] == 'E'))
+            else if ((CWord.TabWord[0] == 'S') && (CWord.TabWord[1] == 'K') && (CWord.TabWord[2] == 'I') && (CWord.TabWord[3] == 'P') && (CWord.TabWord[4] == 'G') && (CWord.TabWord[5] == 'A')&& (CWord.TabWord[6] == 'M') && (CWord.TabWord[7] == 'E') && (CWord.TabWord[8] == ' '))
             {
-                /* Memanggil function Skip Game */
+                int number = CWord.TabWord[9] - '0';
+                SkipGame(&QueueGame,number);
             }
 
             else if (IsKataSama(CWord, StringtoWord("HELP")))
@@ -128,6 +129,7 @@ int main()
             {
                 char inputfiles[50];
                 CopyWordtostring(CWord, inputfiles, 5 , CWord.Length-1);
+                printf("%s",inputfiles);
                 Save(ArrayGame, inputfiles);
 
                 //ADVCommand();

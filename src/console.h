@@ -8,6 +8,8 @@
 #include "ADT/queue/queue.h"
 #include "ADT/queue/queuestr.h"
 #include "boolean.h"
+#include "../Game/RNG.h"
+#include "../Game/dinerdash.h"
 
 void STARTBNMO(ArrayDyn *gamesBNM0);
 

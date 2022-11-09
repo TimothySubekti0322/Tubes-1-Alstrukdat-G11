@@ -193,7 +193,7 @@ void CopyLine()
           CC adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang Word melebihi NMax, maka sisa Word "dipotong" */
     int i = 0;
-    while (!IsEOP() && !IsNewline())
+    while (!IsNewline())
     {
         if (i < NMax)
         {
