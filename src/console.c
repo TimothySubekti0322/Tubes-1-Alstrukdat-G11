@@ -94,6 +94,7 @@ boolean CompareString(char *string1 , char *string2)
         i++;
         }
     }
+    return equal;
 }
 
 

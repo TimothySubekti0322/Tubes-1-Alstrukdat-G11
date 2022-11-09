@@ -7,18 +7,7 @@
 #include "../src/ADT/mesinkarakter/mesinkarakter.h"
 #include "../src/console.h"
 #include <stdio.h>
-typedef struct{
-        int indeks[10];
-        int durasi[10];
-        int count;
-} masaksaji;
-
-typedef struct{
-    Queue indeks;
-    int durasi[25];
-    int ketahanan[25];
-    int harga[25];
-} customers;
+#include "dinerdash.h"
 
 
 void IsMemberMasakSaji(masaksaji m,int custnumber,boolean *found,int *indeks){
