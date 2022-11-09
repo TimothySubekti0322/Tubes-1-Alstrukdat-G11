@@ -3,6 +3,7 @@
 */
 
 #include "queuestr.h"
+#include "../../console.h"
 #include <stdio.h>
 
 /* *** KREATOR QUEUE *** */
@@ -64,8 +65,14 @@ void enqueueStr(QueueStr *q, ElemType var) {
  * 		tetapi tidak penuh
  * F.S.	var menjadi TAIL yang baru, IdxTail "mundur"
 */
-void dequeueStr(QueueStr *q, ElemType *var) {
-	*var = HEAD(*q);
+void dequeueStr(QueueStr *q, ElemType var) {
+	int j = stringLength(HEAD(*q));
+	int i;
+    for (i = 0 ; i < j; i++)
+    {
+        var[i] = (*q).buffer[(*q).IdxHead][i];
+    }
+	var[i] = '\0';
 	if (IDX_HEAD(*q) == IDX_TAIL(*q)) {
 		IDX_HEAD(*q) = Idx_Undef;
 		IDX_TAIL(*q) = Idx_Undef;
@@ -96,7 +103,7 @@ void DisplayStrQueue(QueueStr q) {
 			printf("%s\n", TAIL(q));
 		} else { // Indeks Tail lebih besar dibanding Indeks Head
 			int k;
-			for (k = IDX_HEAD(q); k <= IDX_TAIL(q); k++) {
+			for (k = IDX_HEAD(q); k < IDX_TAIL(q); k++) {
 				printf("%s\n", q.buffer[k]);
 			}
 			printf("%s\n", TAIL(q));

@@ -60,7 +60,7 @@ void enqueueStr(QueueStr *q, ElemType var);
  * 		tetapi tidak penuh
  * F.S.	var menjadi TAIL yang baru, IdxTail "mundur"
 */
-void dequeueStr(QueueStr *q, ElemType *var);
+void dequeueStr(QueueStr *q, ElemType var);
 /* Menghapus var pada queue q dengan sifat First In First Out
  * I.S.	q sudah terdefinisi dan tidak mungkin kosong
  * F.S. var = nilai elemen IdxHead pada queue; IdxHead "mundur";

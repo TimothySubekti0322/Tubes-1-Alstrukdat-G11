@@ -189,7 +189,7 @@ void CopyWordtostring(Word Input, char *string, int Awal , int Akhir)
         *(string + j) = Input.TabWord[i];
         j++;
     }
-    *(string + i) = '\0';
+    *(string + j) = '\0';
 }
 
 /* COMMAND FUNCTION*/
@@ -200,19 +200,20 @@ void LOADFILE(ArrayDyn *Games, char *inputfile)
     char path[50];
 
     concat(placeholder, inputfile, path);
-
+    //printf("SAMPAI SINI 1\n");
     STARTFILE(path);
-
+    //printf("SAMPAI SINI 2\n");
     if (EndWord)
     {
         printf("File tidak valid / kosong. Silahkan masukkan nama file lain.\n");
     }
     else
     {
-        
+        //printf("SAMPAI SINI 3\n");
         int amount = 0;
         WordToInt(CWord,&amount);
         ADVLINEFILE();/* word pertama yang dibaca adalah jumlah game*/
+        //printf("SAMPAI SINI 4\n");
         for (int j = 0; j < amount; j++)
         {
             char *gamename;
@@ -226,6 +227,7 @@ void LOADFILE(ArrayDyn *Games, char *inputfile)
             // printf("%s\n",Games->Ar[j]);
             ADVLINEFILE();
         }
+        //printf("SAMPAI SINI 5\n");
         //ShowStrArrayDyn(*Games);
         if (CompareString(path,"../data/config.txt"))
         {
@@ -239,17 +241,24 @@ void LOADFILE(ArrayDyn *Games, char *inputfile)
 }
 
 
-void Save(ArrayDyn ArrayGame, char namafile[])
+void Save(ArrayDyn ArrayGame, char *namafile)
 {
     //ArrayGame merupakan array yang menyimpan list game yang tersedia
     //namafile merupakan namafile yang diinginkan dilakukan save
 
+    char placeholder[] = "../data/";
+    char path[50];
+
+    concat(placeholder, namafile, path);
+
     FILE* filebaru;
-    filebaru = fopen(namafile,"w");
+    filebaru = fopen(path,"w");
     fprintf(filebaru, "%d\n", ArrayGame.Neff);
-    for (int i=0; i<ArrayGame.Neff; i++){
+    int i;
+    for (i=0; i<ArrayGame.Neff-1; i++){
         fprintf(filebaru, "%s\n", ArrayGame.Ar[i]);
     }
+    fprintf(filebaru, "%s", ArrayGame.Ar[i]);
     fclose(filebaru);
 }
 
@@ -294,59 +303,69 @@ void CreateGame(ArrayDyn* ArrayGame){
     InsertStrLast(ArrayGame, input);
 }
 
-// void PlayGame(QueueStr* AntrianGame){
-//     if (isStrEmpty(*AntrianGame)){
-//         printf("Tidak ada antrian game untuk dimainkan, silahkan daftar game ke antrian dengan menggunakan command QUEUE GAME");
-//     } else { 
-//         printf("Berikut adalah daftar Game-mu\n");
-//         DisplayStrQueue(* AntrianGame);
-//         char game[100];
-//         dequeueStr(AntrianGame,&game);
-//         if (CompareString(game,"RNG") || CompareString(game,"Diner Dash")){ 
-//             printf("Loading %s ...", game);
-//             if (CompareString(game,"RNG")){
-//                 RNG();
-//             } else if (CompareString(game,"RNG")){
-//                 DinerDash();
-//             }
-//         } else {
-//             printf("Game %s masih dalam meaintenance, belum dapat dimainkan.\n", game);
-//             printf("Silahkan pilih game lain.");
-//         }
-//     }
-// }
+void PlayGame(QueueStr* AntrianGame){
+    if (isStrEmpty(*AntrianGame)){
+        printf("Tidak ada antrian game untuk dimainkan, silahkan daftar game ke antrian dengan menggunakan command QUEUE GAME");
+    } else { 
+        printf("Berikut adalah daftar Game-mu\n");
+        DisplayStrQueue(*AntrianGame);
+        char game[4];
+        dequeueStr(AntrianGame,game);
+        printf("%s\n",game);
+        //printf("Loading %s ...", game);
+        if (CompareString(game,"RNG"))
+        {
+            printf("SAMPAI SINI 1");
+            gameRNG();
+        } 
+        else if (CompareString(game,"Diner Dash"))
+        {
+            printf("SAMPAI SINI 2");
+            dinnerdash();
+        }
+        else 
+        {
+            printf("Game %s masih dalam meaintenance, belum dapat dimainkan.\n", game);
+            printf("Silahkan pilih game lain.");
+        }
+    }
+}
 
-// void SkipGame(QueueStr* AntrianGame, int number){
-//     if (isStrEmpty(*AntrianGame)){
-//         pritnf("Tidak ada antrian game untuk diskip, silahkan daftar game ke antrian dengan menggunakan command QUEUE GAME");
-//     } else { 
-//         printf("Berikut adalah daftar Game-mu\n");
-//         DisplayStrQueue(* AntrianGame);
-//         char game[100];
-//         int i = 0;
-//         while (!isStrEmpty(*AntrianGame) && i<number){
-//             dequeue(AntrianGame,game);
-//             i++;
-//         }
+void SkipGame(QueueStr* AntrianGame, int number){
+    printf("%d\n",number);
+    if (isStrEmpty(*AntrianGame)){
+        printf("Tidak ada antrian game untuk diskip, silahkan daftar game ke antrian dengan menggunakan command QUEUE GAME");
+    } else { 
+        printf("Berikut adalah daftar Game-mu\n");
+        DisplayStrQueue(*AntrianGame);
+        char game[100];
+        int i = 0;
+        while (!isStrEmpty(*AntrianGame) && i<number){
+            dequeueStr(AntrianGame,game);
+            i++;
+        }
 
-//         if (isStrEmpty(*AntrianGame)){
-//             printf("Tidak ada permainan lagi dalam daftar game-mu");
-//         } else { 
-//             dequeueStr(AntrianGame,&game);
-//             if (game == 'RNG' || game == 'Diner Dash'){ 
-//                 printf("Loading %s ...", game);
-//                 if (game == 'RNG'){
-//                     RNG();
-//                 } else if (game == 'Diner Dash'){
-//                     DinerDash();
-//                 }
-//             } else {
-//                 printf("Game %s masih dalam meaintenance, belum dapat dimainkan.\n", game);
-//                 printf("Silahkan pilih game lain.");
-//             }
-//         }
-//     }
-// }
+        if (isStrEmpty(*AntrianGame)){
+            printf("Tidak ada permainan lagi dalam daftar game-mu");
+        } else { 
+            dequeueStr(AntrianGame,game);
+            if (CompareString(game,"RNG") || CompareString(game,"Diner Dash"))
+            { 
+                printf("Loading %s ...\n", game);
+                if (CompareString(game,"RNG")){
+                    gameRNG();
+                } else if (CompareString(game,"Diner Dash")){
+                    dinnerdash();
+                }
+            } 
+            else 
+            {
+                printf("Game %s masih dalam meaintenance, belum dapat dimainkan.\n", game);
+                printf("Silahkan pilih game lain.");
+            }
+        }
+    }
+}
 
 void HELP() 
 {
@@ -434,7 +453,7 @@ void QUEUEGAME(QueueStr *BNMOGames, ArrayDyn ListGame) {
 	printf("\n");
 	LISTGAME(ListGame);
 	
-	printf("Nomor Game yang mau ditambahkan ke antrian :");
+	printf("Nomor Game yang mau ditambahkan ke antrian : ");
 	int idxgame = 0;
     INPUT();
     WordToInt(CWord,&idxgame);
