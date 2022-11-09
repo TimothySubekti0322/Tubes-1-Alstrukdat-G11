@@ -1,23 +1,7 @@
 #include <stdio.h>
 #include "time.h"
 #include <stdlib.h>
-#include "Tubes-1-Alstrukdat-G11/src/ADT/array/arraydinamikstr.c"
-#include "Tubes-1-Alstrukdat-G11/src/boolean.h"
-#include "Tubes-1-Alstrukdat-G11/src/console.c"
-#include "Tubes-1-Alstrukdat-G11/src/ADT/queue/queue.c"
-#include "Tubes-1-Alstrukdat-G11/src/ADT/mesinkata/mesinkata.c"
-#include "Tubes-1-Alstrukdat-G11/src/ADT/mesinkarakter/mesinkarakter.c"
-#include "Tubes-1-Alstrukdat-G11/src/ADT/queue/queuestr.c" // Somehow diminta??????
-#include "Tubes-1-Alstrukdat-G11/Game/dinerdash.c"
-#include "Tubes-1-Alstrukdat-G11/Game/RNG.c"
-
-typedef struct{
-    ArrayDyn a;
-    ArrayDyn b;
-    ArrayDyn c;
-    ArrayDyn d;
-    ArrayDyn e;
-} Board;
+#include "mole.h"
 
 Board CreateBoard(){
     Board papan;
@@ -156,6 +140,6 @@ void mole(){
     }
 }
 
-int main(){
-    mole();
-}
+// int main(){
+//     mole();
+// }

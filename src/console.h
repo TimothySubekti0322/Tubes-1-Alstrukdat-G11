@@ -10,6 +10,7 @@
 #include "boolean.h"
 #include "../Game/RNG.h"
 #include "../Game/dinerdash.h"
+#include "../Game/mole.h"
 
 void STARTBNMO(ArrayDyn *gamesBNM0);
 

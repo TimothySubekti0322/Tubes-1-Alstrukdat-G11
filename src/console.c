@@ -349,6 +349,10 @@ void PlayGame(QueueStr* AntrianGame){
             //printf("SAMPAI SINI 2");
             dinnerdash();
         }
+        else if (CompareString(game,"MOLE"))
+        {
+            mole();
+        }
         else 
         {
             printf("Game %s masih dalam meaintenance, belum dapat dimainkan.\n", game);
