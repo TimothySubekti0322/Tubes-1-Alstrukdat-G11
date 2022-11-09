@@ -309,18 +309,18 @@ void PlayGame(QueueStr* AntrianGame){
     } else { 
         printf("Berikut adalah daftar Game-mu\n");
         DisplayStrQueue(*AntrianGame);
-        char game[4];
+        char game[10];
         dequeueStr(AntrianGame,game);
         printf("%s\n",game);
         //printf("Loading %s ...", game);
         if (CompareString(game,"RNG"))
         {
-            printf("SAMPAI SINI 1");
+            // printf("SAMPAI SINI 1");
             gameRNG();
         } 
-        else if (CompareString(game,"Diner Dash"))
+        else if (CompareString(game,"DINER DASH"))
         {
-            printf("SAMPAI SINI 2");
+            //printf("SAMPAI SINI 2");
             dinnerdash();
         }
         else 
