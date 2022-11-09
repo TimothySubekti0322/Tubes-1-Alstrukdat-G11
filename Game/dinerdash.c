@@ -243,7 +243,7 @@ void dinnerdash(){
                 valid = true;
             }
         }
-
+        printf("===================================");
         tambahturn(&masak,&saji,&orders);
         if(HEAD(orders.indeks) == 15){
             printf("Selamat anda sudah memenangkan game. Skor Anda %d.\n",saldo);
