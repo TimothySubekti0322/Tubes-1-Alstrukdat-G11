@@ -180,4 +180,3 @@ IdxType FindStatArray(StatArray array, ElType elmt) {
 	}
 	return LocationIdx;
 }
-int main(){}
