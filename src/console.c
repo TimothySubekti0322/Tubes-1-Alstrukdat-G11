@@ -349,7 +349,7 @@ void PlayGame(QueueStr* AntrianGame){
             //printf("SAMPAI SINI 2");
             dinnerdash();
         }
-        else if (CompareString(game,"MOLE"))
+        else if(CompareString(game,"MOLE"))
         {
             mole();
         }
@@ -379,13 +379,17 @@ void SkipGame(QueueStr* AntrianGame, int number){
             printf("Tidak ada permainan lagi dalam daftar game-mu");
         } else { 
             dequeueStr(AntrianGame,game);
-            if (CompareString(game,"RNG") || CompareString(game,"Diner Dash"))
+            if (CompareString(game,"RNG") || CompareString(game,"DINER DASH") || CompareString(game,"MOLE"))
             { 
                 printf("Loading %s ...\n", game);
                 if (CompareString(game,"RNG")){
                     gameRNG();
-                } else if (CompareString(game,"Diner Dash")){
+                } else if (CompareString(game,"DINER DASH")){
                     dinnerdash();
+                }
+                else if (CompareString(game,"MOLE"))
+                {
+                    mole();
                 }
             } 
             else 
