@@ -104,6 +104,9 @@ void PrintPapan(Board papan){
 
 
 void mole(){
+    printf("Selamat datang pada game Mole. Anda adalah seorang petani dengan lahan seluas 5x5.\n");
+    printf("Tetapi ada mole yang selalu merusak tanian Anda. Galilah grid pada lahan Anda untuk mencari molenya.\n");
+    printf("Skor yang didapatkan berdasarkan seberapa cepat Anda mencari molenya.\n");
     int score = 25;
     boolean gameover = false;
     Board papan;
@@ -124,8 +127,12 @@ void mole(){
             x = xcoor(coordinates);
             y = ycoor(coordinates);
             GetStr(papan.e, x-1);
+            if(!IsValid(coordinates)){
+                printf("Koordinat hanya bisa berisi x dan y pada range 1-5.\n");
+            }
             if(!IsBlankGrid(papan,x,y)){
                 coordinates = "6 6";
+                printf("Inputan hanya bisa mengisi grid yang kosong yaitu yang berisi 'O'.\n");
             }
         }
         
