@@ -12,22 +12,22 @@
 #include "../src/ADT/queue/queue.h"
 #include "../src/ADT/mesinkarakter/mesinkarakter.h"
 #include "../src/ADT/mesinkata/mesinkata.h"
+#include "../src/ADT/array/arraystatis.h"
 
 typedef struct{
-        int indeks[10];
-        int durasi[10];
+        StatArray indeks;
+        StatArray durasi;
         int count;
 } masaksaji;
 // Berfungsi sebagai penyimpan makanan dalam proses pemasakan dan penyajian
 
 typedef struct{
     Queue indeks;
-    int durasi[25];
-    int ketahanan[25];
-    int harga[25];
+    StatArray durasi;
+    StatArray ketahanan;
+    StatArray harga;
 } customers;
 // Berfungsi sebagai penyimpan customer dalam queue dan info infonya
-
 
 void IsMemberMasakSaji(masaksaji m,int custnumber,boolean *found,int *indeks);
 /*Mengecek jika sutu custnumber merupakan member dari masak atau saji dan 

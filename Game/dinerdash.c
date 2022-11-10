@@ -2,23 +2,22 @@
 #include <stdlib.h>
 #include "time.h"
 #include "math.h"
-#include "../src/ADT/queue/queue.h"
-#include "../src/ADT/mesinkata/mesinkata.h"
-#include "../src/ADT/mesinkarakter/mesinkarakter.h"
 #include "../src/console.h"
 #include <stdio.h>
 #include "dinerdash.h"
 
 
+
 void IsMemberMasakSaji(masaksaji m,int custnumber,boolean *found,int *indeks){
     int i;
     for(i = 0;i<m.count;i++){
-                    if(m.indeks[i] == custnumber){
+                    if(m.indeks.Ar[i] == custnumber){
                         *found = true;
                         *indeks = i;
                     }
                 }    
 }
+
 void masaksajiempty(masaksaji *m){
     m->count = 0;
 }
@@ -72,8 +71,8 @@ void DeleteMasakSaji(masaksaji *m,int indeks){
     int i;
     m->count -= 1;
     for(i = indeks;i<m->count;i++){
-        m->durasi[i] = m->durasi[i+1];
-        m->indeks[i] = m->indeks[i+1];
+        m->durasi.Ar[i] = m->durasi.Ar[i+1];
+        m->indeks.Ar[i] = m->indeks.Ar[i+1];
     }
 }
 
@@ -81,18 +80,18 @@ void tambahturn(masaksaji *masak, masaksaji *saji,customers *orders){
     enqueue(&orders->indeks,TAIL(orders->indeks)+1);
     int i;
     for(i = 0;i<masak->count;i++){
-        masak->durasi[i] -=1;
-        if(masak->durasi[i] == 0){
+        masak->durasi.Ar[i] -=1;
+        if(masak->durasi.Ar[i] == 0){
             saji->count++;
-            saji->indeks[saji->count-1] = masak->indeks[i];
-            saji->durasi[saji->count-1] = orders->ketahanan[saji->indeks[saji->count-1]]+1;
+            saji->indeks.Ar[saji->count-1] = masak->indeks.Ar[i];
+            saji->durasi.Ar[saji->count-1] = orders->ketahanan.Ar[saji->indeks.Ar[saji->count-1]]+1;
             DeleteMasakSaji(masak,i);
             i--;    
         }
     }
     for(i = 0;i<saji->count;i++){
-        saji->durasi[i] -= 1;
-        if(saji->durasi[i] == 0){
+        saji->durasi.Ar[i] -= 1;
+        if(saji->durasi.Ar[i] == 0){
             DeleteMasakSaji(saji,i);
         }
     }
@@ -114,11 +113,11 @@ void dinnerdash(){
     int i,random = 1;
     for(i = 0;i<25;i++){
         random = (((127*random) + second)%5) + 1;
-        orders.durasi[i] = random;
+        orders.durasi.Ar[i] = random;
         random = (((127*random) + second)%5) + 1;
-        orders.ketahanan[i] = random;
+        orders.ketahanan.Ar[i] = random;
         random = ((((127*random) + second)%41)+ 10)*1000;
-        orders.harga[i] = random;
+        orders.harga.Ar[i] = random;
         random = (random/1000)%109;
     }
 
@@ -127,9 +126,6 @@ void dinnerdash(){
     masaksajiempty(&masak);
     masaksajiempty(&saji);    
 
-    //Isi command
-    char *command;
-    command = (char *) malloc (6*sizeof(char));
     //Isi Customer awal
     for(i = 0;i<3;i++){
         enqueue(&orders.indeks,i);
@@ -145,7 +141,7 @@ void dinnerdash(){
         printf("Makanan | Durasi Memasak | Ketahanan | Harga\n");
         printf("----------------------------------------------\n");
         for(i = 0;i<length(orders.indeks);i++){
-            printf("M%d      | %d              | %d         | %d\n",count+i,orders.durasi[i+HEAD(orders.indeks)],orders.ketahanan[i+HEAD(orders.indeks)],orders.harga[i+HEAD(orders.indeks)]);
+            printf("M%d      | %d              | %d         | %d\n",count+i,orders.durasi.Ar[i+HEAD(orders.indeks)],orders.ketahanan.Ar[i+HEAD(orders.indeks)],orders.harga.Ar[i+HEAD(orders.indeks)]);
         }
         printf("\n");
 
@@ -156,7 +152,7 @@ void dinnerdash(){
             printf("        |\n");
         }
         for(i = 0;i<masak.count;i++){
-            printf("M%d      | %d\n",masak.indeks[i],masak.durasi[i]);
+            printf("M%d      | %d\n",masak.indeks.Ar[i],masak.durasi.Ar[i]);
         }
         printf("\n");
 
@@ -167,7 +163,7 @@ void dinnerdash(){
             printf("        |\n");
         }
         for(i = 0;i<saji.count;i++){
-            printf("M%d      | %d\n",saji.indeks[i],saji.durasi[i]);
+            printf("M%d      | %d\n",saji.indeks.Ar[i],saji.durasi.Ar[i]);
         }
         boolean valid = false;
         
@@ -192,14 +188,14 @@ void dinnerdash(){
 
                 if(found){
                     if(custnumber == HEAD(orders.indeks)){
-                        saldo += orders.harga[custnumber];
+                        saldo += orders.harga.Ar[custnumber];
                         int val;
                         dequeue(&orders.indeks,&val);
                         saji.count -= 1;
                         count++;
                         for(i = indeks;i<saji.count;i++){
-                            saji.indeks[i] = saji.indeks[i+1];
-                            saji.durasi[i] = saji.durasi[i+1];
+                            saji.indeks.Ar[i] = saji.indeks.Ar[i+1];
+                            saji.durasi.Ar[i] = saji.durasi.Ar[i+1];
                         }
                         valid = true;
                     } else {
@@ -219,8 +215,8 @@ void dinnerdash(){
                 if (masak.count <= 5){
                     if(found){
                         masak.count+=1;
-                        masak.durasi[masak.count-1] = orders.durasi[custnumber]+1;
-                        masak.indeks[masak.count-1] = custnumber;
+                        masak.durasi.Ar[masak.count-1] = orders.durasi.Ar[custnumber]+1;
+                        masak.indeks.Ar[masak.count-1] = custnumber;
                         valid = true;
                     } else{
                         printf("Indeks masakan tidak dalam queue customer.\n");
@@ -230,6 +226,8 @@ void dinnerdash(){
                 }
             } else if(skip(command)){
                 valid = true;
+            } else {
+                printf("Masukan tidak valid.\n");
             }
         }
         printf("===================================\n");

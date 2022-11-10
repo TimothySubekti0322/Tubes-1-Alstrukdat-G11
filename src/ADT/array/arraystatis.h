@@ -109,7 +109,7 @@ void ReverseStatArray(StatArray *array);
  * Fungsi untuk menyalin suatu StatArray
  * Prekondisi : array sudah terdefinisi
 */
-StatArray CopyDynArray(StatArray array);
+StatArray CopyStatArray(StatArray array);
 
 /* Fungsi FindStatArray
  * Fungsi untuk melakukan search pada suatu StatArray
@@ -117,6 +117,6 @@ StatArray CopyDynArray(StatArray array);
  * apabila tidak ditemukan maka akan mengembalikan -1.
  * Prekondisi : array sudah terdefinisi
 */
-IdxType FindDynArray(StatArray array, ElType elmt);
+IdxType FindStatArray(StatArray array, ElType elmt);
 
 #endif
