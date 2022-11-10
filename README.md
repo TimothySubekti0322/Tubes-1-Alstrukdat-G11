@@ -18,9 +18,7 @@ gcc ADT/array/arraydinamik.c ADT/array/arraydinamikstr.c ADT/mesinkarakter/mesin
 config.txt
 
 ## Cara mengcompile File Program
-<ul> Langkah 1 : ( Mengubah current directory ke bin ) 
+<ul> <b>Windows</b>
     <li> <b>Langkah 1</b> : Mengubah current directory ke bin -> cd bin </li>
-    <li> <b>Langkah 2</b> : Mengcompile file.c -> cd make main </li>
-    <li> <b>Langkah 3</b> : Menjalankan program -> ./main </li>
-    <li> <b>Langkah 4</b> : Jika ingin menghapus .exe file -> make clean </li>
+    <li> <b>Langkah 2</b> : Mengcompile file.c -> bash BNMO.sh </li>
 </ul>
