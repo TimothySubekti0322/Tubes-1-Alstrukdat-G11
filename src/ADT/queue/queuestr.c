@@ -103,10 +103,13 @@ void DisplayStrQueue(QueueStr q) {
 			printf("%s\n", TAIL(q));
 		} else { // Indeks Tail lebih besar dibanding Indeks Head
 			int k;
-			for (k = IDX_HEAD(q); k < IDX_TAIL(q); k++) {
-				printf("%d. %s\n", k+1, q.buffer[k]);
+			int l = 1;
+			for (k = IDX_HEAD(q); k < IDX_TAIL(q); k++) 
+			{
+				printf("%d. %s\n", l, q.buffer[k]);
+				l++;
 			}
-			printf("%d. %s\n",k+1, TAIL(q));
+			printf("%d. %s\n",l, TAIL(q));
 		}
 	}
 	printf("\n");
