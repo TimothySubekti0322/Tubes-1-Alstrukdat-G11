@@ -115,11 +115,12 @@ void mole(){
     papan = CreateBoard();
     while(!gameover){
         PrintPapan(papan);
+        printf("\n");
         randomnumber(&xmole,&ymole);
         while(!IsBlankGrid(papan,xmole,ymole)){
             randomnumber(&xmole,&ymole);
         }
-        printf("%d %d cheat hehe\n",xmole,ymole);
+        printf("%d %d cheat hehe\n\n",xmole,ymole);
         while(!IsValid(coordinates)){
             printf("Masukkan input dengan format 'x y', contoh 2 5: \n");
             INPUT();
@@ -137,7 +138,7 @@ void mole(){
         }
         
         if(x == xmole && y == ymole){
-            printf("Selamat Anda sudah menemukan molenya. Skor Anda %d\n",score);
+            printf("Selamat Anda sudah menemukan molenya. Skor Anda %d\n\n",score);
             gameover = true;
         } else{
             UbahBoard(&papan,x,y);
