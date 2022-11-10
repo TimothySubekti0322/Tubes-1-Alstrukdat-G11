@@ -13,7 +13,13 @@ void gameRNG()
     int tebakan;
     int skor = 0;
     int Target = rand() % 10 + 1;
-    printf("%d\n",Target); //Cheat Code - Buat Tahu Jawabannya :)
+    printf("Need Answer ? [Y/N] : ");
+    INPUT();
+    if (CWord.TabWord[0] == 'Y')
+    {
+        printf("%d\n",Target); //Cheat Code - Buat Tahu Jawabannya :)
+    }
+    //printf("%d\n",Target); //Cheat Code - Buat Tahu Jawabannya :)
     printf("Tebakan : ");
     INPUT();
     WordToInt(CWord,&tebakan);
@@ -41,10 +47,3 @@ void gameRNG()
     printf("skor = %d" , skor);
     //return skor;
 }
-
-/*TEST CASE*/
-
-// int main(){
-//     gameRNG();
-//     return 0;
-// }
