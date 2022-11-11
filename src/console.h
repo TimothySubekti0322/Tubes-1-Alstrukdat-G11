@@ -13,6 +13,7 @@
 #include "../Game/mole.h"
 
 void STARTBNMO(ArrayDyn *gamesBNM0);
+/* Membaca file config dan memasukan tiap baris file ke array gamesBNMO*/
 
 boolean IsKataSama(Word InputCommand, Word Command);
     /* Mengirimkan true jika K1 = K2 : Length dan elemen tiap arraynya sama */
@@ -62,6 +63,9 @@ void WordToInt(Word kata, int *hasil);
 /* Mengubah Kata to Int
    I.S : Kata dan hasil terdefinisi
    F.S : hasil merupakan integer dari element Kata*/
+
+void delay(int seconds);
+/* Memberikan Jeda untuk program mengeksekusi baris berikutnya */
 
 /* COMMAND FUNCTION*/
 

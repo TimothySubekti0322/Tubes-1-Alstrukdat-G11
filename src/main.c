@@ -110,6 +110,13 @@ int main()
                 SkipGame(&QueueGame,number);
             }
 
+            /* SKIP GAME jika spasi adalah valid*/
+            else if ((CWord.TabWord[0] == 'S') && (CWord.TabWord[1] == 'K') && (CWord.TabWord[2] == 'I') && (CWord.TabWord[3] == 'P') && (CWord.TabWord[4] == ' ') && (CWord.TabWord[5] == 'G')&& (CWord.TabWord[6] == 'A') && (CWord.TabWord[7] == 'M') && (CWord.TabWord[8] == 'E') && (CWord.TabWord[9] == ' '))
+            {
+                int number = CWord.TabWord[10] - '0';
+                SkipGame(&QueueGame,number);
+            }
+
             else if (IsKataSama(CWord, StringtoWord("HELP")))
             {
                 HELP();

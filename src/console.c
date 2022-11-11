@@ -3,7 +3,10 @@
 #include "console.h"
 
 
-void STARTBNMO(ArrayDyn *gamesBNMO){
+void STARTBNMO(ArrayDyn *gamesBNMO)
+{
+    /* Membaca file config dan memasukan tiap baris file ke array gamesBNMO*/
+
     STARTFILE("../data/config.txt");
     int jumlahGame;
     jumlahGame = atoi(CWord.TabWord);
@@ -51,6 +54,7 @@ void PrintWord(Word CWord)
 
 char *wordToString(Word CWord)
 {
+    /* Mengubah Word menjadi string*/
     char *string;
 
     string = malloc(CWord.Length * sizeof(char));
@@ -66,6 +70,7 @@ char *wordToString(Word CWord)
 
 boolean CompareString(char *string1 , char *string2)
 {
+    /* Mengirimkan true jika string1 = string2 */
     boolean equal = true;
     int i = 0;
     while ((*(string1 + i) != '\0') && (*(string2 + i) != '\0') && equal)
@@ -153,6 +158,10 @@ int StringtoInt(char* string)
 
 void WordToInt(Word kata, int *hasil)
 {
+    /* Mengubah Kata to Int
+   I.S : Kata dan hasil terdefinisi
+   F.S : hasil merupakan integer dari element Kata*/
+
     int i = 0;
     while (i < kata.Length)
     {
@@ -186,6 +195,10 @@ void concat(char *string1, char *string2, char *string3)
 
 void CopyWordtostring(Word Input, char *string, int Awal , int Akhir)
 {
+    /* Menyalin kata ke string
+   I.S : Input terdefinisi , String , Awal , dan Akhir terdefinisi
+   F.S : string berisis elemen elemen kata dari Indeks Awal hingga Indeks Akhir */
+
     int i;
     int j = 0;
     for(i = Awal ; i <= Akhir  ; i++)
@@ -196,10 +209,29 @@ void CopyWordtostring(Word Input, char *string, int Awal , int Akhir)
     *(string + j) = '\0';
 }
 
+void delay(int seconds)
+{
+    /* Memberikan Jeda untuk program mengeksekusi baris berikutnya */
+
+    // Convert seconds into milli_seconds
+    int milli_seconds = 1000 * seconds;
+ 
+    // Storing start time
+    clock_t start_time = clock();
+ 
+    // looping till required time is not achieved
+    while (clock() < start_time + milli_seconds)
+    ;
+}
+
 /* COMMAND FUNCTION*/
 
 void LOADFILE(ArrayDyn *Games, char *inputfile)
 {
+    /* Melakukan pembacaan file , kemudian menuliskan isinya edalam Array Games
+   I.S : File yang diinput terdefinisi , Array Games terdefinisi dan kosong
+   F.S : Array games berisis list Game yang ada dalam file*/
+
     char placeholder[] = "../data/";
     char path[50];
 
@@ -247,8 +279,9 @@ void LOADFILE(ArrayDyn *Games, char *inputfile)
 
 void Save(ArrayDyn ArrayGame, char *namafile)
 {
-    //ArrayGame merupakan array yang menyimpan list game yang tersedia
-    //namafile merupakan namafile yang diinginkan dilakukan save
+    /* Melkaukan Save file
+   I.S : ArrayGame terdefinisi dan nama file terdefinisi
+   F.S : Jika file sudah ada maka file di overwrite , Jika tidak ada akan membuat file baru*/
 
     char placeholder[] = "../data/";
     char path[50];
@@ -269,6 +302,10 @@ void Save(ArrayDyn ArrayGame, char *namafile)
 
 void LISTGAME(ArrayDyn arraygames)
 {
+    /* Menampilkan ListGame yang tersedia 
+   I.S : arraygames terdefinisi
+   F.S : menampilakn seluruh elemen arraygames*/
+
     printf("Berikut adalah daftar game yang tersedia");
     printf("\n");
     for (int i = 0; i < arraygames.Neff; i++)
@@ -280,6 +317,11 @@ void LISTGAME(ArrayDyn arraygames)
 
 void DELETEGAME(ArrayDyn *Games, QueueStr *Queue)
 {
+    /* Melakukan penghapusan suatu game
+   I.S : Arraygames terdefinisi
+   F.S : Melakukan penghapusan game jika ada pada array, mengeluarkan pesan error
+         jika tidak terdefinisi atau termasuk dalam game default*/
+
     int indeksgame = 0;
     LISTGAME(*Games);
     printf("Masukkan nomor game yang akan dihapus: ");
@@ -311,7 +353,10 @@ void DELETEGAME(ArrayDyn *Games, QueueStr *Queue)
 
 void CreateGame(ArrayDyn* ArrayGame)
 {
-    //ArrayGame merupakan array yang menyimpan list game
+    /* Melakukan penambahan suatu game
+   I.S : ArrayGame terdefinisi
+   F.S : Melakukan penambahan game pada array, meminta validasi dengan input 
+         ulang jika game sudah ada di dalam array*/
 
     char *input;
     printf("Masukkan nama game yang akan ditambahkan: ");
@@ -329,7 +374,13 @@ void CreateGame(ArrayDyn* ArrayGame)
     printf("Game berhasil ditambahkan\n");
 }
 
-void PlayGame(QueueStr* AntrianGame){
+void PlayGame(QueueStr* AntrianGame)
+{
+    /* Menjalankan suatu game
+   I.S : ArrayGame terdefinisi
+   F.S : Menjalankan game yang terdapat di paling atas pada ADT Queue yang
+         menyimpan antrian game*/
+
     if (isStrEmpty(*AntrianGame)){
         printf("Tidak ada antrian game untuk dimainkan, silahkan daftar game ke antrian dengan menggunakan command QUEUE GAME");
     } else { 
@@ -337,20 +388,44 @@ void PlayGame(QueueStr* AntrianGame){
         DisplayStrQueue(*AntrianGame);
         char game[10];
         dequeueStr(AntrianGame,game);
-        printf("%s\n",game);
+        //printf("%s\n",game);
         //printf("Loading %s ...", game);
         if (CompareString(game,"RNG"))
         {
             // printf("SAMPAI SINI 1");
+            printf("Loading RNG ");
+            delay(1);
+            printf(". ");
+            delay(1);
+            printf(". ");
+            delay(1);
+            printf(".\n");
+            delay(1);
             gameRNG();
         } 
         else if (CompareString(game,"DINER DASH"))
         {
             //printf("SAMPAI SINI 2");
+            printf("Loading DINNER DASH ");
+            delay(1);
+            printf(". ");
+            delay(1);
+            printf(". ");
+            delay(1);
+            printf(".\n");
+            delay(1);
             dinnerdash();
         }
         else if(CompareString(game,"MOLE"))
         {
+            printf("Loading MOLE ");
+            delay(1);
+            printf(". ");
+            delay(1);
+            printf(". ");
+            delay(1);
+            printf(".\n");
+            delay(1);
             mole();
         }
         else 
@@ -361,8 +436,14 @@ void PlayGame(QueueStr* AntrianGame){
     }
 }
 
-void SkipGame(QueueStr* AntrianGame, int number){
-    //printf("%d\n",number);
+void SkipGame(QueueStr* AntrianGame, int number)
+{
+    
+    /* Menjalankan suatu game dengan skip game sebanyak number
+   I.S : Arraygames terdefinisi
+   F.S : Melewatkan game sebanyak number dari atas, dan menjalankan game apabila
+         masih terdapat game dalam ADT Queue*/
+
     if (isStrEmpty(*AntrianGame)){
         printf("Tidak ada antrian game untuk diskip, silahkan daftar game ke antrian dengan menggunakan command QUEUE GAME");
     } else { 
@@ -381,7 +462,14 @@ void SkipGame(QueueStr* AntrianGame, int number){
             dequeueStr(AntrianGame,game);
             if (CompareString(game,"RNG") || CompareString(game,"DINER DASH") || CompareString(game,"MOLE"))
             { 
-                printf("Loading %s ...\n", game);
+                printf("Loading %s ", game);
+                delay(1);
+                printf(". ");
+                delay(1);
+                printf(". ");
+                delay(1);
+                printf(".\n");
+                delay(1);
                 if (CompareString(game,"RNG")){
                     gameRNG();
                 } else if (CompareString(game,"DINER DASH")){
@@ -403,6 +491,11 @@ void SkipGame(QueueStr* AntrianGame, int number){
 
 void HELP() 
 {
+    /* Menampilkan daftar command-command yang tersedia,
+    * apa saja yang dapat dilakukan dengan masing-masing command,
+    * dan cara memanggilnya.
+    */
+
 	printf("Selamat datang di fungsi HELP!\n");
 	printf("Kalau kamu berada di sini, ");
 	printf("itu berarti kamu kebingungan akan bagaimana program ini berjalan!\n");
@@ -481,7 +574,15 @@ void HELP()
 	printf("Selamat menjalani BNMO ~\n");
 }
 
-void QUEUEGAME(QueueStr *BNMOGames, ArrayDyn ListGame) {
+void QUEUEGAME(QueueStr *BNMOGames, ArrayDyn ListGame) 
+{
+    /* Menampilkan antrian terkini dari game user, lalu memperbolehkan
+    * user untuk menambahkan game sesuai list game yang tersedia di BNMO.
+    * Apabila indeks game yang dipilih berada pada rentang indeks game BNMO,
+    * game berhasil ditambahkan ke antrian.
+    * Jika tidak, akan muncul pesan kesalahan dan game gagal ditambahkan.
+    */
+
 	printf("Berikut adalah daftar antrian game-mu\n");
 	DisplayStrQueue(*BNMOGames);
 	printf("\n");
@@ -504,6 +605,11 @@ void QUEUEGAME(QueueStr *BNMOGames, ArrayDyn ListGame) {
 	}
 }
 
-void QUIT(boolean EndGame){
+void QUIT(boolean EndGame)
+{
+    /*
+   I.S : EndGame bernilai false
+   F.S : Endgame bernilai true
+*/
     EndGame = true;
 }

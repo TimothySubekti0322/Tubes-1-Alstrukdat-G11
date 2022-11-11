@@ -45,6 +45,6 @@ void gameRNG()
         printf("YA , X Adalah %d\n" , Target);
     }
     skor = MaxTry - nTebakan + 1;
-    printf("skor = %d" , skor);
+    printf("skor = %d\n" , skor);
     //return skor;
 }
