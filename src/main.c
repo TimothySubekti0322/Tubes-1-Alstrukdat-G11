@@ -61,7 +61,7 @@ int main()
             else if ((CWord.TabWord[0] == 'L') && (CWord.TabWord[1] == 'O') && (CWord.TabWord[2] == 'A') && (CWord.TabWord[3] == 'D'))
             {
                 char inputfile[50];
-                CopyWordtostring(CWord, inputfile, 5 , CWord.Length-1);
+                CopyWordtostring(CWord, inputfile, 6 , CWord.Length-1);
                 LOADFILE(&ArrayGame,inputfile);
                 // printf("%s", CWord);
                 //printf("%s", inputfile);
