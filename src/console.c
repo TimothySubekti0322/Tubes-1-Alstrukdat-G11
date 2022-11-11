@@ -239,6 +239,7 @@ void LOADFILE(ArrayDyn *Games, char *inputfile)
     //printf("SAMPAI SINI 1\n");
     STARTFILE(path);
     //printf("SAMPAI SINI 2\n");
+    //printf("%s\n",path);
     if (EndWord)
     {
         printf("File tidak valid / kosong. Silahkan masukkan nama file lain.\n");

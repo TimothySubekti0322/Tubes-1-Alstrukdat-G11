@@ -17,7 +17,8 @@ void welcome(){
      char *text =
      "WELCOME TO BNMO <33\n"
      "START :: MAININ BNMO DONG SAYANG\n"
-     "LOAD  :: LOAD GAME YANG TERSEDIA YUK SAYANG\n";
+     "LOAD  :: LOAD GAME YANG TERSEDIA YUK SAYANG\n"
+     "HELP  :: BUTUH BANTUAN SAYANG\n";
 
 
      printf("%s",screen);
@@ -61,7 +62,7 @@ int main()
             else if ((CWord.TabWord[0] == 'L') && (CWord.TabWord[1] == 'O') && (CWord.TabWord[2] == 'A') && (CWord.TabWord[3] == 'D'))
             {
                 char inputfile[50];
-                CopyWordtostring(CWord, inputfile, 6 , CWord.Length-1);
+                CopyWordtostring(CWord, inputfile, 5 , CWord.Length-1);
                 LOADFILE(&ArrayGame,inputfile);
                 // printf("%s", CWord);
                 //printf("%s", inputfile);
@@ -71,6 +72,14 @@ int main()
             else if (IsKataSama(CWord,StringtoWord("HELP")))
             {
                 HELP();
+            }
+
+            else if (IsKataSama(CWord, StringtoWord("QUIT")))
+            {
+                endProgram = true;
+                printf("Anda keluar dari game BNMO.\n");
+                printf("Bye bye ...\n");
+                /* Memanggil Fungsi Quit*/
             }
 
             /* Command lain*/
