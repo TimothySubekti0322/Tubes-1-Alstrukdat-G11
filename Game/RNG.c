@@ -8,11 +8,12 @@
 void gameRNG()  
 {  
     srand(time(NULL));
-    printf("RNG Telah dimulai. Uji keberuntungan Anda dengan menebak sebuah angka X yang rentangnya berada diantara 1 - 10.\n");
+    printf("RNG Telah dimulai. Uji keberuntungan Anda dengan menebak sebuah angka X yang rentangnya berada diantara 1 - 100.\n");
+    printf("Kamu mempunyai 10 kesempatan untuk menebak angka X ini\n");
     int MaxTry = 10;
     int tebakan;
     int skor = 0;
-    int Target = rand() % 10 + 1;
+    int Target = rand() % 100 + 1;
     printf("Need Answer ? [Y/N] : ");
     INPUT();
     if (CWord.TabWord[0] == 'Y')
@@ -37,7 +38,7 @@ void gameRNG()
         WordToInt(CWord,&tebakan);
         nTebakan++;
     }
-    if(nTebakan == MaxTry){
+    if(nTebakan == MaxTry+1){
         printf("GAME OVER!\n");
     }
     else{

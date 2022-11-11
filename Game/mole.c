@@ -120,7 +120,13 @@ void mole(){
         while(!IsBlankGrid(papan,xmole,ymole)){
             randomnumber(&xmole,&ymole);
         }
-        printf("%d %d cheat hehe\n\n",xmole,ymole);
+        printf("Need Answer ? [Y/N] : ");
+        INPUT();
+        if (CWord.TabWord[0] == 'Y')
+        {
+            printf("Answer = %d %d\n\n",xmole,ymole);
+        }
+        // printf("%d %d cheat hehe\n\n",xmole,ymole);
         while(!IsValid(coordinates)){
             printf("Masukkan input dengan format 'x y', contoh 2 5: \n");
             INPUT();
