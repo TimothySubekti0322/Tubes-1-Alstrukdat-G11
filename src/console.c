@@ -407,7 +407,7 @@ void PlayGame(QueueStr* AntrianGame)
         else if (CompareString(game,"DINER DASH"))
         {
             //printf("SAMPAI SINI 2");
-            printf("Loading DINNER DASH ");
+            printf("Loading DINER DASH ");
             delay(1);
             printf(". ");
             delay(1);
@@ -429,10 +429,17 @@ void PlayGame(QueueStr* AntrianGame)
             delay(1);
             mole();
         }
-        else 
+        else if(CompareString(game,"DINOSAUR IN EARTH") || CompareString(game,"RISEWOMAN") || CompareString(game,"EIFFEL TOWER"))
         {
-            printf("Game %s masih dalam meaintenance, belum dapat dimainkan.\n", game);
+            printf("Game %s masih dalam maintenance, belum dapat dimainkan.\n", game);
             printf("Silahkan pilih game lain.");
+        }
+        else
+        {
+            srand(time(NULL));
+            int SKOR = rand() % 100 + 1;
+            printf("GAME OVER !\n");
+            printf("SKOR AKHIR = %d\n", SKOR);
         }
     }
 }
@@ -481,10 +488,17 @@ void SkipGame(QueueStr* AntrianGame, int number)
                     mole();
                 }
             } 
-            else 
+            else if(CompareString(game,"DINOSAUR IN EARTH") || CompareString(game,"RISEWOMAN") || CompareString(game,"EIFFEL TOWER"))
             {
-                printf("Game %s masih dalam meaintenance, belum dapat dimainkan.\n", game);
+                printf("Game %s masih dalam maintenance, belum dapat dimainkan.\n", game);
                 printf("Silahkan pilih game lain.");
+            }
+            else
+            {
+                srand(time(NULL));
+                int SKOR = rand() % 100 + 1;
+                printf("GAME OVER !\n");
+                printf("SKOR AKHIR = %d\n", SKOR);
             }
         }
     }
