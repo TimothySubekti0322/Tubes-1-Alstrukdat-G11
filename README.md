@@ -20,7 +20,7 @@ gcc ADT/array/arraydinamik.c ADT/array/arraydinamikstr.c ADT/mesinkarakter/mesin
 config.txt
 
 ## Cara mengcompile File Program melalui Bash Shell Script File
-<h1 style="font-size:0.5vw"><b>Windows</b></h1>
+<h4 style="font-size:0.5vw"><b>Windows</b></h4>
 <ul> 
     <li> <b>Langkah 1</b> : Mengubah current directory ke bin -> cd bin </li>
     <li> <b>Langkah 2</b> : Mengcompile file.c -> bash BNMO.sh </li>
