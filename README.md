@@ -10,14 +10,16 @@
 5. 18221165 Nicholas
 
 ## HOW TO PLAY
+[Go to src Folder]
 cd src
 
+[compile the program]
 gcc ADT/array/arraydinamik.c ADT/array/arraydinamikstr.c ADT/mesinkarakter/mesinkarakter.c ADT/mesinkata/mesinkata.c ADT/queue/queue.c ADT/queue/queuestr.c ../Game/RNG.c ../Game/dinerdash.h console.c main.c -o main
 
 ## Available File Configuration
 config.txt
 
-## Cara mengcompile File Program
+## Cara mengcompile File Program melalui Bash Shell Script File
 <h1 style="font-size:1.5vw"><b>Windows</b></h1>
 <ul> 
     <li> <b>Langkah 1</b> : Mengubah current directory ke bin -> cd bin </li>
