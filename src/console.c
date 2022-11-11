@@ -12,7 +12,7 @@ void STARTBNMO(ArrayDyn *gamesBNMO)
     jumlahGame = atoi(CWord.TabWord);
     ADVLINEFILE();
 
-    for(int i = 0; i<=jumlahGame; i++){
+    for(int i = 0; i < jumlahGame; i++){
         char *namaGame;
         namaGame = wordToString(CWord);
         InsertStrIn(gamesBNMO,namaGame,i);
@@ -332,7 +332,7 @@ void DELETEGAME(ArrayDyn *Games, QueueStr *Queue)
     //printf("%d\n",indeksgame);
     //int length = StrLength(*Games);
     //printf("%d\n",indeksgame);
-    if(indeksgame >= 1 && indeksgame <= 6)
+    if(indeksgame >= 1 && indeksgame <= 5)
     {
         printf("Game gagal dihapus karena merupakan game default.\n");
     } 
@@ -344,7 +344,7 @@ void DELETEGAME(ArrayDyn *Games, QueueStr *Queue)
     {
         printf("Game gagal dihapus karena game berada dalam Queue\n");
     }
-    else if(indeksgame > 6 && indeksgame <= StrLength(*Games) && !IsInQueue(Queue,GetStr(*Games,indeksgame-1)))
+    else if(indeksgame > 5 && indeksgame <= StrLength(*Games) && !IsInQueue(Queue,GetStr(*Games,indeksgame-1)))
     {
         DeleteStrIn(Games,indeksgame-1);
 

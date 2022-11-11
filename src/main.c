@@ -18,7 +18,8 @@ void welcome(){
      "WELCOME TO BNMO <33\n"
      "START :: MAININ BNMO DONG SAYANG\n"
      "LOAD  :: LOAD GAME YANG TERSEDIA YUK SAYANG\n"
-     "HELP  :: BUTUH BANTUAN SAYANG\n";
+     "HELP  :: BUTUH BANTUAN SAYANG\n"
+     "QUIT  :: JANGAN KELUAR SAYANG T_T\n";
 
 
      printf("%s",screen);
