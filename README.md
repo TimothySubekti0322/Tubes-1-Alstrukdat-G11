@@ -9,7 +9,7 @@ Setelah BNMO diperbaiki kelompok 12 K1, akhirnya BNMO dapat berfungsi. BNMO dapa
 Setelah itu user dapat memasukan command - command lainnya diantaranya adalah "CREATE GAME", "LIST GAME", "DELETE GAME", "QUEUE GAME", "PLAY GAME", "SKIP GAME", "HELP", "SAVE", atau "EXIT".
 <ul>
 
-## Anggota Kelompok G17
+## Anggota Kelompok G12
 1. 18221045 Ivan Aldy Ganesen 
 2. 18221051 Muhammad Shulhan
 3. 18221063 Timothy Subekti
