@@ -10,10 +10,10 @@
 5. 18221165 Nicholas
 
 ## HOW TO PLAY
-[Go to src Folder] <br />
+<b>[Go to src Folder]</b> <br />
 cd src
 
-[compile the program] <br />
+<b>[compile the program]</b> <br />
 gcc ADT/array/arraydinamik.c ADT/array/arraydinamikstr.c ADT/mesinkarakter/mesinkarakter.c ADT/mesinkata/mesinkata.c ADT/queue/queue.c ADT/queue/queuestr.c ../Game/RNG.c ../Game/dinerdash.h console.c main.c -o main
 
 ## Available File Configuration
