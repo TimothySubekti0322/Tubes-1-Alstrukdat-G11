@@ -32,7 +32,9 @@ void welcome(){
 int main()
 {
     ArrayDyn ArrayGame;
+    ArrayDyn History;
     QueueStr QueueGame;
+    History = CreateStrArrayDyn();
     ArrayGame = CreateStrArrayDyn();
     CreateStrQueue(&QueueGame);
     boolean endProgram = false;

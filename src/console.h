@@ -67,6 +67,7 @@ void WordToInt(Word kata, int *hasil);
 void delay(int seconds);
 /* Memberikan Jeda untuk program mengeksekusi baris berikutnya */
 
+void printscoreboard();
 /* COMMAND FUNCTION*/
 
 void LOADFILE(ArrayDyn *Games, char *inputfile);
@@ -121,6 +122,9 @@ void QUEUEGAME(QueueStr *BNMOGames, ArrayDyn ListGame);
  * game berhasil ditambahkan ke antrian.
  * Jika tidak, akan muncul pesan kesalahan dan game gagal ditambahkan.
 */
+
+void SCOREBOARD();
+
 
 void QUIT(boolean EndGame);
 /*

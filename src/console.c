@@ -72,6 +72,10 @@ boolean CompareString(char *string1 , char *string2)
 {
     /* Mengirimkan true jika string1 = string2 */
     boolean equal = true;
+    if (stringLength(string1) != stringLength(string2))
+    {
+        return false;
+    }
     int i = 0;
     while ((*(string1 + i) != '\0') && (*(string2 + i) != '\0') && equal)
     {

@@ -2,6 +2,7 @@
     "files.associations": {
         "LOAD.C": "cpp",
         "mesinkarakter.h": "c",
-        "mesinkata.h": "c"
+        "mesinkata.h": "c",
+        "console.h": "c"
     }
 }
