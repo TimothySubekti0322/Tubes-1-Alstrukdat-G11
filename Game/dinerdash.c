@@ -112,9 +112,9 @@ void dinnerdash(){
     int second = tm_struct->tm_sec;
     int i,random = 1;
     for(i = 0;i<25;i++){
-        random = (((127*random) + second)%5) + 1;
+        random = (((127*random) + second)%2) + 1;
         orders.durasi.Ar[i] = random;
-        random = (((127*random) + second)%5) + 1;
+        random = (((127*random) + second)%2) + 1;
         orders.ketahanan.Ar[i] = random;
         random = ((((127*random) + second)%41)+ 10)*1000;
         orders.harga.Ar[i] = random;
