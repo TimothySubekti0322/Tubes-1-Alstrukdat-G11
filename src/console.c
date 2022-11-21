@@ -708,7 +708,7 @@ void SCOREBOARD(ArrayDyn listgame , Map One , Map Two , Map Three , Map Four , M
             Mole_first = true;
         }
     }
-    if (count == 1)
+    if ((count == 1) && (Mole_first))
     {
         printscoreboard(One , "RNG"); 
         printscoreboard(Two , "DINNER DASH"); 
