@@ -31,7 +31,8 @@ boolean IsFull(Map M)
     return (M.Count == MaxEl);
 }
 
-valuetype Value(Map M, char * k)
+/* ********** Operator Dasar Map ********* */
+valuetype Value(Map M, keytype k)
 {
 /* Mengembalikan nilai value dengan key k dari M */
 /* Jika tidak ada key k pada M, akan mengembalikan Undefined */
@@ -40,7 +41,7 @@ valuetype Value(Map M, char * k)
     valuetype val = Undefined;
     while ((i < M.Count) && (!found))
     {
-        if (CompareString(M.Elements[i].Key,k))
+        if (M.Elements[i].Key == k)
         {
             val = M.Elements[i].Value;
             found = true;
@@ -51,9 +52,10 @@ valuetype Value(Map M, char * k)
         }
     }
     return val;
+
 }
 
-void Insert(Map *M, char * k, valuetype v)
+void Insert(Map *M, keytype k, valuetype v)
 {
 /* Menambahkan Elmt sebagai elemen Map M. */
 /* I.S. M mungkin kosong, M tidak penuh
@@ -67,7 +69,7 @@ void Insert(Map *M, char * k, valuetype v)
     }
 }
 
-void Delete(Map *M, char * k)
+void Delete(Map *M, keytype k)
 {
 /* Menghapus Elmt dari Map M. */
 /* I.S. M tidak kosong
@@ -80,7 +82,7 @@ void Delete(Map *M, char * k)
         boolean found = false;
         while ((i < (*M).Count) && (!found))
         {
-            if (CompareString((*M).Elements[i].Key , k))
+            if ((*M).Elements[i].Key == k)
             {
                 loc = i;
                 found = true;
@@ -98,14 +100,14 @@ void Delete(Map *M, char * k)
     }
 }
 
-boolean IsMember(Map M, char * k)
+boolean IsMember(Map M, keytype k)
 {
 /* Mengembalikan true jika k adalah member dari M */
     int i = 0;
     boolean found = false;
     while ((i < M.Count) && (!found))
     {
-        if (CompareString(M.Elements[i].Key,k))
+        if (M.Elements[i].Key == k)
         {
             found = true;
         }
