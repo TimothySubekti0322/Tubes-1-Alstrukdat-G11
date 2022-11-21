@@ -1,5 +1,5 @@
 /*
-    * File stack.h
+    * File stackstr.h
     * File header untuk deklarasi stack menggunakan tabel kontigu dan berukuran sama
     * TOP adalah alamat elemen puncak
     * Alokasi statik; isi stack berupa string 
