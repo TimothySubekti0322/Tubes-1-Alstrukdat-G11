@@ -34,6 +34,18 @@ int main()
     ArrayDyn ArrayGame;
     ArrayDyn History;
     QueueStr QueueGame;
+    Map RNG;
+    Map DINER_DASH;
+    Map HANGMAN;
+    Map TOWER_OF_HANOI;
+    Map SNAKE_ON_METEOR;
+    Map MOLE;
+    CreateEmpty(&RNG);
+    CreateEmpty(&DINER_DASH);
+    CreateEmpty(&HANGMAN);
+    CreateEmpty(&TOWER_OF_HANOI);
+    CreateEmpty(&SNAKE_ON_METEOR);
+    CreateEmpty(&MOLE);
     History = CreateStrArrayDyn();
     ArrayGame = CreateStrArrayDyn();
     CreateStrQueue(&QueueGame);

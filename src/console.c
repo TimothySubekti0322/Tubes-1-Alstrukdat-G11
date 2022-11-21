@@ -228,6 +228,77 @@ void delay(int seconds)
     ;
 }
 
+int IntLength(int n)
+{
+/* Menghitung banyak Digit*/
+    int count = 0;
+    do
+    {
+        count++;
+        n /= 10;
+    } while(n != 0);
+    return count;
+
+}
+
+void printblank(int n)
+{
+/* Mencetak Blank Sebanyak n ke layar */
+    for (int i = 1 ; i <= n ; i++)
+    {
+        printf(" ");
+    }
+}
+
+void printstrip(int n)
+{
+/* Mencetak '-' sebanyak n ke layar */
+    for (int i = 1 ; i <= n ; i++)
+    {
+        printf("-");
+    }
+}
+
+void printscoreboard(Map M , char *namagame)
+{
+    /* Melakukan Print scroeboard 1 buah Game*/
+    int lengamename = stringLength(namagame);
+    printblank((19 - lengamename)/2);
+    printf("***** SCOREBOARD GAME %s *****\n", namagame);
+    printf("| ");
+    printf("NAMA");
+    int Blank = 17;
+    printblank(Blank);
+    printf("| ");
+    printf("SKOR");
+    printblank(Blank);
+    printf("|");
+    printf("\n");
+    if (!IsEmpty(M))
+    {
+        printstrip(47);
+        printf("\n");
+        int i;
+        for (i = 0 ; i < M.Count ; i++)
+        {
+            printf("| ");
+            printf("%s",M.Elements[i].Key);
+            Blank = (21 - stringLength(M.Elements[i].Key));
+            printblank(Blank);
+            printf("| ");
+            printf("%d",M.Elements[i].Value);
+            Blank = (21 - IntLength(M.Elements[i].Value));
+            printblank(Blank);
+            printf("|");
+            printf("\n");
+        }
+    }
+    else
+    {
+        printf("-------------- SCOREBOARD KOSONG --------------");
+    }
+}
+
 /* COMMAND FUNCTION*/
 
 void LOADFILE(ArrayDyn *Games, char *inputfile)
@@ -622,6 +693,38 @@ void QUEUEGAME(QueueStr *BNMOGames, ArrayDyn ListGame)
     { // Di luar rentang indeks game yang tersedia
 		printf("Nomor permainan tidak valid, silahkan masukkan nomor game pada list.\n");
 	}
+}
+
+void SCOREBOARD(ArrayDyn listgame , Map One , Map Two , Map Three , Map Four , Map Five , Map Six)
+{
+/* Menampilkan Scoreboard game ke layar */
+    int count = 0;
+    boolean Mole_first = false;
+    for(int i = 0 ; i < listgame.Neff ; i++)
+    {
+        if(CompareString(listgame.Ar[i] , "MOLE"))
+        {
+            count++;
+            Mole_first = true;
+        }
+    }
+    if (count == 1)
+    {
+        printscoreboard(One , "RNG"); 
+        printscoreboard(Two , "DINNER DASH"); 
+        printscoreboard(Three , "HANGMAN"); 
+        printscoreboard(Four , "TOWER OF HANOI"); 
+        printscoreboard(Five , "SNAKE ON METEOR");
+        printscoreboard(Six , "MOLE");
+    }
+    else
+    {
+        printscoreboard(One , "RNG"); 
+        printscoreboard(Two , "DINNER DASH"); 
+        printscoreboard(Three , "HANGMAN"); 
+        printscoreboard(Four , "TOWER OF HANOI"); 
+        printscoreboard(Five , "SNAKE ON METEOR");
+    }
 }
 
 void QUIT(boolean EndGame)

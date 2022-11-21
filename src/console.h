@@ -11,6 +11,7 @@
 #include "../Game/RNG.h"
 #include "../Game/dinerdash.h"
 #include "../Game/mole.h"
+#include "ADT/map/map.h"
 
 void STARTBNMO(ArrayDyn *gamesBNM0);
 /* Membaca file config dan memasukan tiap baris file ke array gamesBNMO*/
@@ -67,7 +68,17 @@ void WordToInt(Word kata, int *hasil);
 void delay(int seconds);
 /* Memberikan Jeda untuk program mengeksekusi baris berikutnya */
 
-void printscoreboard();
+int IntLength(int n);
+/* Menghitung banyak Digit*/
+
+void printblank(int n);
+/* Mencetak Blank Sebanyak n ke layar */
+
+void printstrip(int n);
+/* Mencetak '-' sebanyak n ke layar */
+
+void printscoreboard(Map M , char *namagame);
+
 /* COMMAND FUNCTION*/
 
 void LOADFILE(ArrayDyn *Games, char *inputfile);
@@ -124,7 +135,7 @@ void QUEUEGAME(QueueStr *BNMOGames, ArrayDyn ListGame);
 */
 
 void SCOREBOARD();
-
+/* Menampilkan Scoreboard game ke layar */
 
 void QUIT(boolean EndGame);
 /*
