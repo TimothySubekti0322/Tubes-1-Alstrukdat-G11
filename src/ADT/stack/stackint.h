@@ -28,7 +28,7 @@ typedef struct
  * Apabila S adalah StackStr, berikut cara untuk mengakses StackStr:
  * S.TOP untuk mengakses alamat dari elemen puncak
  * S.T[S.TOP] untuk mengakses elemen puncak
- */
+*/
 
 /* Pendefinisian fungsi makro untuk mempermudah pengaksesan Stack */
 #define Top(S) (S).TOP
@@ -43,19 +43,19 @@ void CreateEmptyStackInt(StackInt *S);
  * F.S.  Menciptakan StackStr S yang kosong dan berkapasitas IntStartSize
  * yang memiliki indeks 0..IntStartSize - 1.
  * StackStr adalah kosong apabila TOP bernilai Nil.
- */
+*/
 
 /* ********** PREDIKAT UNTUK MENGUJI KEADAAN STACKSTR ********** */
 boolean IsStackIntEmpty(StackInt S);
 /*
  * Mengirimkan true apabila StackStr kosong, yaitu saat TOP bernilai Nil.
  * Sebaliknya mengirimkan false.
- */
+*/
 boolean IsStackIntFull(StackInt S);
 /*
  * Mengirimkan true apabila StackStr penuh, yaitu saat TOP bernilai IntStartSize - 1.
  * Sebaliknya mengirimkan false.
- */
+*/
 
 /* ********** PENAMBAHAN ELEMEN KE STACK ********** */
 void PushStackInt(StackInt *S, infotype X);
@@ -63,7 +63,7 @@ void PushStackInt(StackInt *S, infotype X);
  * Menambahkan X sebagai elemen StackStr S.
  * I.S.  S mungkin kosong, tetapi tidak penuh.
  * F.S.  X menjadi TOP yang baru, TOP bertambah 1.
- */
+*/
 
 /* ********** PENGHAPUSAN ELEMEN DARI STACK ********** */
 void PopStackInt(StackInt *S, infotype *X);
@@ -71,6 +71,12 @@ void PopStackInt(StackInt *S, infotype *X);
  * Menghapus X dari StackStr S.
  * I.S.  S tidak kosong.
  * F.S.  X adalah nilai elemen TOP yang lama, TOP berkurang 1.
- */
+*/
+
+int LengthStackInt(StackInt S);
+/*
+ * Mengirimkan banyaknya elemen StackStr S.
+ * Mengirimkan 0 jika StackStr kosong.
+*/
 
 #endif

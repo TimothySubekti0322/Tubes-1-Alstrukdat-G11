@@ -1,7 +1,7 @@
 /*
  * File stackint.c
  * File berisi implementasi fungsi dari file header stackint.h
- */
+*/
 
 #include "stackint.h"
 
@@ -15,7 +15,7 @@ void CreateEmptyStackInt(StackInt *S)
  * F.S.  Menciptakan StackInt S yang kosong dan berkapasitas InitSize
  * yang memiliki indeks 0..InitSize - 1.
  * StackInt adalah kosong apabila TOP bernilai Nil.
- */
+*/
 
 /* ********** PREDIKAT UNTUK MENGUJI KEADAAN StackInt ********** */
 boolean IsStackIntEmpty(StackInt S)
@@ -25,7 +25,7 @@ boolean IsStackIntEmpty(StackInt S)
 /*
  * Mengirimkan true apabila StackInt kosong, yaitu saat TOP bernilai Nil.
  * Sebaliknya mengirimkan false.
- */
+*/
 boolean IsStackIntFull(StackInt S)
 {
     return (Top(S) == IntStartSize - 1);
@@ -33,7 +33,7 @@ boolean IsStackIntFull(StackInt S)
 /*
  * Mengirimkan true apabila StackInt penuh, yaitu saat TOP bernilai InitSize - 1.
  * Sebaliknya mengirimkan false.
- */
+*/
 
 /* ********** PENAMBAHAN ELEMEN KE STACK ********** */
 void PushStackInt(StackInt *S, infotype X)
@@ -45,7 +45,7 @@ void PushStackInt(StackInt *S, infotype X)
  * Menambahkan X sebagai elemen StackInt S.
  * I.S.  S mungkin kosong, tetapi tidak penuh.
  * F.S.  X menjadi TOP yang baru, TOP bertambah 1.
- */
+*/
 
 /* ********** PENGHAPUSAN ELEMEN DARI STACK ********** */
 void PopStackInt(StackInt *S, infotype *X)
@@ -57,4 +57,13 @@ void PopStackInt(StackInt *S, infotype *X)
  * Menghapus X dari StackInt S.
  * I.S.  S tidak kosong.
  * F.S.  X adalah nilai elemen TOP yang lama, TOP berkurang 1.
- */
+*/
+
+int LengthStackInt(StackInt S) 
+{
+    return Top(S) + 1;
+}
+/*
+ * Mengirimkan banyaknya elemen StackStr S.
+ * Mengirimkan 0 jika StackStr kosong.
+*/

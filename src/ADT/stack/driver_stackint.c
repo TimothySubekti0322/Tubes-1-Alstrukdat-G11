@@ -46,6 +46,7 @@ int main()
     PushStackInt(&S, 72);
     PushStackInt(&S, 193);
     printf("Penambahan elemen berhasil.\n");
+    printf("Banyak elemen StackInt: %d\n", LengthStackInt(S));
 
     // Melihat elemen TOP dari StackInt
     printf("Elemen teratas dari StackInt : %d\n", InfoTop(S));
@@ -60,6 +61,7 @@ int main()
 
     // Melihat elemen TOP dari StackInt
     printf("Elemen teratas dari StackInt : %d\n", InfoTop(S));
+    printf("Banyak elemen StackInt sekarang: %d\n", LengthStackInt(S));
 
     return 0;
 }
