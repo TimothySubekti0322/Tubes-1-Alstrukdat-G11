@@ -8,22 +8,22 @@
 /* ***** KONSTRUKTOR / KREATOR ***** */
 void CreateEmptyStackInt(StackInt *S)
 {
-    S->TOP = Nil;
+    S->TOP = NIL;
 }
 /*
  * I.S.  sembarang
  * F.S.  Menciptakan StackInt S yang kosong dan berkapasitas InitSize
  * yang memiliki indeks 0..InitSize - 1.
- * StackInt adalah kosong apabila TOP bernilai Nil.
+ * StackInt adalah kosong apabila TOP berNILai NIL.
 */
 
 /* ********** PREDIKAT UNTUK MENGUJI KEADAAN StackInt ********** */
 boolean IsStackIntEmpty(StackInt S)
 {
-    return (Top(S) == Nil);
+    return (Top(S) == NIL);
 }
 /*
- * Mengirimkan true apabila StackInt kosong, yaitu saat TOP bernilai Nil.
+ * Mengirimkan true apabila StackInt kosong, yaitu saat TOP berNILai NIL.
  * Sebaliknya mengirimkan false.
 */
 boolean IsStackIntFull(StackInt S)
@@ -31,7 +31,7 @@ boolean IsStackIntFull(StackInt S)
     return (Top(S) == IntStartSize - 1);
 }
 /*
- * Mengirimkan true apabila StackInt penuh, yaitu saat TOP bernilai InitSize - 1.
+ * Mengirimkan true apabila StackInt penuh, yaitu saat TOP berNILai InitSize - 1.
  * Sebaliknya mengirimkan false.
 */
 
@@ -56,7 +56,7 @@ void PopStackInt(StackInt *S, infotype *X)
 /*
  * Menghapus X dari StackInt S.
  * I.S.  S tidak kosong.
- * F.S.  X adalah nilai elemen TOP yang lama, TOP berkurang 1.
+ * F.S.  X adalah NILai elemen TOP yang lama, TOP berkurang 1.
 */
 
 int LengthStackInt(StackInt S) 

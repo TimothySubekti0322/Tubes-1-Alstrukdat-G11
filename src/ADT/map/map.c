@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "map.h"
+#include "../../console.h"
 
 /* Definisi Map M kosong : M.Count = Nil */
 /* M.Count = jumlah element Map */

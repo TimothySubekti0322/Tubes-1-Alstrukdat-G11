@@ -2,7 +2,6 @@
 #define map_H
 #include <stdio.h>
 #include "../../boolean.h"
-#include "../../console.h"
 
 /* MODUL Map
 Deklarasi stack yang dengan implementasi array eksplisit-statik rata kiri
@@ -23,10 +22,10 @@ typedef int address;
 typedef struct {
 	keytype Key;
 	valuetype Value;
-} infotype;
+} Infotype;
 
 typedef struct {
-	infotype Elements[MaxEl];
+	Infotype Elements[MaxEl];
 	address Count;
 } Map;
 

@@ -40,6 +40,7 @@ int main()
     Map TOWER_OF_HANOI;
     Map SNAKE_ON_METEOR;
     Map MOLE;
+    StackStr HISTORY;
     CreateEmpty(&RNG);
     CreateEmpty(&DINER_DASH);
     CreateEmpty(&HANGMAN);

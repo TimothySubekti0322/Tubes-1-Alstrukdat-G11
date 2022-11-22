@@ -3,6 +3,7 @@
         "LOAD.C": "cpp",
         "mesinkarakter.h": "c",
         "mesinkata.h": "c",
-        "console.h": "c"
+        "console.h": "c",
+        "map.h": "c"
     }
 }
