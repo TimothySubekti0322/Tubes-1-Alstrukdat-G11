@@ -8,7 +8,7 @@
 #ifndef STACK_STRING_H
 #define STACK_STRING_H
 
-#include "../../boolean.h" // File pendefinisian boolean secara manual
+#include "boolean.h" // File pendefinisian boolean secara manual
 
 #define Nil -1
 /* Nil adalah stack dengan elemen kosong. */
