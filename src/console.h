@@ -110,13 +110,13 @@ void CreateGame(ArrayDyn* ArrayGame);
    F.S : Melakukan penambahan game pada array, meminta validasi dengan input 
          ulang jika game sudah ada di dalam array*/
 
-void PlayGame(QueueStr* AntrianGame);
+void PlayGame(QueueStr* AntrianGame , StackStr *History , Map *one);
 /* Menjalankan suatu game
    I.S : ArrayGame terdefinisi
    F.S : Menjalankan game yang terdapat di paling atas pada ADT Queue yang
          menyimpan antrian game*/
 
-void SkipGame(QueueStr* AntrianGame, int number);
+void SkipGame(QueueStr* AntrianGame, int number, Map *One);
 /* Menjalankan suatu game dengan skip game sebanyak number
    I.S : Arraygames terdefinisi
    F.S : Melewatkan game sebanyak number dari atas, dan menjalankan game apabila
@@ -138,6 +138,15 @@ void QUEUEGAME(QueueStr *BNMOGames, ArrayDyn ListGame);
 
 void SCOREBOARD();
 /* Menampilkan Scoreboard game ke layar */
+
+void HISTORY(StackStr history, int n);
+/* Menampilkan History Permainan */
+
+void RESETSCOREBOARD(ArrayDyn listgame, Map *One , Map *Two , Map *Three , Map *Four , Map *Five , Map *Six);
+/* Melakukan Reset Scoreboard */
+
+void RESETHISTORY(StackStr *history);
+/* Melakuka Reset History */
 
 void QUIT(boolean EndGame);
 /*

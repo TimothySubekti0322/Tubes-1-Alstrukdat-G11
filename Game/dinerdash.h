@@ -13,6 +13,7 @@
 #include "../src/ADT/mesinkarakter/mesinkarakter.h"
 #include "../src/ADT/mesinkata/mesinkata.h"
 #include "../src/ADT/array/arraystatis.h"
+#include "../src/ADT/map/map.h"
 
 typedef struct{
         StatArray indeks;

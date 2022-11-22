@@ -13,6 +13,7 @@
 #include "../src/ADT/queue/queuestr.h" // Somehow diminta??????
 #include "../Game/dinerdash.h"
 #include "../Game/RNG.h"
+#include "../src/ADT/map/map.h"
 
 typedef struct{
     ArrayDyn a;

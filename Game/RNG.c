@@ -5,7 +5,7 @@
 #include "RNG.h"
 #include "../src/console.h"
 
-void gameRNG()  
+void gameRNG(Map *RNG)  
 {  
     srand(time(NULL));
     printf("RNG Telah dimulai. Uji keberuntungan Anda dengan menebak sebuah angka X yang rentangnya berada diantara 1 - 100.\n");
@@ -47,4 +47,8 @@ void gameRNG()
     skor = MaxTry - nTebakan + 1;
     printf("skor = %d\n" , skor);
     //return skor;
+    printf("Nama [maksimal 20 karakter] : ");
+    INPUT();
+    char *name = wordToString(CWord);
+    Insert(RNG,name,skor);
 }

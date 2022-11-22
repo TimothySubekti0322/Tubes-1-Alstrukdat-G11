@@ -8,6 +8,7 @@
 
 
 
+
 void IsMemberMasakSaji(masaksaji m,int custnumber,boolean *found,int *indeks){
     int i;
     for(i = 0;i<m.count;i++){

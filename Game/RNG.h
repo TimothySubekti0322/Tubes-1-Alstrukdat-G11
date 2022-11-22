@@ -6,8 +6,9 @@
 
 #include "../src/ADT/mesinkarakter/mesinkarakter.h"
 #include "../src/ADT/mesinkata/mesinkata.h"
+#include "../src/ADT/map/map.h"
 
-void gameRNG();
+void gameRNG(Map *RNG);
 /* Game RNG
    Game menebak suatu Angka Acak X yang berada para rentang 1 - 10. . Di setiap giliran, user diberi 
    kesempatan menebak angka X dan program akan memberi  tahu apakah tebakan pemain dibandingkan 

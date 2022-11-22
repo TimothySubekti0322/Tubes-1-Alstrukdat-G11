@@ -113,6 +113,7 @@ void mole(){
     int x,y,xmole,ymole;
     char *coordinates = "6 6";
     papan = CreateBoard();
+    boolean needans = true;
     while(!gameover){
         PrintPapan(papan);
         printf("\n");
@@ -120,11 +121,15 @@ void mole(){
         while(!IsBlankGrid(papan,xmole,ymole)){
             randomnumber(&xmole,&ymole);
         }
-        printf("Need Answer ? [Y/N] : ");
-        INPUT();
-        if (CWord.TabWord[0] == 'Y')
+        if (needans)
         {
-            printf("Answer = %d %d\n\n",xmole,ymole);
+            printf("Need Answer ? [Y/N] : ");
+            INPUT();
+            if (CWord.TabWord[0] == 'Y')
+            {
+                printf("Answer = %d %d\n\n",xmole,ymole);
+            }
+            needans = false;
         }
         // printf("%d %d cheat hehe\n\n",xmole,ymole);
         while(!IsValid(coordinates)){
@@ -152,6 +157,9 @@ void mole(){
         }
         coordinates = "6 6";
     }
+    printf("Nama [maksimal 20 karakter] : ");
+    INPUT();
+    char *name = wordToString(CWord);
 }
 
 // int main(){
