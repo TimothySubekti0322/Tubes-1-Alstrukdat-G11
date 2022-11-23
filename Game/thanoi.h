@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "ADT/stack/stackint.h"
+#include "../src/ADT/stack/stackint.h"
 
 void CreateStackIntA(StackInt *S);
 /*
