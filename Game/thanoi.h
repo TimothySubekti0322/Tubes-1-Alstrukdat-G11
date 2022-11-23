@@ -6,6 +6,7 @@
 #include "../src/ADT/stack/stackint.h"
 #include "../src/ADT/mesinkarakter/mesinkarakter.h"
 #include "../src/ADT/mesinkata/mesinkata.h"
+#include "../src/boolean.h"
 
 void CreateStackIntA(StackInt *S);
 /*
@@ -20,7 +21,7 @@ void displaystack(StackInt *S,int i);
     F.S : Menampilkan stack berupa "*" dengan jumlah sesuai nilai elemen yang sedang diakses
 */
 
-void movepiring (char tujuan);
+void movepiring (char tujuan, boolean found);
 /*
     I.S : sembarang
     F.S : Menampilkan perpindahan piring ke suatu tiang
@@ -32,15 +33,15 @@ void displaytiang(StackInt A, StackInt B, StackInt C);
     F.S: MEnampilkan tiang-tiang yang ada dalam permainan tower of hanoi
  */
 
-void movepiringtotiang(StackInt *awal, StackInt *tujuan);
+boolean movepiringtotiang(StackInt *awal, StackInt *tujuan, boolean found);
 /*
     I.S: Terdapat dua stack yang terbentuk, stack mungkin kosong
     F.S: Memindahkan piring teratas dari tiang menuju tiang yang lain
  */
 
-void commandH (char *awal, char *tujuan, StackInt *A, StackInt *B, StackInt*C);
+void commandH (char *awal, char *tujuan, StackInt *A, StackInt *B, StackInt*C, boolean found);
 
-void loopHanoi (int *length, StackInt *A, StackInt *B, StackInt*C );
+void loopHanoi (int *length, StackInt *A, StackInt *B, StackInt*C, boolean found );
 
 
 #endif
