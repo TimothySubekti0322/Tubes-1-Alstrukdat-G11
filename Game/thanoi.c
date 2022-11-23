@@ -46,10 +46,10 @@ void movepiringtotiang(StackInt *awal, StackInt *tujuan){
     Toptiang2 = InfoTop(*tujuan);
 
     if (Toptiang1 == NIL){
-        printf("salah\n");
+        printf("pilihan tiang anda salah\n\n");
     }
     else if(Toptiang1 == NIL && Toptiang2==NIL){
-        printf("salah\n");
+        printf("pilihan tiang anda salah\n\n");
     }
     else if(IsStackIntEmpty(*tujuan)){
         PushStackInt(tujuan, Toptiang1);
@@ -71,7 +71,7 @@ void movepiringtotiang(StackInt *awal, StackInt *tujuan){
             PopStackInt(awal,&x);
         }
         else{
-            printf("salah");
+            printf("pilihan tiang anda salah\n\n");
         }
     }
     
