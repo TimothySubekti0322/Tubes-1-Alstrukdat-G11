@@ -51,6 +51,7 @@ void PushStackInt(StackInt *S, infotype X)
 void PopStackInt(StackInt *S, infotype *X)
 {
     (*X) = InfoTop(*S);
+    InfoTop(*S) = -1;
     Top(*S)--;
 }
 /*
