@@ -119,3 +119,43 @@ boolean IsMember(Map M, keytype k)
     }
     return found;
 }
+
+void InsertScoreBoard(Map *M, keytype k, valuetype v)
+{
+    printf("Masukan Username [maksimal 20 karakter] : ");
+    INPUT();
+    char *name = wordToString(CWord);
+    
+    while(IsMember(*M,k))
+    {
+        INPUT();
+        char *name = wordToString(CWord);
+    }
+
+    if(!IsMember(*M,k))
+    {
+        int i;
+        boolean found = false;
+        while ((i < M->Count) && (!found))
+        {
+            if (v > (*M).Elements[i].Value)
+            {
+                found = true;
+            }
+            else
+            {
+                i++;
+            }
+        }
+        int j;
+        for(j = M->Count ; j > i ; j--)
+        {
+            (*M).Elements[j].Key = (*M).Elements[j-1].Key;
+            (*M).Elements[j].Value = (*M).Elements[j-1].Value;
+        }
+        (*M).Elements[i].Key = k;
+        (*M).Elements[i].Value = v;
+        (*M).Count++;
+    }
+
+}
