@@ -43,7 +43,7 @@ void displaystack(StackInt *S,int i){
 
 
 void movepiring (char tujuan){
-    printf("Memindahkan piring ke tiang \"%c\"\n");
+    printf("Memindahkan piring ke tiang %c\n",tujuan);
 }
 
 void movepiringtotiang(StackInt *awal, StackInt *tujuan){
@@ -113,15 +113,87 @@ void displaytiang(StackInt A, StackInt B, StackInt C){
     printf("                \n\n");
 }
 
+void memilih (char pilih, StackInt *A, StackInt *B, StackInt*C){
+    if (pilih == 'A'){
+        printf("\nMasukan Tiang Tujuan: ");
+        INPUT();
+        if(CWord.TabWord[0] == 'A')
+        {
+            movepiringtotiang(A, A);
+            displaytiang(*A,*B,*C);
+            movepiring(CWord.TabWord[0]);
+        }
+        else if (CWord.TabWord[0] == 'B')
+        {
+            movepiringtotiang(A, B);
+            displaytiang(*A,*B,*C);
+            movepiring(CWord.TabWord[0]);
+        }
+        else if (CWord.TabWord[0] == 'C')
+        {
+            movepiringtotiang(A, C);
+            displaytiang(*A,*B,*C);
+            movepiring(CWord.TabWord[0]);
+        }
+    }
+    else if (pilih == 'B'){
+        printf("\nMasukan Tiang Tujuan: ");
+        INPUT();
+        if(CWord.TabWord[0] == 'A')
+        {
+            movepiringtotiang(B, A);
+            displaytiang(*A,*B,*C);
+            movepiring(CWord.TabWord[0]);
+        }
+        else if (CWord.TabWord[0] == 'B')
+        {
+            movepiringtotiang(B, B);
+            displaytiang(*A,*B,*C);
+            movepiring(CWord.TabWord[0]);
+        }
+        else if (CWord.TabWord[0] == 'C')
+        {
+            movepiringtotiang(B, C);
+            displaytiang(*A,*B,*C);
+            movepiring(CWord.TabWord[0]);
+        }
+    }
+    else if (pilih == 'C'){
+        printf("\nMasukan Tiang Tujuan: ");
+        INPUT();
+        if(CWord.TabWord[0] == 'A')
+        {
+            movepiringtotiang(C, A);
+            displaytiang(*A,*B,*C);
+            movepiring(CWord.TabWord[0]);
+        }
+        else if (CWord.TabWord[0] == 'B')
+        {
+            movepiringtotiang(C, B);
+            displaytiang(*A,*B,*C);
+            movepiring(CWord.TabWord[0]);
+        }
+        else if (CWord.TabWord[0] == 'C')
+        {
+            movepiringtotiang(C, C);
+            displaytiang(*A,*B,*C);
+            movepiring(CWord.TabWord[0]);
+        }
+    }
+}
+
 
 int main(){
     StackInt A, B, C,D;
-    char tujuan, awal;
     int length;
     CreateStackIntA(&A);
     CreateEmptyStackInt(&B);
     CreateEmptyStackInt(&C);
     CreateEmptyStackInt(&D);
     displaytiang(A,B,C);
+    printf("\nMasukan Tiang Awal: ");
+    INPUT();
+    memilih(CWord.TabWord[0],&A,&B,&C);
+
 
 }

@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../src/ADT/stack/stackint.h"
+#include "../src/ADT/mesinkarakter/mesinkarakter.h"
+#include "../src/ADT/mesinkata/mesinkata.h"
 
 void CreateStackIntA(StackInt *S);
 /*
@@ -35,5 +37,11 @@ void movepiringtotiang(StackInt *awal, StackInt *tujuan);
     I.S: Terdapat dua stack yang terbentuk, stack mungkin kosong
     F.S: Memindahkan piring teratas dari tiang menuju tiang yang lain
  */
+
+void memilih (char pilih, StackInt *A, StackInt *B, StackInt*C);
+/*
+    I.S : Stack sudah terdefinisi stack bisa kosong
+    F.S : Melakukan pemindahan tiang sesuai dengan input
+*/
 
 #endif
