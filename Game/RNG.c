@@ -47,8 +47,5 @@ void gameRNG(Map *RNG)
     skor = MaxTry - nTebakan + 1;
     printf("skor = %d\n" , skor);
     //return skor;
-    printf("Nama [maksimal 20 karakter] : ");
-    INPUT();
-    char *name = wordToString(CWord);
-    Insert(RNG,name,skor);
+    InsertScoreBoard(RNG, skor);
 }
