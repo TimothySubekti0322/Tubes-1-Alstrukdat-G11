@@ -38,10 +38,9 @@ void movepiringtotiang(StackInt *awal, StackInt *tujuan);
     F.S: Memindahkan piring teratas dari tiang menuju tiang yang lain
  */
 
-void memilih (char pilih, StackInt *A, StackInt *B, StackInt*C);
-/*
-    I.S : Stack sudah terdefinisi stack bisa kosong
-    F.S : Melakukan pemindahan tiang sesuai dengan input
-*/
+void commandH (char *awal, char *tujuan, StackInt *A, StackInt *B, StackInt*C);
+
+void loopHanoi (int *length, StackInt *A, StackInt *B, StackInt*C );
+
 
 #endif
