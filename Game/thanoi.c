@@ -34,48 +34,58 @@ void displaystack(StackInt *S,int i){
 
 
 
-void movepiring (char tujuan){
-    printf("Memindahkan piring ke tiang %c\n",tujuan);
+void movepiring (char tujuan, boolean found){
+    if (found){
+        printf("Memindahkan piring ke tiang %c\n",tujuan);
+    }
+    else{
+        printf("gagal memindahkan piring\n");
+    }
 }
 
-void movepiringtotiang(StackInt *awal, StackInt *tujuan){
+boolean movepiringtotiang(StackInt *awal, StackInt *tujuan, boolean found){
     int Toptiang1, Toptiang2;
     infotype x;
 
-    Toptiang1 = InfoTop(*awal);
-    Toptiang2 = InfoTop(*tujuan);
+    if(awal != tujuan)
+    {
+        Toptiang1 = InfoTop(*awal);
+        Toptiang2 = InfoTop(*tujuan);
 
-    if (Toptiang1 == NIL){
-        printf("pilihan tiang anda salah\n\n");
-    }
-    else if(Toptiang1 == NIL && Toptiang2==NIL){
-        printf("pilihan tiang anda salah\n\n");
-    }
-    else if(IsStackIntEmpty(*tujuan)){
-        PushStackInt(tujuan, Toptiang1);
-        PopStackInt(awal,&x);
-        if(IsStackIntEmpty(*awal)){
-            Top(*awal) = -1;
-        }
-    }
-    else if(Toptiang2 > Toptiang1){
-        PushStackInt(tujuan, Toptiang1);
-        PopStackInt(awal,&x);
-        if(IsStackIntEmpty(*awal)){
-            Top(*awal) = -1;
-        }
-    }
-    else if(Toptiang1 > Toptiang2){
         if(IsStackIntEmpty(*tujuan)){
             PushStackInt(tujuan, Toptiang1);
             PopStackInt(awal,&x);
+            if(IsStackIntEmpty(*awal)){
+                Top(*awal) = -1;
+            }
+            found = true;
+        }
+        else if(Toptiang2 > Toptiang1){
+            PushStackInt(tujuan, Toptiang1);
+            PopStackInt(awal,&x);
+            if(IsStackIntEmpty(*awal)){
+                Top(*awal) = -1;
+            }
+            found = true;
+        }
+        else if(Toptiang1 > Toptiang2){
+            if(IsStackIntEmpty(*tujuan)){
+                PushStackInt(tujuan, Toptiang1);
+                PopStackInt(awal,&x);
+                found = true;
+            }
+            else{
+                found = false;
+            }
         }
         else{
-            printf("pilihan tiang anda salah\n\n");
-        }
+            found = false;
+        }    
     }
-    
-
+    else{
+        found = false;
+    }
+    return found;
 }
 
 
@@ -105,62 +115,67 @@ void displaytiang(StackInt A, StackInt B, StackInt C){
     printf("                \n\n");
 }
 
-void commandH (char *awal, char *tujuan, StackInt *A, StackInt *B, StackInt*C){
+void commandH (char *awal, char *tujuan, StackInt *A, StackInt *B, StackInt*C, boolean found){
     if(*awal == 'A' && *tujuan == 'B')
     {
-        movepiringtotiang(A, B);
+        found = movepiringtotiang(A, B, found);
         displaytiang(*A,*B,*C);
+        movepiring(*tujuan, found);
     }
     else if(*awal == 'A' && *tujuan == 'C')
     {
-        movepiringtotiang(A, C);
+        found = movepiringtotiang(A, C, found);
         displaytiang(*A,*B,*C);
+        movepiring(*tujuan, found);
     }
     else if(*awal == 'A' && *tujuan == 'A')
     {
-        movepiringtotiang(A, A);
+        found = movepiringtotiang(A, A, found);
         displaytiang(*A,*B,*C);
+        movepiring(*tujuan, found);
     }
     else if(*awal == 'B' && *tujuan == 'A')
     {
-        movepiringtotiang(B, A);
+        found = movepiringtotiang(B, A, found);
         displaytiang(*A,*B,*C);
+        movepiring(*tujuan, found);
 
     }
     else if(*awal == 'B' && *tujuan == 'B')
     {
-        movepiringtotiang(B, B);
+        found = movepiringtotiang(B, B, found);
         displaytiang(*A,*B,*C);
+        movepiring(*tujuan, found);
 
     }
     else if(*awal == 'B' && *tujuan == 'C')
     {
-        movepiringtotiang(B, C);
+        found = movepiringtotiang(B, C, found);
         displaytiang(*A,*B,*C);
-
+        movepiring(*tujuan, found);
     }
     else if(*awal == 'C' && *tujuan == 'A')
     {
-        movepiringtotiang(C, A);
+        found = movepiringtotiang(C, A, found);
         displaytiang(*A,*B,*C);
-
+        movepiring(*tujuan, found);
     }
     else if(*awal == 'C' && *tujuan == 'B')
     {
-        movepiringtotiang(C, B);
+        found = movepiringtotiang(C, B, found);
         displaytiang(*A,*B,*C);
-
+        movepiring(*tujuan, found);
     }
     else if(*awal == 'C' && *tujuan == 'C')
     {
-        movepiringtotiang(C, C);
+        found = movepiringtotiang(C, C, found);
         displaytiang(*A,*B,*C);
-
+        movepiring(*tujuan, found);
     }
     
 }
 
-void loopHanoi (int *length, StackInt *A, StackInt *B, StackInt*C ){
+void loopHanoi (int *length, StackInt *A, StackInt *B, StackInt*C, boolean found ){
     char awal,tujuan;
     while(*length != 5)
     {
@@ -170,7 +185,7 @@ void loopHanoi (int *length, StackInt *A, StackInt *B, StackInt*C ){
         printf("\nMasukan tiang tujuan: ");
         INPUT();
         tujuan = CWord.TabWord[0];
-        commandH(&awal,&tujuan,A,B,C);
+        commandH(&awal,&tujuan,A,B,C, found);
         *length = LengthStackInt(*C);
     }
 }
@@ -179,11 +194,13 @@ void loopHanoi (int *length, StackInt *A, StackInt *B, StackInt*C ){
 int main(){
     StackInt A, B, C;
     int length;
+    boolean ketemu;
     CreateStackIntA(&A);
     CreateEmptyStackInt(&B);
     CreateEmptyStackInt(&C);
     displaytiang(A,B,C);
     length = LengthStackInt(C);
-    loopHanoi(&length, &A, &B, &C);
+    ketemu = true;
+    loopHanoi(&length, &A, &B, &C, ketemu);
 
 }
