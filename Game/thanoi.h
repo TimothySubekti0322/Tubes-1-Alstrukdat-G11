@@ -41,7 +41,7 @@ boolean movepiringtotiang(StackInt *awal, StackInt *tujuan, boolean found);
 
 void commandH (char *awal, char *tujuan, StackInt *A, StackInt *B, StackInt*C, boolean found);
 
-void loopHanoi (int *length, StackInt *A, StackInt *B, StackInt*C, boolean found );
+void loopHanoi (int *length, StackInt *A, StackInt *B, StackInt*C, boolean found);
 
 
 #endif
