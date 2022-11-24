@@ -104,6 +104,7 @@ void displaytiang(StackInt A, StackInt B, StackInt C){
 }
 
 void commandH (char *awal, char *tujuan, StackInt *A, StackInt *B, StackInt*C, boolean found){
+    printf("\n");
     if(*awal == 'A' && *tujuan == 'B')
     {
         found = movepiringtotiang(A, B, found);
@@ -157,6 +158,9 @@ void commandH (char *awal, char *tujuan, StackInt *A, StackInt *B, StackInt*C, b
         found = movepiringtotiang(C, C, found);
         displaytiang(*A,*B,*C);
         movepiring(*tujuan,found);
+    }
+    else{
+        printf("Masukan tiang anda salah, pikir lagi\n");
     }
     
 }
