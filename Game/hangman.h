@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include "../src/console.h"
+#include "../src/boolean.h"
+
+void LoadWordList(ArrayDyn *ListWord);
+/*
+    * Melakukan pembacaan file , kemudian menuliskan isinya ke dalam array ListWord
+    * I.S : Array ListWord terdefinisi dan kosong
+    * F.S : Array ListWord berisi list kata-kata yang ada dalam file listkata.txt
+*/
+
+char wordToChar(Word CWord);
+/* Mengubah Word menjadi char */
+
+void guessedchars(char *guessed, char current, int pos);
+/*
+    * Menambahkan current ke array guessed di indeks ke-pos
+    * I.S : Array guessed terdefinisi, mungkin kosong (apabila di awal)
+    * F.S : Array guessed sudah berisi char current pada indeks ke-pos
+*/
+
+void DisplayHangmanWord(char *array, int length);
+/*
+    * Fungsi untuk menampilkan string (pointer to char) array ke dalam layar
+    * Tampilan string memiliki format : "elemen-1 elemen-2 ... elemen-n"
+    * Prekondisi : array selalu terdefinisi, dan tidak mungkin kosong
+*/
+
+boolean isWordsEqual(char *word1, char *word2);
+/*  
+    * Mengirimkan true apabila word1 dan word2 adalah sama (panjang dan isinya);
+    * false jika sebaliknya
+*/
+
+boolean alreadyGuessed(char now, char *guessed);
+/* 
+    * Bernilai true apabila now sudah pernah ditebak, yang dalam kata lain,
+    * now merupakan elemen dari array guessed.
+    * Mengirimkan false jika sebaliknya
+*/
+
+void hangman();
+/* Fungsi utama untuk game hangman */
