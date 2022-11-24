@@ -98,7 +98,8 @@ void tambahturn(masaksaji *masak, masaksaji *saji,customers *orders){
     }
 }
 
-void dinnerdash(){
+void dinnerdash(ArrayDyn ArrayGame, ArrayMap *MapGame)
+{
     printf("Selamat datang di Diner Dash!\n");
     
     // Deklarasi variabel dan array
@@ -241,5 +242,7 @@ void dinnerdash(){
             printf("Maaf. Anda kalah karena customer sudah melebihi 7. Skor anda %d.\n",saldo);
             game_over = true;
         }
-    }    
+    }  
+    int index = FindStrArrayDyn(ArrayGame,"DINNER DASH");
+    InsertScoreBoard(&MapGame->ElArrMap[index], saldo);
 }

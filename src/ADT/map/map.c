@@ -109,7 +109,6 @@ boolean IsMember(Map M, keytype k)
     boolean found = false;
     while ((i < M.Count) && (!found))
     {
-        printf("\nMap nya = %s , keytype k nya = %s\n",(M).Elements[i].Key , k);
         if (CompareString((M).Elements[i].Key , k))
         {
             found = true;
@@ -130,7 +129,7 @@ void InsertScoreBoard(Map *M, valuetype v)
     // name = (char *) malloc (CWord.Length * sizeof(char)); 
     name = wordToString(CWord);
     printf("\n");
-    printf("\n name = %s\n",name);
+    //printf("\n name = %s\n",name);
     while(IsMember(*M,name))
     {
         printf("Username sudah dipakai , silahkan gunakan username lain\n");
@@ -139,9 +138,12 @@ void InsertScoreBoard(Map *M, valuetype v)
         // char *name;
         // name = (char *) malloc (CWord.Length * sizeof(char));
         name = wordToString(CWord);
-        printf("\n name = %s\n",name);
+        //printf("\n name = %s\n",name);
     }
-
+    
+    int asci = 175;
+    printf("\n%c USERNAME BERHASIL DIDAFTARKAN %c\n", asci , asci);
+    
     if(!IsMember(*M,name))
     {
         int i = 0;

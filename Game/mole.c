@@ -103,7 +103,7 @@ void PrintPapan(Board papan){
 }
 
 
-void mole(){
+void mole(ArrayDyn ArrayGame, ArrayMap *MapGame){
     printf("Selamat datang pada game Mole. Anda adalah seorang petani dengan lahan seluas 5x5.\n");
     printf("Tetapi ada mole yang selalu merusak tanian Anda. Galilah grid pada lahan Anda untuk mencari molenya.\n");
     printf("Skor yang didapatkan berdasarkan seberapa cepat Anda mencari molenya.\n");
@@ -157,9 +157,8 @@ void mole(){
         }
         coordinates = "6 6";
     }
-    printf("Nama [maksimal 20 karakter] : ");
-    INPUT();
-    char *name = wordToString(CWord);
+    int index = FindStrArrayDyn(ArrayGame,"MOLE");
+    InsertScoreBoard(&MapGame->ElArrMap[index], score);
 }
 
 // int main(){

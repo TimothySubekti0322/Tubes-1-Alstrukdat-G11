@@ -16,7 +16,7 @@
 #include "ADT/stack/stackint.h"
 #include "ADT/map/arrayofmap.h"
 
-void STARTBNMO(ArrayDyn *gamesBNM0);
+void STARTBNMO(ArrayDyn *gamesBNMO , ArrayMap *MapGame);
 /* Membaca file config dan memasukan tiap baris file ke array gamesBNMO*/
 
 boolean IsKataSama(Word InputCommand, Word Command);
@@ -84,7 +84,7 @@ void printscoreboard(Map M , char *namagame);
 
 /* COMMAND FUNCTION*/
 
-void LOADFILE(ArrayDyn *Games, char *inputfile);
+void LOADFILE(ArrayDyn *Games, char *inputfile, ArrayMap *MapGame , StackStr *History);
 /* Melakukan pembacaan file , kemudian menuliskan isinya edalam Array Games
    I.S : File yang diinput terdefinisi , Array Games terdefinisi dan kosong
    F.S : Array games berisis list Game yang ada dalam file*/
@@ -99,25 +99,25 @@ void LISTGAME(ArrayDyn arraygames);
    I.S : arraygames terdefinisi
    F.S : menampilakn seluruh elemen arraygames*/
 
-void DELETEGAME(ArrayDyn *Games, QueueStr *Queue);
+void DELETEGAME(ArrayDyn *Games, QueueStr *Queue , ArrayMap *MapGame);
 /* Melakukan penghapusan suatu game
    I.S : Arraygames terdefinisi
    F.S : Melakukan penghapusan game jika ada pada array, mengeluarkan pesan error
          jika tidak terdefinisi atau termasuk dalam game default*/
 
-void CreateGame(ArrayDyn* ArrayGame);
+void CreateGame(ArrayDyn* ArrayGame, ArrayMap *MapGame);
 /* Melakukan penambahan suatu game
    I.S : ArrayGame terdefinisi
    F.S : Melakukan penambahan game pada array, meminta validasi dengan input 
          ulang jika game sudah ada di dalam array*/
 
-void PlayGame(QueueStr* AntrianGame , StackStr *History , Map *one);
+void PlayGame(QueueStr* AntrianGame , StackStr *History , ArrayMap *MapGame , ArrayDyn ArrayGame);
 /* Menjalankan suatu game
    I.S : ArrayGame terdefinisi
    F.S : Menjalankan game yang terdapat di paling atas pada ADT Queue yang
          menyimpan antrian game*/
 
-void SkipGame(QueueStr* AntrianGame, int number, Map *One);
+void SkipGame(QueueStr* AntrianGame, int number , ArrayMap *MapGame , ArrayDyn ArrayGame , StackStr *History);
 /* Menjalankan suatu game dengan skip game sebanyak number
    I.S : Arraygames terdefinisi
    F.S : Melewatkan game sebanyak number dari atas, dan menjalankan game apabila
@@ -137,13 +137,13 @@ void QUEUEGAME(QueueStr *BNMOGames, ArrayDyn ListGame);
  * Jika tidak, akan muncul pesan kesalahan dan game gagal ditambahkan.
 */
 
-void SCOREBOARD();
+void SCOREBOARD(ArrayDyn listgame , ArrayMap M);
 /* Menampilkan Scoreboard game ke layar */
 
 void HISTORY(StackStr history, int n);
 /* Menampilkan History Permainan */
 
-void RESETSCOREBOARD(ArrayDyn listgame, Map *One , Map *Two , Map *Three , Map *Four , Map *Five , Map *Six);
+void RESETSCOREBOARD(ArrayDyn listgame , ArrayMap *M);
 /* Melakukan Reset Scoreboard */
 
 void RESETHISTORY(StackStr *history);

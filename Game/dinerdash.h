@@ -14,6 +14,7 @@
 #include "../src/ADT/mesinkata/mesinkata.h"
 #include "../src/ADT/array/arraystatis.h"
 #include "../src/ADT/map/map.h"
+#include "../src/ADT/map/arrayofmap.h"
 
 typedef struct{
         StatArray indeks;
@@ -83,7 +84,7 @@ F.S. Dilakukan operasi penambahan turn, durasi memasak dikurangi 1, customer dit
 ketahanan saji dikurangi satu, dan memindahkan makanan dari masak ke saji jika durasi sudah 0 dan 
 makanan dihilangkan jika ketahanan sudah 0*/
 
-void dinnerdash();
+void dinnerdash(ArrayDyn ArrayGame, ArrayMap *MapGame);
 /*Memulai game dinerdash yang awalnya menampilkan isi antrian,makanan yang dimasak, makanan yang dapat disaji
 lalu meminta command dan memproses COOK dan SERVE berdasarkan primitif primitif pada dinner dash*/
 #endif

@@ -64,7 +64,7 @@ void PrintPapan(Board papan);
 I.S. papan terdefinisi
 F.S. Ditampilkan papan pada layar*/
 
-void mole();
+void mole(ArrayDyn ArrayGame, ArrayMap *MapGame);
 /* Bermain game mole dimana player harus mencari mole yang tersembunyi pada papan 5x5
 Input yang salah akan terisi akan menjadi "X". Inputan hanya bisa "menggali" grid kosong
 Skor yang didapatkan berdasarkan seberapa cepat pemain menemukan mole.*/
