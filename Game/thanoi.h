@@ -39,13 +39,25 @@ boolean movepiringtotiang(StackInt *awal, StackInt *tujuan, boolean found);
     F.S: Memindahkan piring teratas dari tiang menuju tiang yang lain
  */
 
+void bikingaris(StackInt S);
+/*
+    I.S : stack terdefinisi, stack mungkin kosong
+    F.S : menampilkan --------
+*/
+
 void commandH (char *awal, char *tujuan, StackInt *A, StackInt *B, StackInt*C, boolean found);
 /*
     I.S : Terdapat tiga stack yang terbentuk, stack mungkin kosong
     F.S : Memindahkan piringan dari tiang awal ke tiang tujuan sesuai command masukan
 */
 
-void loopHanoi (int *length, StackInt *A, StackInt *B, StackInt*C, boolean found);
+int hitungskor (int langkah);
+/*
+    I.S : sembarang
+    F.S : Mengeluarkan nilai yang didapat sesuai banyak langkah
+*/
+
+int loopHanoi (int *length, StackInt *A, StackInt *B, StackInt*C, boolean found);
 /*
     I.S : Terdapat tiga stack yang terbentuk, stack mungkin kosong
     F.S : Melakukan loop untuk memainkan game

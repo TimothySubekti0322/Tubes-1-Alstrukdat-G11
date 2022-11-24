@@ -76,7 +76,14 @@ boolean movepiringtotiang(StackInt *awal, StackInt *tujuan, boolean found){
     return found;
 }
 
-
+void bikingaris(StackInt S){
+    if(IsStackIntEmpty(S)){
+        printf("   ---   ");
+    }
+    else{
+        printf(" ------- ");
+    }
+}
 
 void displaytiang(StackInt A, StackInt B, StackInt C){
     
@@ -89,11 +96,11 @@ void displaytiang(StackInt A, StackInt B, StackInt C){
         printf("\n");
 
     }
-    printf(" ------- ");
+    bikingaris(A);
     printf("                ");
-    printf(" ------- ");
+    bikingaris(B);
     printf("                ");
-    printf(" ------- ");
+    bikingaris(C);
     printf("                \n");
     printf("    A    ");
     printf("                ");
@@ -165,8 +172,50 @@ void commandH (char *awal, char *tujuan, StackInt *A, StackInt *B, StackInt*C, b
     
 }
 
-void loopHanoi (int *length, StackInt *A, StackInt *B, StackInt*C, boolean found ){
+int hitungskor (int langkah){
+    int skor;
+    if(langkah == 31){
+        skor = 10;
+    }
+    else if(langkah >31 && langkah <=37 ){
+        skor = 9;
+    }
+
+    else if(langkah >37 && langkah <=43 ){
+        skor = 8;
+    }
+    else if(langkah >43 && langkah <=48 ){
+        skor = 7;
+    }
+    else if(langkah >48 && langkah <=54 ){
+        skor = 6;
+    }
+    else if(langkah >54 && langkah <=59 ){
+        skor = 5;
+    }
+    else if(langkah >59 && langkah <=65 ){
+        skor = 4;
+    }
+    else if(langkah >65 && langkah <=71 ){
+        skor = 3;
+    }
+    else if(langkah >71 && langkah <=77 ){
+        skor = 2;
+    }
+    else if(langkah >77 && langkah <=83 ){
+        skor = 1;
+    }
+    else{
+        skor = 0;
+    }
+    return skor;
+}
+
+int loopHanoi (int *length, StackInt *A, StackInt *B, StackInt*C, boolean found ){
     char awal,tujuan;
+    int langkah = 0;
+    int akhir;
+    boolean menyerah = false;
     while(*length != 5)
     {
         printf("\nMasukan tiang awal: ");
@@ -177,20 +226,25 @@ void loopHanoi (int *length, StackInt *A, StackInt *B, StackInt*C, boolean found
         tujuan = CWord.TabWord[0];
         commandH(&awal,&tujuan,A,B,C,found);
         *length = LengthStackInt(*C);
+        langkah = langkah + 1;
     }
+    akhir = hitungskor(langkah);
+    return akhir;
 }
 
 
 int main(){
     StackInt A, B, C;
     boolean found;
-    int length;
+    int length,nilai;
     CreateStackIntA(&A);
     CreateEmptyStackInt(&B);
     CreateEmptyStackInt(&C);
     displaytiang(A,B,C);
     length = LengthStackInt(C);
     found = false;
-    loopHanoi(&length, &A, &B, &C,found);
+    nilai = loopHanoi(&length, &A, &B, &C,found);
+    printf("\nkamu berhasil\n");
+    printf("skor yang didapat: %d", nilai);
 
 }
