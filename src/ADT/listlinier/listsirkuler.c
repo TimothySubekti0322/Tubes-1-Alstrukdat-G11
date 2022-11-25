@@ -68,7 +68,7 @@ address Search(List L, infotype X)
     boolean found = false;
     address elmt = First(L);
 
-    if (!IsEmpty(L))
+    if (!IsEmptyList(L))
     {
         do
         {
@@ -151,7 +151,7 @@ void InsertLast(List *L, address P)
 /* F.S. P ditambahkan sebagai elemen terakhir yang baru */
 {
     address last = First(*L);
-    if (IsEmpty(*L))
+    if (IsEmptyList(*L))
     {
         First(*L) = P;
         Next(P) = P;
@@ -185,7 +185,7 @@ void DelFirst(List *L, address *P)
     if (Next(last) == First(*L))
     {
         (*P) = First(*L);
-        CreateEmpty(L);
+        CreateEmptyList(L);
     }
     else
     {
@@ -207,7 +207,7 @@ void DelLast(List *L, address *P)
     if (Next(last) == First(*L))
     {
         (*P) = First(*L);
-        CreateEmpty(L);
+        CreateEmptyList(L);
     }
     else
     {
@@ -229,7 +229,7 @@ void DelAfter(List *L, address *Pdel, address Prec)
         First(*L) = Next(Next(Prec));
     }
     if (Next(First(*L)) == First(*L))
-        CreateEmpty(L);
+        CreateEmptyList(L);
     else
     {
         (*Pdel) = Next(Prec);
@@ -249,7 +249,7 @@ void DelP(List *L, infotype X)
     {
         address prev = First(*L);
         if (Next(prev) == First(*L))
-            CreateEmpty(L);
+            CreateEmptyList(L);
         else
         {
             while (Next(prev) != P)
@@ -270,7 +270,7 @@ void PrintInfo(List L)
 /* Tidak ada tambahan karakter apa pun di awal, akhir, atau di tengah */
 {
     printf("[");
-    if (!IsEmpty(L))
+    if (!IsEmptyList(L))
     {
         address P = First(L);
         do
