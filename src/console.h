@@ -82,6 +82,15 @@ void printstrip(int n);
 
 void printscoreboard(Map M , char *namagame);
 
+boolean IsStringEqual(char *string1 , char* string2);
+/* Mengirimkan True jika string 1 sama dengan string 2 baik Uppercase maupun Lowercase*/
+
+boolean IsMemberScoreBoard(Map M, keytype k);
+/* Memeriksa apakah k merupakan Anggota dari M */
+
+void InsertScoreBoard(Map *M, valuetype v);
+/* Memasukan Username dan score game ke Map */
+
 /* COMMAND FUNCTION*/
 
 void LOADFILE(ArrayDyn *Games, char *inputfile, ArrayMap *MapGame , StackStr *History);

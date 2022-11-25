@@ -302,6 +302,114 @@ void printscoreboard(Map M , char *namagame)
     }
 }
 
+boolean IsStringEqual(char *string1 , char* string2)
+{
+/* Mengirimkan True jika string 1 sama dengan string 2 baik Uppercase maupun Lowercase*/
+    int i = 0;
+    boolean sama = true;
+    if (stringLength(string1) != stringLength(string2))
+    {
+        sama = false;
+        return sama;
+    }
+    while (*(string1 + i) != '\0' && *(string2 + i) != '\0' && sama)
+    {
+        int j = *(string2 + i);
+        if ((j >= 65) && (j <= 90))
+        {
+            if ((*(string1 + i) != *(string2 + i)) && (*(string1 + i) != *(string2 + i) + 32))
+            {
+                sama = false;
+            }
+        }
+        else if ((j >= 97) && (j <= 122))
+        {
+            if ((*(string1 + i) != *(string2 + i)) && (*(string1 + i) != *(string2 + i) - 32))
+            {
+                sama = false;
+            }
+        }
+        else
+        {
+            if(*(string1 + i) != *(string2 + i))
+            {
+                sama = false;
+            }
+        }
+        i++;
+    }
+    return sama;
+}
+
+boolean IsMemberScoreBoard(Map M, keytype k)
+{
+/* Mengembalikan true jika k adalah member dari M */
+    int i = 0;
+    boolean found = false;
+    while ((i < M.Count) && (!found))
+    {
+        if (IsStringEqual((M).Elements[i].Key , k))
+        {
+            found = true;
+        }
+        else
+        {
+            i++;
+        }
+    }
+    return found;
+}
+
+void InsertScoreBoard(Map *M, valuetype v)
+{
+    printf("Masukan Username [maksimal 20 karakter] : ");
+    INPUT();
+    char *name;
+    // name = (char *) malloc (CWord.Length * sizeof(char)); 
+    name = wordToString(CWord);
+    printf("\n");
+    //printf("\n name = %s\n",name);
+    while(IsMemberScoreBoard(*M,name))
+    {
+        printf("Username sudah dipakai , silahkan gunakan username lain\n");
+        printf("Masukan Username [maksimal 20 karakter] : ");
+        INPUT();
+        // char *name;
+        // name = (char *) malloc (CWord.Length * sizeof(char));
+        name = wordToString(CWord);
+        //printf("\n name = %s\n",name);
+    }
+    
+    //int asci = 175;
+    printf("\n// USERNAME %s BERHASIL DIDAFTARKAN \\\\n", name);
+    
+    if(!IsMember(*M,name))
+    {
+        int i = 0;
+        boolean found = false;
+        while ((i < M->Count) && (!found))
+        {
+            if (v > (*M).Elements[i].Value)
+            {
+                found = true;
+            }
+            else
+            {
+                i++;
+            }
+        }
+        int j;
+        for(j = M->Count ; j > i ; j--)
+        {
+            (*M).Elements[j].Key = (*M).Elements[j-1].Key;
+            (*M).Elements[j].Value = (*M).Elements[j-1].Value;
+        }
+        (*M).Elements[i].Key = name;
+        (*M).Elements[i].Value = v;
+        (*M).Count++;
+    }
+}
+
 /* COMMAND FUNCTION*/
 
 void LOADFILE(ArrayDyn *Games, char *inputfile, ArrayMap *MapGame , StackStr *History)
@@ -362,7 +470,7 @@ void LOADFILE(ArrayDyn *Games, char *inputfile, ArrayMap *MapGame , StackStr *Hi
             PushStackStr(History,HistoryGame);
             ADVLINEFILE();
         }
-        
+        ReverseStack(History);
         //printf("\nSampai sini load History Berhasil\n");
         
         int amountscoreboard;

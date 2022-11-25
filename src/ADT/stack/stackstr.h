@@ -72,5 +72,10 @@ void PopStackStr (StackStr *S, strtype *X);
     * F.S.  X adalah NILai elemen TOP yang lama, TOP berkurang 1.
 */
 
+void ReverseStack (StackStr *S); 
+/* Membalikan Urutan Stack
+ * I.S. S sudah terdefinisi dan mungkin kosong,
+ * F.S.	Urutan S Terbalik
+*/
 
 #endif

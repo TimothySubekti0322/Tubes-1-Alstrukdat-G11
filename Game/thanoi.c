@@ -30,7 +30,6 @@ void displaystack(StackInt *S,int i){
     else{
         printf("    |    ");
     }
-
 }
 
 
