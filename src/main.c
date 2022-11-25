@@ -3,30 +3,194 @@
 
 #include "console.h"
 
+void screen()
+{
+    char *screen1 =
+    ".______   .__   __. .___  ___.   ______   ";
+
+    char *screen2 =
+    "|   _  \\  |  \\ |  | |   \\/   |  /  __  \\  ";
+    
+    char *screen3 =
+    "|  |_)  | |   \\|  | |  \\  /  | |  |  |  |";
+    
+    char *screen4 =
+    "|   _  <  |  . `  | |  |\\/|  | |  |  |  |";
+    
+    char *screen5 =
+    "|  |_)  | |  |\\   | |  |  |  | |  '--'  | ";
+    
+    char *screen6 =
+    "|______/  |__| \\__| |__|  |__|  \\______/";
+    
+    
+    int LTC = 201;
+    int RTC = 187;
+    int LBC = 200;
+    int RBC = 188;
+    int H = 205;
+    int V = 186;
+
+    /*  Baris Penutup Atas */
+    printf("%c",LTC);
+    int i;
+    for(i = 0; i < stringLength(screen1)+3; i++)
+    {
+        delay(0.018);
+        printf("%c",H);
+    }
+    delay(0.018);
+    printf("%c\n",RTC);
+    
+    /* baris 1 */
+    delay(0.018);
+    printf("%c  ",V);
+    for(i = 0; i < stringLength(screen1); i++)
+    {
+        delay(0.018);
+        printf("%c",screen1[i]);
+    }
+    delay(0.018);
+    printf(" %c\n",V);
+
+    /* baris 2 */
+    delay(0.018);
+    printf("%c  ",V);
+    for(i = 0; i < stringLength(screen2); i++)
+    {
+        delay(0.018);
+        printf("%c",screen2[i]);
+    }
+    delay(0.018);
+    printf(" %c\n",V);
+
+    /* baris 3 */
+    delay(0.018);
+    printf("%c  ",V);
+    for(i = 0; i < stringLength(screen3); i++)
+    {
+        delay(0.018);
+        printf("%c",screen3[i]);
+    }
+    delay(0.018);
+    printf("  %c\n",V);
+
+    /* baris 4 */
+    delay(0.018);
+    printf("%c  ",V);
+    for(i = 0; i < stringLength(screen4); i++)
+    {
+        delay(0.018);
+        printf("%c",screen4[i]);
+    }
+    delay(0.018);
+    printf("  %c\n",V);
+
+    /* baris 5 */
+    delay(0.018);
+    printf("%c  ",V);
+    for(i = 0; i < stringLength(screen5); i++)
+    {
+        delay(0.018);
+        printf("%c",screen5[i]);
+    }
+    delay(0.018);
+    printf(" %c\n",V);
+
+    /* baris 6*/
+    delay(0.018);
+    printf("%c  ",V);
+    for(i = 0; i < stringLength(screen6); i++)
+    {
+        delay(0.018);
+        printf("%c",screen6[i]);
+    }
+    delay(0.018);
+    printf("   %c\n",V);
+
+    /* baris kosong tambahan */
+    delay(0.018);
+    printf("%c  ",V);
+    for(i = 0; i < stringLength(screen6); i++)
+    {
+        printf(" ");
+    }
+    delay(0.018);
+    printf("   %c\n",V);
+
+    /* Baris Penutup Bawah */
+    delay(0.018);
+    printf("%c",LBC);
+    for(i = 0; i < stringLength(screen1)+3; i++)
+    {
+        delay(0.018);
+        printf("%c",H);
+    }
+    delay(0.018);
+    printf("%c\n",RBC);
+}
 
 void welcome(){
-    char *screen =  
-    ".______   .__   __. .___  ___.   ______   \n" 
-    "|   _  \\  |  \\ |  | |   \\/   |  /  __  \\  \n"
-    "|  |_)  | |   \\|  | |  \\  /  | |  |  |  |\n"
-    "|   _  <  |  . `  | |  |\\/|  | |  |  |  |\n"
-    "|  |_)  | |  |\\   | |  |  |  | |  `--'  | \n"
-    "|______/  |__| \\__| |__|  |__|  \\______/\n";
+    int asciLTC = 218;
+    int asciLBC = 192;
+    int asciRTC = 191;
+    int asciRBC = 217;
+    int asciV = 179;
+    int asciH = 196;
+    int asciBlok = 178;
+
+    // char *screen =  
+    // ".______   .__   __. .___  ___.   ______   \n" 
+    // "|   _  \\  |  \\ |  | |   \\/   |  /  __  \\  \n"
+    // "|  |_)  | |   \\|  | |  \\  /  | |  |  |  |\n"
+    // "|   _  <  |  . `  | |  |\\/|  | |  |  |  |\n"
+    // "|  |_)  | |  |\\   | |  |  |  | |  `--'  | \n"
+    // "|______/  |__| \\__| |__|  |__|  \\______/\n";
      
 
+     char *welcome = "  WELCOME TO BNMO  ";
      char *text =
-     "WELCOME TO BNMO <33\n"
      "START :: MAININ BNMO DONG SAYANG\n"
      "LOAD  :: LOAD GAME YANG TERSEDIA YUK SAYANG\n"
      "HELP  :: BUTUH BANTUAN SAYANG\n"
      "QUIT  :: JANGAN KELUAR SAYANG T_T\n";
 
 
-     printf("%s",screen);
+     screen();
      printf(" \n");
-     printf("============================================================================================================================\n");
-     printf(" \n");
-     printf("%s",text);
+    //  printf("============================================================================================================================\n");
+    //  printf(" \n")
+
+    printf("Loading ");
+    delay(0.8);
+    printf(". ");
+    delay(0.8);
+    printf(". ");
+    delay(0.8);
+    printf(". ");
+    printf("\r                   ");
+    printf("\n");
+    //  /* Print Welcome*/
+    //  printf("%c",asciLTC);
+    //  int i;
+    //  for(i = 0; i < 19 ; i++)
+    //  {
+    //     printf("%c",asciH);
+    //  }
+    //  printf("%c\n",asciRTC);
+    //  printf("%c%s%c\n",asciV,welcome,asciV);
+    //  printf("%c",asciLBC);
+    //  for(i = 0; i < 19 ; i++)
+    //  {
+    //     printf("%c",asciH);
+    //  }
+    //  printf("%c\n",asciRBC);
+    //  printf("\n");
+
+    printf("%c%c%c%c%c%c%c%c%c%c%c%c%c%c WELCOME TO BNMO %c%c%c%c%c%c%c%c%c%c%c%c%c%c",asciBlok,asciBlok,asciBlok,asciBlok,asciBlok,asciBlok,asciBlok,asciBlok,asciBlok,asciBlok,asciBlok,asciBlok,asciBlok,asciBlok,asciBlok,asciBlok,asciBlok,asciBlok,asciBlok,asciBlok,asciBlok,asciBlok,asciBlok,asciBlok,asciBlok,asciBlok,asciBlok,asciBlok);
+    delay(2.5);
+    printf("\r                                                   ");
+    printf("\r%s",text);
 }
 
 int main()
@@ -108,7 +272,7 @@ int main()
             }
             else if (IsKataSama(CWord, StringtoWord("DELETE GAME")))
             {
-                DELETEGAME(&ArrayGame,&QueueGame,&MapGame);
+                DELETEGAME(&ArrayGame,&QueueGame,&MapGame,&History);
             }
             else if (IsKataSama(CWord, StringtoWord("QUEUE GAME")))
             {

@@ -68,7 +68,7 @@ void WordToInt(Word kata, int *hasil);
    I.S : Kata dan hasil terdefinisi
    F.S : hasil merupakan integer dari element Kata*/
 
-void delay(int seconds);
+void delay(float seconds);
 /* Memberikan Jeda untuk program mengeksekusi baris berikutnya */
 
 int IntLength(int n);
@@ -91,6 +91,9 @@ boolean IsMemberScoreBoard(Map M, keytype k);
 void InsertScoreBoard(Map *M, valuetype v);
 /* Memasukan Username dan score game ke Map */
 
+void DeleteHistoryifEqual(StackStr *History , char *string);
+/* Menghapus semua Element Stack yang Sama dengan string */
+
 /* COMMAND FUNCTION*/
 
 void LOADFILE(ArrayDyn *Games, char *inputfile, ArrayMap *MapGame , StackStr *History);
@@ -108,7 +111,7 @@ void LISTGAME(ArrayDyn arraygames);
    I.S : arraygames terdefinisi
    F.S : menampilakn seluruh elemen arraygames*/
 
-void DELETEGAME(ArrayDyn *Games, QueueStr *Queue , ArrayMap *MapGame);
+void DELETEGAME(ArrayDyn *Games, QueueStr *Queue , ArrayMap *MapGame, StackStr *History);
 /* Melakukan penghapusan suatu game
    I.S : Arraygames terdefinisi
    F.S : Melakukan penghapusan game jika ada pada array, mengeluarkan pesan error

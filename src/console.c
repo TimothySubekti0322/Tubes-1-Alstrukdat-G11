@@ -216,12 +216,12 @@ void CopyWordtostring(Word Input, char *string, int Awal , int Akhir)
     *(string + j) = '\0';
 }
 
-void delay(int seconds)
+void delay(float seconds)
 {
     /* Memberikan Jeda untuk program mengeksekusi baris berikutnya */
 
     // Convert seconds into milli_seconds
-    int milli_seconds = 1000 * seconds;
+    float milli_seconds = 1000 * seconds;
  
     // Storing start time
     clock_t start_time = clock();
@@ -434,6 +434,46 @@ void InsertScoreBoard(Map *M, valuetype v)
     }
 }
 
+TypeIdx FindStrArrayDynCreateGame(ArrayDyn array, TypeEl elmt) {
+	boolean found = false;
+	int LocationIdx = -1;
+	int i = 0;
+	while (i < array.Neff && !found) {
+		if (IsStringEqual(array.Ar[i],elmt)) 
+		{
+			found = true;
+			LocationIdx = i;
+		}
+		i++;
+	}
+	return LocationIdx;
+}
+
+void DeleteHistoryifEqual(StackStr *History , char *string)
+{
+    /* Menghapus semua Element Stack yang Sama dengan string */
+    StackStr temp;
+    CreateEmptyStackStr(&temp);
+    char *tempstring;
+    //tempstring = (char *) malloc (100 * sizeof(char));
+    while (!IsStackStrEmpty(*History))
+    {
+        // printf("\nBerhasil 1\n");
+        PopStackStr(History,&tempstring);
+        if (!IsStringEqual(tempstring,string))
+        {
+            // printf("\nBerhasil 2\n");
+            PushStackStr(&temp,tempstring);
+        }
+    }
+    while (!IsStackStrEmpty(temp))
+    {
+        // printf("\nBerhasil 3\n");
+        PopStackStr(&temp,&tempstring);
+        PushStackStr(History,tempstring);
+    }
+}
+
 /* COMMAND FUNCTION*/
 
 void LOADFILE(ArrayDyn *Games, char *inputfile, ArrayMap *MapGame , StackStr *History)
@@ -611,7 +651,7 @@ void LISTGAME(ArrayDyn arraygames)
 
 }
 
-void DELETEGAME(ArrayDyn *Games, QueueStr *Queue , ArrayMap *MapGame)
+void DELETEGAME(ArrayDyn *Games, QueueStr *Queue , ArrayMap *MapGame, StackStr *History)
 {
     /* Melakukan penghapusan suatu game
    I.S : Arraygames terdefinisi
@@ -641,11 +681,12 @@ void DELETEGAME(ArrayDyn *Games, QueueStr *Queue , ArrayMap *MapGame)
     }
     else if(indeksgame > 6 && indeksgame <= StrLength(*Games) && !IsInQueue(Queue,GetStr(*Games,indeksgame-1)))
     {
+        DeleteHistoryifEqual(History , GetStr(*Games,indeksgame-1));
+        CreateEmpty(&MapGame->ElArrMap[indeksgame-1]);
+        DeleteMapAt(MapGame,indeksgame-1);
         DeleteStrIn(Games,indeksgame-1);
 
         printf("Game berhasil dihapus\n");
-        CreateEmpty(&MapGame->ElArrMap[indeksgame-1]);
-        DeleteMapAt(MapGame,indeksgame-1);
     }
 }
 
@@ -661,7 +702,8 @@ void CreateGame(ArrayDyn* ArrayGame, ArrayMap *MapGame)
     INPUT();
     input = wordToString(CWord);
     //Melakukan validasi input, apakah sudah ada game yang bernama sama dengan input atau belum
-    while (FindStrArrayDyn(*ArrayGame, input) != -1){
+    while (FindStrArrayDynCreateGame(*ArrayGame, input) != -1)
+    {
         printf("Game sudah ada, silahkan input ulang\n");
         printf("Masukkan nama game yang akan ditambahkan: ");
         INPUT();
@@ -697,39 +739,39 @@ void PlayGame(QueueStr* AntrianGame , StackStr *History , ArrayMap *MapGame , Ar
         {
             // printf("SAMPAI SINI 1");
             printf("Loading RNG ");
-            delay(1);
+            delay(0.8);
             printf(". ");
-            delay(1);
+            delay(0.8);
             printf(". ");
-            delay(1);
+            delay(0.8);
             printf(".\n");
-            delay(1);
+            delay(0.8);
             gameRNG(ArrayGame, MapGame);
         } 
         else if (CompareString(game,"DINER DASH"))
         {
             //printf("SAMPAI SINI 2");
             printf("Loading DINER DASH ");
-            delay(1);
+            delay(0.8);
             printf(". ");
-            delay(1);
+            delay(0.8);
             printf(". ");
-            delay(1);
+            delay(0.8);
             printf(".\n");
-            delay(1);
+            delay(0.8);
             dinnerdash(ArrayGame, MapGame);
         }
         else if (CompareString(game,"HANGMAN"))
         {
             //printf("SAMPAI SINI 2");
             printf("Loading HANGMAN ");
-            delay(1);
+            delay(0.8);
             printf(". ");
-            delay(1);
+            delay(0.8);
             printf(". ");
-            delay(1);
+            delay(0.8);
             printf(".\n");
-            delay(1);
+            delay(0.8);
             // < Name Game >;
         }
 
@@ -737,13 +779,13 @@ void PlayGame(QueueStr* AntrianGame , StackStr *History , ArrayMap *MapGame , Ar
         {
             //printf("SAMPAI SINI 2");
             printf("Loading TOWER OF HANOI ");
-            delay(1);
+            delay(0.8);
             printf(". ");
-            delay(1);
+            delay(0.8);
             printf(". ");
-            delay(1);
+            delay(0.8);
             printf(".\n");
-            delay(1);
+            delay(0.8);
             // < Name Game >;
         }
 
@@ -751,26 +793,26 @@ void PlayGame(QueueStr* AntrianGame , StackStr *History , ArrayMap *MapGame , Ar
         {
             //printf("SAMPAI SINI 2");
             printf("Loading SNAKE ON METEOR ");
-            delay(1);
+            delay(0.8);
             printf(". ");
-            delay(1);
+            delay(0.8);
             printf(". ");
-            delay(1);
+            delay(0.8);
             printf(".\n");
-            delay(1);
+            delay(0.8);
             // < Name Game >;
         }
 
         else if(CompareString(game,"MOLE"))
         {
             printf("Loading MOLE ");
-            delay(1);
+            delay(0.8);
             printf(". ");
-            delay(1);
+            delay(0.8);
             printf(". ");
-            delay(1);
+            delay(0.8);
             printf(".\n");
-            delay(1);
+            delay(0.8);
             mole(ArrayGame, MapGame);
         }
 
@@ -778,13 +820,13 @@ void PlayGame(QueueStr* AntrianGame , StackStr *History , ArrayMap *MapGame , Ar
         {
             //printf("SAMPAI SINI 2");
             printf("Loading SNAKE ON METEOR ");
-            delay(1);
+            delay(0.8);
             printf(". ");
-            delay(1);
+            delay(0.8);
             printf(". ");
-            delay(1);
+            delay(0.8);
             printf(".\n");
-            delay(1);
+            delay(0.8);
             // < Name Game >;
         }
 
@@ -1028,15 +1070,22 @@ void SCOREBOARD(ArrayDyn listgame , ArrayMap M)
 
 void HISTORY(StackStr history, int n)
 {
-    printf("Berikut adalah daftar Game yang telah dimainkan\n");
-    int i = 1;
-    while ((i <= n) && !IsStackStrEmpty(history))
+    if (!IsStackStrEmpty(history))
     {
-        char* namagame;
-        //printf("%s\n",INFOTop(history));
-        PopStackStr(&history,&namagame);
-        printf("%d. %s\n",i,namagame);
-        i++;
+        printf("Berikut adalah daftar Game yang telah dimainkan\n");
+        int i = 1;
+        while ((i <= n) && !IsStackStrEmpty(history))
+        {
+            char* namagame;
+            //printf("%s\n",INFOTop(history));
+            PopStackStr(&history,&namagame);
+            printf("%d. %s\n",i,namagame);
+            i++;
+        }
+    }
+    else
+    {
+        printf("Belum ada game yang dimainkan\n");
     }
 }
 
