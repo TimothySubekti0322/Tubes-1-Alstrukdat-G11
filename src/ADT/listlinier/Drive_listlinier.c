@@ -4,9 +4,9 @@
 
 int main(){
     List L;
-    CreateEmpty(&L);
+    CreateEmptyList(&L);
     printf("List linier kosong terbentuk? ");
-    if(IsEmpty(L)){
+    if(IsEmptyList(L)){
         printf("Ya\n");
     }
 
