@@ -14,7 +14,7 @@
 /* *** Definisi Type Pohon Biner *** */
 /* typedef int infotype; */ /* type infotype sesuai pada modul listrek */
 typedef struct tNode *addrNode;
-typedef int infotype;
+typedef char* infotype;
 typedef struct tNode
 {
   infotype info;
