@@ -72,5 +72,4 @@ void Delete(Map *M, keytype k);
 boolean IsMember(Map M, keytype k);
 /* Mengembalikan true jika k adalah member dari M */
 
-void InsertScoreBoard(Map *M, valuetype v);
 #endif

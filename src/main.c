@@ -33,20 +33,10 @@ int main()
 {
     ArrayDyn ArrayGame;
     QueueStr QueueGame;
-    Map RNG;
-    Map DINER_DASH;
-    Map HANGMAN;
-    Map TOWER_OF_HANOI;
-    Map SNAKE_ON_METEOR;
-    Map MOLE;
+    ArrayMap MapGame;
     StackStr History;
     ArrayGame = CreateStrArrayDyn();
-    CreateEmpty(&RNG);
-    CreateEmpty(&DINER_DASH);
-    CreateEmpty(&HANGMAN);
-    CreateEmpty(&TOWER_OF_HANOI);
-    CreateEmpty(&SNAKE_ON_METEOR);
-    CreateEmpty(&MOLE);
+    MakeEmptyArrMap(&MapGame);
     CreateEmptyStackStr(&History);
     CreateStrQueue(&QueueGame);
     boolean endProgram = false;
@@ -67,7 +57,7 @@ int main()
             /* Command START*/
             if (IsKataSama(CWord, StringtoWord("START")))
             {
-                STARTBNMO(&ArrayGame);
+                STARTBNMO(&ArrayGame,&MapGame);
                 //LOADFILE(&ArrayGame,"config.txt");
                 // ShowStrArrayDyn(ArrayGame);
                 // printf("%d",ArrayGame.Neff);
@@ -78,7 +68,7 @@ int main()
             {
                 char inputfile[50];
                 CopyWordtostring(CWord, inputfile, 5 , CWord.Length-1);
-                LOADFILE(&ArrayGame,inputfile);
+                LOADFILE(&ArrayGame,inputfile,&MapGame,&History);
                 // printf("%s", CWord);
                 //printf("%s", inputfile);
             }
@@ -110,7 +100,7 @@ int main()
         {
             if (IsKataSama(CWord,StringtoWord("CREATE GAME")))
             {
-                CreateGame(&ArrayGame);
+                CreateGame(&ArrayGame, &MapGame);
             }
             else if (IsKataSama(CWord, StringtoWord("LIST GAME")))
             {
@@ -118,7 +108,7 @@ int main()
             }
             else if (IsKataSama(CWord, StringtoWord("DELETE GAME")))
             {
-                DELETEGAME(&ArrayGame,&QueueGame);
+                DELETEGAME(&ArrayGame,&QueueGame,&MapGame);
             }
             else if (IsKataSama(CWord, StringtoWord("QUEUE GAME")))
             {
@@ -126,19 +116,19 @@ int main()
             }
             else if (IsKataSama(CWord, StringtoWord("PLAY GAME")))
             {
-                PlayGame(&QueueGame, &History,&RNG);
+                PlayGame(&QueueGame, &History,&MapGame , ArrayGame);
             }
             else if ((CWord.TabWord[0] == 'S') && (CWord.TabWord[1] == 'K') && (CWord.TabWord[2] == 'I') && (CWord.TabWord[3] == 'P') && (CWord.TabWord[4] == 'G') && (CWord.TabWord[5] == 'A')&& (CWord.TabWord[6] == 'M') && (CWord.TabWord[7] == 'E') && (CWord.TabWord[8] == ' '))
             {
                 int number = CWord.TabWord[9] - '0';
-                SkipGame(&QueueGame,number,&RNG);
+                SkipGame(&QueueGame,number,&MapGame , ArrayGame , &History);
             }
 
             /* SKIP GAME jika spasi adalah valid*/
             else if ((CWord.TabWord[0] == 'S') && (CWord.TabWord[1] == 'K') && (CWord.TabWord[2] == 'I') && (CWord.TabWord[3] == 'P') && (CWord.TabWord[4] == ' ') && (CWord.TabWord[5] == 'G')&& (CWord.TabWord[6] == 'A') && (CWord.TabWord[7] == 'M') && (CWord.TabWord[8] == 'E') && (CWord.TabWord[9] == ' '))
             {
                 int number = CWord.TabWord[10] - '0';
-                SkipGame(&QueueGame,number,&RNG);
+                SkipGame(&QueueGame,number,&MapGame , ArrayGame , &History);
             }
 
             else if (IsKataSama(CWord, StringtoWord("HELP")))
@@ -168,19 +158,20 @@ int main()
                 }
             else if (IsKataSama(CWord, StringtoWord("SCOREBOARD")))
             {
-                SCOREBOARD(ArrayGame,RNG,DINER_DASH,HANGMAN,TOWER_OF_HANOI,SNAKE_ON_METEOR,MOLE);
+                SCOREBOARD(ArrayGame,MapGame);
             }
             else if (IsKataSama(CWord, StringtoWord("RESET SCOREBOARD")))
             {
-                RESETSCOREBOARD(ArrayGame,&RNG,&DINER_DASH,&HANGMAN,&TOWER_OF_HANOI,&SNAKE_ON_METEOR,&MOLE);
+                RESETSCOREBOARD(ArrayGame,&MapGame);
             }
 
             else if ((CWord.TabWord[0] == 'H') && (CWord.TabWord[1] == 'I') && (CWord.TabWord[2] == 'S') && (CWord.TabWord[3] == 'T') && (CWord.TabWord[4] == 'O') && (CWord.TabWord[5] == 'R')&& (CWord.TabWord[6] == 'Y') && (CWord.TabWord[7] == ' '))
             {
                 char *x;
                 x = (char *) malloc(sizeof(char));
-                CopyWordtostring(CWord,x,8,8);
-                int n = StringtoInt(x);
+                CopyWordtostring(CWord,x,8,CWord.Length-1);
+                int n = 0; 
+                n = StringtoInt(x);
                 HISTORY(History,n);
             }
             else if (IsKataSama(CWord, StringtoWord("RESET HISTORY")))

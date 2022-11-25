@@ -58,3 +58,32 @@ void PopStackStr(StackStr *S, strtype *X)
  * I.S.  S tidak kosong.
  * F.S.  X adalah NILai elemen TOP yang lama, TOP berkurang 1.
  */
+
+void ReverseStack(StackStr *S)
+{
+/* Membalikan Urutan Stack
+ * I.S. S sudah terdefinisi dan mungkin kosong,
+ * F.S.	Urutan S Terbalik
+*/
+
+    StackStr S1;
+    StackStr S2;
+    CreateEmptyStackStr(&S1);
+    CreateEmptyStackStr(&S2);
+    strtype X;
+    while (!IsStackStrEmpty(*S))
+    {
+        PopStackStr(S,&X);
+        PushStackStr(&S1,X);
+    }
+    while (!IsStackStrEmpty(S1))
+    {
+        PopStackStr(&S1,&X);
+        PushStackStr(&S2,X);
+    }
+    while (!IsStackStrEmpty(S2))
+    {
+        PopStackStr(&S2,&X);
+        PushStackStr(S,X);
+    }
+}

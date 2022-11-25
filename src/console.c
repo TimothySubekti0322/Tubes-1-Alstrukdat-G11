@@ -3,7 +3,7 @@
 #include "console.h"
 
 
-void STARTBNMO(ArrayDyn *gamesBNMO)
+void STARTBNMO(ArrayDyn *gamesBNMO , ArrayMap *MapGame)
 {
     /* Membaca file config dan memasukan tiap baris file ke array gamesBNMO*/
 
@@ -16,6 +16,9 @@ void STARTBNMO(ArrayDyn *gamesBNMO)
         char *namaGame;
         namaGame = wordToString(CWord);
         InsertStrIn(gamesBNMO,namaGame,i);
+        Map M;
+        CreateEmpty(&M);
+        InsertMapLast(MapGame,M);
         ADVLINEFILE();
     }
     printf("File konfigurasi sistem berhasil dibaca. BNMO berhasil dijalankan.\n");
@@ -299,9 +302,117 @@ void printscoreboard(Map M , char *namagame)
     }
 }
 
+boolean IsStringEqual(char *string1 , char* string2)
+{
+/* Mengirimkan True jika string 1 sama dengan string 2 baik Uppercase maupun Lowercase*/
+    int i = 0;
+    boolean sama = true;
+    if (stringLength(string1) != stringLength(string2))
+    {
+        sama = false;
+        return sama;
+    }
+    while (*(string1 + i) != '\0' && *(string2 + i) != '\0' && sama)
+    {
+        int j = *(string2 + i);
+        if ((j >= 65) && (j <= 90))
+        {
+            if ((*(string1 + i) != *(string2 + i)) && (*(string1 + i) != *(string2 + i) + 32))
+            {
+                sama = false;
+            }
+        }
+        else if ((j >= 97) && (j <= 122))
+        {
+            if ((*(string1 + i) != *(string2 + i)) && (*(string1 + i) != *(string2 + i) - 32))
+            {
+                sama = false;
+            }
+        }
+        else
+        {
+            if(*(string1 + i) != *(string2 + i))
+            {
+                sama = false;
+            }
+        }
+        i++;
+    }
+    return sama;
+}
+
+boolean IsMemberScoreBoard(Map M, keytype k)
+{
+/* Mengembalikan true jika k adalah member dari M */
+    int i = 0;
+    boolean found = false;
+    while ((i < M.Count) && (!found))
+    {
+        if (IsStringEqual((M).Elements[i].Key , k))
+        {
+            found = true;
+        }
+        else
+        {
+            i++;
+        }
+    }
+    return found;
+}
+
+void InsertScoreBoard(Map *M, valuetype v)
+{
+    printf("Masukan Username [maksimal 20 karakter] : ");
+    INPUT();
+    char *name;
+    // name = (char *) malloc (CWord.Length * sizeof(char)); 
+    name = wordToString(CWord);
+    printf("\n");
+    //printf("\n name = %s\n",name);
+    while(IsMemberScoreBoard(*M,name))
+    {
+        printf("Username sudah dipakai , silahkan gunakan username lain\n");
+        printf("Masukan Username [maksimal 20 karakter] : ");
+        INPUT();
+        // char *name;
+        // name = (char *) malloc (CWord.Length * sizeof(char));
+        name = wordToString(CWord);
+        //printf("\n name = %s\n",name);
+    }
+    
+    //int asci = 175;
+    printf("\n// USERNAME %s BERHASIL DIDAFTARKAN \\\\n", name);
+    
+    if(!IsMember(*M,name))
+    {
+        int i = 0;
+        boolean found = false;
+        while ((i < M->Count) && (!found))
+        {
+            if (v > (*M).Elements[i].Value)
+            {
+                found = true;
+            }
+            else
+            {
+                i++;
+            }
+        }
+        int j;
+        for(j = M->Count ; j > i ; j--)
+        {
+            (*M).Elements[j].Key = (*M).Elements[j-1].Key;
+            (*M).Elements[j].Value = (*M).Elements[j-1].Value;
+        }
+        (*M).Elements[i].Key = name;
+        (*M).Elements[i].Value = v;
+        (*M).Count++;
+    }
+}
+
 /* COMMAND FUNCTION*/
 
-void LOADFILE(ArrayDyn *Games, char *inputfile)
+void LOADFILE(ArrayDyn *Games, char *inputfile, ArrayMap *MapGame , StackStr *History)
 {
     /* Melakukan pembacaan file , kemudian menuliskan isinya edalam Array Games
    I.S : File yang diinput terdefinisi , Array Games terdefinisi dan kosong
@@ -311,36 +422,106 @@ void LOADFILE(ArrayDyn *Games, char *inputfile)
     char path[50];
 
     concat(placeholder, inputfile, path);
-    //printf("SAMPAI SINI 1\n");
+
     STARTFILE(path);
-    //printf("SAMPAI SINI 2\n");
-    //printf("%s\n",path);
+
     if (EndWord)
     {
         printf("File tidak valid / kosong. Silahkan masukkan nama file lain.\n");
     }
     else
     {
-        //printf("SAMPAI SINI 3\n");
+
         int amount = 0;
         WordToInt(CWord,&amount);
-        ADVLINEFILE();/* word pertama yang dibaca adalah jumlah game*/
-        //printf("SAMPAI SINI 4\n");
+
+        //printf("\namount = %d\n",amount);
+        
+        ADVLINEFILE(); /* word pertama yang dibaca adalah jumlah game*/
+
         for (int j = 0; j < amount; j++)
         {
             char *gamename;
             gamename = wordToString(CWord);
+            
             // printf("%s\n",gamename);
             // printf("Sampe sini 2\n");
             //InsertStrLast(Games,string);
+            
             InsertStrIn(Games, gamename, j);
+            
             // printf("%s\n",gamename);
             // ShowStrArrayDyn(*Games);
-            // printf("%s\n",Games->Ar[j]);
+            // printf("\n%s\n",Games->Ar[j]);
+            
             ADVLINEFILE();
         }
-        //printf("SAMPAI SINI 5\n");
-        //ShowStrArrayDyn(*Games);
+
+        /* Menambahkan History */
+        //printf("\nSampai sini load List Berhasil\n");
+        
+        int amounthistory = 0;
+        WordToInt(CWord,&amounthistory);
+        ADVLINEFILE();
+        for (int k = 0; k < amounthistory; k++)
+        {
+            char *HistoryGame;
+            HistoryGame = wordToString(CWord);
+            PushStackStr(History,HistoryGame);
+            ADVLINEFILE();
+        }
+        ReverseStack(History);
+        //printf("\nSampai sini load History Berhasil\n");
+        
+        int amountscoreboard;
+        int z , w;
+        for (w = 0; w < amount; w++)
+        {
+            //printf("\nMasuk Loop ke %d\n",w+1);
+            
+            Map M;
+            CreateEmpty(&M);
+            amountscoreboard = 0;
+            WordToInt(CWord,&amountscoreboard);
+            
+            //printf("\namountscoreboard = %d\n",amountscoreboard);
+            
+            IgnoreNewLine();
+            ADVWORD();
+            
+            //printf("\nABIS INI MASUK KE INNER LOOP\n");
+            for (z = 0; z < amountscoreboard ; z++)
+            {
+                //printf("\nz = %d\n",z);
+                
+                char *scoreboardkey;
+                scoreboardkey = wordToString(CWord);
+                
+                //printf("\nscoreboardkey = %s\n",scoreboardkey);
+                
+                ADVWORD();
+                
+                //printf("CWord karakter 1 = %c",CWord.TabWord[1]);
+                
+                int scoreboardvalue = 0;
+                WordToInt(CWord,&scoreboardvalue); 
+                
+                //printf("\nscoreboardvalue = %d\n",scoreboardvalue);
+                
+                Insert(&M, scoreboardkey , scoreboardvalue);
+                IgnoreNewLine();
+                ADVWORD();
+                
+                //printf("CWord karakter 0 = %c",CWord.TabWord[0]);
+                
+            }
+            
+            //printf("\nMap Value = %d\n",M.Elements[z-1].Value);
+            
+            InsertMapLast(MapGame,M);
+        }
+
+        //printf("\nSampai sini load Scoreboard Berhasil\n");
         if (CompareString(path,"../data/config.txt"))
         {
             printf("File konfigurasi sistem berhasil dibaca. BNMO berhasil dijalankan.\n");
@@ -391,7 +572,7 @@ void LISTGAME(ArrayDyn arraygames)
 
 }
 
-void DELETEGAME(ArrayDyn *Games, QueueStr *Queue)
+void DELETEGAME(ArrayDyn *Games, QueueStr *Queue , ArrayMap *MapGame)
 {
     /* Melakukan penghapusan suatu game
    I.S : Arraygames terdefinisi
@@ -419,15 +600,17 @@ void DELETEGAME(ArrayDyn *Games, QueueStr *Queue)
     {
         printf("Game gagal dihapus karena game berada dalam Queue\n");
     }
-    else if(indeksgame > 5 && indeksgame <= StrLength(*Games) && !IsInQueue(Queue,GetStr(*Games,indeksgame-1)))
+    else if(indeksgame > 6 && indeksgame <= StrLength(*Games) && !IsInQueue(Queue,GetStr(*Games,indeksgame-1)))
     {
         DeleteStrIn(Games,indeksgame-1);
 
         printf("Game berhasil dihapus\n");
-    } 
+        CreateEmpty(&MapGame->ElArrMap[indeksgame-1]);
+        DeleteMapAt(MapGame,indeksgame-1);
+    }
 }
 
-void CreateGame(ArrayDyn* ArrayGame)
+void CreateGame(ArrayDyn* ArrayGame, ArrayMap *MapGame)
 {
     /* Melakukan penambahan suatu game
    I.S : ArrayGame terdefinisi
@@ -448,9 +631,12 @@ void CreateGame(ArrayDyn* ArrayGame)
     //Melakukan penambahan game yang diinput
     InsertStrLast(ArrayGame, input);
     printf("Game berhasil ditambahkan\n");
+    Map M;
+    CreateEmpty(&M);
+    InsertMapLast(MapGame,M);
 }
 
-void PlayGame(QueueStr* AntrianGame , StackStr *History , Map *One)
+void PlayGame(QueueStr* AntrianGame , StackStr *History , ArrayMap *MapGame , ArrayDyn ArrayGame)
 {
     /* Menjalankan suatu game
    I.S : ArrayGame terdefinisi
@@ -479,7 +665,7 @@ void PlayGame(QueueStr* AntrianGame , StackStr *History , Map *One)
             delay(1);
             printf(".\n");
             delay(1);
-            gameRNG(One);
+            gameRNG(ArrayGame, MapGame);
         } 
         else if (CompareString(game,"DINER DASH"))
         {
@@ -492,8 +678,50 @@ void PlayGame(QueueStr* AntrianGame , StackStr *History , Map *One)
             delay(1);
             printf(".\n");
             delay(1);
-            dinnerdash();
+            dinnerdash(ArrayGame, MapGame);
         }
+        else if (CompareString(game,"HANGMAN"))
+        {
+            //printf("SAMPAI SINI 2");
+            printf("Loading HANGMAN ");
+            delay(1);
+            printf(". ");
+            delay(1);
+            printf(". ");
+            delay(1);
+            printf(".\n");
+            delay(1);
+            // < Name Game >;
+        }
+
+        else if (CompareString(game,"TOWER OF HANOI"))
+        {
+            //printf("SAMPAI SINI 2");
+            printf("Loading TOWER OF HANOI ");
+            delay(1);
+            printf(". ");
+            delay(1);
+            printf(". ");
+            delay(1);
+            printf(".\n");
+            delay(1);
+            // < Name Game >;
+        }
+
+        else if (CompareString(game,"SNAKE ON METEOR"))
+        {
+            //printf("SAMPAI SINI 2");
+            printf("Loading SNAKE ON METEOR ");
+            delay(1);
+            printf(". ");
+            delay(1);
+            printf(". ");
+            delay(1);
+            printf(".\n");
+            delay(1);
+            // < Name Game >;
+        }
+
         else if(CompareString(game,"MOLE"))
         {
             printf("Loading MOLE ");
@@ -504,20 +732,33 @@ void PlayGame(QueueStr* AntrianGame , StackStr *History , Map *One)
             delay(1);
             printf(".\n");
             delay(1);
-            mole();
+            mole(ArrayGame, MapGame);
         }
-        // else if(CompareString(game,"DINOSAUR IN EARTH") || CompareString(game,"RISEWOMAN") || CompareString(game,"EIFFEL TOWER"))
-        // {
-        //     printf("Game %s masih dalam maintenance, belum dapat dimainkan.\n", game);
-        //     printf("Silahkan pilih game lain.");
-        // }
+
+        else if (CompareString(game,"SNAKE ON METEOR"))
+        {
+            //printf("SAMPAI SINI 2");
+            printf("Loading SNAKE ON METEOR ");
+            delay(1);
+            printf(". ");
+            delay(1);
+            printf(". ");
+            delay(1);
+            printf(".\n");
+            delay(1);
+            // < Name Game >;
+        }
+
         else
         {
             srand(time(NULL));
             int SKOR = rand() % 100 + 1;
             printf("GAME OVER !\n");
             printf("SKOR AKHIR = %d\n", SKOR);
+            int index = FindStrArrayDyn(ArrayGame,game);
+            InsertScoreBoard(&MapGame->ElArrMap[index], SKOR);
         }
+
         int length = stringLength(game);
         char *gametohistory;
         gametohistory = (char *) malloc (length * sizeof(char));
@@ -531,7 +772,7 @@ void PlayGame(QueueStr* AntrianGame , StackStr *History , Map *One)
     }
 }
 
-void SkipGame(QueueStr* AntrianGame, int number , Map *One)
+void SkipGame(QueueStr* AntrianGame, int number , ArrayMap *MapGame , ArrayDyn ArrayGame , StackStr *History )
 {
     
     /* Menjalankan suatu game dengan skip game sebanyak number
@@ -555,7 +796,7 @@ void SkipGame(QueueStr* AntrianGame, int number , Map *One)
             printf("Tidak ada permainan lagi dalam daftar game-mu");
         } else { 
             dequeueStr(AntrianGame,game);
-            if (CompareString(game,"RNG") || CompareString(game,"DINER DASH") || CompareString(game,"MOLE"))
+            if (CompareString(game,"RNG") || CompareString(game,"DINER DASH") || CompareString(game,"MOLE") || CompareString(game,"HANGMAN") || CompareString(game,"TOWER OF HANOI") || CompareString(game,"SNAKE ON METEOR"))
             { 
                 printf("Loading %s ", game);
                 delay(1);
@@ -565,28 +806,54 @@ void SkipGame(QueueStr* AntrianGame, int number , Map *One)
                 delay(1);
                 printf(".\n");
                 delay(1);
-                if (CompareString(game,"RNG")){
-                    gameRNG(One);
-                } else if (CompareString(game,"DINER DASH")){
-                    dinnerdash();
+                
+                if (CompareString(game,"RNG"))
+                {
+                    gameRNG(ArrayGame,MapGame);
+                } 
+                else if (CompareString(game,"DINER DASH"))
+                {
+                    dinnerdash(ArrayGame, MapGame);
                 }
                 else if (CompareString(game,"MOLE"))
                 {
-                    mole();
+                    mole(ArrayGame, MapGame);
                 }
+                else if (CompareString(game,"HANGMAN"))
+                {
+                    // < Name Game >;
+                }
+
+                else if (CompareString(game,"TOWER OF HANOI"))
+                {
+                    // < Name Game >;
+                }
+
+                else if (CompareString(game,"SNAKE ON METEOR"))
+                {
+                    // < Name Game >;
+                }
+                
             } 
-            else if(CompareString(game,"DINOSAUR IN EARTH") || CompareString(game,"RISEWOMAN") || CompareString(game,"EIFFEL TOWER"))
-            {
-                printf("Game %s masih dalam maintenance, belum dapat dimainkan.\n", game);
-                printf("Silahkan pilih game lain.");
-            }
             else
             {
                 srand(time(NULL));
                 int SKOR = rand() % 100 + 1;
                 printf("GAME OVER !\n");
                 printf("SKOR AKHIR = %d\n", SKOR);
+                int index = FindStrArrayDyn(ArrayGame,game);
+                InsertScoreBoard(&MapGame->ElArrMap[index], SKOR);
             }
+            int length = stringLength(game);
+            char *gametohistory;
+            gametohistory = (char *) malloc (length * sizeof(char));
+            int i;
+            for (i = 0 ; i < length ; i++)
+            {
+                *(gametohistory + i) = game[i];
+            }
+            gametohistory[i] = '\0';
+            PushStackStr(History, gametohistory);
         }
     }
 }
@@ -707,39 +974,17 @@ void QUEUEGAME(QueueStr *BNMOGames, ArrayDyn ListGame)
 	}
 }
 
-void SCOREBOARD(ArrayDyn listgame , Map One , Map Two , Map Three , Map Four , Map Five , Map Six)
+void SCOREBOARD(ArrayDyn listgame , ArrayMap M)
 {
 /* Menampilkan Scoreboard game ke layar */
-//     int count = 0;
-//    // boolean Mole_first = false;
-//     for(int i = 0 ; i < listgame.Neff ; i++)
-//     {
-//         if(CompareString(listgame.Ar[i] , "MOLE"))
-//         {
-//             count++;
-//             //Mole_first = true;
-//         }
-//     }
-    //if ((count == 1) && (Mole_first))
     printf("\n");
-    printscoreboard(One , "RNG");
-    printf("\n");
-    printf("\n");
-    printscoreboard(Two , "DINNER DASH");
-    printf("\n"); 
-    printf("\n"); 
-    printscoreboard(Three , "HANGMAN");
-    printf("\n"); 
-    printf("\n"); 
-    printscoreboard(Four , "TOWER OF HANOI");
-    printf("\n"); 
-    printf("\n"); 
-    printscoreboard(Five , "SNAKE ON METEOR");
-    printf("\n");
-    printf("\n");
-    printscoreboard(Six , "MOLE");
-    printf("\n");
-    printf("\n");
+    int i;
+    for (i = 0 ; i < M.NeffArrMap ; i++)
+    {
+        printscoreboard(M.ElArrMap[i] , listgame.Ar[i]);
+        printf("\n");
+        printf("\n");
+    }
 }
 
 void HISTORY(StackStr history, int n)
@@ -756,17 +1001,15 @@ void HISTORY(StackStr history, int n)
     }
 }
 
-void RESETSCOREBOARD(ArrayDyn listgame, Map *One , Map *Two , Map *Three , Map *Four , Map *Five , Map *Six)
+void RESETSCOREBOARD(ArrayDyn listgame , ArrayMap *M)
 {
     printf("\nDAFTAR SCOREBOARD: \n");
-
     printf("0. ALL\n");
-    printf("1. RNG\n");
-    printf("2. DINER DASH\n");
-    printf("3. HANGMAN\n");
-    printf("4. TOWER OF HANOI\n");
-    printf("5. SNAKE ON METEOR\n");
-    printf("6. MOLE\n");
+    int i;
+    for(i = 0 ; i < listgame.Neff ; i++)
+    {
+        printf("%d. %s\n",i+1,listgame.Ar[i]);
+    }
 
     printf("\nSCOREBOARD YANG INGIN DIHAPUS: ");
     INPUT();
@@ -777,82 +1020,43 @@ void RESETSCOREBOARD(ArrayDyn listgame, Map *One , Map *Two , Map *Three , Map *
         printf("\nAPAKAH KAMU YAKIN INGIN MELAKUKAN RESET SCOREBOARD ALL (YA/TIDAK)? ");
         INPUT();
         char *validasi = wordToString(CWord);
+        int asci = 254;
         if (CompareString(validasi,"YA"))
         {
-            CreateEmpty(One);
-            CreateEmpty(Two);
-            CreateEmpty(Three);
-            CreateEmpty(Four);
-            CreateEmpty(Five);
-            CreateEmpty(Six);
+            int j;
+            for(j = 0 ; j < listgame.Neff ; j++)
+            {
+                CreateEmpty(&M->ElArrMap[j]);
+            }
+
+            printf("\n%c ALL SCOREBOARD BERHASIL DIHAPUS %c\n",asci,asci);
+        }
+        else
+        {
+            printf("\n%c ALL SCOREBOARD GAGAL DIHAPUS %c\n",asci,asci);
         }
     }
-    else if(n == 1)
+    else
     {
-        printf("\nAPAKAH KAMU YAKIN INGIN MELAKUKAN RESET SCOREBOARD RNG (YA/TIDAK)? ");
+        printf("\nAPAKAH KAMU YAKIN INGIN MELAKUKAN RESET SCOREBOARD %s (YA/TIDAK)? ",listgame.Ar[n-1]);
         INPUT();
         char *validasi = wordToString(CWord);
+        int asci = 254;
         if (CompareString(validasi,"YA"))
         {
-            CreateEmpty(One);
+            CreateEmpty(&M->ElArrMap[n-1]);
+            printf("\n%c SCOREBOARD %s BERHASIL DIHAPUS %c\n",asci,listgame.Ar[n-1],asci);
         }
-    }
-    else if(n == 2)
-    {
-        printf("\nAPAKAH KAMU YAKIN INGIN MELAKUKAN RESET SCOREBOARD DINNER DASH (YA/TIDAK)? ");
-        INPUT();
-        char *validasi = wordToString(CWord);
-        if (CompareString(validasi,"YA"))
+        else
         {
-        CreateEmpty(Two);
+            printf("\n%c SCOREBOARD %s GAGAL DIHAPUS %c\n",asci,listgame.Ar[n-1],asci);
         }
-    }
-    else if(n == 3)
-    {
-        printf("\nAPAKAH KAMU YAKIN INGIN MELAKUKAN RESET SCOREBOARD HANGMAN (YA/TIDAK)? ");
-        INPUT();
-        char *validasi = wordToString(CWord);
-        if (CompareString(validasi,"YA"))
-        {
-            CreateEmpty(Three);
-        }
-    }
-    else if(n == 4)
-    {
-        printf("\nAPAKAH KAMU YAKIN INGIN MELAKUKAN RESET SCOREBOARD TOWER OF HANOI (YA/TIDAK)? ");
-        INPUT();
-        char *validasi = wordToString(CWord);
-        if (CompareString(validasi,"YA"))
-        {
-        CreateEmpty(Four);
-        }
-    }
-    else if(n == 5)
-    {
-        printf("\nAPAKAH KAMU YAKIN INGIN MELAKUKAN RESET SCOREBOARD SNAKE ON METEOR (YA/TIDAK)? ");
-        INPUT();
-        char *validasi = wordToString(CWord);
-        if (CompareString(validasi,"YA"))
-        {
-        CreateEmpty(Five);
-        }
-    }
-    else if(n == 6)
-    {
-        printf("\nAPAKAH KAMU YAKIN INGIN MELAKUKAN RESET SCOREBOARD MOLE (YA/TIDAK)? ");
-        INPUT();
-        char *validasi = wordToString(CWord);
-        if (CompareString(validasi,"YA"))
-        {
-        CreateEmpty(Six);
-        }
-    }
-    
+    }    
 }
 
 void RESETHISTORY(StackStr *history)
 {
-    printf("\nAPAKAH KAMU YAKIN INGIN MELAKUKAN RESET HSTORY? ");
+    printf("\nAPAKAH KAMU YAKIN INGIN MELAKUKAN RESET HSTORY (YA/TIDAK)? ");
     INPUT();
     printf("\n");
     char *validasi = wordToString(CWord);

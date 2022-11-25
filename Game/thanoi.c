@@ -11,25 +11,25 @@ void CreateStackIntA(StackInt *S){
 
 
 void displaystack(StackInt *S,int i){
+    int ascii = 220;
     if ((*S).T[i]==1){
-        printf("    *    ");
+        printf("    %c    ",ascii);
     }
     else if ((*S).T[i]==2){
-        printf("   ***   ");
+        printf("   %c%c%c   ",ascii,ascii,ascii);
     }
     else if ((*S).T[i]==3){
-        printf("  *****  ");
+        printf("  %c%c%c%c%c  ",ascii,ascii,ascii,ascii,ascii);
     }
     else if ((*S).T[i]==4){
-        printf(" ******* ");
+        printf(" %c%c%c%c%c%c%c ",ascii,ascii,ascii,ascii,ascii,ascii,ascii);
     }        
     else if ((*S).T[i]==5){
-        printf("*********");
+        printf("%c%c%c%c%c%c%c%c%c",ascii,ascii,ascii,ascii,ascii,ascii,ascii,ascii,ascii);
     }
     else{
         printf("    |    ");
     }
-
 }
 
 

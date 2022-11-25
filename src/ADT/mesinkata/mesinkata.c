@@ -92,7 +92,7 @@ void ADVWORD()
           Jika CC = MARK, EndWord = true.
    Proses : Akuisisi Word menggunakan procedure CopyWord */
     IgnoreBlanks();
-    if(IsEOP())
+    if(IsEOP() || IsNewline() || IsFeof())
     {
         EndWord = true;
     }
@@ -149,7 +149,7 @@ void CopyWord()
           CC adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang Word melebihi NMax, maka sisa Word "dipotong" */
     int i = 0;
-    while (!IsEOP() && !IsBlank())
+    while (!IsEOP() && !IsBlank() && !IsNewline() && !IsFeof())
     {
         if (i < NMax)
         {

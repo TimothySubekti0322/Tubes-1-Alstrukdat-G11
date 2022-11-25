@@ -5,7 +5,7 @@
 #include "RNG.h"
 #include "../src/console.h"
 
-void gameRNG(Map *RNG)  
+void gameRNG(ArrayDyn ArrayGame, ArrayMap *MapGame)  
 {  
     srand(time(NULL));
     printf("RNG Telah dimulai. Uji keberuntungan Anda dengan menebak sebuah angka X yang rentangnya berada diantara 1 - 100.\n");
@@ -47,5 +47,6 @@ void gameRNG(Map *RNG)
     skor = MaxTry - nTebakan + 1;
     printf("skor = %d\n" , skor);
     //return skor;
-    InsertScoreBoard(RNG, skor);
+    int index = FindStrArrayDyn(ArrayGame,"RNG");
+    InsertScoreBoard(&MapGame->ElArrMap[index], skor);
 }

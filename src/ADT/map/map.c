@@ -109,7 +109,6 @@ boolean IsMember(Map M, keytype k)
     boolean found = false;
     while ((i < M.Count) && (!found))
     {
-        printf("\nMap nya = %s , keytype k nya = %s\n",(M).Elements[i].Key , k);
         if (CompareString((M).Elements[i].Key , k))
         {
             found = true;
@@ -120,52 +119,4 @@ boolean IsMember(Map M, keytype k)
         }
     }
     return found;
-}
-
-void InsertScoreBoard(Map *M, valuetype v)
-{
-    printf("Masukan Username [maksimal 20 karakter] : ");
-    INPUT();
-    char *name;
-    // name = (char *) malloc (CWord.Length * sizeof(char)); 
-    name = wordToString(CWord);
-    printf("\n");
-    printf("\n name = %s\n",name);
-    while(IsMember(*M,name))
-    {
-        printf("Username sudah dipakai , silahkan gunakan username lain\n");
-        printf("Masukan Username [maksimal 20 karakter] : ");
-        INPUT();
-        // char *name;
-        // name = (char *) malloc (CWord.Length * sizeof(char));
-        name = wordToString(CWord);
-        printf("\n name = %s\n",name);
-    }
-
-    if(!IsMember(*M,name))
-    {
-        int i = 0;
-        boolean found = false;
-        while ((i < M->Count) && (!found))
-        {
-            if (v > (*M).Elements[i].Value)
-            {
-                found = true;
-            }
-            else
-            {
-                i++;
-            }
-        }
-        int j;
-        for(j = M->Count ; j > i ; j--)
-        {
-            (*M).Elements[j].Key = (*M).Elements[j-1].Key;
-            (*M).Elements[j].Value = (*M).Elements[j-1].Value;
-        }
-        (*M).Elements[i].Key = name;
-        (*M).Elements[i].Value = v;
-        (*M).Count++;
-    }
-
 }

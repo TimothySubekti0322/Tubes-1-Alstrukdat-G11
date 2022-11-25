@@ -131,7 +131,7 @@ boolean IsFullArrMap(ArrayMap ArrMap)
     return (Neff(ArrMap) == MaxNbElArrMap(ArrMap));
 }
 
-void InsertFirst(ArrayMap *ArrMap, ElTypeArrMap M)
+void InsertMapFirst(ArrayMap *ArrMap, ElTypeArrMap M)
 {
 /* I.S. ArrMap terdefinisi, mungkin kosong. */
 /* F.S. M menjadi first element ArrMap. */
@@ -151,7 +151,7 @@ void InsertFirst(ArrayMap *ArrMap, ElTypeArrMap M)
     }
 }
 
-void InsertAt(ArrayMap *ArrMap, ElTypeArrMap M, IdxArrMap j)
+void InsertMapAt(ArrayMap *ArrMap, ElTypeArrMap M, IdxArrMap j)
 {
 /* I.S. ArrMap terdefinisi, tidak kosong, j merupakan indeks lojik yang valid di ArrMap. */
 /* F.S. M disisipkan dalam ArrMap pada indeks ke-j (bukan menimpa elemen di j). */
@@ -171,7 +171,7 @@ void InsertAt(ArrayMap *ArrMap, ElTypeArrMap M, IdxArrMap j)
     }
 }
 
-void InsertLast(ArrayMap *ArrMap, ElTypeArrMap M)
+void InsertMapLast(ArrayMap *ArrMap, ElTypeArrMap M)
 {
 /* I.S. ArrMap terdefinisi, mungkin kosong. */
 /* F.S. M menjadi last element ArrMap. */
@@ -182,12 +182,13 @@ void InsertLast(ArrayMap *ArrMap, ElTypeArrMap M)
     }
     else
     {
-        TI(*ArrMap)[Neff(*ArrMap)] = M;
+        int index = NbElmtArrMap(*ArrMap);
+        (*ArrMap).ElArrMap[index] = M;
         Neff(*ArrMap)++;
     }
 }
 
-void DeleteFirst(ArrayMap *ArrMap)
+void DeleteMapFirst(ArrayMap *ArrMap)
 {
 /* I.S. ArrMap terdefinisi, tidak kosong. */
 /* F.S. first element ArrMap dihapus dari ArrMap. */
@@ -205,7 +206,7 @@ void DeleteFirst(ArrayMap *ArrMap)
     }
 }
 
-void DeleteAt(ArrayMap *ArrMap, IdxArrMap j)
+void DeleteMapAt(ArrayMap *ArrMap, IdxArrMap j)
 {
 /* I.S. ArrMap terdefinisi, tidak kosong,j merupakan indeks lojik yang valid di ArrMap. */
 /* F.S. Elemen ArrMap pada indeks ke-j dihapus dari ArrMap. */
@@ -223,7 +224,7 @@ void DeleteAt(ArrayMap *ArrMap, IdxArrMap j)
     }
 }
 
-void DeleteLast(ArrayMap *ArrMap)
+void DeleteMapLast(ArrayMap *ArrMap)
 {
 /* I.S. ArrMap terdefinisi, tidak kosong. */
 /* F.S. last element ArrMap dihapus dari ArrMap. */
