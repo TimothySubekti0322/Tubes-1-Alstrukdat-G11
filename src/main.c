@@ -141,7 +141,7 @@ int main()
                 char inputfiles[50];
                 CopyWordtostring(CWord, inputfiles, 5 , CWord.Length-1);
                 //printf("%s",inputfiles);
-                Save(ArrayGame, inputfiles);
+                Save(ArrayGame , inputfiles , History , MapGame);
 
                 //ADVCommand();
                 //char filename[50];
@@ -163,6 +163,12 @@ int main()
             else if (IsKataSama(CWord, StringtoWord("RESET SCOREBOARD")))
             {
                 RESETSCOREBOARD(ArrayGame,&MapGame);
+            }
+
+            else if (IsKataSama(CWord, StringtoWord("HISTORY")))
+            {
+                int n = History.TOP + 1;
+                HISTORY(History,n);
             }
 
             else if ((CWord.TabWord[0] == 'H') && (CWord.TabWord[1] == 'I') && (CWord.TabWord[2] == 'S') && (CWord.TabWord[3] == 'T') && (CWord.TabWord[4] == 'O') && (CWord.TabWord[5] == 'R')&& (CWord.TabWord[6] == 'Y') && (CWord.TabWord[7] == ' '))

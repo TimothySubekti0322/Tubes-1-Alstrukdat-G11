@@ -380,9 +380,33 @@ void InsertScoreBoard(Map *M, valuetype v)
         //printf("\n name = %s\n",name);
     }
     
-    //int asci = 175;
-    printf("\n// USERNAME %s BERHASIL DIDAFTARKAN \\\\n", name);
+    int asciLTC = 218;
+    int asciLBC = 192;
+    int asciRTC = 191;
+    int asciRBC = 217;
+    int asciV = 179;
+    int asciH = 196;
     
+    // 34 = 0 huruf
+    // 35 =  1 huruf
+    
+    int NameLen = stringLength(name);
+
+    printf("%c",asciLTC);
+    for (int Hor = 1 ; Hor <= 34 + NameLen ; Hor++)
+    {
+        printf("%c",asciH);
+    }
+    printf("%c\n",asciRTC);
+    printf("%c  USERNAME %s BERHASIL DIDAFTARKAN  %c\n",asciV,name,asciV);
+    printf("%c",asciLBC);
+    for (int Hor = 1 ; Hor <= 34 + NameLen ; Hor++)
+    {
+        printf("%c",asciH);
+    }
+    printf("%c\n",asciRBC);
+    printf("\n");
+
     if(!IsMember(*M,name))
     {
         int i = 0;
@@ -534,7 +558,9 @@ void LOADFILE(ArrayDyn *Games, char *inputfile, ArrayMap *MapGame , StackStr *Hi
 }
 
 
-void Save(ArrayDyn ArrayGame, char *namafile)
+void Save(ArrayDyn ArrayGame, char *namafile, StackStr History, ArrayMap MapGame)
+{
+    /* Melakukan penyimpan
 {
     /* Melkaukan Save file
    I.S : ArrayGame terdefinisi dan nama file terdefinisi
@@ -549,10 +575,23 @@ void Save(ArrayDyn ArrayGame, char *namafile)
     filebaru = fopen(path,"w");
     fprintf(filebaru, "%d\n", ArrayGame.Neff);
     int i;
-    for (i=0; i<ArrayGame.Neff-1; i++){
+    for (i=0; i<ArrayGame.Neff; i++){
         fprintf(filebaru, "%s\n", ArrayGame.Ar[i]);
     }
-    fprintf(filebaru, "%s", ArrayGame.Ar[i]);
+    // fprintf(filebaru, "%s", ArrayGame.Ar[i]);
+    fprintf(filebaru, "%d\n", History.TOP + 1);
+    int j;
+    for (j=0; j< History.TOP + 1; j++)
+    {
+        fprintf(filebaru, "%s\n", History.T[j]);
+    }
+    int k,l;
+    for (k=0; k < MapGame.NeffArrMap ; k++){
+        fprintf(filebaru, "%d\n", MapGame.ElArrMap[k].Count);
+        for(l=0; l < MapGame.ElArrMap[k].Count; l++){
+            fprintf(filebaru, "%s %d\n", MapGame.ElArrMap[k].Elements[l].Key , MapGame.ElArrMap[k].Elements[l].Value);
+        }
+    }
     fclose(filebaru);
     printf("Save file berhasil disimpan. \n");
 }

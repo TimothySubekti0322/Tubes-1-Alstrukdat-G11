@@ -98,7 +98,7 @@ void LOADFILE(ArrayDyn *Games, char *inputfile, ArrayMap *MapGame , StackStr *Hi
    I.S : File yang diinput terdefinisi , Array Games terdefinisi dan kosong
    F.S : Array games berisis list Game yang ada dalam file*/
 
-void Save(ArrayDyn ArrayGame, char namafile[]);
+void Save(ArrayDyn ArrayGame, char namafile[] , StackStr History, ArrayMap MapGame);
 /* Melkaukan Save file
    I.S : ArrayGame terdefinisi dan nama file terdefinisi
    F.S : Jika file sudah ada maka file di overwrite , Jika tidak ada akan membuat file baru*/
