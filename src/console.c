@@ -626,10 +626,36 @@ void Save(ArrayDyn ArrayGame, char *namafile, StackStr History, ArrayMap MapGame
         fprintf(filebaru, "%s\n", History.T[j]);
     }
     int k,l;
-    for (k=0; k < MapGame.NeffArrMap ; k++){
-        fprintf(filebaru, "%d\n", MapGame.ElArrMap[k].Count);
-        for(l=0; l < MapGame.ElArrMap[k].Count; l++){
-            fprintf(filebaru, "%s %d\n", MapGame.ElArrMap[k].Elements[l].Key , MapGame.ElArrMap[k].Elements[l].Value);
+    for (k=0; k < MapGame.NeffArrMap ; k++)
+    {
+        if ((k == MapGame.NeffArrMap-1) && (MapGame.ElArrMap[k].Count == 0))
+        {
+            fprintf(filebaru, "%d", MapGame.ElArrMap[k].Count);
+        }
+        else
+        {
+            fprintf(filebaru, "%d\n", MapGame.ElArrMap[k].Count);
+        }
+        if(k != MapGame.NeffArrMap-1)
+        {
+            for(l=0; l < MapGame.ElArrMap[k].Count; l++)
+            {
+                fprintf(filebaru, "%s %d\n", MapGame.ElArrMap[k].Elements[l].Key , MapGame.ElArrMap[k].Elements[l].Value);
+            }
+        }
+        else
+        {
+            for(l=0; l < MapGame.ElArrMap[k].Count; l++)
+            {
+                if (l != MapGame.ElArrMap[k].Count - 1)
+                {
+                    fprintf(filebaru, "%s %d\n", MapGame.ElArrMap[k].Elements[l].Key , MapGame.ElArrMap[k].Elements[l].Value);
+                }
+                else
+                {
+                    fprintf(filebaru, "%s %d", MapGame.ElArrMap[k].Elements[l].Key , MapGame.ElArrMap[k].Elements[l].Value);
+                }
+            }
         }
     }
     fclose(filebaru);

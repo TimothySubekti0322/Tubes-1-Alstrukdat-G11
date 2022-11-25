@@ -168,6 +168,7 @@ void welcome(){
     printf(". ");
     delay(0.8);
     printf(". ");
+    delay(0.8);
     printf("\r                   ");
     printf("\n");
     //  /* Print Welcome*/
