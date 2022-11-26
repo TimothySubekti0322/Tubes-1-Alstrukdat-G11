@@ -1,5 +1,7 @@
 #include <stdio.h>
-#include <stdlib.h>
+#include "../src/ADT/tree/tree.c"
+#include "../src/boolean.h"
+
 char *opening=  
     "In front of you is a cave said to harbor the treasure of a 13th century king, The WanPis.\n"
     "It is said that many adventurers come for the challenge of claiming the treasure\n"

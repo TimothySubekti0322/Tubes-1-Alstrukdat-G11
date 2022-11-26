@@ -1,7 +1,4 @@
-#include "../src/ADT/tree/tree.c"
-#include "../src/boolean.h"
 #include "OnePiece.h"
-#include <stdio.h>
 #include <stdlib.h>
 
 void ReadStory(BinTree Story){
