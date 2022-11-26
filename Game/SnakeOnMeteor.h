@@ -6,8 +6,8 @@
 
 #include <stdio.h>
 #include "time.h"
-#include "..\src\console.c"
-#include "..\src\ADT\listlinier\listsirkuler.c"
+#include "..\src\console.h"
+#include "..\src\ADT\listlinier\listsirkuler.h"
 
 //Belum lengkap, meteor, obstacle, scoreboard belum ditangani
 

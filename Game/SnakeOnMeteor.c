@@ -1,7 +1,7 @@
 #include "SnakeOnMeteor.h"
 //Belum lengkap, meteor, obstacle, scoreboard belum ditangani
 
-void randomnumber(int *x,int *y){
+void randomnumbersnake(int *x,int *y){
     srand(time(NULL));
     *x = rand() % 5;
     *y = rand() % 5;
@@ -9,17 +9,16 @@ void randomnumber(int *x,int *y){
 
 void GenerateFood(StatArray *container, int *FoodLocation){
     int x,y;
-    randomnumber(&x,&y);
+    randomnumbersnake(&x,&y);
     while(container->Ar[x + 5*y] != -100){
-        randomnumber(&x,&y);
+        randomnumbersnake(&x,&y);
     }
     container->Ar[x + 5*y] = -1;
     *FoodLocation = x + 5*y;
 }
 
 boolean IsPointNotEmpty(List snake, int input){
-    StatArray coordinat;
-    coordinat = CreateStatArray();
+
     addresslist last = First(snake);
     boolean Found = false;
     while (!Found && (Next(last) != First(snake))){
@@ -86,7 +85,7 @@ void ShowSquare(List snake, int *FoodLocation, boolean *IsFoodAvailable){
 void CreateSnake(List *snake){
     CreateEmptyList(snake);
     int x,y;
-    randomnumber(&x,&y);
+    randomnumbersnake(&x,&y);
     InsVLast(snake,y*5+x);
     if (x==0){
         if(y>=2){

@@ -602,7 +602,7 @@ void Save(ArrayDyn ArrayGame, char *namafile, StackStr History, ArrayMap MapGame
 {
     /* Melakukan penyimpan
 {
-    /* Melkaukan Save file
+   Melkaukan Save file
    I.S : ArrayGame terdefinisi dan nama file terdefinisi
    F.S : Jika file sudah ada maka file di overwrite , Jika tidak ada akan membuat file baru*/
 
