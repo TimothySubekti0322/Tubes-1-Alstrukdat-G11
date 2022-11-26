@@ -9,7 +9,7 @@
 #include "..\src\console.h"
 #include "..\src\ADT\listlinier\listsirkuler.h"
 
-//Belum lengkap, meteor, obstacle, scoreboard belum ditangani
+//Belum lengkap, obstacle, scoreboard belum ditangani
 
 void randomnumbersnake(int *x,int *y);
 

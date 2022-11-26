@@ -1,5 +1,5 @@
 #include "SnakeOnMeteor.h"
-//Belum lengkap, meteor, obstacle, scoreboard belum ditangani
+//Belum lengkap, obstacle, scoreboard belum ditangani
 
 void randomnumbersnake(int *x,int *y){
     srand(time(NULL));
