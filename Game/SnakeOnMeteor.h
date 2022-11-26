@@ -23,7 +23,7 @@ boolean IsSnakeBody(List snake, int input);
 
 int ShowSquare(StatArray container);
 
-void NextTurn(List *snake, int *FoodLocation, boolean *IsFoodAvailable, int Turn, int *MeteorLocation, int *End, int *score)
+void NextTurn(List *snake, int *FoodLocation, boolean *IsFoodAvailable, int Turn, int *MeteorLocation, int *End, int *score);
 
 void CreateSnake(List *snake);
 
