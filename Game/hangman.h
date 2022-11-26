@@ -9,9 +9,6 @@ void LoadWordList(ArrayDyn *ListWord);
     * F.S : Array ListWord berisi list kata-kata yang ada dalam file listkata.txt
 */
 
-char wordToChar(Word CWord);
-/* Mengubah Word menjadi char */
-
 void guessedchars(char *guessed, char current, int pos);
 /*
     * Menambahkan current ke array guessed di indeks ke-pos
@@ -26,12 +23,6 @@ void DisplayHangmanWord(char *array, int length);
     * Prekondisi : array selalu terdefinisi, dan tidak mungkin kosong
 */
 
-boolean isWordsEqual(char *word1, char *word2);
-/*  
-    * Mengirimkan true apabila word1 dan word2 adalah sama (panjang dan isinya);
-    * false jika sebaliknya
-*/
-
 boolean alreadyGuessed(char now, char *guessed);
 /* 
     * Bernilai true apabila now sudah pernah ditebak, yang dalam kata lain,
@@ -39,5 +30,16 @@ boolean alreadyGuessed(char now, char *guessed);
     * Mengirimkan false jika sebaliknya
 */
 
-void hangman();
-/* Fungsi utama untuk game hangman */
+void emptyguessed(char *guessed);
+/* 
+    * Fungsi untuk mengosongkan string hasil tebakan pada kata sebelumnya.
+    * I.S.  : String guessed berisi huruf-huruf yang ditebak untuk kata sebelumnya, tidak mungkin kosong.
+    * F.S.  : String guessed menjadi kosong, yaitu semua elemennya adalah '\0'.
+*/
+
+void hangman(ArrayDyn ArrayGame, ArrayMap *MapGame);
+/* 
+    * Fungsi utama untuk game hangman
+    * Setelah game berakhir, nilai user akan dimasukkan ke scoreboard,
+    * yaitu MapGame.
+*/
