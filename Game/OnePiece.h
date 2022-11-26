@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 char *opening=  
     "In front of you is a cave said to harbor the treasure of a 13th century king, The WanPis.\n"
     "It is said that many adventurers come for the challenge of claiming the treasure\n"
@@ -11,7 +12,7 @@ char *opening=
     
     "As you approach the cave entrance, you find a suspicious looking mushroom. With a red cap\n"
     "and blue stalk. Maybe it has something to do with this cave. Eat the mushroom?\n"
-    "1. Eat the mushroom"
+    "1. Eat the mushroom\n"
     "2. Don't eat the mushroom. It might be poisonous\n"
     "(Pick your choice with the corresponding number)\n";
 
@@ -28,7 +29,7 @@ char *nomushroom =
     "As you take a few steps into the dark cave. You sense a slight but sudden fall below your right foot\n"
     "Just like clockwork, you feel a needle pierce through your arm then many more. Your journey ends here.\n"
     "GAME OVER.\n"
-    "PIERCE THROUGH THE HEART ENDING";
+    "PIERCE THROUGH THE HEART ENDING\n";
 
 char *path_left =
     "You peek through a passage and see a sleeping beast with a lion head, bear body and a hawk's wings\n"
@@ -40,7 +41,7 @@ char *path_left_fight =
     "You use your sword to pierce through its eye\n"
     "Irritated, the beast swipes at you\n"
     "You die. What were you even thinking trying to fight such a beast?\n"
-    "At least you've put a mark by half blinding the beast, at least"
+    "At least you've put a mark by half blinding the beast, at least\n"
     "AN EYE FOR A LIFE ENDING\n";
 
 char *path_left_sneak =
@@ -53,7 +54,7 @@ char *path_left_sneak =
 char *path_right =
     "You peek through a corridor and see a kraken-like monster.\n"
     "It notices you and reaches one of its tentacle onto you.\n"
-    "What do you do?"
+    "What do you do?\n"
     "1. Dodge it\n"
     "2. Slice it\n";
 

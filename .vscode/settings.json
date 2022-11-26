@@ -4,6 +4,7 @@
         "mesinkarakter.h": "c",
         "mesinkata.h": "c",
         "console.h": "c",
-        "map.h": "c"
+        "map.h": "c",
+        "stdio.h": "c"
     }
 }

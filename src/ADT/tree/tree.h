@@ -7,7 +7,7 @@
 #define _BINTREE_H_
 
 /* Modul lain yang digunakan : */
-#include "boolean.h"
+#include "../../boolean.h"
 #include <stdlib.h>
 
 #define Nil NULL 
@@ -15,6 +15,7 @@
 /* *** Definisi Type Pohon Biner *** */
 /* typedef int infotype; */ /* type infotype sesuai pada modul listrek */
 typedef struct tNode *addrNode;
+typedef char* infotype;
 typedef struct tNode
 {
     infotype info;
@@ -41,16 +42,6 @@ void MakeTree(infotype Akar, BinTree L, BinTree R, BinTree *P);
 /* I.S. Akar, L, R terdefinisi. P Sembarang */
 /* F.S. Membentuk pohon P dengan Akar(P)=Akar, Left(P)=L, dan Right(P)=R
    jika alokasi berhasil. P = Nil jika alokasi gagal. */
-BinTree BuildBalanceTree(int n);
-/* Menghasilkan sebuah balanced tree dengan n node, nilai setiap node dibaca */
-/* Jika n == 0, kembalikan Nil.
-   Mula-mula, baca nilai dari root dari stdin, lalu bangun pohon biner di kiri
-   (dengan membaca dari stdin) lalu di tree kanan (dengan membaca dari stdin). 
-   misal dari stdin: 1, 2, 3, 4, 5, 6, 7, hasilnya:
-       1
-     2   5
-    3 4 6 7
-  */
 
 /* Manajemen Memory */
 addrNode AlokNode(infotype X);
@@ -169,9 +160,5 @@ boolean BSearch(BinTree P, infotype X);
 void InsSearch(BinTree *P, infotype X);
 /* Menghasilkan sebuah pohon Binary Search Tree P dengan tambahan simpul X. Belum ada simpul P yang bernilai X. */
 
-void DelBtree(BinTree *P, infotype X);
-/* I.S. Pohon P tidak  kosong */
-/* F.S. Nilai X yang dihapus pasti ada */
-/* Sebuah node dengan nilai X dihapus */
 
 #endif

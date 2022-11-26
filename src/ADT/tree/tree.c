@@ -12,19 +12,11 @@
 #define Nil NULL
 
 /* *** Definisi Type Pohon Biner *** */
-/* typedef int infotype; */ /* type infotype sesuai pada modul listrek */
-typedef struct tNode *addrNode;
-typedef char* infotype;
-typedef struct tNode
-{
-  infotype info;
-  addrNode left;
-  addrNode right;
-} Node;
+
 
 /* Definisi PohonBiner : */
 /* Pohon Biner kosong : P = Nil */
-typedef addrNode BinTree;
+
 
 /* *** PROTOTYPE *** */
 
@@ -85,42 +77,6 @@ void MakeTree(infotype Akar, BinTree L, BinTree R, BinTree *P)
   (*P) = Tree(Akar, L, R);
 }
 
-BinTree BuildBalanceTree(int n)
-/* Menghasilkan sebuah balanced tree dengan n node, nilai setiap node dibaca */
-/* Jika n == 0, kembalikan Nil.
-   Mula-mula, baca nilai dari root dari stdin, lalu bangun pohon biner di kiri
-   (dengan membaca dari stdin) lalu di tree kanan (dengan membaca dari stdin).
-   misal dari stdin: 1, 2, 3, 4, 5, 6, 7, hasilnya:
-       1
-     2   5
-    3 4 6 7
-  */
-{
-  addrNode P;
-  infotype X;
-  BinTree R, L;
-  int nL, nR;
-  if (n == 0)
-  {
-    return Nil;
-  }
-  else
-  {
-    scanf("%d", &X);
-    P = AlokNode(X);
-    if (P != Nil)
-    {
-      Akar(P) = X;
-      nL = n / 2;
-      nR = n - nL - 1;
-      L = BuildBalanceTree(nL);
-      R = BuildBalanceTree(nR);
-      Left(P) = L;
-      Right(P) = R;
-    }
-    return P;
-  }
-}
 
 /* *** Predikat-Predikat Penting *** */
 boolean IsTreeEmpty(BinTree P)
@@ -168,7 +124,7 @@ void PrintPreorder(BinTree P)
   else
   {
     printf("(");
-    printf("%d", Akar(P));
+    printf("%s", Akar(P));
     PrintPreorder(Left(P));
     PrintPreorder(Right(P));
     printf(")");
@@ -189,7 +145,7 @@ void PrintInorder(BinTree P)
   if (!IsTreeEmpty(P))
   {
     PrintInorder(Left(P));
-    printf("%d", Akar(P));
+    printf("%s", Akar(P));
     PrintInorder(Right(P));
   }
   printf(")");
@@ -212,7 +168,7 @@ void PrintPostorder(BinTree P)
     printf("(");
     PrintPostorder(Left(P));
     PrintPostorder(Right(P));
-    printf("%d", Akar(P));
+    printf("%s", Akar(P));
     printf(")");
   }
 }
@@ -222,7 +178,7 @@ void PrintTree2(BinTree P, int h, int current_indent)
   if (!IsTreeEmpty(P))
   {
 
-    printf("%*s%d\n", current_indent, "", Akar(P));
+    printf("%*s%s\n", current_indent, "", Akar(P));
 
     PrintTree2(Left(P), h, current_indent + h);
     PrintTree2(Right(P), h, current_indent + h);
@@ -469,49 +425,3 @@ void InsSearch(BinTree *P, infotype X)
   }
 }
 
-void DelNode(BinTree *P)
-{
-  addrNode q;
-  if (Right(*P) != Nil)
-  {
-    DelNode(&Right(*P));
-  }
-  else
-  {
-    q = *P;
-    *P = Left(*P);
-  }
-}
-
-void DelBtree(BinTree *P, infotype X)
-/* I.S. Pohon P tidak  kosong */
-/* F.S. Nilai X yang dihapus pasti ada */
-/* Sebuah node dengan nilai X dihapus */
-{
-  addrNode q;
-  if (X < Akar(*P))
-  {
-    DelBtree(&Left(*P), X);
-  }
-  else if (X > Akar(*P))
-  {
-    DelBtree(&Right(*P), X);
-  }
-  else if (X == Akar(*P))
-  {
-    q = Tree(Akar(*P), Left(*P), Right(*P));
-    if (Right(q) == Nil)
-    {
-      (*P) = Left(q);
-    }
-    else if (Left(q) == Nil)
-    {
-      (*P) = Right(q);
-    }
-    else
-    {
-      DelNode(&Left(q));
-      free(&q);
-    }
-  }
-}
