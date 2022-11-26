@@ -11,7 +11,7 @@
 
 //Belum lengkap, meteor, obstacle, scoreboard belum ditangani
 
-void randomnumber(int *x,int *y);
+void randomnumbersnake(int *x,int *y);
 
 void GenerateFood(StatArray *container, int *FoodLocation);
 
