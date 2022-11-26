@@ -8,14 +8,14 @@
 #include "../src/ADT/mesinkata/mesinkata.h"
 #include "../src/boolean.h"
 
-void CreateStackIntA(StackInt *S);
+void CreateStackIntA(StackInt *S, int size);
 /*
     I.S : Sembarang
     F.S : Membuat stack yang berisi angka 1 sampai 5 secara berurutan dengan angka 1
     adalah angka terakhir yang masuk ke dalam stack
 */
 
-void displaystack(StackInt *S,int i);
+void displaystack(StackInt S,int size, int i);
 /*
     I.S : Stack sudah terbentuk
     F.S : Menampilkan stack berupa "*" dengan jumlah sesuai nilai elemen yang sedang diakses
@@ -27,7 +27,7 @@ void movepiring (char tujuan, boolean found);
     F.S : Menampilkan perpindahan piring ke suatu tiang
 */
 
-void displaytiang(StackInt A, StackInt B, StackInt C);
+void displaytiang(StackInt A, StackInt B, StackInt C, int Size);
 /*
     I.S: Terdapat tiga stack yang terbentuk, stack mungkin kosong
     F.S: MEnampilkan tiang-tiang yang ada dalam permainan tower of hanoi
@@ -39,13 +39,13 @@ boolean movepiringtotiang(StackInt *awal, StackInt *tujuan, boolean found);
     F.S: Memindahkan piring teratas dari tiang menuju tiang yang lain
  */
 
-void bikingaris(StackInt S);
+void bikingaris(StackInt S, int size);
 /*
     I.S : stack terdefinisi, stack mungkin kosong
     F.S : menampilkan --------
 */
 
-void commandH (char *awal, char *tujuan, StackInt *A, StackInt *B, StackInt*C, boolean found);
+void commandH (char *awal, char *tujuan, StackInt *A, StackInt *B, StackInt*C, boolean found, int Size);
 /*
     I.S : Terdapat tiga stack yang terbentuk, stack mungkin kosong
     F.S : Memindahkan piringan dari tiang awal ke tiang tujuan sesuai command masukan
@@ -57,10 +57,12 @@ int hitungskor (int langkah);
     F.S : Mengeluarkan nilai yang didapat sesuai banyak langkah
 */
 
-int loopHanoi (int *length, StackInt *A, StackInt *B, StackInt*C, boolean found);
+void towerhanoi();
+
+void KataToInt(Word kata, int *hasil);
 /*
-    I.S : Terdapat tiga stack yang terbentuk, stack mungkin kosong
-    F.S : Melakukan loop untuk memainkan game
+    I.S : Kata dan hasil terdefinisi
+    F.S : hasil merupakan integer dari element Kata
 */
 
 

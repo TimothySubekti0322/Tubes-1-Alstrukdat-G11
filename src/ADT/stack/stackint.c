@@ -68,3 +68,19 @@ int LengthStackInt(StackInt S)
  * Mengirimkan banyaknya elemen StackStr S.
  * Mengirimkan 0 jika StackStr kosong.
 */
+
+void CreateEmptyStackHanoi(StackInt *S)
+{
+    int i;
+    for (i = 0; i < IntStartSize; i++)
+    {
+        (*S).T[i] = NIL;
+    }
+    (*S).TOP = NIL;
+}
+/*
+ * I.S.  sembarang
+ * F.S.  Menciptakan StackStr S yang kosong dan berkapasitas IntStartSize
+ * yang memiliki indeks 0..IntStartSize - 1.
+ * StackStr adalah kosong apabila TOP bernilai Nil.
+ */
