@@ -6,8 +6,8 @@
 
 #include <stdio.h>
 #include "time.h"
-#include "C:\Users\muham\OneDrive\Documents\Kuliah\Semester 3\Algoritma dan Struktur Data STI\Tubes\Tubes-1-Alstrukdat-G11\src\console.c"
-#include "C:\Users\muham\OneDrive\Documents\Kuliah\Semester 3\Algoritma dan Struktur Data STI\Tubes\Tubes-1-Alstrukdat-G11\src\ADT\listlinier\listsirkuler.c"
+#include "..\src\console.c"
+#include "..\src\ADT\listlinier\listsirkuler.c"
 
 //Belum lengkap, meteor, obstacle, scoreboard belum ditangani
 

@@ -20,7 +20,7 @@ void GenerateFood(StatArray *container, int *FoodLocation){
 boolean IsPointNotEmpty(List snake, int input){
     StatArray coordinat;
     coordinat = CreateStatArray();
-    address last = First(snake);
+    addresslist last = First(snake);
     boolean Found = false;
     while (!Found && (Next(last) != First(snake))){
         if (last->info == input){
@@ -41,7 +41,7 @@ void ShowSquare(List snake, int *FoodLocation, boolean *IsFoodAvailable){
 
     StatArray coordinat;
     coordinat = CreateStatArray();
-    address last = First(snake);
+    addresslist last = First(snake);
     InsertLStat(&coordinat,last->info);
     while (Next(last) != First(snake)){
         last = Next(last);
@@ -84,7 +84,7 @@ void ShowSquare(List snake, int *FoodLocation, boolean *IsFoodAvailable){
 }
 
 void CreateSnake(List *snake){
-    CreateEmpty(snake);
+    CreateEmptyList(snake);
     int x,y;
     randomnumber(&x,&y);
     InsVLast(snake,y*5+x);
