@@ -17,7 +17,8 @@ void displaystack(StackInt S,int size, int i){
     spasi = ((2 * size + 1) - bintang)/2;
     int ascii = 178;
     
-    if(isi == NIL){
+    if(isi == NIL)
+    {
         for(int j=0; j < size; j++)
         {
             printf(" ");
@@ -28,13 +29,15 @@ void displaystack(StackInt S,int size, int i){
             printf(" ");
         }
         
-    }else{
+    }
+    else
+    {
         for(int j=0;j<spasi;j++)
         {
             printf(" ");
         }
         for(int j = 0; j<bintang; j++){
-            printf("%c",ascii);
+            printf("*");
         }
         for(int j=0;j<spasi;j++)
         {
@@ -46,42 +49,52 @@ void displaystack(StackInt S,int size, int i){
 
 
 void movepiring (char tujuan, boolean found){
-    if(found){
+    if(found)
+    {
         printf("Memindahkan piring ke tiang %c\n",tujuan);
     }
-    else{
+    else
+    {
         printf("Salah memilih tiang, pikir lagi\n");
     }    
 }
 
 boolean movepiringtotiang(StackInt *awal, StackInt *tujuan, boolean found){
     int Toptiang1, Toptiang2;
-    if(awal != tujuan){
-        if(!IsStackIntEmpty(*awal)){
+    if(awal != tujuan)
+    {
+        if(!IsStackIntEmpty(*awal))
+        {
             PopStackInt(awal,&Toptiang1);
-            if(IsStackIntEmpty(*tujuan)){
+            if(IsStackIntEmpty(*tujuan))
+            {
                 PushStackInt(tujuan,Toptiang1);
                 found = true;
             }
-            else{
+            else
+            {
                 PopStackInt(tujuan,&Toptiang2);
-                if(Toptiang2 > Toptiang1){
+                if(Toptiang2 > Toptiang1)
+                {
                     PushStackInt(tujuan,Toptiang2);
                     PushStackInt(tujuan,Toptiang1);
                     found = true;
                 }
-                else{
+                else
+                {
                     PushStackInt(tujuan,Toptiang2);
                     PushStackInt(awal,Toptiang1);
                     found = false;
                 }
             }
         }
-        else{
+        else
+        {
             found = false;
         }
     }
-    else{
+    else
+    {
         found = false;
     }
     return found;
@@ -124,7 +137,7 @@ void bikingaris(StackInt S, int size)
             }
         }
     }
-    else
+    else if(size == 2)
     {
         for(int i = 0; i < spasikosong; i++)
         {
@@ -136,98 +149,121 @@ void bikingaris(StackInt S, int size)
             printf(" ");
         }
     }
+    else{
+        for(int i = 0; i < 1; i++)
+        {
+            printf(" ");
+        }
+        printf("-");
+        for(int i = 0; i < 1; i++)
+        {
+            printf(" ");
+        }
+    }
 
 }
 
 void spasitiang (int size){
-    for(int i = 0; i < size;i++)
+    if(size > 0)
     {
-        printf(" ");
+        for(int i = 0; i < size;i++)
+        {
+            printf(" ");
+        }
     }
+    else
+    {
+        for(int i = 0; i < 1;i++)
+        {
+            printf(" ");
+        }
+    }
+    
 }
 
-void displaytiang(StackInt A, StackInt B, StackInt C, int Size){
+void displaytiang(StackInt A, StackInt B, StackInt C, int size){
     
-    for (int i=(Size-1);i>=0;i-=1){
-        displaystack(A,Size,i);
-        displaystack(B,Size,i);
-        displaystack(C,Size,i);
+    for (int i=(size-1);i>=0;i-=1)
+    {
+        displaystack(A,size,i);
+        displaystack(B,size,i);
+        displaystack(C,size,i);
         printf("\n");
 
     }
     int i;
-    bikingaris(A,Size);
-    bikingaris(B,Size);
-    bikingaris(C,Size);
+    bikingaris(A,size);
+    bikingaris(B,size);
+    bikingaris(C,size);
     printf("\n");
-    spasitiang(Size);
+    spasitiang(size);
     printf("A");
-    spasitiang(Size);
-    spasitiang(Size);
+    spasitiang(size);
+    spasitiang(size);
     printf("B");
-    spasitiang(Size);
-    spasitiang(Size);
+    spasitiang(size);
+    spasitiang(size);
     printf("C");
-    spasitiang(Size);
+    spasitiang(size);
     printf("\n\n");
 }
 
 
 
-void commandH (char *awal, char *tujuan, StackInt *A, StackInt *B, StackInt*C, boolean found, int Size){
+void commandH (char *awal, char *tujuan, StackInt *A, StackInt *B, StackInt*C, boolean found, int size){
     printf("\n");
     if(*awal == 'A' && *tujuan == 'B')
     {
         found = movepiringtotiang(A, B, found);
-        displaytiang(*A,*B,*C,Size);
+        displaytiang(*A,*B,*C,size);
         movepiring(*tujuan,found);
     }
     else if(*awal == 'A' && *tujuan == 'C')
     {
         found = movepiringtotiang(A, C, found);
-        displaytiang(*A,*B,*C,Size);
+        displaytiang(*A,*B,*C,size);
         movepiring(*tujuan,found);
     }
     else if(*awal == 'A' && *tujuan == 'A')
     {
         found = movepiringtotiang(A, A, found);
-        displaytiang(*A,*B,*C,Size);
+        displaytiang(*A,*B,*C,size);
         movepiring(*tujuan,found);
     }
     else if(*awal == 'B' && *tujuan == 'A')
     {
         found = movepiringtotiang(B, A, found);
-        displaytiang(*A,*B,*C,Size);
+        displaytiang(*A,*B,*C,size);
         movepiring(*tujuan,found);
     }
     else if(*awal == 'B' && *tujuan == 'B')
     {
         found = movepiringtotiang(B, B, found);
-        displaytiang(*A,*B,*C,Size);
+        displaytiang(*A,*B,*C,size);
         movepiring(*tujuan,found);
     }
     else if(*awal == 'B' && *tujuan == 'C')
     {
         found = movepiringtotiang(B, C, found);
-        displaytiang(*A,*B,*C,Size);
+        displaytiang(*A,*B,*C,size);
         movepiring(*tujuan,found);
     }
     else if(*awal == 'C' && *tujuan == 'A')
     {
         found = movepiringtotiang(C, A, found);
-        displaytiang(*A,*B,*C,Size);
+        displaytiang(*A,*B,*C,size);
         movepiring(*tujuan,found);
     }
     else if(*awal == 'C' && *tujuan == 'B')
     {
         found = movepiringtotiang(C, B, found);
-        displaytiang(*A,*B,*C,Size);
+        displaytiang(*A,*B,*C,size);
         movepiring(*tujuan,found);
     }
     else if(*awal == 'C' && *tujuan == 'C')
     {
         found = movepiringtotiang(C, C, found);
-        displaytiang(*A,*B,*C,Size);
+        displaytiang(*A,*B,*C,size);
         movepiring(*tujuan,found);
     }
     else{
@@ -236,50 +272,90 @@ void commandH (char *awal, char *tujuan, StackInt *A, StackInt *B, StackInt*C, b
     
 }
 
-void efektif (int size){
-    if (size == 1){
-        return;
+int langkahefektif (int size){
+    int result;
+    if (size < 2)
+    {
+        return size;
     }
-    efektif(size-1);
-    efektif(size-1);
+    if(size == 2)
+    {
+        return 3;
+    }
+
+    result = 1 + langkahefektif(size-1)+ langkahefektif(size-1);
+    return result;
+        
 }
 
-int hitungskor (int langkah){
+int hitungskor (int langkah, int size){
     int skor;
-    if(langkah == 31){
-        skor = 10;
-    }
-    else if(langkah >31 && langkah <=37 ){
-        skor = 9;
+    if (size == 5)
+    {
+        if(langkah == 31)
+        {
+            skor = 10;
+        }
+        else if(langkah >31 && langkah <=37 )
+        {
+            skor = 9;
+        }
+
+        else if(langkah >37 && langkah <=43 )
+        {
+            skor = 8;
+        }
+        else if(langkah >43 && langkah <=48 )
+        {
+            skor = 7;
+        }
+        else if(langkah >48 && langkah <=54 )
+        {
+            skor = 6;
+        }
+        else if(langkah >54 && langkah <=59 )
+        {
+            skor = 5;
+        }
+        else if(langkah >59 && langkah <=65 )
+        {
+            skor = 4;
+        }
+        else if(langkah >65 && langkah <=71 )
+        {
+            skor = 3;
+        }
+        else if(langkah >71 && langkah <=77 )
+        {
+            skor = 2;
+        }
+        else if(langkah >77 && langkah <=83 )
+        {
+            skor = 1;
+        }
+        else
+        {
+            skor = 0;
+        }
     }
 
-    else if(langkah >37 && langkah <=43 ){
-        skor = 8;
+    else
+    {
+        int efisien = langkahefektif(size);
+        if (langkah == efisien)
+        {
+            skor = 2 * size;
+        }
+        else
+        {
+            skor = (2 * size) - (langkah - efisien);
+            if (skor < 0)
+            {
+                skor = 0;
+            }
+        }
     }
-    else if(langkah >43 && langkah <=48 ){
-        skor = 7;
-    }
-    else if(langkah >48 && langkah <=54 ){
-        skor = 6;
-    }
-    else if(langkah >54 && langkah <=59 ){
-        skor = 5;
-    }
-    else if(langkah >59 && langkah <=65 ){
-        skor = 4;
-    }
-    else if(langkah >65 && langkah <=71 ){
-        skor = 3;
-    }
-    else if(langkah >71 && langkah <=77 ){
-        skor = 2;
-    }
-    else if(langkah >77 && langkah <=83 ){
-        skor = 1;
-    }
-    else{
-        skor = 0;
-    }
+
     return skor;
 }
 
@@ -297,16 +373,24 @@ void KataToInt(Word kata, int *hasil)
     }
 }
 
-void towerhanoi(){
+
+void towerhanoi(ArrayDyn ArrayGame, ArrayMap *MapGame){
     StackInt A, B, C;
     boolean found;
-    int length,size;
+    int length,size,optimal;
 
     size = 0;
     printf("Masukan banyak jumlah piringan: ");
     INPUT();
     KataToInt(CWord,&size);
 
+    while(size >= 28)
+    {
+        printf("jumlah piringan terlalu banyak kamu gabakal bisa\n");
+        printf("\nMasukan banyak jumlah piringan: ");
+        INPUT();
+        KataToInt(CWord,&size);
+    }
 
     CreateStackIntA(&A,size);
     CreateEmptyStackHanoi(&B);
@@ -331,7 +415,11 @@ void towerhanoi(){
         length = LengthStackInt(C);
         langkah = langkah + 1;
     }
-    akhir = hitungskor(langkah);
+    akhir = hitungskor(langkah,size);
     printf("\nkamu berhasil\n");
-    printf("skor yang didapat: %d", akhir);
+    printf("skor yang didapat: %d\n", akhir);
+    int index = FindStrArrayDyn(ArrayGame,"TOWER OF HANOI");
+    InsertScoreBoard(&MapGame->ElArrMap[index], akhir);
 }
+
+

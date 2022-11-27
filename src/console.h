@@ -15,6 +15,7 @@
 #include "ADT/stack/stackstr.h"
 #include "ADT/stack/stackint.h"
 #include "ADT/map/arrayofmap.h"
+#include "../Game/thanoi.h"
 
 void STARTBNMO(ArrayDyn *gamesBNMO , ArrayMap *MapGame);
 /* Membaca file config dan memasukan tiap baris file ke array gamesBNMO*/

@@ -812,7 +812,7 @@ void PlayGame(QueueStr* AntrianGame , StackStr *History , ArrayMap *MapGame , Ar
             delay(0.8);
             printf(".\n");
             delay(0.8);
-            // < Name Game >;
+            towerhanoi(ArrayGame, MapGame);
         }
 
         else if (CompareString(game,"SNAKE ON METEOR"))
@@ -933,7 +933,7 @@ void SkipGame(QueueStr* AntrianGame, int number , ArrayMap *MapGame , ArrayDyn A
 
                 else if (CompareString(game,"TOWER OF HANOI"))
                 {
-                    // < Name Game >;
+                    towerhanoi(ArrayGame,MapGame);
                 }
 
                 else if (CompareString(game,"SNAKE ON METEOR"))

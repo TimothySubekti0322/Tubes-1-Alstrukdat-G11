@@ -7,6 +7,11 @@
 #include "../src/ADT/mesinkarakter/mesinkarakter.h"
 #include "../src/ADT/mesinkata/mesinkata.h"
 #include "../src/boolean.h"
+#include "../src/ADT/map/arrayofmap.h"
+#include "../src/ADT/array/arraydinamikstr.h"
+#include "../src/ADT/map/map.h"
+#include "../src/console.h"
+
 
 void CreateStackIntA(StackInt *S, int size);
 /*
@@ -27,7 +32,7 @@ void movepiring (char tujuan, boolean found);
     F.S : Menampilkan perpindahan piring ke suatu tiang
 */
 
-void displaytiang(StackInt A, StackInt B, StackInt C, int Size);
+void displaytiang(StackInt A, StackInt B, StackInt C, int size);
 /*
     I.S: Terdapat tiga stack yang terbentuk, stack mungkin kosong
     F.S: MEnampilkan tiang-tiang yang ada dalam permainan tower of hanoi
@@ -45,19 +50,31 @@ void bikingaris(StackInt S, int size);
     F.S : menampilkan --------
 */
 
-void commandH (char *awal, char *tujuan, StackInt *A, StackInt *B, StackInt*C, boolean found, int Size);
+void commandH (char *awal, char *tujuan, StackInt *A, StackInt *B, StackInt*C, boolean found, int size);
 /*
     I.S : Terdapat tiga stack yang terbentuk, stack mungkin kosong
     F.S : Memindahkan piringan dari tiang awal ke tiang tujuan sesuai command masukan
 */
 
-int hitungskor (int langkah);
+void spasitiang (int size);
+/*
+    Membuat sapasi antar tiang
+*/
+
+int hitungskor (int langkah, int size);
 /*
     I.S : sembarang
     F.S : Mengeluarkan nilai yang didapat sesuai banyak langkah
 */
 
-void towerhanoi();
+int langkahefektif (int size);
+/*
+    I.S : sembarang
+    F.S : Mengembalikan langkah efektif dalam memainkan tower of hanoi 
+          sesuai jumlah piring;
+*/
+
+void towerhanoi(ArrayDyn ArrayGame, ArrayMap *MapGame);
 
 void KataToInt(Word kata, int *hasil);
 /*
