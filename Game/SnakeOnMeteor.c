@@ -164,11 +164,6 @@ void NextTurn(List *snake, int *FoodLocation, boolean *IsFoodAvailable, int Turn
                     printf("Silahkan lanjutkan permainan\n");
                     if (((abs(coordinat.Ar[i-1]-coordinat.Ar[i+1]) == 2 || abs(coordinat.Ar[i-1]-coordinat.Ar[i+1]) == 3) && coordinat.Ar[i-1]/5 == coordinat.Ar[i+1]/5) ||
                         ((abs(coordinat.Ar[i-1]-coordinat.Ar[i+1]) == 10 || abs(coordinat.Ar[i-1]-coordinat.Ar[i+1]) == 15) && coordinat.Ar[i-1]%5 == coordinat.Ar[i+1]%5)){
-                        addresslist MoveCoordinat = Search(*snake, *MeteorLocation);
-                        while(MoveCoordinat != First(*snake)){
-                            MoveCoordinat->info = MoveCoordinat->next->info;
-                            MoveCoordinat = MoveCoordinat->next;
-                        }
                         DelVLast(snake,&temporary);
                     } else {
                         DelP(snake, *MeteorLocation);
