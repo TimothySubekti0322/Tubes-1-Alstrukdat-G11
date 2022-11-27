@@ -227,7 +227,7 @@ boolean IsMeteorLocation(Word Cword, List snake, int MeteorLocation){
     }
 }
 
-int main(){
+void SnakeOnMeteor(){
     boolean IsFoodAvailable = false;
     int FoodLocation = -1;
     int MeteorLocation = -1;

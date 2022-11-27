@@ -32,3 +32,5 @@ boolean IsInputValid(Word CWord);
 boolean IsMoveable(Word CWord, List snake);
 
 boolean IsMeteorLocation(Word Cword, List snake, int MeteorLocation);
+
+int SnakeOnMeteor();
