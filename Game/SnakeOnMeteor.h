@@ -13,24 +13,32 @@
 
 void randomnumbersnake(int *x,int *y);
 
-void GenerateFood(StatArray *container, int *FoodLocation);
-
-void GenerateMeteor(int *MeteorLocation, int Foodlocation);
-
-boolean IsPointNotEmpty(List snake, int input);
+boolean IsSnakeLocation(List snake, int input);
 
 boolean IsSnakeBody(List snake, int input);
 
+boolean IsObstacleLocation(StatArray ObstacleLocation, int location);
+
+void CreateSnake(List *snake, StatArray ObstacleLocation);
+
+void GenerateFood(StatArray *container, int *FoodLocation, List snake, StatArray ObstacleLocation);
+
+void GenerateMeteor(int *MeteorLocation, int Foodlocation, StatArray ObstacleLocation);
+
+void GenerateObstacle(StatArray *ObstacleLocation, int number);
+
+boolean IsCommandValid(Word CWord);
+
+boolean IsTowardSnakeBody(Word CWord, List snake);
+
+boolean IsTowardMeteor(Word Cword, List snake, int MeteorLocation);
+
+boolean IsTowardObstacle(Word Cword, List snake, StatArray ObstacleLocation);
+
+boolean IsNotMoveable(List snake, int MeteorLocation, StatArray ObstacleLocation);
+
 int ShowSquare(StatArray container);
 
-void NextTurn(List *snake, int *FoodLocation, boolean *IsFoodAvailable, int Turn, int *MeteorLocation, int *End, int *score);
-
-void CreateSnake(List *snake);
-
-boolean IsInputValid(Word CWord);
-
-boolean IsMoveable(Word CWord, List snake);
-
-boolean IsMeteorLocation(Word Cword, List snake, int MeteorLocation);
+void NextTurn(List *snake, int *FoodLocation, boolean *IsFoodAvailable, int Turn, int *MeteorLocation, int *End, int *score, StatArray ObstacleLocation);
 
 void SnakeOnMeteor();
