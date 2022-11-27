@@ -51,4 +51,4 @@ int ShowSquare(StatArray container);
 
 void NextTurn(List *snake, int *FoodLocation, boolean *IsFoodAvailable, int Turn, int *MeteorLocation, int *End, int *score, StatArray ObstacleLocation);
 
-void SnakeOnMeteor();
+void SnakeOnMeteor(ArrayDyn ArrayGame, ArrayMap *MapGame);

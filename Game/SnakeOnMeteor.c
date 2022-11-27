@@ -287,7 +287,7 @@ void NextTurn(List *snake, int *FoodLocation, boolean *IsFoodAvailable, int Turn
     } 
 }
 
-void SnakeOnMeteor(){
+void SnakeOnMeteor(ArrayDyn ArrayGame, ArrayMap *MapGame){
     boolean IsFoodAvailable = false;
     int FoodLocation = -1;
     int MeteorLocation = -1;
@@ -397,4 +397,7 @@ void SnakeOnMeteor(){
         printf("Ularmu tidak dapat bergerak kemana pun!\n");
     }
     printf("Game berakhir. Skor: %d\n", score);
+
+    int index = FindStrArrayDyn(ArrayGame,"SnakeOnMeteor");
+    InsertScoreBoard(&MapGame->ElArrMap[index], score);
 }
