@@ -275,18 +275,17 @@ void SnakeOnMeteor(){
         if (snake.First->info == FoodLocation){
             DelVLast(&snake,&temporary);
             InsVLast(&snake,temporary);
-            if (((temporary/5)*5 + (temporary-1)%5 < temporary) && !IsPointNotEmpty(snake,temporary-1) && temporary-1 >= 0){
-                InsVLast(&snake, temporary-1);
-            } else if ((temporary+20)%25 < temporary && !IsPointNotEmpty(snake,temporary-5) && temporary-5 >=0){
-                InsVLast(&snake, temporary-5);
-            } else if ((temporary+5)%25 > temporary && !IsPointNotEmpty(snake,temporary+5 && temporary+5 <=24)){
-                InsVLast(&snake, temporary+5);
-            } else if (((temporary/5)*5 + (temporary+1)%5 > temporary) && !IsPointNotEmpty(snake,temporary+1) && temporary+1 <= 24){
-                InsVLast(&snake, temporary+1);
+            if (!IsPointNotEmpty(snake,(temporary/5)*5 + (temporary-1)%5)){
+                InsVLast(&snake, (temporary/5)*5 + (temporary-1)%5);
+            } else if (!IsPointNotEmpty(snake,(temporary+20)%25)){
+                InsVLast(&snake, (temporary+20)%25);
+            } else if (!IsPointNotEmpty(snake,(temporary+5)%25)){
+                InsVLast(&snake, (temporary+5)%25);
+            } else if (!IsPointNotEmpty(snake,(temporary/5)*5 + (temporary+1)%5)){
+                InsVLast(&snake, (temporary/5)*5 + (temporary+1)%5);
             } else {
                 End = 1;
             }
-
             IsFoodAvailable = false;
         }
 
