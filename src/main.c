@@ -194,6 +194,151 @@ void welcome(){
     printf("\r%s",text);
 }
 
+void screenwithoutdelay()
+{
+    char *screen1 =
+    ".______   .__   __. .___  ___.   ______   ";
+
+    char *screen2 =
+    "|   _  \\  |  \\ |  | |   \\/   |  /  __  \\  ";
+    
+    char *screen3 =
+    "|  |_)  | |   \\|  | |  \\  /  | |  |  |  |";
+    
+    char *screen4 =
+    "|   _  <  |  . `  | |  |\\/|  | |  |  |  |";
+    
+    char *screen5 =
+    "|  |_)  | |  |\\   | |  |  |  | |  '--'  | ";
+    
+    char *screen6 =
+    "|______/  |__| \\__| |__|  |__|  \\______/";
+    
+    
+    int LTC = 201;
+    int RTC = 187;
+    int LBC = 200;
+    int RBC = 188;
+    int H = 205;
+    int V = 186;
+
+    /*  Baris Penutup Atas */
+    printf("%c",LTC);
+    int i;
+    for(i = 0; i < stringLength(screen1)+3; i++)
+    {
+
+        printf("%c",H);
+    }
+    printf("%c\n",RTC);
+    
+    /* baris 1 */
+    printf("%c  ",V);
+    for(i = 0; i < stringLength(screen1); i++)
+    {
+
+        printf("%c",screen1[i]);
+    }
+    printf(" %c\n",V);
+
+    /* baris 2 */
+    printf("%c  ",V);
+    for(i = 0; i < stringLength(screen2); i++)
+    {
+
+        printf("%c",screen2[i]);
+    }
+    printf(" %c\n",V);
+
+    /* baris 3 */
+    printf("%c  ",V);
+    for(i = 0; i < stringLength(screen3); i++)
+    {
+
+        printf("%c",screen3[i]);
+    }
+    printf("  %c\n",V);
+
+    /* baris 4 */
+    printf("%c  ",V);
+    for(i = 0; i < stringLength(screen4); i++)
+    {
+
+        printf("%c",screen4[i]);
+    }
+    printf("  %c\n",V);
+
+    /* baris 5 */
+    printf("%c  ",V);
+    for(i = 0; i < stringLength(screen5); i++)
+    {
+
+        printf("%c",screen5[i]);
+    }
+    printf(" %c\n",V);
+
+    /* baris 6*/
+    printf("%c  ",V);
+    for(i = 0; i < stringLength(screen6); i++)
+    {
+
+        printf("%c",screen6[i]);
+    }
+    printf("   %c\n",V);
+
+    /* baris kosong tambahan */
+    printf("%c  ",V);
+    for(i = 0; i < stringLength(screen6); i++)
+    {
+        printf(" ");
+    }
+    printf("   %c\n",V);
+
+    /* Baris Penutup Bawah */
+    printf("%c",LBC);
+    for(i = 0; i < stringLength(screen1)+3; i++)
+    {
+
+        printf("%c",H);
+    }
+    printf("%c\n",RBC);
+}
+
+void welcomewithoutdelay()
+{
+    int asciLTC = 218;
+    int asciLBC = 192;
+    int asciRTC = 191;
+    int asciRBC = 217;
+    int asciV = 179;
+    int asciH = 196;
+    int asciBlok = 178;
+
+    // char *screen =  
+    // ".______   .__   __. .___  ___.   ______   \n" 
+    // "|   _  \\  |  \\ |  | |   \\/   |  /  __  \\  \n"
+    // "|  |_)  | |   \\|  | |  \\  /  | |  |  |  |\n"
+    // "|   _  <  |  . `  | |  |\\/|  | |  |  |  |\n"
+    // "|  |_)  | |  |\\   | |  |  |  | |  `--'  | \n"
+    // "|______/  |__| \\__| |__|  |__|  \\______/\n";
+     
+
+     char *welcome = "  WELCOME TO BNMO  ";
+     char *text =
+     "START :: MAININ BNMO DONG SAYANG\n"
+     "LOAD  :: LOAD GAME YANG TERSEDIA YUK SAYANG\n"
+     "HELP  :: BUTUH BANTUAN SAYANG\n"
+     "QUIT  :: JANGAN KELUAR SAYANG T_T\n";
+
+
+     screenwithoutdelay();
+     printf(" \n");
+    //  printf("============================================================================================================================\n");
+    //  printf(" \n")
+
+    printf("%s",text);
+}
+
 int main()
 {
     ArrayDyn ArrayGame;
@@ -348,6 +493,41 @@ int main()
             else if (IsKataSama(CWord, StringtoWord("RESET HISTORY")))
             {
                 RESETHISTORY(&History);
+            }
+            else if (IsKataSama(CWord, StringtoWord("EXIT")))
+            {
+                printf("Are you sure you want to exit (Y/N)? ");
+                INPUT();
+                printf("\n");
+                printf("\n");
+                while((CWord.TabWord[0] != 'Y' || CWord.Length != 1) && (CWord.TabWord[0] != 'N' || CWord.Length != 1))
+                {
+                    printf("Invalid input. Please try again.\n");
+                    printf("\nAre you sure you want to exit (Y/N)? ");
+                    INPUT();
+                    printf("\n");
+                    printf("\n");
+                }
+                if (CWord.TabWord[0] == 'Y')
+                {
+                    ArrayGame = CreateStrArrayDyn();
+                    MakeEmptyArrMap(&MapGame);
+                    CreateEmptyStackStr(&History);
+                    CreateStrQueue(&QueueGame);
+                    printf("Back To main Menu ");
+                    delay(0.7);
+                    printf(". ");
+                    delay(0.7);
+                    printf(". ");
+                    delay(0.7);
+                    printf(". \n");
+                    printf("\n");
+                    welcomewithoutdelay();
+                }
+                else if (CWord.TabWord[0] == 'N')
+                {
+                    printf("You are still in the game.\n");
+                }
             }
             else
             {

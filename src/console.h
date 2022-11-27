@@ -81,6 +81,9 @@ void printblank(int n);
 void printstrip(int n);
 /* Mencetak '-' sebanyak n ke layar */
 
+void printsingelhorizontalline(int n);
+/* Mencetak Horizontal line sebanyak n ke layar */
+
 void printscoreboard(Map M , char *namagame);
 
 boolean IsStringEqual(char *string1 , char* string2);

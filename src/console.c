@@ -262,43 +262,177 @@ void printstrip(int n)
     }
 }
 
+void printsingelhorizontalline(int n)
+{
+/* Mencetak Horizontal line sebanyak n ke layar */
+    int horizontalline = 196;
+    for (int i = 1 ; i <= n ; i++)
+    {
+        printf("%c",horizontalline);
+    }
+}
+
 void printscoreboard(Map M , char *namagame)
 {
     /* Melakukan Print scroeboard 1 buah Game*/
+    int asciTLC = 218;
+    int asciH = 196;
+    int asciT = 194;
+    int asciTRC = 191;
+    int asciTkiri = 195;
+    int asciTkanan = 180;
+    int asciTbawah = 193;
+    int asciBLC = 192;
+    int asciBRC = 217;
+    int asciV = 179;
+    int asciplus = 197;
+
     int lengamename = stringLength(namagame);
-    printblank((19 - lengamename)/2);
-    printf("***** SCOREBOARD GAME %s *****\n", namagame);
-    printf("| ");
+
+    /* Top */
+    for(int i = 1 ; i <= 47 ; i++)
+    {
+        if (i == 1)
+        {
+            printf("%c",asciTLC);
+        }
+        else if(i == 47)
+        {
+            printf("%c",asciTRC);
+        }
+        else
+        {
+            printf("%c",asciH);
+        }
+    }
+    printf("\n");
+
+    // 16 + lengamename + blank = 47 -> 31 = lengamename + blank
+    
+    /* Title */
+    printf("%c",asciV);
+    printblank((30 - lengamename)/2);
+    printf("SCOREBOARD GAME %s", namagame);
+    printblank((29 - lengamename)/2);
+    printf("%c",asciV);
+    printf("\n");
+
+    /* Title - Head Separator */
+    for(int i = 1 ; i <= 47 ; i++)
+    {
+        if (i == 1)
+        {
+            printf("%c",asciTkiri);
+        }
+        else if(i == 47)
+        {
+            printf("%c",asciTkanan);
+        }
+        else if (i == 24)
+        {
+            printf("%c",asciT);
+        }
+        else
+        {
+            printf("%c",asciH);
+        }
+    }
+    printf("\n");
+
+    printf("%c ",asciV);
     printf("NAMA");
     int Blank = 17;
     printblank(Blank);
-    printf("| ");
+    printf("%c ",asciV);
     printf("SKOR");
     printblank(Blank);
-    printf("|");
+    printf("%c",asciV);
     printf("\n");
     if (!IsEmpty(M))
     {
-        printstrip(47);
+        /* Head - Body Separator */
+        printf("%c",asciTkiri);
+        printsingelhorizontalline(22);
+        printf("%c",asciplus);
+        printsingelhorizontalline(22);
+        printf("%c",asciTkanan);
         printf("\n");
+
+        /* Body */
         int i;
         for (i = 0 ; i < M.Count ; i++)
         {
-            printf("| ");
+            printf("%c ",asciV);
             printf("%s",M.Elements[i].Key);
             Blank = (21 - stringLength(M.Elements[i].Key));
             printblank(Blank);
-            printf("| ");
+            printf("%c ",asciV);
             printf("%d",M.Elements[i].Value);
             Blank = (21 - IntLength(M.Elements[i].Value));
             printblank(Blank);
-            printf("|");
+            printf("%c",asciV);
             printf("\n");
         }
+
+        /* Bottom */
+        for(int i = 1 ; i <= 47 ; i++)
+        {
+            if (i == 1)
+            {
+                printf("%c",asciBLC);
+            }
+            else if(i == 47)
+            {
+                printf("%c",asciBRC);
+            }
+            else if(i == 24)
+            {
+                printf("%c",asciTbawah);
+            }
+            else
+            {
+                printf("%c",asciH);
+            }
+        }
+        printf("\n");
     }
     else
     {
-        printf("-------------- SCOREBOARD KOSONG --------------\n");
+         /* Head - Body Separator */
+        printf("%c",asciTkiri);
+        printsingelhorizontalline(22);
+        printf("%c",asciTbawah);
+        printsingelhorizontalline(22);
+        printf("%c",asciTkanan);
+        printf("\n");
+
+        /* Body */
+        // 30 sisanya
+        printf("%c",asciV);
+        printblank(14);
+        printf("SCOREBOARD KOSONG");
+        printblank(14);
+        printf("%c",asciV);
+        printf("\n");
+
+        /* Bottom */
+        for(int i = 1 ; i <= 47 ; i++)
+        {
+            if (i == 1)
+            {
+                printf("%c",asciBLC);
+            }
+            else if(i == 47)
+            {
+                printf("%c",asciBRC);
+            }
+            else
+            {
+                printf("%c",asciH);
+            }
+        }
+        printf("\n");
+        // printf("-------------- SCOREBOARD KOSONG --------------\n");
     }
 }
 

@@ -80,26 +80,185 @@ int ycoor(char *coordinates){
 }
 
 void PrintPapan(Board papan){
-    for(int i = 0;i<5;i++){
-        printf("%s ",papan.a.Ar[i]);
+    int asciTLC = 218;
+    int asciH = 196;
+    int asciV = 179;
+    int asciT = 194;
+    int asciTRC = 191;
+    int asciTkiri = 195;
+    int asciTkanan = 180;
+    int asciTbawah = 193;
+    int asciBLC = 192;
+    int asciBRC = 217;
+    int asciplus = 197;
+
+    /* Top */
+    for (int i = 1; i <= 21; i++)
+    {
+        if (i == 1)
+        {
+            printf("%c", asciTLC);
+        }
+        else if (i == 21)
+        {
+            printf("%c", asciTRC);
+        }
+        else if(i % 4 == 1)
+        {
+            printf("%c", asciT);
+        }
+        else if(i % 4 != 1)
+        {
+            printf("%c", asciH);
+        }
     }
     printf("\n");
+
+    /* Body */
+    printf("%c", asciV);
     for(int i = 0;i<5;i++){
-        printf("%s ",papan.b.Ar[i]);
+        printf(" %s %c",papan.a.Ar[i],asciV);
     }
     printf("\n");
-    for(int i = 0;i<5;i++){
-        printf("%s ",papan.c.Ar[i]);
+
+    /* Middle */
+    for (int i = 1; i <= 21; i++)
+    {
+        if (i == 1)
+        {
+            printf("%c", asciTkiri);
+        }
+        else if (i == 21)
+        {
+            printf("%c", asciTkanan);
+        }
+        else if(i % 4 == 1)
+        {
+            printf("%c", asciplus);
+        }
+        else if(i % 4 != 1)
+        {
+            printf("%c", asciH);
+        }
     }
     printf("\n");
+
+    /* Body */
+    printf("%c", asciV);
     for(int i = 0;i<5;i++){
-        printf("%s ",papan.d.Ar[i]);
+        printf(" %s %c",papan.b.Ar[i],asciV);
     }
     printf("\n");
-    for(int i = 0;i<5;i++){
-        printf("%s ",papan.e.Ar[i]);
+
+    /* Middle */
+    for (int i = 1; i <= 21; i++)
+    {
+        if (i == 1)
+        {
+            printf("%c", asciTkiri);
+        }
+        else if (i == 21)
+        {
+            printf("%c", asciTkanan);
+        }
+        else if(i % 4 == 1)
+        {
+            printf("%c", asciplus);
+        }
+        else if(i % 4 != 1)
+        {
+            printf("%c", asciH);
+        }
     }
     printf("\n");
+
+    /* Body */
+    printf("%c", asciV);
+    for(int i = 0;i<5;i++){
+        printf(" %s %c",papan.c.Ar[i],asciV);
+    }
+    printf("\n");
+
+    /* Middle */
+    for (int i = 1; i <= 21; i++)
+    {
+        if (i == 1)
+        {
+            printf("%c", asciTkiri);
+        }
+        else if (i == 21)
+        {
+            printf("%c", asciTkanan);
+        }
+        else if(i % 4 == 1)
+        {
+            printf("%c", asciplus);
+        }
+        else if(i % 4 != 1)
+        {
+            printf("%c", asciH);
+        }
+    }
+    printf("\n");
+
+    /* Body */
+    printf("%c", asciV);
+    for(int i = 0;i<5;i++){
+        printf(" %s %c",papan.d.Ar[i],asciV);
+    }
+    printf("\n");
+
+    /* Middle */
+    for (int i = 1; i <= 21; i++)
+    {
+        if (i == 1)
+        {
+            printf("%c", asciTkiri);
+        }
+        else if (i == 21)
+        {
+            printf("%c", asciTkanan);
+        }
+        else if(i % 4 == 1)
+        {
+            printf("%c", asciplus);
+        }
+        else if(i % 4 != 1)
+        {
+            printf("%c", asciH);
+        }
+    }
+    printf("\n");
+
+    /* Body */
+    printf("%c", asciV);
+    for(int i = 0;i<5;i++){
+        printf(" %s %c",papan.e.Ar[i],asciV);
+    }
+    printf("\n");
+
+     /* Bottom */
+    for (int i = 1; i <= 21; i++)
+    {
+        if (i == 1)
+        {
+            printf("%c", asciBLC);
+        }
+        else if (i == 21)
+        {
+            printf("%c", asciBRC);
+        }
+        else if(i % 4 == 1)
+        {
+            printf("%c", asciTbawah);
+        }
+        else if(i % 4 != 1)
+        {
+            printf("%c", asciH);
+        }
+    }
+    printf("\n");
+
 }
 
 
