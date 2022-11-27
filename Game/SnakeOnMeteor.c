@@ -124,7 +124,6 @@ void NextTurn(List *snake, int *FoodLocation, boolean *IsFoodAvailable, int Turn
 
     if (Turn > 0){
         GenerateMeteor(MeteorLocation, *FoodLocation);
-        printf("%d\n", *MeteorLocation);
         if (IsPointNotEmpty(*snake,*MeteorLocation)){    
             IsHitMeteor = true;
         }
