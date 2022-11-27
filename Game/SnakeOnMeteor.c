@@ -1,5 +1,7 @@
 #include "SnakeOnMeteor.h"
 
+/*------------Fungsi tambahan------------*/
+
 void randomnumbersnake(int *x,int *y){
     srand(time(NULL));
     *x = rand() % 5;
