@@ -960,7 +960,7 @@ void PlayGame(QueueStr* AntrianGame , StackStr *History , ArrayMap *MapGame , Ar
             delay(0.8);
             printf(".\n");
             delay(0.8);
-            // < Name Game >;
+            SnakeOnMeteor(ArrayGame, MapGame);
         }
 
         else if(CompareString(game,"MOLE"))
@@ -976,10 +976,10 @@ void PlayGame(QueueStr* AntrianGame , StackStr *History , ArrayMap *MapGame , Ar
             mole(ArrayGame, MapGame);
         }
 
-        else if (CompareString(game,"SNAKE ON METEOR"))
+        else if (CompareString(game,"TREASURE HUNT"))
         {
             //printf("SAMPAI SINI 2");
-            printf("Loading SNAKE ON METEOR ");
+            printf("Loading TREASURE HUNT ");
             delay(0.8);
             printf(". ");
             delay(0.8);
@@ -987,7 +987,7 @@ void PlayGame(QueueStr* AntrianGame , StackStr *History , ArrayMap *MapGame , Ar
             delay(0.8);
             printf(".\n");
             delay(0.8);
-            // < Name Game >;
+            treasure_hunt(ArrayGame, MapGame);
         }
 
         else
@@ -1037,7 +1037,7 @@ void SkipGame(QueueStr* AntrianGame, int number , ArrayMap *MapGame , ArrayDyn A
             printf("Tidak ada permainan lagi dalam daftar game-mu");
         } else { 
             dequeueStr(AntrianGame,game);
-            if (CompareString(game,"RNG") || CompareString(game,"DINER DASH") || CompareString(game,"MOLE") || CompareString(game,"HANGMAN") || CompareString(game,"TOWER OF HANOI") || CompareString(game,"SNAKE ON METEOR"))
+            if (CompareString(game,"RNG") || CompareString(game,"DINER DASH") || CompareString(game,"MOLE") || CompareString(game,"HANGMAN") || CompareString(game,"TOWER OF HANOI") || CompareString(game,"SNAKE ON METEOR") || CompareString(game,"TREASURE HUNT"))
             { 
                 printf("Loading %s ", game);
                 delay(1);
@@ -1072,8 +1072,13 @@ void SkipGame(QueueStr* AntrianGame, int number , ArrayMap *MapGame , ArrayDyn A
 
                 else if (CompareString(game,"SNAKE ON METEOR"))
                 {
-                    // < Name Game >;
+                    SnakeOnMeteor(ArrayGame,MapGame);
                 }
+                else if (CompareString(game,"TREASURE HUNT"))
+                {
+                    treasure_hunt(ArrayGame, MapGame);
+                }
+
                 
             } 
             else

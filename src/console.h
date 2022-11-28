@@ -15,7 +15,12 @@
 #include "ADT/stack/stackstr.h"
 #include "ADT/stack/stackint.h"
 #include "ADT/map/arrayofmap.h"
+#include "ADT/tree/tree.h"
+#include "ADT/listLinier/listsirkuler.h"
 #include "../Game/thanoi.h"
+#include "../Game/treasurehunt.h"
+#include "../Game/SnakeOnMeteor.h"
+
 
 void STARTBNMO(ArrayDyn *gamesBNMO , ArrayMap *MapGame);
 /* Membaca file config dan memasukan tiap baris file ke array gamesBNMO*/

@@ -243,6 +243,6 @@ void dinnerdash(ArrayDyn ArrayGame, ArrayMap *MapGame)
             game_over = true;
         }
     }  
-    int index = FindStrArrayDyn(ArrayGame,"DINNER DASH");
+    int index = FindStrArrayDyn(ArrayGame,"DINER DASH");
     InsertScoreBoard(&MapGame->ElArrMap[index], saldo);
 }

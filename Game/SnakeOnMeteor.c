@@ -398,6 +398,6 @@ void SnakeOnMeteor(ArrayDyn ArrayGame, ArrayMap *MapGame){
     }
     printf("Game berakhir. Skor: %d\n", score);
 
-    int index = FindStrArrayDyn(ArrayGame,"SnakeOnMeteor");
+    int index = FindStrArrayDyn(ArrayGame,"SNAKE ON METEOR");
     InsertScoreBoard(&MapGame->ElArrMap[index], score);
 }
