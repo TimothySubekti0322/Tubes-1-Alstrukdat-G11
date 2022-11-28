@@ -273,7 +273,9 @@ void NextTurn(List *snake, int *FoodLocation, boolean *IsFoodAvailable, int Turn
             }
         }
     } 
-    if (container.Ar[(snake->First->info+5)%25] != -100 && container.Ar[(snake->First->info+20)%25] != -100 && container.Ar[(snake->First->info/5)*5 + (snake->First->info+4)%5] != -100 && container.Ar[(snake->First->info/5)*5 + (snake->First->info+1)%5] != -100){
+    
+    if (container.Ar[(snake->First->info+5)%25] != -100 && container.Ar[(snake->First->info+20)%25] != -100 && container.Ar[(snake->First->info/5)*5 + (snake->First->info+4)%5] != -100 && container.Ar[(snake->First->info/5)*5 + (snake->First->info+1)%5] != -100 &&
+        container.Ar[(snake->First->info+5)%25] != -10 && container.Ar[(snake->First->info+20)%25] != -10 && container.Ar[(snake->First->info/5)*5 + (snake->First->info+4)%5] != -10 && container.Ar[(snake->First->info/5)*5 + (snake->First->info+1)%5] != -10){
         *End = 4;
     }
 }
