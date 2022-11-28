@@ -74,6 +74,18 @@ int langkahefektif (int size);
           sesuai jumlah piring;
 */
 
+void cheatsheet (int langkah);
+/*
+    Input : jumlah langkah
+    Output : Langkah yang harus dilakukan
+*/
+
+boolean langkahbenar(int langkah,char awal, char tujuan);
+/*
+    Input : jumlah langkah, char awal, char tujuan
+    Output : menghasilkan boolean apakah langkah sesuai dengan cheatsheet
+*/
+
 void towerhanoi(ArrayDyn ArrayGame, ArrayMap *MapGame);
 
 void KataToInt(Word kata, int *hasil);

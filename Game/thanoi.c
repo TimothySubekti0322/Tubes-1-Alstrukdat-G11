@@ -378,18 +378,31 @@ void KataToInt(Word kata, int *hasil)
 
 void towerhanoi(ArrayDyn ArrayGame, ArrayMap *MapGame){
     StackInt A, B, C;
-    boolean found;
+    boolean found,benar,digit;
     int length,size,optimal;
+    benar = false;
+    digit = true;
 
     size = 0;
     printf("Masukan banyak jumlah piringan: ");
     INPUT();
+    digit = digitvalid(CWord);
+
+    while(digit == false)
+    {
+        printf("\nJumlah piringan harus angka!!\n");
+        printf("\nMasukan banyak jumlah piringan: ");
+        INPUT();
+        digit = digitvalid(CWord);
+    }
+
     KataToInt(CWord,&size);
 
     while(size >= 28)
     {
         printf("jumlah piringan terlalu banyak kamu gabakal bisa\n");
         printf("\nMasukan banyak jumlah piringan: ");
+        size = 0;
         INPUT();
         KataToInt(CWord,&size);
     }
@@ -402,17 +415,43 @@ void towerhanoi(ArrayDyn ArrayGame, ArrayMap *MapGame){
     length = LengthStackInt(C);
     found = false;
     char awal,tujuan;
+    char cheat;
     int langkah = 0;
     int akhir;
     
+    if (size == 5){
+        printf("\nApakah anda perlu cheatsheet(Y/N): ");
+        INPUT();
+        cheat = CWord.TabWord[0];
+        if(cheat == 'Y')
+        {
+            benar = true;
+        }
+        else
+        {
+            benar = false;
+        }
+    }
     while(length != size)
     {
+        if(benar == true && size == 5)
+        {
+            cheatsheet(langkah);
+        }
         printf("\nMasukan tiang awal: ");
         INPUT();
         awal = CWord.TabWord[0];
         printf("\nMasukan tiang tujuan: ");
         INPUT();
         tujuan = CWord.TabWord[0];
+        if (size == 5 && benar == true )
+        {
+            benar = langkahbenar(langkah, awal, tujuan);
+            printf("\n%d\n",langkah);
+            if (benar == true) {
+                printf("halo\n");
+            }
+        }
         commandH(&awal,&tujuan,&A,&B,&C,found,size);
         length = LengthStackInt(C);
         langkah = langkah + 1;
