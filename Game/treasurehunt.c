@@ -25,9 +25,9 @@ void ProgressStory(BinTree Story,int *choice,int *score){
         }
     }
     if(Story->info = chest_open){
-        score = 100;
+        *score = 100;
     } else if(Story->info = chest_ignore){
-        score = 50;
+        *score = 50;
     }
 }
 
