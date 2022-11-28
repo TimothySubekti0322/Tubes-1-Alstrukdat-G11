@@ -1,4 +1,4 @@
-#include "OnePiece.h"
+#include "treasurehunt.h"
 #include <stdlib.h>
 
 void ReadStory(BinTree Story){
