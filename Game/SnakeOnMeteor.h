@@ -78,11 +78,6 @@ boolean IsTowardObstacle(Word Cword, List snake, StatArray ObstacleLocation);
     I.S. Game dimulai, command sudah diinput dan valid, Obstacle dalam board
     F.S. Mengecek jika inputan command user menyebabkan snake bergerak ke obstacle*/
 
-boolean IsNotMoveable(List snake, int MeteorLocation, StatArray ObstacleLocation);
-/* Mengecek jika snake sedang bergerak menuju titik yang tidak valid
-    I.S. Game dimulai, command sudah diinput dan valid, Meteor dalam board, Obstacle dalam board
-    F.S. Mengecek jika inputan command user menyebabkan snake bergerak ke meteor, badan sendiri atau obstacle*/
-
 /*------------Fungsi untuk memunculkan keadaan map sekarang------------*/
 
 void ShowSquare(StatArray container);

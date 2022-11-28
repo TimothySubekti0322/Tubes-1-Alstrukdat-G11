@@ -160,17 +160,6 @@ boolean IsTowardObstacle(Word Cword, List snake, StatArray ObstacleLocation){
     }
 }
 
-boolean IsNotMoveable(List snake, int MeteorLocation, StatArray ObstacleLocation){
-    char w[1] = {'w'};
-    char s[1] = {'s'};
-    char d[1] = {'d'};
-    char a[1] = {'a'};
-    return ((IsTowardSnakeBody(StringtoWord(w),snake) || IsTowardMeteor(StringtoWord(w),snake,MeteorLocation) || IsTowardObstacle(StringtoWord(w),snake,ObstacleLocation)) &&
-            (IsTowardSnakeBody(StringtoWord(s),snake) || IsTowardMeteor(StringtoWord(s),snake,MeteorLocation) || IsTowardObstacle(StringtoWord(s),snake,ObstacleLocation)) &&
-            (IsTowardSnakeBody(StringtoWord(d),snake) || IsTowardMeteor(StringtoWord(d),snake,MeteorLocation) || IsTowardObstacle(StringtoWord(d),snake,ObstacleLocation)) &&
-            (IsTowardSnakeBody(StringtoWord(a),snake) || IsTowardMeteor(StringtoWord(a),snake,MeteorLocation) || IsTowardObstacle(StringtoWord(a),snake,ObstacleLocation)));
-}
-
 /*------------Fungsi untuk memunculkan keadaan map sekarang------------*/
 
 void ShowSquare(StatArray container){
@@ -252,7 +241,6 @@ void NextTurn(List *snake, int *FoodLocation, boolean *IsFoodAvailable, int Turn
             printf("Anda beruntung tidak terkena meteor! Silahkan lanjutkan permainan\n");
         } else {
             if (container.Ar[snake->First->info] == -10){
-                printf("Kepala snake terkena meteor!\n");
                 *End = 2;
                 *score = (coordinat.Neff-1)*2;
             } else {
@@ -285,6 +273,9 @@ void NextTurn(List *snake, int *FoodLocation, boolean *IsFoodAvailable, int Turn
             }
         }
     } 
+    if (container.Ar[(snake->First->info+5)%25] != -100 && container.Ar[(snake->First->info+20)%25] != -100 && container.Ar[(snake->First->info/5)*5 + (snake->First->info+4)%5] != -100 && container.Ar[(snake->First->info/5)*5 + (snake->First->info+1)%5] != -100){
+        *End = 4;
+    }
 }
 
 void SnakeOnMeteor(ArrayDyn ArrayGame, ArrayMap *MapGame){
@@ -337,9 +328,7 @@ void SnakeOnMeteor(ArrayDyn ArrayGame, ArrayMap *MapGame){
         printf("TURN %d:\n", Turn);
         printf("Silahkan masukkan command anda:");
         INPUT();
-        /* if (IsNotMoveable(snake,MeteorLocation,ObstacleLocation)) {
-            End = 4;
-        } else */ if (IsTowardObstacle(CWord,snake,ObstacleLocation)){
+        if (IsTowardObstacle(CWord,snake,ObstacleLocation)){
             End = 3;
         } else {
             while (!IsCommandValid(CWord) || IsTowardSnakeBody(CWord,snake) || IsTowardMeteor(CWord,snake,MeteorLocation)){
@@ -391,6 +380,8 @@ void SnakeOnMeteor(ArrayDyn ArrayGame, ArrayMap *MapGame){
 
     if (End == 1){
         printf("Ekor ular tidak dapat bertambah!\n");
+    } else if (End == 2){
+        printf("Kepala snake terkena meteor!\n");
     } else if (End == 3){
         printf("Ularmu menabrak obstacle!\n");
     } else if (End == 4){
