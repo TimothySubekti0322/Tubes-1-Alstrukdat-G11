@@ -5,28 +5,33 @@ void ReadStory(BinTree Story){
     printf("%s",Story->info);
 }
 
-void ProgressStory(BinTree Story,int *choice){
+void ProgressStory(BinTree Story,int *choice,int *score){
     if(!IsTreeOneElmt(Story)){
         boolean valid = false;
         while(valid == false){
             scanf("%d",choice);
             if(*choice == 1){
                 ReadStory(Story->left);
-                ProgressStory(Story->left,choice);
+                ProgressStory(Story->left,choice,&score);
                 valid = true;
                 
             } else if(*choice == 2){
                 ReadStory(Story->right);
-                ProgressStory(Story->right,choice);
+                ProgressStory(Story->right,choice,&score);
                 valid = true;
             } else{
                 printf("Inputan tidak valid.\n");
             }
         }
     }
+    if(Story->info = chest_open){
+        score = 100;
+    } else if(Story->info = chest_ignore){
+        score = 50;
+    }
 }
 
-int main(){
+void treasure_hunt(ArrayDyn ArrayGame, ArrayMap *MapGame){
     BinTree chest_ignore_tree =  Tree(chest_ignore,Nil,Nil);
     BinTree chest_open_tree = Tree(chest_open,Nil,Nil);
     BinTree mimic_ignore_tree = Tree(mimic_ignore,chest_open_tree,chest_ignore_tree);
@@ -41,7 +46,9 @@ int main(){
     BinTree nomushroom_tree = Tree(nomushroom,Nil,Nil);
     BinTree Story = Tree(opening,entrance_tree,nomushroom_tree);
     
-    int choice;
+    int choice,score = 0;
     ReadStory(Story);
-    ProgressStory(Story,&choice);
+    ProgressStory(Story,&choice,&score);
+    int index = FindStrArrayDyn(ArrayGame,"TREASURE HUNT");
+    InsertScoreBoard(&MapGame->ElArrMap[index], score);
 }

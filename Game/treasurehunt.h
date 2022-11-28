@@ -1,6 +1,19 @@
 #include <stdio.h>
 #include "../src/ADT/tree/tree.c"
 #include "../src/boolean.h"
+#include "../src/ADT/array/arraydinamikstr.h"
+#include "../src/ADT/map/map.h"
+#include "../src/ADT/map/arrayofmap.h"
+
+void ReadStory(BinTree Story);
+/*Melakukan pembacaaan cerita pada Tree*/
+
+void ProgressStory(BinTree Story,int *choice,int *score);
+/*Melakukan penlanjutan story melalui choice dan penambahan score jika mencapai ending baik.*/
+
+void treasure_hunt(ArrayDyn ArrayGame, ArrayMap *MapGame);
+/*Memainkan game treasure hunt di mana diberikan dua pilihan tiap menemukan halangan
+dan memberikan score jika mencapai ending baik.*/
 
 char *opening=  
     "In front of you is a cave said to harbor the treasure of a 13th century king, The WanPis.\n"
