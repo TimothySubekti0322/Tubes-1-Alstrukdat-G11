@@ -173,7 +173,7 @@ boolean IsNotMoveable(List snake, int MeteorLocation, StatArray ObstacleLocation
 
 /*------------Fungsi untuk memunculkan keadaan map sekarang------------*/
 
-int ShowSquare(StatArray container){
+void ShowSquare(StatArray container){
     for (int j = 0; j<5; j++){
         printf("---------------------\n");
         printf("|");
