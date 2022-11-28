@@ -30,10 +30,10 @@ boolean alreadyGuessed(char now, char *guessed);
     * Mengirimkan false jika sebaliknya
 */
 
-void emptyguessed(char *guessed);
+void emptystring(char *guessed, int size);
 /* 
     * Fungsi untuk mengosongkan string hasil tebakan pada kata sebelumnya.
-    * I.S.  : String guessed berisi huruf-huruf yang ditebak untuk kata sebelumnya, tidak mungkin kosong.
+    * I.S.  : String guessed berisi huruf-huruf yang ditebak untuk kata sebelumnya, dan berukuran size.
     * F.S.  : String guessed menjadi kosong, yaitu semua elemennya adalah '\0'.
 */
 
