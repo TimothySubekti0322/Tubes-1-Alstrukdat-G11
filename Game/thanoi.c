@@ -15,7 +15,7 @@ void displaystack(StackInt S,int size, int i){
     int bintang, spasi;
     bintang = 2 * isi - 1;
     spasi = ((2 * size + 1) - bintang)/2;
-    int ascii = 178;
+    int ascii = 220;
     
     if(isi == NIL)
     {
@@ -37,7 +37,7 @@ void displaystack(StackInt S,int size, int i){
             printf(" ");
         }
         for(int j = 0; j<bintang; j++){
-            printf("*");
+            printf("%c",ascii);
         }
         for(int j=0;j<spasi;j++)
         {
@@ -104,6 +104,8 @@ boolean movepiringtotiang(StackInt *awal, StackInt *tujuan, boolean found){
 
 void bikingaris(StackInt S, int size)
 {
+    int asciH = 196;
+
     int spasi,spasikosong,spasiisi;
 
     spasi = 2 * size + 1;
@@ -118,7 +120,7 @@ void bikingaris(StackInt S, int size)
             {
                 printf(" ");
             }
-            printf("-------");
+            printf("%c%c%c%c%c%c%c",asciH,asciH,asciH,asciH,asciH,asciH,asciH);
             for(int i = 0; i < spasiisi; i++)
             {
                 printf(" ");
@@ -130,7 +132,7 @@ void bikingaris(StackInt S, int size)
             {
                 printf(" ");
             }
-            printf("---");
+            printf("%c%c%c",asciH,asciH,asciH);
             for(int i = 0; i < spasikosong; i++)
             {
                 printf(" ");
@@ -143,7 +145,7 @@ void bikingaris(StackInt S, int size)
         {
             printf(" ");
         }
-        printf("---");
+        printf("%c%c%c",asciH,asciH,asciH);
         for(int i = 0; i < spasikosong; i++)
         {
             printf(" ");
@@ -154,7 +156,7 @@ void bikingaris(StackInt S, int size)
         {
             printf(" ");
         }
-        printf("-");
+        printf("%c",asciH);
         for(int i = 0; i < 1; i++)
         {
             printf(" ");
