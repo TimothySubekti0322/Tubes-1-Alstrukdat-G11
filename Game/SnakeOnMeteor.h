@@ -93,5 +93,11 @@ void ShowSquare(StatArray container);
 /*------------Fungsi utama dalam menjalankan program------------*/
 
 void NextTurn(List *snake, int *FoodLocation, boolean *IsFoodAvailable, int Turn, int *MeteorLocation, int *End, int *score, StatArray ObstacleLocation);
+/* Melakukan lanjutan dan kondisi papan dalam game ketika user menginput command yang valid
+    I.S. Game dimulai, Command valid sudah diinput
+    F.S. Melakukan lanjutan turn dan membuat kondisi yang sesuai*/
 
 void SnakeOnMeteor(ArrayDyn ArrayGame, ArrayMap *MapGame);
+/* Memainkan game snake
+    I.S. sembarang
+    F.S. Game snake dimainkan*/
