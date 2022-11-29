@@ -94,5 +94,11 @@ void KataToInt(Word kata, int *hasil);
     F.S : hasil merupakan integer dari element Kata
 */
 
+boolean digitvalid (Word CWord);
+/*
+    INPUT : input CWord
+    OUTPUT : Memastikan CWord merupakan angka
+*/
+
 
 #endif

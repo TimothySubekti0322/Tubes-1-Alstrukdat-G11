@@ -375,7 +375,106 @@ void KataToInt(Word kata, int *hasil)
     }
 }
 
+void cheatsheet (int langkah)
+{
+    char towerA = 'A';
+    char towerB = 'B';
+    char towerC = 'C';
 
+    if (langkah == 0 || langkah == 6 || langkah == 18 || langkah == 30 || langkah == 3 || langkah == 12 || langkah == 15 || langkah == 24 || langkah == 27)
+    {
+        printf("Tiang Awal : %c\n", towerA);
+        printf("Tiang Awal : %c\n", towerC);
+    }
+    else if (langkah == 1 || langkah == 7 || langkah == 13 || langkah == 25)
+    {
+        printf("Tiang Awal : %c\n", towerA);
+        printf("Tiang Awal : %c\n", towerB);
+    }
+    else if(langkah == 2 || langkah == 8 || langkah == 11 || langkah == 14 || langkah == 26 || langkah == 20)
+    {
+        printf("Tiang Awal : %c\n", towerC);
+        printf("Tiang Awal : %c\n", towerB);
+    }
+    else if(langkah == 4 || langkah == 10 || langkah == 16 || langkah == 19 || langkah == 22 || langkah == 28)
+    {
+        printf("Tiang Awal : %c\n", towerB);
+        printf("Tiang Awal : %c\n", towerA);
+    }
+    else if(langkah == 5 || langkah == 17 || langkah == 23 || langkah == 29)
+    {
+        printf("Tiang Awal : %c\n", towerB);
+        printf("Tiang Awal : %c\n", towerC);
+    }
+    else if(langkah == 9 || langkah == 21)
+    {
+        printf("Tiang Awal : %c\n", towerC);
+        printf("Tiang Awal : %c\n", towerA);
+    }
+}
+
+boolean langkahbenar(int langkah,char awal, char tujuan)
+{
+    char towerA = 'A';
+    char towerB = 'B';
+    char towerC = 'C';
+    boolean found = false;
+
+    if (langkah == 0 || langkah == 6 || langkah == 18 || langkah == 30 || langkah == 3 || langkah == 12 || langkah == 15 || langkah == 24 || langkah == 27)
+    {
+        if (awal == 'A' && tujuan == 'C'){
+            found = true;
+        }
+    }
+    else if (langkah == 1 || langkah == 7 || langkah == 13 || langkah == 25)
+    {
+        if (awal == 'A' && tujuan == 'B'){
+            found = true;
+        }
+    }
+    else if(langkah == 2 || langkah == 8 || langkah == 11 || langkah == 14 || langkah == 26 || langkah == 20)
+    {
+        if (awal == 'C' && tujuan == 'B'){
+            found = true;
+        }
+    }
+    else if(langkah == 4 || langkah == 10 || langkah == 16 || langkah == 19 || langkah == 22 || langkah == 28)
+    {
+        if (awal == 'B' && tujuan == 'A'){
+            found = true;
+        }
+    }
+    else if(langkah == 5 || langkah == 17 || langkah == 23 || langkah == 29)
+    {
+        if (awal == 'B' && tujuan == 'C'){
+            found = true;
+        }
+    }
+    else if(langkah == 9 || langkah == 21)
+    {
+        if (awal == 'C' && tujuan == 'A'){
+            found = true;
+        }
+    }
+    return found;
+}
+
+boolean digitvalid (Word CWord)
+{
+    boolean found;
+    found = true;
+    int i = 0;
+
+    while(i < CWord.Length && found == true)
+    {
+        if (CWord.TabWord[i] < 48 || CWord.TabWord[i] > 57)
+        {
+            found = false;
+        }
+        i++;
+    }
+    return found;
+}
 void towerhanoi(ArrayDyn ArrayGame, ArrayMap *MapGame){
     StackInt A, B, C;
     boolean found,benar,digit;
