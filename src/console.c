@@ -932,7 +932,7 @@ void PlayGame(QueueStr* AntrianGame , StackStr *History , ArrayMap *MapGame , Ar
             delay(0.8);
             printf(".\n");
             delay(0.8);
-            // < Name Game >;
+            hangman(ArrayGame, MapGame);
         }
 
         else if (CompareString(game,"TOWER OF HANOI"))
@@ -1062,7 +1062,7 @@ void SkipGame(QueueStr* AntrianGame, int number , ArrayMap *MapGame , ArrayDyn A
                 }
                 else if (CompareString(game,"HANGMAN"))
                 {
-                    // < Name Game >;
+                    hangman(ArrayGame, MapGame);
                 }
 
                 else if (CompareString(game,"TOWER OF HANOI"))

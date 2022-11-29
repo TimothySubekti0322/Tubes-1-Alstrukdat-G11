@@ -20,6 +20,7 @@
 #include "../Game/thanoi.h"
 #include "../Game/treasurehunt.h"
 #include "../Game/SnakeOnMeteor.h"
+#include "../Game/hangman.h"
 
 
 void STARTBNMO(ArrayDyn *gamesBNMO , ArrayMap *MapGame);
