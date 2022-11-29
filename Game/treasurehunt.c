@@ -45,8 +45,18 @@ void ProgressStory(BinTree Story,int *choice,int *score)
     }
     if(Story->info == chest_open){
         *score = 100;
+        printf("\033[32m");
+        printf("THE END\n");
+        printf("\033[0m");
     } else if(Story->info == chest_ignore){
         *score = 50;
+        printf("\033[32m");
+        printf("THE END\n");
+        printf("\033[0m");
+    } else{
+        printf("\033[1;31m");
+        printf("GAME OVER.\n");
+        printf("\033[0m");
     }
 }
 
