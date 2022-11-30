@@ -12,7 +12,6 @@ void ProgressStory(BinTree Story,int *choice,int *score)
     "You open the chest and find a gemstone. Red in color and shining bright\n"
     "You discover that it could make anything you imagine.\n"
     "With this your village definitely will be the greatest superpower the world has ever seen\n"
-    "THE END\n"
     "GEM\n";
 
     char *chest_ignore =
@@ -20,7 +19,6 @@ void ProgressStory(BinTree Story,int *choice,int *score)
     "You find a light at the end of the tunnel leading outside.\n"
     "The WanPis might just be a myth after all, you thought.\n"
     "You used your experience found in the journey to lead your village to prosper.\n"
-    "THE END\n"
     "LEADER\n";
     if(!IsTreeOneElmt(Story)){
         boolean valid = false;
@@ -45,18 +43,12 @@ void ProgressStory(BinTree Story,int *choice,int *score)
     }
     if(Story->info == chest_open){
         *score = 100;
-        printf("\033[32m");
-        printf("THE END\n");
-        printf("\033[0m");
+        printf(GRN"THE END\n"reset);
     } else if(Story->info == chest_ignore){
         *score = 50;
-        printf("\033[32m");
-        printf("THE END\n");
-        printf("\033[0m");
+        printf(GRN"THE END\n"reset);
     } else{
-        printf("\033[1;31m");
-        printf("GAME OVER.\n");
-        printf("\033[0m");
+        printf(RED"GAME OVER.\n"reset);
     }
 }
 
@@ -90,7 +82,6 @@ void treasure_hunt(ArrayDyn ArrayGame, ArrayMap *MapGame)
     char *nomushroom = 
         "As you take a few steps into the dark cave. You sense a slight but sudden fall below your right foot\n"
         "Just like clockwork, you feel a needle pierce through your arm then many more. Your journey ends here.\n"
-        "GAME OVER.\n"
         "PIERCE THROUGH THE HEART ENDING\n";
 
     char *path_left =
@@ -110,7 +101,6 @@ void treasure_hunt(ArrayDyn ArrayGame, ArrayMap *MapGame)
         "Just a step past the beast makes the beast swipe at you.\n"
         "You go flying and crash a boulder inside the cave\n"
         "Nice try I guess?\n"
-        "GAME OVER\n"
         "ALL EARS ON YOU ENDING\n";
 
     char *path_right =
@@ -123,7 +113,6 @@ void treasure_hunt(ArrayDyn ArrayGame, ArrayMap *MapGame)
     char *kraken_dodge = 
         "You successfully dodge the tentacle by doing a limbo.\n"
         "However, you lose your footing and the kraken lifts you up into its mouth.\n"
-        "GAME OVER\n"
         "KRAKEN MEAL ENDING\n";
 
     char *kraken_fight =
@@ -141,8 +130,6 @@ void treasure_hunt(ArrayDyn ArrayGame, ArrayMap *MapGame)
         "You open the chest and see a pile of gold inside it.\n"
         "As you put your arm inside it, the chest grew teeth and bites your arm off.\n"
         "You fall for the mimic's trap and suffered from severe blood loss.\n\n"
-        
-        "GAME OVER\n"
         "ALL THAT GLITTERS ISN'T GOLD\n";
 
     char *mimic_ignore =
@@ -158,7 +145,6 @@ void treasure_hunt(ArrayDyn ArrayGame, ArrayMap *MapGame)
         "You open the chest and find a gemstone. Red in color and shining bright\n"
         "You discover that it could make anything you imagine.\n"
         "With this your village definitely will be the greatest superpower the world has ever seen\n"
-        "THE END\n"
         "GEM\n";
 
     char *chest_ignore =
@@ -166,7 +152,6 @@ void treasure_hunt(ArrayDyn ArrayGame, ArrayMap *MapGame)
         "You find a light at the end of the tunnel leading outside.\n"
         "The WanPis might just be a myth after all, you thought.\n"
         "You used your experience found in the journey to lead your village to prosper.\n"
-        "THE END\n"
         "LEADER\n";
 
     BinTree chest_ignore_tree =  Tree(chest_ignore,NilTree,NilTree);
