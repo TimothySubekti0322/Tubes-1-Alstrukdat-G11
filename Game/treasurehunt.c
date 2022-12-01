@@ -7,7 +7,6 @@ void ReadStory(BinTree Story){
 
 void ProgressStory(BinTree Story,int *choice,int *score)
 {
-
     char *chest_open =
     "You open the chest and find a gemstone. Red in color and shining bright\n"
     "You discover that it could make anything you imagine.\n"
@@ -54,6 +53,27 @@ void ProgressStory(BinTree Story,int *choice,int *score)
 
 void treasure_hunt(ArrayDyn ArrayGame, ArrayMap *MapGame)
 {   
+        char *ascii = 
+    "*******************************************************************************\n"
+    "          |                   |                  |                     |\n"
+    " _________|________________.=''_;=.______________|_____________________|_______\n"
+    "|                   |  ,-'_,=''     `'=.|                  |\n"
+    "|___________________|__'=._o`'-._        `'=.______________|___________________\n"
+    "          |                `'=._o`'=._      _`'=._                     |\n"
+    " _________|_____________________:=._o '=._.'_.-='''=.__________________|_______\n"
+    "|                   |    __.--' , ; `'=._o.' ,-'''-._ '.   |\n"
+    "|___________________|_._'  ,. .` ` `` ,  `'-._'-._   '. '__|___________________\n"
+    "          |           |o`'=._` , '` `; .'. ,  '-._'-._; ;              |\n"
+    " _________|___________| ;`-.o`'=._; .'' ` '`.'\\` . '-._ /_______________|_______\n"
+    "|                   | |o;    `'-.o`'=._``  '` ' ,__.--o;   |\n"
+    "|___________________|_| ;     (#) `-.o `'=.`_.--'_o.-; ;___|___________________\n"
+    "____/______/______/___|o;._    '      `'.o|o_.--'    ;o;____/______/______/____\n"
+    "/______/______/______/_'=._o--._        ; | ;        ; ;/______/______/______/_\n"
+    "____/______/______/______/__'=._o--._   ;o|o;     _._;o;____/______/______/____\n"
+    "/______/______/______/______/____'=._o._; | ;_.--'o.--'_/______/______/______/_\n"
+    "____/______/______/______/______/_____'=.o|o_.--''___/______/______/______/____\n"
+    "/______/______/______/______/______/______/______/______/______/______/______/_\n"
+    "*******************************************************************************\n\n";
         char *opening=  
         "In front of you is a cave said to harbor the treasure of a 13th century king, The WanPis.\n"
         "It is said that many adventurers come for the challenge of claiming the treasure\n"
@@ -169,6 +189,7 @@ void treasure_hunt(ArrayDyn ArrayGame, ArrayMap *MapGame)
     BinTree Story = Tree(opening,entrance_tree,nomushroom_tree);
     
     int choice,score = 0;
+    printf("%s",ascii);
     ReadStory(Story);
     ProgressStory(Story,&choice,&score);
     int index = FindStrArrayDyn(ArrayGame,"TREASURE HUNT");

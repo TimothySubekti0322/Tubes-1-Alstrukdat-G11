@@ -8,6 +8,48 @@ void randomnumbersnake(int *x,int *y){
     *y = rand() % 5;
 }
 
+int idxmaxarray(StatArray container, int n)
+{
+    int i, idxmax;
+    idxmax = 0;
+    for (i = 1; i < n; i++)
+    {
+        if (container.Ar[i] > container.Ar[idxmax])
+        {
+            idxmax = i;
+        }
+    }
+    return idxmax;
+}
+
+int idxnol(StatArray container, int n)
+{
+    int i, idxnol;
+    idxnol = 0;
+    for (i = 0; i < n; i++)
+    {
+        if (container.Ar[i] == 0)
+        {
+            return i;
+        }
+    }
+    return -100;
+}
+
+int idxsatu(StatArray container, int n)
+{
+    int i, idxsatu;
+    idxsatu = 0;
+    for (i = 0; i < n; i++)
+    {
+        if (container.Ar[i] == 1)
+        {
+            return i;
+        }
+    }
+    return -100;
+}
+
 /*------------Fungsi untuk memeriksa lokasi snake(full component, atau body saja) dan obstacle dalam peta------------*/
 
 boolean IsSnakeLocation(List snake, int input){
@@ -161,31 +203,621 @@ boolean IsTowardObstacle(Word Cword, List snake, StatArray ObstacleLocation){
 }
 
 /*------------Fungsi untuk memunculkan keadaan map sekarang------------*/
+void DisplaySOMMap(StatArray container)
+{
+        int board[21][51];
 
-void ShowSquare(StatArray container){
-    for (int j = 0; j<5; j++){
-        printf("---------------------\n");
-        printf("|");
-        for (int i = j*5; i<(j+1)*5; i++){
-            if (container.Ar[i]==-100){
-                printf("   |");
-            } else if (container.Ar[i]==0){
-                printf(" H |");
-            } else if (container.Ar[i]==-1){
-                printf(" o |");
-            } else if (container.Ar[i]==-5) {
-                printf(" X |"); 
-            } else if (container.Ar[i]==-10){
-                printf(" m |");
-            } else if (container.Ar[i]>0 && container.Ar[i]<10){
-                printf(" %d |", container.Ar[i]);
-            } else {
-                printf(" %d|", container.Ar[i]);
+    for(int i = 0 ; i < 21; i++)
+    {
+        for(int j = 0; j < 51 ; j++)
+        {
+            board[i][j] = -100;
+        }
+    }
+
+    // int array[25] = {-100,5,4,-100,-100,
+    //                  -100,-100,3,-100,-100,
+    //                  -100,-100,2,-100,-100,
+    //                  -100,-100,1,-100,-100,
+    //                  -100,-100,0,-100,-100};
+    
+    int idxmaxbody = idxmaxarray(container, 25);
+                     
+    int asciTLC = 218;
+    int asciH = 196;
+    int asciV = 179;
+    int asciT = 194;
+    int asciTRC = 191;
+    int asciTkiri = 195;
+    int asciTkanan = 180;
+    int asciTbawah = 193;
+    int asciBLC = 192;
+    int asciBRC = 217;
+    int asciplus = 197;
+    int ascibox = 219;
+    int ascicircle = 167;
+    int ascicongruent = 240;
+    int asciequal = 205;
+    int ascislashedzero = 157;
+    int asciM = 77;
+
+    // printf("%d",board[5][11]);
+
+    for(int i = 0 ; i < 21; i++)
+    {
+        for(int j = 0; j < 51 ; j++)
+        {
+            if(i % 4 == 0 && j == 0)  /* T kiri */
+            {
+                board[i][j] = asciTkiri;
+            }
+
+            else if(i % 4 == 0 && j == 50)  /* T Kanan*/
+            {
+                board[i][j] = asciTkanan;
+            }
+
+            else if(j % 10 == 0 && i == 0)  /* T Atas */
+            {
+                board[i][j] = asciT;
+            }
+
+            else if(j % 10 == 0 && i == 20)  /* T Bawah */
+            {
+                board[i][j] = asciTbawah;
+            }
+
+            else if((i % 4 == 0) && (j % 10 == 0))  /* T Tengah (Plus) */
+            {
+                board[i][j] = asciplus;
+            }
+            else if(i % 4 == 0) /* Garis Horizontal */
+            {
+                board[i][j] = asciH;
+            }
+
+            else if(j % 10 == 0)  /* Garis Vertikal */
+            {
+                board[i][j] = asciV;
+            }
+        }
+    }
+
+    board[0][0] = asciTLC;
+    board[0][50] = asciTRC;
+    board[20][0] = asciBLC;
+    board[20][50] = asciBRC;
+
+    /* Body */
+    for(int i = 0; i < 25; i++)
+    {
+        if (container.Ar[i] >= 0 && container.Ar[i] < 10)
+        {
+            for(int j = (i%5)*10 + 5 - 1 ; j < (i%5)*10 + 7; j++)
+            {
+                board[(i/5)*4 + 3 - 1][j] = ascibox;
+            }
+        }
+    }
+
+    /* Side Up */
+    for(int i = 0; i < 25; i++)
+    {   //printf("sideup\n");
+        if ((container.Ar[i] > 0) && (container.Ar[i] <= 10))
+        {   //printf("container.Ar[%d] = %d\n",i,container.Ar[i]);
+            if ((i >= 0) && (i <= 4))
+            {
+                if ((container.Ar[i+20] == container.Ar[i]-1) || (container.Ar[i+20] == container.Ar[i]+1))
+                {
+                    for (int j = (i%5)*10 + 5 - 1; j < (i%5)*10 + 7; j++)
+                    {
+                        board[1][j] = ascibox;
+                    }
+
+                }
+                else if((i == idxmaxbody) && (container.Ar[i+20] == 0))
+                {
+                    for (int j = (i%5)*10 + 5 - 1; j < (i%5)*10 + 7; j++)
+                    {
+                        board[1][j] = ascibox;
+                    }
+                }
+                
+            }
+
+            else
+            {
+                if ((container.Ar[i-5] == container.Ar[i]-1) || (container.Ar[i-5] == container.Ar[i]+1))
+                {
+                    for (int j = (i%5)*10 + 5 - 1; j < (i%5)*10 + 7; j++)
+                    {
+                        for(int k = (i/5)*4 + 3 - 2 - 1 ; k < (i/5)*4 + 3 - 1; k++)
+                        {
+                            board[k][j] = ascibox;
+                        }
+                    }
+                }
+
+                else if((i == idxmaxbody) && (container.Ar[i-5] == 0))
+                {   
+                    for (int j = (i%5)*10 + 5 - 1; j < (i%5)*10 + 7; j++)
+                    {
+                        for(int k = (i/5)*4 + 3 - 2 - 1 ; k < (i/5)*4 + 3 - 1; k++)
+                        {
+                            board[k][j] = ascibox;
+                        }
+                    }
+                }
+            }
+        }
+
+        // else if(container.Ar[i] == container.Ar[idxmaxbody])
+        // {
+        //     if ((i >= 0) && (i <= 4))
+        //     {
+        //         if (container.Ar[i+20] == container.Ar[i]+1)
+        //         {
+        //             for (int j = (i%5)*10 + 5 - 1; j < (i%5)*10 + 7; j++)
+        //             {
+        //                 board[1][j] = ascibox;
+        //             }
+        //         }
+        //     }
+        //     else
+        //     {
+        //         if (container.Ar[i-5] == container.Ar[i]+1)
+        //         {
+        //             for (int j = (i%5)*10 + 5 - 1; j < (i%5)*10 + 7; j++)
+        //             {
+        //                 for(int k = (i/5)*4 + 3 - 2 - 1 ; k < (i/5)*4 + 3 - 1; k++)
+        //                 {
+        //                     board[k][j] = ascibox;
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
+
+        else if(container.Ar[i] == 0)
+        {
+            if ((i >= 0) && (i <= 4))
+            {
+                if (container.Ar[i+20] == 1)
+                {
+                    for (int j = (i%5)*10 + 5 - 1; j < (i%5)*10 + 7; j++)
+                    {
+                        board[1][j] = ascibox;
+                    }                  
+                }  
+            }
+            else
+            {
+                if (container.Ar[i-5] == 1)
+                {
+                    for (int j = (i%5)*10 + 5 - 1; j < (i%5)*10 + 7; j++)
+                    {
+                        for(int k = (i/5)*4 + 3 - 2 - 1 ; k < (i/5)*4 + 3 - 1; k++)
+                        {
+                            board[k][j] = ascibox;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /* Side Left */
+    for(int i = 0; i < 25; i++)
+    {
+        if ((container.Ar[i] > 0) && (container.Ar[i] < 10))
+        {   //printf("%d = %d\n",i ,container.Ar[i]);
+            if (i%5 == 0)
+            {
+                if ((container.Ar[i+4] == container.Ar[i]-1) || (container.Ar[i+4] == container.Ar[i]+1))
+                {
+                    for(int j = (i%5)*10 + 5 - 3 - 1 ; j < (i%5)*10 + 5-1 ; j++)
+                    {
+                        board[(i/5)*4 + 3 - 1][j] = ascibox;
+                    }
+                }
+                else if((i == idxmaxbody) && (container.Ar[i+4] == 0))
+                {
+                    for(int j = (i%5)*10 + 5 - 3 - 1 ; j < (i%5)*10 + 5-1 ; j++)
+                    {
+                        board[(i/5)*4 + 3 - 1][j] = ascibox;
+                    }
+                }
+            }
+            else
+            {
+                //printf("Masuk , ");
+                if ((container.Ar[i-1] == container.Ar[i]-1) || (container.Ar[i-1] == container.Ar[i]+1))
+                {
+                    for(int j = (i%5)*10 + 5 - 4 - 1; j < (i%5)*10 + 5-1; j++)
+                    {
+                        board[(i/5)*4 + 3 - 1][j] = ascibox;
+                    }
+                }
+                
+                else if((i == idxmaxbody) && (container.Ar[i-1] == 0))
+                {
+                    for(int j = (i%5)*10 + 5 - 4 - 1; j < (i%5)*10 + 5-1; j++)
+                    {
+                        board[(i/5)*4 + 3 - 1][j] = ascibox;
+                    }
+                }
+            }
+        }
+
+        // else if(container.Ar[i] == 1)
+        // {
+        //     if (i%5 == 0)
+        //     {
+        //         if (container.Ar[i+4] == container.Ar[i]+1)
+        //         {
+        //             for(int j = (i%5)*10 + 5 - 3 - 1 ; j < (i%5)*10 + 5-1 ; j++)
+        //             {
+        //                 board[(i/5)*4 + 3 - 1][j] = ascibox;
+        //             }
+        //         }
+        //     }
+        
+        //     else
+        //     {
+        //         if (container.Ar[i-1] == container.Ar[i]+1)
+        //         {
+        //             for(int j = (i%5)*10 + 5 - 4 - 1; j < (i%5)*10 + 5-1; j++)
+        //             {
+        //                 board[(i/5)*4 + 3 - 1][j] = ascibox;
+        //             }
+        //         }
+        //     }
+        // }
+        else if(container.Ar[i] == 0)
+        {
+            if (i%5 == 0)
+            {
+                if (container.Ar[i+4] == 1)
+                {
+                    for(int j = (i%5)*10 + 5 - 3 - 1 ; j < (i%5)*10 + 5-1 ; j++)
+                    {
+                        board[(i/5)*4 + 3 - 1][j] = ascibox;
+                    }
+                }
+            }
+            else
+            {
+                //printf("Masuk , ");
+                if (container.Ar[i-1] == 1)
+                {
+                    for(int j = (i%5)*10 + 5 - 4 - 1; j < (i%5)*10 + 5-1; j++)
+                    {
+                        board[(i/5)*4 + 3 - 1][j] = ascibox;
+                    }
+                }
+            }
+        }
+    }
+
+    /* Side Right */
+    for(int i = 0; i < 25; i++)
+    {   //printf("%d\n",i);
+        //printf("%d\n",container.Ar[i]);
+        if ((container.Ar[i] > 0) && (container.Ar[i] < 10))
+        {
+            //printf("%d\n",i);
+            if ((i + 1)%5 == 0)
+            {
+                if ((container.Ar[i-4] == container.Ar[i]-1) || (container.Ar[i-4] == container.Ar[i]+1))
+                {
+                    for (int j = (i%5)*10 + 5 + 3 - 1 ; j < (i%5)*10 + 7 + 3; j++)
+                    {
+                        board[(i/5)*4 + 3 - 1][j] = ascibox;
+                    }
+                }
+                else if((i == idxmaxbody) && (container.Ar[i-4] == 0))
+                {
+                    for( int j = (i%5)*10 + 5 + 3 - 1 ; j < (i%5)*10 + 7 + 3; j++)
+                    {
+                        board[(i/5)*4 + 3 - 1][j] = ascibox;
+                    }
+                }
+            }
+            else
+            {
+                if ((container.Ar[i+1] == container.Ar[i]-1) || (container.Ar[i+1] == container.Ar[i]+1))
+                {
+                    for (int j = (i%5)*10 + 5 + 3 - 1 ; j < (i%5)*10 + 7 + 3; j++)
+                    {
+                        board[(i/5)*4 + 3 - 1][j] = ascibox;
+                    }
+                }
+                else if((i == idxmaxbody) && (container.Ar[i+1] == 0))
+                {
+                    for (int j = (i%5)*10 + 5 + 3 - 1 ; j < (i%5)*10 + 7 + 3; j++)
+                    {
+                        board[(i/5)*4 + 3 - 1][j] = ascibox;
+                    }
+                }
+            }
+        }
+        // else if(container.Ar[i] == 1)
+        // {
+        //     if ((i + 1)%5 == 0)
+        //     {
+        //         if (container.Ar[i-4] == container.Ar[i]+1)
+        //         {
+        //             for (int j = (i%5)*10 + 5 + 3 - 1 ; j < (i%5)*10 + 7 + 3; j++)
+        //             {
+        //                 board[(i/5)*4 + 3 - 1][j] = ascibox;
+        //             }
+        //         }
+        //     }
+        //     else
+        //     {
+        //         if (container.Ar[i+1] == container.Ar[i]+1)
+        //         {
+        //             for (int j = (i%5)*10 + 5 + 3 - 1 ; j < (i%5)*10 + 7 + 3; j++)
+        //             {
+        //                 board[(i/5)*4 + 3 - 1][j] = ascibox;
+        //             }
+        //         }
+        //     }
+        // }
+        else if(container.Ar[i] == 0)
+        {
+            if ((i + 1)%5 == 0)
+            {
+                if (container.Ar[i-4] == 1)
+                {
+                    for (int j = (i%5)*10 + 5 + 3 - 1 ; j < (i%5)*10 + 7 + 3; j++)
+                    {
+                        board[(i/5)*4 + 3 - 1][j] = ascibox;
+                    }
+                }
+            }
+            else
+            {
+                if (container.Ar[i+1] == 1)
+                {
+                    for (int j = (i%5)*10 + 5 + 3 - 1 ; j < (i%5)*10 + 7 + 3; j++)
+                    {
+                        board[(i/5)*4 + 3 - 1][j] = ascibox;
+                    }
+                }
+            }
+        }
+    }
+
+    /* Side Down */
+    for(int i = 0; i < 25; i++)
+    {
+        if ((container.Ar[i] > 0) && (container.Ar[i] < 10))
+        {
+            if ((i >= 20) && (i <= 24))
+            {
+                if ((container.Ar[i-20] == container.Ar[i]-1) || (container.Ar[i-20] == container.Ar[i]+1))
+                {
+                    for(int j = (i%5)*10 + 5 - 1 ; j < (i%5)*10 + 7; j++)
+                    {
+                        board[(i/5)*4 + 3 + 1 - 1][j] = ascibox;
+                    }
+                }
+                else if ((i = idxmaxbody) && (container.Ar[i-20] == 0))
+                {
+                    for(int j = (i%5)*10 + 5 - 1 ; j < (i%5)*10 + 7; j++)
+                    {
+                        board[(i/5)*4 + 3 + 1 - 1][j] = ascibox;
+                    }
+                }
+            }
+            else
+            {
+                if ((container.Ar[i+5] == container.Ar[i]-1) || (container.Ar[i+5] == container.Ar[i]+1))
+                {
+                    for(int j = (i%5)*10 + 5 - 1 ; j < (i%5)*10 + 7; j++)
+                    {
+                        board[(i/5)*4 + 3 + 1 - 1][j] = ascibox;
+                    }
+                }
+
+                else if ((i == idxmaxbody) && (container.Ar[i+5] == 0))
+                {
+                    for(int j = (i%5)*10 + 5 - 1 ; j < (i%5)*10 + 7; j++)
+                    {
+                        board[(i/5)*4 + 3 + 1 - 1][j] = ascibox;
+                    }
+                }
+            }
+        }
+        // else if(container.Ar[i] == 1)
+        // {
+        //     if ((i >= 20) && (i <= 24))
+        //     {
+        //         if (container.Ar[i-20] == container.Ar[i]+1)
+        //         {
+        //             for(int j = (i%5)*10 + 5 - 1 ; j < (i%5)*10 + 7; j++)
+        //             {
+        //                 board[(i/5)*4 + 3 + 1 - 1][j] = ascibox;
+        //             }
+        //         }
+        //     }
+        //     else
+        //     {
+        //         if (container.Ar[i+5] == container.Ar[i]+1)
+        //         {
+        //             for(int j = (i%5)*10 + 5 - 1 ; j < (i%5)*10 + 7; j++)
+        //             {
+        //                 board[(i/5)*4 + 3 + 1 - 1][j] = ascibox;
+        //             }
+        //         }
+        //     }
+        // }
+        else if (container.Ar[i] == 0)
+        {
+            //printf("Masuk\n");
+            if ((i >= 20) && (i <= 24))
+            {
+                // printf("container.Ar[%d] = %d\n",idxmaxbody,container.Ar[idxmaxbody]);
+                // printf("container.Ar[%d] = %d\n",i,container.Ar[i]);
+                if (container.Ar[i-20] == 1)
+                {
+                    for(int j = (i%5)*10 + 5 - 1 ; j < (i%5)*10 + 7; j++)
+                    {
+                        board[(i/5)*4 + 3 + 1 - 1][j] = ascibox;
+                    }
+                }
+            }
+            else
+            {   
+                if (container.Ar[i+5] == 1)
+                {
+                    for(int j = (i%5)*10 + 5 - 1 ; j < (i%5)*10 + 7; j++)
+                    {
+                        board[(i/5)*4 + 3 + 1 - 1][j] = ascibox;
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    /* Head */
+    int idxhead = idxnol(container,25);
+    //printf("\nidxhead = %d\n",idxhead);
+
+    /* body before Head */
+    int idxprevhead = idxsatu(container,25);
+    //printf("\nidxprevhead = %d\n",idxprevhead);
+
+    /* Face Up */
+    if (idxhead == idxprevhead + 20)
+    {
+        for(int j = (idxhead%5)*10 + 5 - 1 ; j < (idxhead%5)*10 + 7; j++)
+        {
+            board[(idxhead/5)*4 + 3 - 1 - 1][j] = asciT;
+        }
+    }
+
+    else if (idxhead == (idxprevhead - 5))
+    {
+        //printf("\nMasuk\n");
+        for(int j = (idxhead%5)*10 + 5 - 1 ; j < (idxhead%5)*10 + 7; j++)
+        {
+            board[(idxhead/5)*4 + 3 - 1 - 1][j] = asciT;
+        }
+    }
+
+    /* Face Left */
+    else if (idxhead == idxprevhead + 4)
+    {
+        board[(idxhead/5)*4 + 3 - 1][(idxhead%5)*10 + 5-2] = asciTkiri;
+    }
+    else if (idxhead == (idxprevhead - 1))
+    {
+        board[(idxhead/5)*4 + 3 - 1][(idxhead%5)*10 + 5-2] = asciTkiri;
+    }
+
+    /* Face Right*/
+    else if (idxhead == (idxprevhead-4))
+    {
+        board[(idxhead/5)*4 + 3 - 1][(idxhead%5)*10 + 7] = asciTkanan;
+    }
+    else if (idxhead == (idxprevhead + 1))
+    {
+        board[(idxhead/5)*4 + 3 - 1][(idxhead%5)*10 + 7] = asciTkanan;
+    }
+
+    /* Face Down */
+    else if (idxhead == (idxprevhead - 20))
+    {
+        for(int j = (idxhead%5)*10 + 5 - 1 ; j < (idxhead%5)*10 + 7; j++)
+        {
+            board[(idxhead/5)*4 + 3][j] = asciTbawah;
+        }
+    }
+    else if (idxhead == (idxprevhead + 5))
+    {
+        for(int j = (idxhead%5)*10 + 5 - 1 ; j < (idxhead%5)*10 + 7; j++)
+        {
+            board[(idxhead/5)*4 + 3][j] = asciTbawah;
+            printf("\nMasuk\n");
+        }
+    }
+
+    /* Food */
+    for(int i = 0; i < 25; i++)
+    {
+        if (container.Ar[i] == -1)
+        {
+            board[(i/5)*4 + 3 - 1][(i%5)*10 + 5] = ascicircle;
+        }
+    }
+
+    /* Meteor */
+    for(int i = 0; i < 25; i++)
+    {
+        if (container.Ar[i] == -10)
+        {
+            board[(i/5)*4 + 3 - 1][(i%5)*10 + 5] = asciM;
+        }
+    }
+
+    /* Hot Tile */
+    for(int i = 0; i < 25; i++)
+    {
+        if (container.Ar[i] == -5)
+        {
+            board[(i/5)*4 + 3 - 1][(i%5)*10 + 5] = ascislashedzero;
+        }
+    }
+
+    
+    /* Melakukan Print*/
+    for(int baris = 0 ; baris < 21 ; baris++)
+    {
+        for(int kolom = 0 ; kolom < 51 ; kolom++)
+        {
+            if (board[baris][kolom] == -100)
+            {
+                printf(" ");
+            }
+            else
+            {
+                printf("%c",board[baris][kolom]);
             }
         }
         printf("\n");
     }
-    printf("---------------------\n");
+}
+
+void ShowSquare(StatArray container){
+    DisplaySOMMap(container);
+    // for (int j = 0; j<5; j++){
+    //     printf("---------------------\n");
+    //     printf("|");
+    //     for (int i = j*5; i<(j+1)*5; i++){
+    //         if (container.Ar[i]==-100){
+    //             printf("   |");
+    //         } else if (container.Ar[i]==0){
+    //             printf(" H |");
+    //         } else if (container.Ar[i]==-1){
+    //             printf(" o |");
+    //         } else if (container.Ar[i]==-5) {
+    //             printf(" X |"); 
+    //         } else if (container.Ar[i]==-10){
+    //             printf(" m |");
+    //         } else if (container.Ar[i]>0 && container.Ar[i]<10){
+    //             printf(" %d |", container.Ar[i]);
+    //         } else {
+    //             printf(" %d|", container.Ar[i]);
+    //         }
+    //     }
+    //     printf("\n");
+    // }
+    // printf("---------------------\n");
+    printf("\n");
 }
 
 /*------------Fungsi utama dalam menjalankan program------------*/

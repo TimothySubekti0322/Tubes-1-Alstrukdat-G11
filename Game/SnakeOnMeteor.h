@@ -16,6 +16,16 @@ void randomnumbersnake(int *x,int *y);
     I.S. sembarang
     F.S. random number tersimpan di x dan y. */
 
+int idxmaxarray(StatArray container, int n);
+/* Mengembalikan indeks dari elemen maksimum dalam array */
+
+int idxnol(StatArray container, int n);
+/* Mengembalikan indeks dari elemen pertama yang bernilai 0 */
+
+
+int idxsatu(StatArray container, int n);
+/* Mengembalikan indeks dari elemen pertama yang bernilai 1 */
+
 /*------------Fungsi untuk memeriksa lokasi snake(full component, atau body saja) dan obstacle dalam peta------------*/
 
 boolean IsSnakeLocation(List snake, int input);
@@ -79,6 +89,11 @@ boolean IsTowardObstacle(Word Cword, List snake, StatArray ObstacleLocation);
     F.S. Mengecek jika inputan command user menyebabkan snake bergerak ke obstacle*/
 
 /*------------Fungsi untuk memunculkan keadaan map sekarang------------*/
+void DisplaySOMMap(StatArray container);
+/* Memunculkan map dengan Tampilan Design Asci
+    I.S. Game dimulai
+    F.S. Memunculkan map dengan tampilan design asci*/
+
 
 void ShowSquare(StatArray container);
 /* Memunculkan kondisi map sekarang

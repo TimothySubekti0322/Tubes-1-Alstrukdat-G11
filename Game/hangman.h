@@ -25,8 +25,7 @@ void DisplayHangmanWord(char *array, int length);
 
 boolean alreadyGuessed(char now, char *guessed);
 /* 
-    * Bernilai true apabila now sudah pernah ditebak, yang dalam kata lain,
-    * now merupakan elemen dari array guessed.
+    * Bernilai true apabila now sudah pernah ditebak (now merupakan elemen dari array guessed)
     * Mengirimkan false jika sebaliknya
 */
 
@@ -35,6 +34,16 @@ void emptystring(char *guessed, int size);
     * Fungsi untuk mengosongkan string hasil tebakan pada kata sebelumnya.
     * I.S.  : String guessed berisi huruf-huruf yang ditebak untuk kata sebelumnya, dan berukuran size.
     * F.S.  : String guessed menjadi kosong, yaitu semua elemennya adalah '\0'.
+*/
+
+void showFigHangman(int num);
+/*
+    * Fungsi untuk menampilkan gambar hangman sampai num
+*/
+
+void EndCredits();
+/*
+    * Melakukan pembacaan file , kemudian menampilkan isinya ke layar.
 */
 
 void hangman(ArrayDyn ArrayGame, ArrayMap *MapGame);
