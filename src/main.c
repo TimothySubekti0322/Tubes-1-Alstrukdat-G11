@@ -483,12 +483,27 @@ int main()
 
             else if ((CWord.TabWord[0] == 'H') && (CWord.TabWord[1] == 'I') && (CWord.TabWord[2] == 'S') && (CWord.TabWord[3] == 'T') && (CWord.TabWord[4] == 'O') && (CWord.TabWord[5] == 'R')&& (CWord.TabWord[6] == 'Y') && (CWord.TabWord[7] == ' '))
             {
-                char *x;
-                x = (char *) malloc(sizeof(char));
-                CopyWordtostring(CWord,x,8,CWord.Length-1);
-                int n = 0; 
-                n = StringtoInt(x);
-                HISTORY(History,n);
+                boolean valid = true;
+                for(int i = 8; i < CWord.Length;i++)
+                {
+                    if(CWord.TabWord[i] < '0' || CWord.TabWord[i] > '9')
+                    {
+                        valid = false;
+                    }
+                }
+                if(valid)
+                {
+                    char *x;
+                    x = (char *) malloc(sizeof(char));
+                    CopyWordtostring(CWord,x,8,CWord.Length-1);
+                    int n = 0; 
+                    n = StringtoInt(x);
+                    HISTORY(History,n);
+                }
+                else
+                {
+                    printf("\nCommand tidak valid\n");
+                }
             }
             else if (IsKataSama(CWord, StringtoWord("RESET HISTORY")))
             {

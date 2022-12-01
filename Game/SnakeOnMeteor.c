@@ -1,4 +1,5 @@
 #include "SnakeOnMeteor.h"
+#include <stdlib.h>
 
 /*------------Fungsi tambahan------------*/
 
@@ -205,7 +206,11 @@ boolean IsTowardObstacle(Word Cword, List snake, StatArray ObstacleLocation){
 /*------------Fungsi untuk memunculkan keadaan map sekarang------------*/
 void DisplaySOMMap(StatArray container)
 {
-        int board[21][51];
+    //int board[21][51];
+    int**board = (int**) malloc(21*sizeof(int*));
+    for (int i = 0; i < 21; i++){
+        board[i] = (int*) malloc(51*sizeof(int));
+    }
 
     for(int i = 0 ; i < 21; i++)
     {
@@ -350,34 +355,6 @@ void DisplaySOMMap(StatArray container)
                 }
             }
         }
-
-        // else if(container.Ar[i] == container.Ar[idxmaxbody])
-        // {
-        //     if ((i >= 0) && (i <= 4))
-        //     {
-        //         if (container.Ar[i+20] == container.Ar[i]+1)
-        //         {
-        //             for (int j = (i%5)*10 + 5 - 1; j < (i%5)*10 + 7; j++)
-        //             {
-        //                 board[1][j] = ascibox;
-        //             }
-        //         }
-        //     }
-        //     else
-        //     {
-        //         if (container.Ar[i-5] == container.Ar[i]+1)
-        //         {
-        //             for (int j = (i%5)*10 + 5 - 1; j < (i%5)*10 + 7; j++)
-        //             {
-        //                 for(int k = (i/5)*4 + 3 - 2 - 1 ; k < (i/5)*4 + 3 - 1; k++)
-        //                 {
-        //                     board[k][j] = ascibox;
-        //                 }
-        //             }
-        //         }
-        //     }
-        // }
-
         else if(container.Ar[i] == 0)
         {
             if ((i >= 0) && (i <= 4))
@@ -448,31 +425,6 @@ void DisplaySOMMap(StatArray container)
                 }
             }
         }
-
-        // else if(container.Ar[i] == 1)
-        // {
-        //     if (i%5 == 0)
-        //     {
-        //         if (container.Ar[i+4] == container.Ar[i]+1)
-        //         {
-        //             for(int j = (i%5)*10 + 5 - 3 - 1 ; j < (i%5)*10 + 5-1 ; j++)
-        //             {
-        //                 board[(i/5)*4 + 3 - 1][j] = ascibox;
-        //             }
-        //         }
-        //     }
-        
-        //     else
-        //     {
-        //         if (container.Ar[i-1] == container.Ar[i]+1)
-        //         {
-        //             for(int j = (i%5)*10 + 5 - 4 - 1; j < (i%5)*10 + 5-1; j++)
-        //             {
-        //                 board[(i/5)*4 + 3 - 1][j] = ascibox;
-        //             }
-        //         }
-        //     }
-        // }
         else if(container.Ar[i] == 0)
         {
             if (i%5 == 0)
@@ -541,29 +493,6 @@ void DisplaySOMMap(StatArray container)
                 }
             }
         }
-        // else if(container.Ar[i] == 1)
-        // {
-        //     if ((i + 1)%5 == 0)
-        //     {
-        //         if (container.Ar[i-4] == container.Ar[i]+1)
-        //         {
-        //             for (int j = (i%5)*10 + 5 + 3 - 1 ; j < (i%5)*10 + 7 + 3; j++)
-        //             {
-        //                 board[(i/5)*4 + 3 - 1][j] = ascibox;
-        //             }
-        //         }
-        //     }
-        //     else
-        //     {
-        //         if (container.Ar[i+1] == container.Ar[i]+1)
-        //         {
-        //             for (int j = (i%5)*10 + 5 + 3 - 1 ; j < (i%5)*10 + 7 + 3; j++)
-        //             {
-        //                 board[(i/5)*4 + 3 - 1][j] = ascibox;
-        //             }
-        //         }
-        //     }
-        // }
         else if(container.Ar[i] == 0)
         {
             if ((i + 1)%5 == 0)
@@ -630,29 +559,6 @@ void DisplaySOMMap(StatArray container)
                 }
             }
         }
-        // else if(container.Ar[i] == 1)
-        // {
-        //     if ((i >= 20) && (i <= 24))
-        //     {
-        //         if (container.Ar[i-20] == container.Ar[i]+1)
-        //         {
-        //             for(int j = (i%5)*10 + 5 - 1 ; j < (i%5)*10 + 7; j++)
-        //             {
-        //                 board[(i/5)*4 + 3 + 1 - 1][j] = ascibox;
-        //             }
-        //         }
-        //     }
-        //     else
-        //     {
-        //         if (container.Ar[i+5] == container.Ar[i]+1)
-        //         {
-        //             for(int j = (i%5)*10 + 5 - 1 ; j < (i%5)*10 + 7; j++)
-        //             {
-        //                 board[(i/5)*4 + 3 + 1 - 1][j] = ascibox;
-        //             }
-        //         }
-        //     }
-        // }
         else if (container.Ar[i] == 0)
         {
             //printf("Masuk\n");
@@ -742,7 +648,6 @@ void DisplaySOMMap(StatArray container)
         for(int j = (idxhead%5)*10 + 5 - 1 ; j < (idxhead%5)*10 + 7; j++)
         {
             board[(idxhead/5)*4 + 3][j] = asciTbawah;
-            printf("\nMasuk\n");
         }
     }
 
@@ -790,6 +695,12 @@ void DisplaySOMMap(StatArray container)
         }
         printf("\n");
     }
+
+    for(int i = 0; i < 21; i++)
+    {
+        free(board[i]);
+    }
+    free(board);
 }
 
 void ShowSquare(StatArray container){

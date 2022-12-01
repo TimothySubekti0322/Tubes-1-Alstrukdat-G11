@@ -1289,7 +1289,7 @@ void RESETSCOREBOARD(ArrayDyn listgame , ArrayMap *M)
             printf("\n%c ALL SCOREBOARD GAGAL DIHAPUS %c\n",asci,asci);
         }
     }
-    else
+    else if (n >= 1 && n <= listgame.Neff)
     {
         printf("\nAPAKAH KAMU YAKIN INGIN MELAKUKAN RESET SCOREBOARD %s (YA/TIDAK)? ",listgame.Ar[n-1]);
         INPUT();
@@ -1304,7 +1304,12 @@ void RESETSCOREBOARD(ArrayDyn listgame , ArrayMap *M)
         {
             printf("\n%c SCOREBOARD %s GAGAL DIHAPUS %c\n",asci,listgame.Ar[n-1],asci);
         }
-    }    
+    }   
+    else
+    {
+        printf("\nIndex Tidak Valid ! Silahkan Masukan Index yang valid\n");
+        RESETSCOREBOARD(listgame,M);
+    } 
 }
 
 void RESETHISTORY(StackStr *history)
