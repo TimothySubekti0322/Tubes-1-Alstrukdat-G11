@@ -1340,3 +1340,36 @@ void QUIT(boolean EndGame)
 */
     EndGame = true;
 }
+
+// Melakukan print dengan warna
+void PrintGreen(char* input){
+   printf(GRN"%s"reset,input);
+}
+
+void PrintRed(char* input){
+   printf(RED"%s"reset,input);
+}
+
+void PrintYellow(char* input){
+   printf(YEL"%s"reset,input);
+}
+
+void PrintBlue(char* input){
+   printf(BLU"%s"reset,input);
+}
+
+void PrintGreenchar(char input){
+   printf(GRN"%c"reset,input);
+}
+
+void PrintRedchar(char input){
+   printf(RED"%c"reset,input);
+}
+
+void PrintYellowchar(char input){
+   printf(YEL"%c"reset,input);
+}
+
+void PrintBluechar(char input){
+   printf(BLU"%c"reset,input);
+}

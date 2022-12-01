@@ -26,15 +26,11 @@
 //colors
 #define RED "\e[0;31m"
 #define GRN "\e[0;32m"
+#define YEL "\e[0;33m"
+#define BLU "\e[0;34m"
 #define reset "\e[0m"
 
-void PrintGreen(char* input){
-   printf(GRN"%s"reset,input);
-}
 
-void PrintRed(char* input){
-   printf(RED"%s"reset,input);
-}
 
 void STARTBNMO(ArrayDyn *gamesBNMO , ArrayMap *MapGame);
 /* Membaca file config dan memasukan tiap baris file ke array gamesBNMO*/
@@ -189,4 +185,29 @@ void QUIT(boolean EndGame);
    I.S : EndGame bernilai false
    F.S : Endgame bernilai true
 */
+
+void PrintGreen(char* input);
+/* Print string warna Hijau*/
+
+void PrintRed(char* input);
+/* Print string warna Merah*/
+
+void PrintYellow(char* input);
+/* Print string warna Kuning*/
+
+void PrintBlue(char* input);
+/* Print string warna Biru*/
+
+void PrintGreenchar(char input);
+/* Print char warna Hijau*/
+
+void PrintRedchar(char input);
+/* Print char warna Merah*/
+
+void PrintYellowchar(char input);
+/* Print char warna Kuning*/
+
+void PrintBluechar(char input);
+/* Print char warna Biru*/
+
 #endif

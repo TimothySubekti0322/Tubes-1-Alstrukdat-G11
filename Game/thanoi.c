@@ -36,8 +36,22 @@ void displaystack(StackInt S,int size, int i){
         {
             printf(" ");
         }
-        for(int j = 0; j<bintang; j++){
-            printf("%c",ascii);
+        if(bintang%8 == 1){
+            for(int j = 0; j<bintang; j++){
+                PrintRedchar(ascii);
+            }
+        } else if(bintang%8 == 3){
+            for(int j = 0; j<bintang; j++){
+                PrintGreenchar(ascii);
+            }
+        } else if(bintang%8 == 5){
+            for(int j = 0; j<bintang; j++){
+                PrintYellowchar(220);
+            }
+        } else if(bintang%8 == 7){
+            for(int j = 0; j<bintang; j++){
+                PrintBluechar(220);
+            }
         }
         for(int j=0;j<spasi;j++)
         {
