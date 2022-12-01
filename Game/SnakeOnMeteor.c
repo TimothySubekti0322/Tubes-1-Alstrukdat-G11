@@ -361,13 +361,13 @@ void SnakeOnMeteor(ArrayDyn ArrayGame, ArrayMap *MapGame){
             if (snake.First->info == FoodLocation){
                 DelVLast(&snake,&temporary);
                 InsVLast(&snake,temporary);
-                if (!IsSnakeLocation(snake,(temporary/5)*5 + (temporary-1)%5)){
-                    InsVLast(&snake, (temporary/5)*5 + (temporary-1)%5);
-                } else if (!IsSnakeLocation(snake,(temporary+20)%25)){
+                if (!(IsSnakeLocation(snake,(temporary/5)*5 + (temporary+4)%5) || IsObstacleLocation(ObstacleLocation,(temporary/5)*5 + (temporary+4)%5) || MeteorLocation == (temporary/5)*5 + (temporary+4)%5)){
+                    InsVLast(&snake, (temporary/5)*5 + (temporary+4)%5);
+                } else if (!(IsSnakeLocation(snake,(temporary+20)%25) || IsObstacleLocation(ObstacleLocation,(temporary+20)%25) || MeteorLocation == (temporary+20)%25)){
                     InsVLast(&snake, (temporary+20)%25);
-                } else if (!IsSnakeLocation(snake,(temporary+5)%25)){
+                } else if (!(IsSnakeLocation(snake,(temporary+5)%25) || IsObstacleLocation(ObstacleLocation,(temporary+5)%25) || MeteorLocation == (temporary+5)%25)){
                     InsVLast(&snake, (temporary+5)%25);
-                } else if (!IsSnakeLocation(snake,(temporary/5)*5 + (temporary+1)%5)){
+                } else if (!(IsSnakeLocation(snake,(temporary/5)*5 + (temporary+1)%5) || IsObstacleLocation(ObstacleLocation,(temporary/5)*5 + (temporary+1)%5) || MeteorLocation == (temporary/5)*5 + (temporary+1)%5)){
                     InsVLast(&snake, (temporary/5)*5 + (temporary+1)%5);
                 } else {
                     End = 1;
