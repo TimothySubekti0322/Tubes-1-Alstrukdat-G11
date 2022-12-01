@@ -38,11 +38,11 @@ void displaystack(StackInt S,int size, int i){
         }
         if(bintang%8 == 1){
             for(int j = 0; j<bintang; j++){
-                PrintRedchar(ascii);
+                PrintRedchar(220);
             }
         } else if(bintang%8 == 3){
             for(int j = 0; j<bintang; j++){
-                PrintGreenchar(ascii);
+                PrintGreenchar(220);
             }
         } else if(bintang%8 == 5){
             for(int j = 0; j<bintang; j++){
