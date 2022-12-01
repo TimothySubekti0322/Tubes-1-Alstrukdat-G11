@@ -15,7 +15,6 @@ void displaystack(StackInt S,int size, int i){
     int bintang, spasi;
     bintang = 2 * isi - 1;
     spasi = ((2 * size + 1) - bintang)/2;
-    int ascii = 220;
     
     if(isi == NIL)
     {
