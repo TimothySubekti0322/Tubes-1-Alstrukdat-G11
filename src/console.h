@@ -23,6 +23,19 @@
 #include "../Game/hangman.h"
 
 
+//colors
+#define RED "\e[0;31m"
+#define GRN "\e[0;32m"
+#define reset "\e[0m"
+
+void PrintGreen(char* input){
+   printf(GRN"%s"reset,input);
+}
+
+void PrintRed(char* input){
+   printf(RED"%s"reset,input);
+}
+
 void STARTBNMO(ArrayDyn *gamesBNMO , ArrayMap *MapGame);
 /* Membaca file config dan memasukan tiap baris file ke array gamesBNMO*/
 
