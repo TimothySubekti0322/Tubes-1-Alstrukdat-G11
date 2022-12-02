@@ -908,6 +908,10 @@ void SnakeOnMeteor(ArrayDyn ArrayGame, ArrayMap *MapGame){
     printf("Mengenerate peta, snake dan makanan . . . \n\n");
     printf("Berhasil digenerate!\n\n");
     printf("Berikut merupakan peta permainan\n");
+    printf("\nBerikut merupakan Beberapa petunjuk :\n");
+    printf("%c = Food\n",111);
+    printf("%c = Meteor\n",88);
+    printf("Kumpulan %c yang memenuhi kotak = Obstacle\n",219);
     CreateSnake(&snake, ObstacleLocation);
     NextTurn(&snake, &FoodLocation, &IsFoodAvailable, 0, &MeteorLocation, &End, &score, ObstacleLocation);
     
