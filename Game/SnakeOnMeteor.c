@@ -204,7 +204,7 @@ boolean IsTowardObstacle(Word Cword, List snake, StatArray ObstacleLocation){
 }
 
 /*------------Fungsi untuk memunculkan keadaan map sekarang------------*/
-void DisplaySOMMap(StatArray container)
+void DisplaySOMMap(StatArray container, Word Cword)
 {
     //int board[21][51];
     int**board = (int**) malloc(21*sizeof(int*));
@@ -240,10 +240,11 @@ void DisplaySOMMap(StatArray container)
     int asciBRC = 217;
     int asciplus = 197;
     int ascibox = 219;
-    int ascicircle = 167;
+    int ascicircle = 111;
     int ascicongruent = 240;
     int asciequal = 205;
     int ascislashedzero = 157;
+    int asciX = 88;
     int asciM = 77;
 
     // printf("%d",board[5][11]);
@@ -532,7 +533,7 @@ void DisplaySOMMap(StatArray container)
                         board[(i/5)*4 + 3 + 1 - 1][j] = ascibox;
                     }
                 }
-                else if ((i = idxmaxbody) && (container.Ar[i-20] == 0))
+                else if ((i == idxmaxbody) && (container.Ar[i-20] == 0))
                 {
                     for(int j = (i%5)*10 + 5 - 1 ; j < (i%5)*10 + 7; j++)
                     {
@@ -598,7 +599,37 @@ void DisplaySOMMap(StatArray container)
     //printf("\nidxprevhead = %d\n",idxprevhead);
 
     /* Face Up */
-    if (idxhead == idxprevhead + 20)
+    if(Cword.TabWord[0] == 'w')
+    {
+        for(int j = (idxhead%5)*10 + 5 - 1 ; j < (idxhead%5)*10 + 7; j++)
+        {
+            board[(idxhead/5)*4 + 3 - 1 - 1][j] = asciT;
+        }
+    }
+
+    /* Face Left */
+    else if(Cword.TabWord[0] == 'a')
+    {
+        board[(idxhead/5)*4 + 3 - 1][(idxhead%5)*10 + 5-2] = asciTkiri;
+    }
+
+    /* Face Right*/
+    else if(Cword.TabWord[0] == 'd')
+    {
+        board[(idxhead/5)*4 + 3 - 1][(idxhead%5)*10 + 7] = asciTkanan;
+    }
+
+    /* Face Down */
+    else if(Cword.TabWord[0] == 's')
+    {
+        for(int j = (idxhead%5)*10 + 5 - 1 ; j < (idxhead%5)*10 + 7; j++)
+        {
+            board[(idxhead/5)*4 + 3][j] = asciTbawah;
+        }
+    }
+
+    /* Face Up */
+    else if (idxhead == idxprevhead + 20)
     {
         for(int j = (idxhead%5)*10 + 5 - 1 ; j < (idxhead%5)*10 + 7; j++)
         {
@@ -615,25 +646,30 @@ void DisplaySOMMap(StatArray container)
         }
     }
 
+
     /* Face Left */
     else if (idxhead == idxprevhead + 4)
     {
         board[(idxhead/5)*4 + 3 - 1][(idxhead%5)*10 + 5-2] = asciTkiri;
     }
+
     else if (idxhead == (idxprevhead - 1))
     {
         board[(idxhead/5)*4 + 3 - 1][(idxhead%5)*10 + 5-2] = asciTkiri;
     }
 
-    /* Face Right*/
+
+    /* Face Rigth */
     else if (idxhead == (idxprevhead-4))
     {
         board[(idxhead/5)*4 + 3 - 1][(idxhead%5)*10 + 7] = asciTkanan;
     }
+
     else if (idxhead == (idxprevhead + 1))
     {
         board[(idxhead/5)*4 + 3 - 1][(idxhead%5)*10 + 7] = asciTkanan;
     }
+
 
     /* Face Down */
     else if (idxhead == (idxprevhead - 20))
@@ -643,6 +679,7 @@ void DisplaySOMMap(StatArray container)
             board[(idxhead/5)*4 + 3][j] = asciTbawah;
         }
     }
+    
     else if (idxhead == (idxprevhead + 5))
     {
         for(int j = (idxhead%5)*10 + 5 - 1 ; j < (idxhead%5)*10 + 7; j++)
@@ -665,16 +702,22 @@ void DisplaySOMMap(StatArray container)
     {
         if (container.Ar[i] == -10)
         {
-            board[(i/5)*4 + 3 - 1][(i%5)*10 + 5] = asciM;
+            board[(i/5)*4 + 3 - 1][(i%5)*10 + 5] = asciX;
         }
     }
 
-    /* Hot Tile */
+    /* Obstacle */
     for(int i = 0; i < 25; i++)
     {
         if (container.Ar[i] == -5)
         {
-            board[(i/5)*4 + 3 - 1][(i%5)*10 + 5] = ascislashedzero;
+            for(int j = (i/5)*4 + 1 ; j < (i/5)*4 + 4 ; j++)
+            {
+                for(int k = (i%5)*10 + 1 ; k < (i%5)*10 + 10 ; k++)
+                {
+                    board[j][k] = ascibox;
+                }
+            }
         }
     }
 
@@ -703,8 +746,8 @@ void DisplaySOMMap(StatArray container)
     free(board);
 }
 
-void ShowSquare(StatArray container){
-    DisplaySOMMap(container);
+void ShowSquare(StatArray container , Word Cword){
+    DisplaySOMMap(container, Cword);
     // for (int j = 0; j<5; j++){
     //     printf("---------------------\n");
     //     printf("|");
@@ -776,7 +819,7 @@ void NextTurn(List *snake, int *FoodLocation, boolean *IsFoodAvailable, int Turn
         container.Ar[*MeteorLocation] = -10;
     }
 
-    ShowSquare(container);
+    ShowSquare(container,CWord);
     *score = coordinat.Neff*2;
 
     if (Turn > 0){
@@ -793,7 +836,7 @@ void NextTurn(List *snake, int *FoodLocation, boolean *IsFoodAvailable, int Turn
                     DelVLast(snake, &temporary);
                     container.Ar[coordinat.Ar[coordinat.Neff-1]] == -100;
                     printf("Berikut merupakan peta permainan sekarang:\n");
-                    ShowSquare(container);
+                    ShowSquare(container,CWord);
                     printf("Silahkan lanjutkan permainan\n");
                 } else {
                     int i = 1;
@@ -804,7 +847,7 @@ void NextTurn(List *snake, int *FoodLocation, boolean *IsFoodAvailable, int Turn
                         container.Ar[coordinat.Ar[j]]--;
                     }
                     printf("Berikut merupakan peta permainan sekarang:\n");
-                    ShowSquare(container);
+                    ShowSquare(container,CWord);
                     printf("Silahkan lanjutkan permainan\n");
                     if (((abs(coordinat.Ar[i-1]-coordinat.Ar[i+1]) == 2 || abs(coordinat.Ar[i-1]-coordinat.Ar[i+1]) == 3) && coordinat.Ar[i-1]/5 == coordinat.Ar[i+1]/5) ||
                         ((abs(coordinat.Ar[i-1]-coordinat.Ar[i+1]) == 10 || abs(coordinat.Ar[i-1]-coordinat.Ar[i+1]) == 15) && coordinat.Ar[i-1]%5 == coordinat.Ar[i+1]%5)){

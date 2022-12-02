@@ -6,7 +6,7 @@ BNMO (dibaca: Binomo) adalah sebuah robot video game console yang dimiliki oleh 
 
 Setelah BNMO diperbaiki kelompok 12 K1, akhirnya BNMO dapat berfungsi. BNMO dapat berfungsi sebagai game console. Saat game pertama kali berjalan user dapat memasukan command "START" atau "LOAD". Command "START" akan membaca file config default pada BNMO. Command "LOAD" membaca file yang nama filenya dimasukan oleh user.
 
-Setelah itu user dapat memasukan command - command lainnya diantaranya adalah "CREATE GAME", "LIST GAME", "DELETE GAME", "QUEUE GAME", "PLAY GAME", "SKIP GAME", "HELP", "SAVE", atau "EXIT".
+Setelah itu user dapat memasukan command - command lainnya diantaranya adalah "CREATE GAME", "LIST GAME", "DELETE GAME", "QUEUE GAME", "PLAY GAME", "SKIP GAME", "SCOREBOARD", "RESET SCOREBOARD", "HISTORY" , "RESET HISTORY", "HELP", "SAVE", "EXIT", dan "QUIT".
 <ul>
 
 ## Anggota Kelompok G12

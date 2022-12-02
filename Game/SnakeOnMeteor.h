@@ -89,13 +89,13 @@ boolean IsTowardObstacle(Word Cword, List snake, StatArray ObstacleLocation);
     F.S. Mengecek jika inputan command user menyebabkan snake bergerak ke obstacle*/
 
 /*------------Fungsi untuk memunculkan keadaan map sekarang------------*/
-void DisplaySOMMap(StatArray container);
+void DisplaySOMMap(StatArray container , Word Cword);
 /* Memunculkan map dengan Tampilan Design Asci
     I.S. Game dimulai
     F.S. Memunculkan map dengan tampilan design asci*/
 
 
-void ShowSquare(StatArray container);
+void ShowSquare(StatArray container ,Word Cword);
 /* Memunculkan kondisi map sekarang
     I.S. Game dimulai
     F.S. Menampilkan kondisi map sekarang*/
