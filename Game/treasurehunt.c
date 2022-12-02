@@ -80,8 +80,29 @@ void ProgressStory(BinTree Story,int *choice,int *score)
     }
 }
 
+void StartCredits()
+{
+    /*
+     * Melakukan pembacaan file , kemudian menampilkan isinya ke layar.
+     */
+
+    STARTFILE("../data/startingsnake.txt");
+
+    int amount = 0;
+    WordToInt(CWord, &amount);
+    ADVLINEFILE();
+
+    for (int j = 0; j < amount; j++)
+    {
+        char *asciis;
+        asciis = wordToString(CWord);
+        printf("%s\n", asciis);
+        ADVLINEFILE();
+    }
+}
+
 void treasure_hunt(ArrayDyn ArrayGame, ArrayMap *MapGame)
-{   
+{
         char *ascii = 
     "*******************************************************************************\n"
     "          |                   |                  |                     |\n"
