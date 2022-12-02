@@ -86,12 +86,12 @@ addresslist Search(List L, infotype X)
     return found ? elmt : NilList;
 }
 
-/****************** PRIMITIF BERDASARKAN NilListAI ******************/
+/****************** PRIMITIF BERDASARKAN Nilai ******************/
 /*** PENAMBAHAN ELEMEN ***/
 void InsVFirst(List *L, infotype X)
 /* I.S. L mungkin kosong */
 /* F.S. Melakukan alokasi sebuah elemen dan */
-/* menambahkan elemen pertama dengan NilListai X jika alokasi berhasil */
+/* menambahkan elemen pertama dengan Nilai X jika alokasi berhasil */
 {
     addresslist P = Alokasi(X);
     if (P != NilList)
@@ -104,7 +104,7 @@ void InsVLast(List *L, infotype X)
 /* I.S. L mungkin kosong */
 /* F.S. Melakukan alokasi sebuah elemen dan */
 /* menambahkan elemen list di akhir: elemen terakhir yang baru */
-/* berNilListai X jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */
+/* berNilai X jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */
 {
     addresslist P = Alokasi(X);
     if (P != NilList)
@@ -116,7 +116,7 @@ void InsVLast(List *L, infotype X)
 /*** PENGHAPUSAN ELEMEN ***/
 void DelVFirst(List *L, infotype *X)
 /* I.S. List L tidak kosong  */
-/* F.S. Elemen pertama list dihapus: NilListai info disimpan pada X */
+/* F.S. Elemen pertama list dihapus: Nilai info disimpan pada X */
 /*      dan alamat elemen pertama di-dealokasi */
 {
     addresslist P;
@@ -127,7 +127,7 @@ void DelVFirst(List *L, infotype *X)
 
 void DelVLast(List *L, infotype *X)
 /* I.S. list tidak kosong */
-/* F.S. Elemen terakhir list dihapus: NilListai info disimpan pada X */
+/* F.S. Elemen terakhir list dihapus: Nilai info disimpan pada X */
 /*      dan alamat elemen terakhir di-dealokasi */
 {
     addresslist P;
@@ -265,7 +265,7 @@ void DelP(List *L, infotype X)
 void PrintInfo(List L)
 /* I.S. List mungkin kosong */
 /* F.S. Jika list tidak kosong, iai list dicetak ke kanan: [e1,e2,...,en] */
-/* Contoh : jika ada tiga elemen berNilListai 1, 20, 30 akan dicetak: [1,20,30] */
+/* Contoh : jika ada tiga elemen berNilai 1, 20, 30 akan dicetak: [1,20,30] */
 /* Jika list kosong : menulis [] */
 /* Tidak ada tambahan karakter apa pun di awal, akhir, atau di tengah */
 {
