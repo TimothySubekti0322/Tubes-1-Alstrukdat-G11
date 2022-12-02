@@ -171,6 +171,7 @@ void welcome(){
     delay(0.8);
     printf("\r                   ");
     printf("\n");
+    
     //  /* Print Welcome*/
     //  printf("%c",asciLTC);
     //  int i;

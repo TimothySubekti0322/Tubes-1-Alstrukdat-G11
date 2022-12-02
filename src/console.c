@@ -1175,11 +1175,34 @@ void HELP()
 	printf("Apabila setelah dilangkahi, masih ada game di antrian, game teratas pada antrian akan dimainkan.\n");
 	printf("Apabila game pada antrian kosong setelah dilangkahi, akan muncul pesan yang menandakan tidak ada game lagi di antrianmu.\n\n");
 	
-	printf("10. Quit\n");
+    printf("10. Scoreboard\n");
+	printf("Jalankan command ini apabila kamu ingin melihat daftar scoreboard dari seluruh game BNMO\n");
+	printf("Untuk menjalankan command ini, ketikkan 'SCOREBOARD'.\n");
+	printf("Apabila Scoreboard suatu game kosong maka akan menampilkan \"scoreboard kosong\" sedangkan jika tidak kosong maka akan menampilkan username beserta nilai dari player dalam game \n\n");
+    
+    printf("11. Reset Scoreboard\n");
+	printf("Jalankan command ini apabila kamu ingin melakukan reset pada scoreboard\n");
+	printf("Untuk menjalankan command ini, ketikkan 'RESET SCOREBOARD'.\n\n");
+
+    printf("12. History\n");
+	printf("Jalankan command ini apabila kamu ingin melihat daftar riwayat permainan yang telah dimainkan\n");
+	printf("Untuk menjalankan command ini, ketikkan 'HISTORY'.\n");
+    printf("Lalu, diikuti dengan bilangan n, banyaknya riwayat game yang ingin ditampilakn.\n");
+    printf("Jika tidak diikuti dengan bilangan n, maka program akan mengeluarkan seluruh daftar riwayat permainan\n");
+	printf("Apabila riwayat game kosong maka akan menampilkan \"Belum ada game yang dimainkan\" sedangkan jika tidak kosong maka akan menampilkan riwayat permainan sejumlah n\n\n");
+
+    printf("13. Reset History\n");
+	printf("Jalankan command ini apabila kamu ingin melakuakn reset pada daftar riwayat permainan yang telah dimainkan\n");
+	printf("Untuk menjalankan command ini, ketikkan 'RESET HISTORY'.\n\n");
+
+    printf("14. Exit\n");
+    printf("Jalankan command ini apabila kamu ingin Kembali ke menu utama Game BNMO.\n");
+
+	printf("15. Quit\n");
 	printf("Jalankan oommand ini apabila kamu ingin keluar dari BNMO.\n");
 	printf("Untuk menjalankan command ini, ketikkan 'QUIT'.\n\n");
 	
-	printf("11. Help\n");
+	printf("16. Help\n");
 	printf("Kamu sudah berada di help!\n\n");
 	
 	printf("Harap diingat, command yang dimasukkan selain di atas ini termasuk command yang tidak dikenali BNMO.\n");
