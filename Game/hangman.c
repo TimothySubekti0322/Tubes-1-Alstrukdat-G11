@@ -258,9 +258,9 @@ void hangman(ArrayDyn ArrayGame, ArrayMap *MapGame) {
                 }
             }
             same = false; // Nilai boolean direset, dan memungkinkan untuk pengambilan kata acak kembali selama mistakes < 10
-            emptyguessed(characters, 30);
-            emptyguessed(guess, 20);
-            emptyguessed(word, 20);
+            emptystring(characters, 30);
+            emptystring(guess, 20);
+            emptystring(word, 20);
             printf("\n");
         } while (mistakes < 10);
     }
