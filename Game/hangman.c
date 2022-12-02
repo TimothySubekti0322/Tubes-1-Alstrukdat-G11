@@ -153,6 +153,7 @@ void hangman(ArrayDyn ArrayGame, ArrayMap *MapGame) {
     int i;                        // Variabel untuk keperluan loop incrementation
     int idxword;                  // Variabel untuk menunjukkan index pada array word
     boolean same = false;         // Variabel untuk mengecek apakah kata yang ditebak sama dengan kata yang dirandom
+    boolean cheat = false;        // Variabel untuk menunjukkan bocoran kata kepada user
     // bernilai true apabila kata sama, dan false jika sebaliknya
     int score = 0; // Variabel untuk menyimpan skor
 
@@ -162,20 +163,19 @@ void hangman(ArrayDyn ArrayGame, ArrayMap *MapGame) {
     printf("Apakah Anda ingin menambahkan kata baru, atau langsung bermain? Ketik Y apabila ingin, dan N jika tidak. ");
     INPUT();
 
-    if (CWord.TabWord[0] != 'Y' && CWord.TabWord[0] != 'N') {
-        while (CWord.TabWord[0] != 'Y' && CWord.TabWord[0] != 'N') {
+    if (CWord.TabWord[0] != 'Y' && CWord.TabWord[0] != 'N' && CWord.TabWord[0] != 'y' && CWord.TabWord[0] != 'n') {
+        while (CWord.TabWord[0] != 'Y' && CWord.TabWord[0] != 'N' && CWord.TabWord[0] != 'y' && CWord.TabWord[0] != 'n') {
             printf("Input tidak valid; silahkan masukkan Y apabila ingin menambah kata, dan N jika tidak: ");
             INPUT();
         }
     }
-    if (CWord.TabWord[0] == 'Y') {
-        while (CWord.TabWord[0] == 'Y') {
+    if (CWord.TabWord[0] == 'Y' || CWord.TabWord[0] == 'y') {
+        while (CWord.TabWord[0] == 'Y' || CWord.TabWord[0] == 'y') {
             char *newword;
             printf("Masukkan kata yang ingin ditambahkan: ");
             INPUT();
             newword = wordToString(CWord);
-            while (FindStrArrayDyn(HangmanWordList, newword) != -1)
-            {
+            while (FindStrArrayDyn(HangmanWordList, newword) != -1) {
                 printf("Kata sudah ada dalam list kata. Silahkan masukkan kata yang lain: ");
                 INPUT();
                 newword = wordToString(CWord);
@@ -185,15 +185,15 @@ void hangman(ArrayDyn ArrayGame, ArrayMap *MapGame) {
             INPUT();
         }
     }
-    if (CWord.TabWord[0] == 'N') {
+    if (CWord.TabWord[0] == 'N' || CWord.TabWord[0] == 'n') {
         SaveWordList(HangmanWordList);
         DealokasiStrArrayDyn(&HangmanWordList);
         HangmanWordList = CreateStrArrayDyn();
         LoadWordList(&HangmanWordList);
         do {
-            srand(time(NULL));
+            srand(time(NULL)); // Pengacakan yang memungkinkan pemilihan kata secara random
             idxword = rand() % HangmanWordList.Neff; // Mengambil kata secara acak dari list kata dengan penggunaan fungsi rand()
-            int p = 0;
+            int p = 0;      // Variabel untuk keperluan loop incrementation
             int length = 0; // Panjang kata yang dipilih secara acak
             while (HangmanWordList.Ar[idxword][p] != '\0') { // While loop untuk memindahkan kata yang diacak ke variabel lain (word)
                 word[p] = HangmanWordList.Ar[idxword][p];
@@ -210,6 +210,20 @@ void hangman(ArrayDyn ArrayGame, ArrayMap *MapGame) {
             int idx = 0;
             while (!same && mistakes < 10) { // While loop yang akan berhenti jika kata yang ditebak sudah sama dengan word
                 showFigHangman(mistakes);
+                if (!cheat) { // Belum pernah melihat bocoran kata
+                    printf("Apakah Anda ingin melihat bocoran katanya? Masukkan I apabila ingin, dan T apabila ingin terus berusaha. ");
+                    INPUT();
+                    if (CWord.TabWord[0] == 'I' || CWord.TabWord[0] == 'i') {
+                        printf("Shhh! Katanya adalah %s ; jangan beritahu siapapun, bahkan developernya!\n", word);
+                        cheat = true;
+                    }
+                    if (CWord.TabWord[0] != 'I' && CWord.TabWord[0] != 'T' && CWord.TabWord[0] != 't' && CWord.TabWord[0] != 'i') {
+                        while (CWord.TabWord[0] != 'I' && CWord.TabWord[0] != 'T' && CWord.TabWord[0] != 't' && CWord.TabWord[0] != 'i') {
+                            printf("Input tidak valid; silahkan masukkan I apabila ingin melihat bocoran, dan T apabila ingin terus berusaha: ");
+                            INPUT();
+                        }
+                    }
+                }
                 printf("Masukkan tebakan: ");
                 INPUT(); // Asumsikan masukan user selalu valid, yaitu 1 karakter dan kapital
                 if (alreadyGuessed(CWord.TabWord[0], characters) || alreadyGuessed(CWord.TabWord[0] - 32, characters) || alreadyGuessed(CWord.TabWord[0] + 32, characters)) {
@@ -222,13 +236,13 @@ void hangman(ArrayDyn ArrayGame, ArrayMap *MapGame) {
                 int appear = 0; // Variabel untuk menghitung kemunculan huruf yang ditebak dalam kata yang dipilih secara acak
                 char curr = CWord.TabWord[0];
                 for (i = 0; i < length; i++) {
-                    if (97 <= curr <= 122) {
+                    if (97 <= curr <= 122) { // Masukan huruf adalah lowercase
                         if (curr - 32 == word[i]) {
                             guess[i] = curr - 32;
                             appear++;
                         }
                     }
-                    if (65 <= curr <= 90) {
+                    if (65 <= curr <= 90) { // Masukan huruf adalah uppercase
                         if (curr == word[i])
                         {
                             guess[i] = curr;
@@ -257,7 +271,8 @@ void hangman(ArrayDyn ArrayGame, ArrayMap *MapGame) {
                     same = true;
                 }
             }
-            same = false; // Nilai boolean direset, dan memungkinkan untuk pengambilan kata acak kembali selama mistakes < 10
+            same = false;   // Nilai boolean direset, dan memungkinkan untuk pengambilan kata acak kembali selama mistakes < 10
+            cheat = false;  // Nilai boolean direset, dan memungkinkan untuk menunjukkan bocoran kata kembali selama mistakes < 10
             emptystring(characters, 30);
             emptystring(guess, 20);
             emptystring(word, 20);
@@ -272,9 +287,9 @@ void hangman(ArrayDyn ArrayGame, ArrayMap *MapGame) {
         printf("Semoga menikmati permainannya, dan jangan lupa untuk bermain kembali!\n");
         printf("Sedikit oleh-oleh ~\n");
         delay(4);
-        EndCredits();
+        EndCredits(); // Menampilkan karakter sebagai penutup game
     }
-    
+    // Memasukkan skor ke scoreboard
     int index = FindStrArrayDyn(ArrayGame, "HANGMAN");
     InsertScoreBoard(&MapGame->ElArrMap[index], score);
 }
