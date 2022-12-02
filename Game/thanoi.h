@@ -32,7 +32,7 @@ void movepiring (char tujuan, boolean found);
     F.S : Menampilkan perpindahan piring ke suatu tiang
 */
 
-void displaytiang(StackInt A, StackInt B, StackInt C, int size);
+void displaytiang(StackInt A, StackInt B, StackInt C, int size, char warna);
 /*
     I.S: Terdapat tiga stack yang terbentuk, stack mungkin kosong
     F.S: MEnampilkan tiang-tiang yang ada dalam permainan tower of hanoi
@@ -50,7 +50,7 @@ void bikingaris(StackInt S, int size);
     F.S : menampilkan --------
 */
 
-void commandH (char *awal, char *tujuan, StackInt *A, StackInt *B, StackInt*C, boolean found, int size);
+void commandH (char *awal, char *tujuan, StackInt *A, StackInt *B, StackInt*C, boolean found, int size, char warna);
 /*
     I.S : Terdapat tiga stack yang terbentuk, stack mungkin kosong
     F.S : Memindahkan piringan dari tiang awal ke tiang tujuan sesuai command masukan
@@ -99,6 +99,8 @@ boolean digitvalid (Word CWord);
     INPUT : input CWord
     OUTPUT : Memastikan CWord merupakan angka
 */
+
+void displaystackwarna(StackInt S,int size, int i);
 
 
 #endif
