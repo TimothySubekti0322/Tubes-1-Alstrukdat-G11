@@ -559,10 +559,6 @@ void towerhanoi(ArrayDyn ArrayGame, ArrayMap *MapGame){
         if (size == 5 && benar == true )
         {
             benar = langkahbenar(langkah, awal, tujuan);
-            printf("\n%d\n",langkah);
-            if (benar == true) {
-                printf("halo\n");
-            }
         }
         commandH(&awal,&tujuan,&A,&B,&C,found,size);
         length = LengthStackInt(C);
