@@ -19,6 +19,35 @@ void ProgressStory(BinTree Story,int *choice,int *score)
     "The WanPis might just be a myth after all, you thought.\n"
     "You used your experience found in the journey to lead your village to prosper.\n"
     "LEADER\n";
+
+    char *nomushroom = 
+        "As you take a few steps into the dark cave. You sense a slight but sudden fall below your right foot\n"
+        "Just like clockwork, you feel a needle pierce through your arm then many more. Your journey ends here.\n"
+        "PIERCE THROUGH THE HEART ENDING\n";
+    
+    char *path_left_fight =
+        "You use your sword to pierce through its eye\n"
+        "Irritated, the beast swipes at you\n"
+        "You die. What were you even thinking trying to fight such a beast?\n"
+        "At least you've put a mark by half blinding the beast, at least\n"
+        "AN EYE FOR A LIFE ENDING\n";
+    
+    char *path_left_sneak =
+        "Just a step past the beast makes the beast swipe at you.\n"
+        "You go flying and crash a boulder inside the cave\n"
+        "Nice try I guess?\n"
+        "ALL EARS ON YOU ENDING\n";
+    char *kraken_dodge = 
+        "You successfully dodge the tentacle by doing a limbo.\n"
+        "However, you lose your footing and the kraken lifts you up into its mouth.\n"
+        "KRAKEN MEAL ENDING\n";
+
+    char *mimic_open =
+        "You open the chest and see a pile of gold inside it.\n"
+        "As you put your arm inside it, the chest grew teeth and bites your arm off.\n"
+        "You fall for the mimic's trap and suffered from severe blood loss.\n\n"
+        "ALL THAT GLITTERS ISN'T GOLD\n";
+
     if(!IsTreeOneElmt(Story)){
         boolean valid = false;
         while(valid == false)
@@ -46,7 +75,7 @@ void ProgressStory(BinTree Story,int *choice,int *score)
     } else if(Story->info == chest_ignore){
         *score = 50;
         PrintGreen("THE END\n");
-    } else{
+    } else if(Story->info == nomushroom || Story->info == path_left_fight || Story->info == path_left_sneak || Story->info == kraken_dodge || Story->info == mimic_open){
         PrintRed("GAME OVER.\n");
     }
 }
